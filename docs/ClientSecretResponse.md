@@ -1,0 +1,29 @@
+# ClientSecretResponse
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**client_secret** | **str** |  | 
+
+## Example
+
+```python
+from platform_api_client.models.client_secret_response import ClientSecretResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ClientSecretResponse from a JSON string
+client_secret_response_instance = ClientSecretResponse.from_json(json)
+# print the JSON string representation of the object
+print ClientSecretResponse.to_json()
+
+# convert the object into a dict
+client_secret_response_dict = client_secret_response_instance.to_dict()
+# create an instance of ClientSecretResponse from a dict
+client_secret_response_form_dict = client_secret_response.from_dict(client_secret_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

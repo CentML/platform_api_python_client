@@ -38,12 +38,6 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                 name = '',
                 image_url = '',
                 hardware_instance_id = 56,
-                env_vars = {
-                    'key' : ''
-                    },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 ssh_key = '',
                 username = '',
                 password = ''
@@ -53,6 +47,8 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                 name = '',
                 image_url = '',
                 hardware_instance_id = 56,
+                username = '',
+                password = '',
         )
         """
 

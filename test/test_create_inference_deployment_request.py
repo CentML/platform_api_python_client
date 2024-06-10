@@ -38,17 +38,21 @@ class TestCreateInferenceDeploymentRequest(unittest.TestCase):
                 name = '',
                 image_url = '',
                 hardware_instance_id = 56,
-                env_vars = {
-                    'key' : ''
-                    },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 port = 56,
                 min_replicas = 56,
                 max_replicas = 56,
                 timeout = 56,
-                healthcheck = ''
+                healthcheck = '',
+                env_vars = {
+                    'key' : ''
+                    },
+                command = [
+                    ''
+                    ],
+                command_args = [
+                    ''
+                    ],
+                endpoint_certificate_authority = ''
             )
         else:
             return CreateInferenceDeploymentRequest(

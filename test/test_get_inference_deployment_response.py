@@ -46,14 +46,12 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 port = 56,
                 min_replicas = 56,
                 max_replicas = 56,
                 timeout = 56,
-                healthcheck = ''
+                healthcheck = '',
+                endpoint_certificate_authority = ''
             )
         else:
             return GetInferenceDeploymentResponse(
@@ -68,14 +66,12 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 port = 56,
                 min_replicas = 56,
                 max_replicas = 56,
                 timeout = 56,
                 healthcheck = '',
+                endpoint_certificate_authority = '',
         )
         """
 

@@ -18,8 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_client.models.auth_secret import AuthSecret
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,9 +29,7 @@ class CreateTrainingDeploymentRequest(BaseModel):
     name: StrictStr
     image_url: StrictStr
     hardware_instance_id: StrictInt
-    env_vars: Optional[Dict[str, StrictStr]] = None
-    secrets: Optional[AuthSecret] = None
-    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id", "env_vars", "secrets"]
+    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,19 +70,6 @@ class CreateTrainingDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of secrets
-        if self.secrets:
-            _dict['secrets'] = self.secrets.to_dict()
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
-
-        # set to None if secrets (nullable) is None
-        # and model_fields_set contains the field
-        if self.secrets is None and "secrets" in self.model_fields_set:
-            _dict['secrets'] = None
-
         return _dict
 
     @classmethod
@@ -100,9 +84,7 @@ class CreateTrainingDeploymentRequest(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "image_url": obj.get("image_url"),
-            "hardware_instance_id": obj.get("hardware_instance_id"),
-            "env_vars": obj.get("env_vars"),
-            "secrets": AuthSecret.from_dict(obj["secrets"]) if obj.get("secrets") is not None else None
+            "hardware_instance_id": obj.get("hardware_instance_id")
         })
         return _obj
 

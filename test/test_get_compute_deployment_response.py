@@ -46,9 +46,6 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 port = 56,
                 ssh_key = '',
                 username = '',
@@ -67,9 +64,6 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
                 port = 56,
                 ssh_key = '',
                 username = '',

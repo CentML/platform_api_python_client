@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_client.models.deployment_status import DeploymentStatus
+from platform_api_client.models.deployment_type import DeploymentType
 from platform_api_client.models.endpoint_ready_state import EndpointReadyState
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +30,12 @@ class DeploymentStatusResponse(BaseModel):
     DeploymentStatusResponse
     """ # noqa: E501
     id: StrictInt
+    type: DeploymentType
     status: DeploymentStatus
     service_status: Optional[EndpointReadyState]
     error_message: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["id", "status", "service_status", "error_message"]
+    endpoint_url: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "type", "status", "service_status", "error_message", "endpoint_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +86,11 @@ class DeploymentStatusResponse(BaseModel):
         if self.error_message is None and "error_message" in self.model_fields_set:
             _dict['error_message'] = None
 
+        # set to None if endpoint_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
+            _dict['endpoint_url'] = None
+
         return _dict
 
     @classmethod
@@ -96,9 +104,11 @@ class DeploymentStatusResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "type": obj.get("type"),
             "status": obj.get("status"),
             "service_status": obj.get("service_status"),
-            "error_message": obj.get("error_message")
+            "error_message": obj.get("error_message"),
+            "endpoint_url": obj.get("endpoint_url")
         })
         return _obj
 

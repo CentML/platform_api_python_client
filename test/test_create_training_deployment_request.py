@@ -37,13 +37,7 @@ class TestCreateTrainingDeploymentRequest(unittest.TestCase):
             return CreateTrainingDeploymentRequest(
                 name = '',
                 image_url = '',
-                hardware_instance_id = 56,
-                env_vars = {
-                    'key' : ''
-                    },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', )
+                hardware_instance_id = 56
             )
         else:
             return CreateTrainingDeploymentRequest(

@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_client.models.auth_secret import AuthSecret
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,12 +29,10 @@ class CreateComputeDeploymentRequest(BaseModel):
     name: StrictStr
     image_url: StrictStr
     hardware_instance_id: StrictInt
-    env_vars: Optional[Dict[str, StrictStr]] = None
-    secrets: Optional[AuthSecret] = None
     ssh_key: Optional[StrictStr] = None
-    username: Optional[StrictStr] = None
-    password: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id", "env_vars", "secrets", "ssh_key", "username", "password"]
+    username: StrictStr
+    password: StrictStr
+    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id", "ssh_key", "username", "password"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,33 +73,10 @@ class CreateComputeDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of secrets
-        if self.secrets:
-            _dict['secrets'] = self.secrets.to_dict()
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
-
-        # set to None if secrets (nullable) is None
-        # and model_fields_set contains the field
-        if self.secrets is None and "secrets" in self.model_fields_set:
-            _dict['secrets'] = None
-
         # set to None if ssh_key (nullable) is None
         # and model_fields_set contains the field
         if self.ssh_key is None and "ssh_key" in self.model_fields_set:
             _dict['ssh_key'] = None
-
-        # set to None if username (nullable) is None
-        # and model_fields_set contains the field
-        if self.username is None and "username" in self.model_fields_set:
-            _dict['username'] = None
-
-        # set to None if password (nullable) is None
-        # and model_fields_set contains the field
-        if self.password is None and "password" in self.model_fields_set:
-            _dict['password'] = None
 
         return _dict
 
@@ -119,8 +93,6 @@ class CreateComputeDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "image_url": obj.get("image_url"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "env_vars": obj.get("env_vars"),
-            "secrets": AuthSecret.from_dict(obj["secrets"]) if obj.get("secrets") is not None else None,
             "ssh_key": obj.get("ssh_key"),
             "username": obj.get("username"),
             "password": obj.get("password")

@@ -18,7 +18,7 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class EndpointReadyState(int, Enum):
+class EndpointReadyState(str, Enum):
     """
     Enum for the ready state of an endpoint.
     """
@@ -26,12 +26,17 @@ class EndpointReadyState(int, Enum):
     """
     allowed enum values
     """
-    NUMBER_0 = 0
-    NUMBER_1 = 1
-    NUMBER_2 = 2
-    NUMBER_3 = 3
-    NUMBER_4 = 4
-    NUMBER_5 = 5
+    UNKNOWN = 'UNKNOWN'
+    READY = 'READY'
+    NOT_READY = 'NOT_READY'
+    NOT_FOUND = 'NOT_FOUND'
+    FOUND_MULTIPLE = 'FOUND_MULTIPLE'
+    CONDITION_NOT_FOUND = 'CONDITION_NOT_FOUND'
+    INGRESS_RULE_NOT_FOUND = 'INGRESS_RULE_NOT_FOUND'
+    INGRESS_NOT_CONFIGURED = 'INGRESS_NOT_CONFIGURED'
+    CONTAINER_MISSING = 'CONTAINER_MISSING'
+    PROGRESS_DEADLINE_EXCEEDED = 'PROGRESS_DEADLINE_EXCEEDED'
+    REVISION_MISSING = 'REVISION_MISSING'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

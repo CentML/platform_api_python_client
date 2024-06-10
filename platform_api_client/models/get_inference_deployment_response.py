@@ -20,7 +20,6 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_client.models.auth_secret import AuthSecret
 from platform_api_client.models.deployment_status import DeploymentStatus
 from platform_api_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
@@ -39,13 +38,13 @@ class GetInferenceDeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     endpoint_url: Optional[StrictStr]
     env_vars: Optional[Dict[str, StrictStr]]
-    secrets: Optional[AuthSecret]
     port: StrictInt
     min_replicas: StrictInt
     max_replicas: StrictInt
     timeout: StrictInt
     healthcheck: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["id", "name", "image_url", "type", "status", "created_at", "hardware_instance_id", "endpoint_url", "env_vars", "secrets", "port", "min_replicas", "max_replicas", "timeout", "healthcheck"]
+    endpoint_certificate_authority: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "name", "image_url", "type", "status", "created_at", "hardware_instance_id", "endpoint_url", "env_vars", "port", "min_replicas", "max_replicas", "timeout", "healthcheck", "endpoint_certificate_authority"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,9 +85,6 @@ class GetInferenceDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of secrets
-        if self.secrets:
-            _dict['secrets'] = self.secrets.to_dict()
         # set to None if endpoint_url (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
@@ -99,15 +95,15 @@ class GetInferenceDeploymentResponse(BaseModel):
         if self.env_vars is None and "env_vars" in self.model_fields_set:
             _dict['env_vars'] = None
 
-        # set to None if secrets (nullable) is None
-        # and model_fields_set contains the field
-        if self.secrets is None and "secrets" in self.model_fields_set:
-            _dict['secrets'] = None
-
         # set to None if healthcheck (nullable) is None
         # and model_fields_set contains the field
         if self.healthcheck is None and "healthcheck" in self.model_fields_set:
             _dict['healthcheck'] = None
+
+        # set to None if endpoint_certificate_authority (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
+            _dict['endpoint_certificate_authority'] = None
 
         return _dict
 
@@ -130,12 +126,12 @@ class GetInferenceDeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "endpoint_url": obj.get("endpoint_url"),
             "env_vars": obj.get("env_vars"),
-            "secrets": AuthSecret.from_dict(obj["secrets"]) if obj.get("secrets") is not None else None,
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
             "timeout": obj.get("timeout"),
-            "healthcheck": obj.get("healthcheck")
+            "healthcheck": obj.get("healthcheck"),
+            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")
         })
         return _obj
 

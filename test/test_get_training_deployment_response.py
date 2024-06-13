@@ -45,10 +45,7 @@ class TestGetTrainingDeploymentResponse(unittest.TestCase):
                 endpoint_url = '',
                 env_vars = {
                     'key' : ''
-                    },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', )
+                    }
             )
         else:
             return GetTrainingDeploymentResponse(
@@ -63,9 +60,6 @@ class TestGetTrainingDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                secrets = platform_api_client.models.auth_secret.AuthSecret(
-                    username = '', 
-                    password = '', ),
         )
         """
 

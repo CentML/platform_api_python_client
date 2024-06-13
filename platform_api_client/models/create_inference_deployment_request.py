@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_client.models.auth_secret import AuthSecret
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,14 +29,16 @@ class CreateInferenceDeploymentRequest(BaseModel):
     name: StrictStr
     image_url: StrictStr
     hardware_instance_id: StrictInt
-    env_vars: Optional[Dict[str, StrictStr]] = None
-    secrets: Optional[AuthSecret] = None
     port: StrictInt
     min_replicas: StrictInt
     max_replicas: StrictInt
     timeout: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id", "env_vars", "secrets", "port", "min_replicas", "max_replicas", "timeout", "healthcheck"]
+    env_vars: Optional[Dict[str, StrictStr]] = None
+    command: Optional[List[StrictStr]] = None
+    command_args: Optional[List[StrictStr]] = None
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["name", "image_url", "hardware_instance_id", "port", "min_replicas", "max_replicas", "timeout", "healthcheck", "env_vars", "command", "command_args", "endpoint_certificate_authority"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,19 +79,6 @@ class CreateInferenceDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of secrets
-        if self.secrets:
-            _dict['secrets'] = self.secrets.to_dict()
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
-
-        # set to None if secrets (nullable) is None
-        # and model_fields_set contains the field
-        if self.secrets is None and "secrets" in self.model_fields_set:
-            _dict['secrets'] = None
-
         # set to None if timeout (nullable) is None
         # and model_fields_set contains the field
         if self.timeout is None and "timeout" in self.model_fields_set:
@@ -100,6 +88,26 @@ class CreateInferenceDeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.healthcheck is None and "healthcheck" in self.model_fields_set:
             _dict['healthcheck'] = None
+
+        # set to None if env_vars (nullable) is None
+        # and model_fields_set contains the field
+        if self.env_vars is None and "env_vars" in self.model_fields_set:
+            _dict['env_vars'] = None
+
+        # set to None if command (nullable) is None
+        # and model_fields_set contains the field
+        if self.command is None and "command" in self.model_fields_set:
+            _dict['command'] = None
+
+        # set to None if command_args (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_args is None and "command_args" in self.model_fields_set:
+            _dict['command_args'] = None
+
+        # set to None if endpoint_certificate_authority (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
+            _dict['endpoint_certificate_authority'] = None
 
         return _dict
 
@@ -116,13 +124,15 @@ class CreateInferenceDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "image_url": obj.get("image_url"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "env_vars": obj.get("env_vars"),
-            "secrets": AuthSecret.from_dict(obj["secrets"]) if obj.get("secrets") is not None else None,
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
             "timeout": obj.get("timeout"),
-            "healthcheck": obj.get("healthcheck")
+            "healthcheck": obj.get("healthcheck"),
+            "env_vars": obj.get("env_vars"),
+            "command": obj.get("command"),
+            "command_args": obj.get("command_args"),
+            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")
         })
         return _obj
 

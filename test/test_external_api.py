@@ -82,6 +82,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_deployment_logs_deployments_logs_deployment_id_get(self) -> None:
+        """Test case for get_deployment_logs_deployments_logs_deployment_id_get
+
+        Get Deployment Logs
+        """
+        pass
+
     def test_get_deployment_status_deployments_status_deployment_id_get(self) -> None:
         """Test case for get_deployment_status_deployments_status_deployment_id_get
 

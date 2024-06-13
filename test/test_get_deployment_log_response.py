@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_client.models.auth_secret import AuthSecret
+from platform_api_client.models.get_deployment_log_response import GetDeploymentLogResponse
 
-class TestAuthSecret(unittest.TestCase):
-    """AuthSecret unit test stubs"""
+class TestGetDeploymentLogResponse(unittest.TestCase):
+    """GetDeploymentLogResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,32 @@ class TestAuthSecret(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> AuthSecret:
-        """Test AuthSecret
+    def make_instance(self, include_optional) -> GetDeploymentLogResponse:
+        """Test GetDeploymentLogResponse
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `AuthSecret`
+        # uncomment below to create an instance of `GetDeploymentLogResponse`
         """
-        model = AuthSecret()
+        model = GetDeploymentLogResponse()
         if include_optional:
-            return AuthSecret(
-                username = '',
-                password = ''
+            return GetDeploymentLogResponse(
+                events = [
+                    None
+                    ],
+                next_page_token = ''
             )
         else:
-            return AuthSecret(
-                username = '',
-                password = '',
+            return GetDeploymentLogResponse(
+                events = [
+                    None
+                    ],
+                next_page_token = '',
         )
         """
 
-    def testAuthSecret(self):
-        """Test AuthSecret"""
+    def testGetDeploymentLogResponse(self):
+        """Test GetDeploymentLogResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

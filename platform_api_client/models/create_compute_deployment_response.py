@@ -30,7 +30,8 @@ class CreateComputeDeploymentResponse(BaseModel):
     id: StrictInt
     created_at: datetime
     endpoint_url: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url"]
+    port: StrictInt
+    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url", "port"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +86,8 @@ class CreateComputeDeploymentResponse(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "created_at": obj.get("created_at"),
-            "endpoint_url": obj.get("endpoint_url")
+            "endpoint_url": obj.get("endpoint_url"),
+            "port": obj.get("port")
         })
         return _obj
 

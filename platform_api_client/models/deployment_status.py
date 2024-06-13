@@ -29,7 +29,6 @@ class DeploymentStatus(str, Enum):
     ACTIVE = 'active'
     PAUSED = 'paused'
     DELETED = 'deleted'
-    FAILED = 'failed'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

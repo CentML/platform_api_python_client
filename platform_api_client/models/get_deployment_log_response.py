@@ -18,17 +18,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AuthSecret(BaseModel):
+class GetDeploymentLogResponse(BaseModel):
     """
-    AuthSecret
+    GetDeploymentLogResponse
     """ # noqa: E501
-    username: StrictStr
-    password: StrictStr
-    __properties: ClassVar[List[str]] = ["username", "password"]
+    events: List[Dict[str, Any]]
+    next_page_token: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["events", "next_page_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class AuthSecret(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AuthSecret from a JSON string"""
+        """Create an instance of GetDeploymentLogResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +69,16 @@ class AuthSecret(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if next_page_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_page_token is None and "next_page_token" in self.model_fields_set:
+            _dict['next_page_token'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AuthSecret from a dict"""
+        """Create an instance of GetDeploymentLogResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +86,8 @@ class AuthSecret(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "username": obj.get("username"),
-            "password": obj.get("password")
+            "events": obj.get("events"),
+            "next_page_token": obj.get("next_page_token")
         })
         return _obj
 

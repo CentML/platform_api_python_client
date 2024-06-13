@@ -36,16 +36,20 @@ class TestDeploymentStatusResponse(unittest.TestCase):
         if include_optional:
             return DeploymentStatusResponse(
                 id = 56,
+                type = 'inference',
                 status = 'active',
-                service_status = 0,
-                error_message = ''
+                service_status = 'UNKNOWN',
+                error_message = '',
+                endpoint_url = ''
             )
         else:
             return DeploymentStatusResponse(
                 id = 56,
+                type = 'inference',
                 status = 'active',
-                service_status = 0,
+                service_status = 'UNKNOWN',
                 error_message = '',
+                endpoint_url = '',
         )
         """
 

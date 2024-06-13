@@ -14,7 +14,6 @@
 
 
 # import models into model package
-from platform_api_client.models.auth_secret import AuthSecret
 from platform_api_client.models.client_secret_response import ClientSecretResponse
 from platform_api_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
 from platform_api_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
@@ -30,6 +29,7 @@ from platform_api_client.models.deployment_status_response import DeploymentStat
 from platform_api_client.models.deployment_type import DeploymentType
 from platform_api_client.models.endpoint_ready_state import EndpointReadyState
 from platform_api_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
+from platform_api_client.models.get_deployment_log_response import GetDeploymentLogResponse
 from platform_api_client.models.get_deployment_response import GetDeploymentResponse
 from platform_api_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
 from platform_api_client.models.get_training_deployment_response import GetTrainingDeploymentResponse

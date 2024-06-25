@@ -37,6 +37,8 @@ class EndpointReadyState(str, Enum):
     CONTAINER_MISSING = 'CONTAINER_MISSING'
     PROGRESS_DEADLINE_EXCEEDED = 'PROGRESS_DEADLINE_EXCEEDED'
     REVISION_MISSING = 'REVISION_MISSING'
+    COMPLETE = 'COMPLETE'
+    FAILED_JOB = 'FAILED_JOB'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

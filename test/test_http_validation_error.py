@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.http_validation_error import HTTPValidationError
+from platform_api_python_client.models.http_validation_error import HTTPValidationError
 
 class TestHTTPValidationError(unittest.TestCase):
     """HTTPValidationError unit test stubs"""
@@ -36,7 +36,7 @@ class TestHTTPValidationError(unittest.TestCase):
         if include_optional:
             return HTTPValidationError(
                 detail = [
-                    platform_api_client.models.validation_error.ValidationError(
+                    platform_api_python_client.models.validation_error.ValidationError(
                         loc = [
                             null
                             ], 

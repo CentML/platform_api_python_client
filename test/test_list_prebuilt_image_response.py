@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
+from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 
 class TestListPrebuiltImageResponse(unittest.TestCase):
     """ListPrebuiltImageResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestListPrebuiltImageResponse(unittest.TestCase):
         if include_optional:
             return ListPrebuiltImageResponse(
                 results = [
-                    platform_api_client.models.prebuilt_image_response.PrebuiltImageResponse(
+                    platform_api_python_client.models.prebuilt_image_response.PrebuiltImageResponse(
                         image_name = '', 
                         label = '', 
                         tags = [
@@ -48,7 +48,7 @@ class TestListPrebuiltImageResponse(unittest.TestCase):
         else:
             return ListPrebuiltImageResponse(
                 results = [
-                    platform_api_client.models.prebuilt_image_response.PrebuiltImageResponse(
+                    platform_api_python_client.models.prebuilt_image_response.PrebuiltImageResponse(
                         image_name = '', 
                         label = '', 
                         tags = [

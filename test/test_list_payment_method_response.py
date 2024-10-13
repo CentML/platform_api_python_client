@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.list_payment_method_response import ListPaymentMethodResponse
+from platform_api_python_client.models.list_payment_method_response import ListPaymentMethodResponse
 
 class TestListPaymentMethodResponse(unittest.TestCase):
     """ListPaymentMethodResponse unit test stubs"""

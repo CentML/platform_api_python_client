@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
 
 class TestHardwareInstanceResponse(unittest.TestCase):
     """HardwareInstanceResponse unit test stubs"""
@@ -41,7 +41,7 @@ class TestHardwareInstanceResponse(unittest.TestCase):
                 num_gpu = 56,
                 cpu = 56,
                 memory = 56,
-                cost = 56
+                cost_per_hr = 56
             )
         else:
             return HardwareInstanceResponse(
@@ -51,7 +51,7 @@ class TestHardwareInstanceResponse(unittest.TestCase):
                 num_gpu = 56,
                 cpu = 56,
                 memory = 56,
-                cost = 56,
+                cost_per_hr = 56,
         )
         """
 

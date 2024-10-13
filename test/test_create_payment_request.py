@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.create_payment_request import CreatePaymentRequest
+from platform_api_python_client.models.create_payment_request import CreatePaymentRequest
 
 class TestCreatePaymentRequest(unittest.TestCase):
     """CreatePaymentRequest unit test stubs"""

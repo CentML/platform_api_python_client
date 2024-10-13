@@ -127,6 +127,7 @@ class GetComputeV2DeploymentResponse(BaseModel):
             "exposed_port": obj.get("exposed_port"),
             "ssh_public_key": obj.get("ssh_public_key"),
             "ssh_password": obj.get("ssh_password"),
+            "env_vars": obj.get("env_vars")
         })
         return _obj
 

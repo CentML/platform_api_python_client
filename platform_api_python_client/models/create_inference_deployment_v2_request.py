@@ -131,6 +131,7 @@ class CreateInferenceDeploymentV2Request(BaseModel):
             "max_scale": obj.get("max_scale"),
             "concurrency": obj.get("concurrency"),
             "healthcheck": obj.get("healthcheck"),
+            "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "command_args": obj.get("command_args"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")

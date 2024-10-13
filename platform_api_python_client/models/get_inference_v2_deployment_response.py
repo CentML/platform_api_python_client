@@ -138,6 +138,7 @@ class GetInferenceV2DeploymentResponse(BaseModel):
             "concurrency": obj.get("concurrency"),
             "healthcheck": obj.get("healthcheck"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "env_vars": obj.get("env_vars")
         })
         return _obj
 

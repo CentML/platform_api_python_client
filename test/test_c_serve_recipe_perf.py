@@ -27,7 +27,7 @@ class TestCServeRecipePerf(unittest.TestCase):
 
     def make_instance(self, include_optional) -> CServeRecipePerf:
         """Test CServeRecipePerf
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CServeRecipePerf`
@@ -59,12 +59,12 @@ class TestCServeRecipePerf(unittest.TestCase):
                 hardware_instance_id = 56,
                 output_tp = [
                     [
-                        ''
+                        null
                         ]
                     ],
                 mean_ttft = [
                     [
-                        ''
+                        null
                         ]
                     ]
             )
@@ -94,12 +94,12 @@ class TestCServeRecipePerf(unittest.TestCase):
                 hardware_instance_id = 56,
                 output_tp = [
                     [
-                        ''
+                        null
                         ]
                     ],
                 mean_ttft = [
                     [
-                        ''
+                        null
                         ]
                     ],
         )

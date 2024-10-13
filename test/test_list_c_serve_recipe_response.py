@@ -27,7 +27,7 @@ class TestListCServeRecipeResponse(unittest.TestCase):
 
     def make_instance(self, include_optional) -> ListCServeRecipeResponse:
         """Test ListCServeRecipeResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ListCServeRecipeResponse`
@@ -64,12 +64,12 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                             hardware_instance_id = 56, 
                             output_tp = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], 
                             mean_ttft = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], ), 
                         cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
@@ -97,12 +97,12 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                             hardware_instance_id = 56, 
                             output_tp = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], 
                             mean_ttft = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], ), 
                         best_value = , )
@@ -139,12 +139,12 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                             hardware_instance_id = 56, 
                             output_tp = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], 
                             mean_ttft = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], ), 
                         cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
@@ -172,12 +172,12 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                             hardware_instance_id = 56, 
                             output_tp = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], 
                             mean_ttft = [
                                 [
-                                    ''
+                                    null
                                     ]
                                 ], ), 
                         best_value = , )

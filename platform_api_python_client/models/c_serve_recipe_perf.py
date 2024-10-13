@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
 from platform_api_python_client.models.c_serve_recipe_output import CServeRecipeOutput
@@ -30,8 +30,8 @@ class CServeRecipePerf(BaseModel):
     """ # noqa: E501
     recipe: CServeRecipeOutput
     hardware_instance_id: StrictInt
-    output_tp: List[Annotated[List[StrictStr], Field(min_length=2, max_length=2)]]
-    mean_ttft: List[Annotated[List[StrictStr], Field(min_length=2, max_length=2)]]
+    output_tp: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
+    mean_ttft: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
     __properties: ClassVar[List[str]] = ["recipe", "hardware_instance_id", "output_tp", "mean_ttft"]
 
     model_config = ConfigDict(

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.credits_response import CreditsResponse
+from platform_api_python_client.models.credits_response import CreditsResponse
 
 class TestCreditsResponse(unittest.TestCase):
     """CreditsResponse unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
+from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
 
 class TestListHardwareInstanceResponse(unittest.TestCase):
     """ListHardwareInstanceResponse unit test stubs"""
@@ -36,27 +36,27 @@ class TestListHardwareInstanceResponse(unittest.TestCase):
         if include_optional:
             return ListHardwareInstanceResponse(
                 results = [
-                    platform_api_client.models.hardware_instance_response.HardwareInstanceResponse(
+                    platform_api_python_client.models.hardware_instance_response.HardwareInstanceResponse(
                         id = 56, 
                         name = '', 
                         gpu_type = '', 
                         num_gpu = 56, 
                         cpu = 56, 
                         memory = 56, 
-                        cost = 56, )
+                        cost_per_hr = 56, )
                     ]
             )
         else:
             return ListHardwareInstanceResponse(
                 results = [
-                    platform_api_client.models.hardware_instance_response.HardwareInstanceResponse(
+                    platform_api_python_client.models.hardware_instance_response.HardwareInstanceResponse(
                         id = 56, 
                         name = '', 
                         gpu_type = '', 
                         num_gpu = 56, 
                         cpu = 56, 
                         memory = 56, 
-                        cost = 56, )
+                        cost_per_hr = 56, )
                     ],
         )
         """

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.models.client_secret_response import ClientSecretResponse
+from platform_api_python_client.models.client_secret_response import ClientSecretResponse
 
 class TestClientSecretResponse(unittest.TestCase):
     """ClientSecretResponse unit test stubs"""

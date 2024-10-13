@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_client.api.external_api import EXTERNALApi
+from platform_api_python_client.api.external_api import EXTERNALApi
 
 
 class TestEXTERNALApi(unittest.TestCase):
@@ -26,15 +26,43 @@ class TestEXTERNALApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_create_compute_deployment_deployments_compute_post(self) -> None:
-        """Test case for create_compute_deployment_deployments_compute_post
+    def test_add_feedback_request_support_feedback_post(self) -> None:
+        """Test case for add_feedback_request_support_feedback_post
+
+        Add Feedback Request
+        """
+        pass
+
+    def test_create_api_key_credentials_api_key_post(self) -> None:
+        """Test case for create_api_key_credentials_api_key_post
+
+        Create Api Key
+        """
+        pass
+
+    def test_create_compute_deployment_deployments_v2_compute_post(self) -> None:
+        """Test case for create_compute_deployment_deployments_v2_compute_post
 
         Create Compute Deployment
         """
         pass
 
-    def test_create_inference_deployment_deployments_inference_post(self) -> None:
-        """Test case for create_inference_deployment_deployments_inference_post
+    def test_create_cserve_deployment_deployments_v2_cserve_post(self) -> None:
+        """Test case for create_cserve_deployment_deployments_v2_cserve_post
+
+        Create Cserve Deployment
+        """
+        pass
+
+    def test_create_hardware_request_support_hardware_request_post(self) -> None:
+        """Test case for create_hardware_request_support_hardware_request_post
+
+        Create Hardware Request
+        """
+        pass
+
+    def test_create_inference_deployment_deployments_v2_inference_post(self) -> None:
+        """Test case for create_inference_deployment_deployments_v2_inference_post
 
         Create Inference Deployment
         """
@@ -54,10 +82,10 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_create_training_deployment_deployments_training_post(self) -> None:
-        """Test case for create_training_deployment_deployments_training_post
+    def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
+        """Test case for delete_api_key_credentials_api_key_id_delete
 
-        Create Training Deployment
+        Delete Api Key
         """
         pass
 
@@ -68,8 +96,22 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_compute_deployment_deployments_compute_deployment_id_get(self) -> None:
-        """Test case for get_compute_deployment_deployments_compute_deployment_id_get
+    def test_get_api_keys_credentials_api_key_get(self) -> None:
+        """Test case for get_api_keys_credentials_api_key_get
+
+        Get Api Keys
+        """
+        pass
+
+    def test_get_clusters_clusters_get(self) -> None:
+        """Test case for get_clusters_clusters_get
+
+        Get Clusters
+        """
+        pass
+
+    def test_get_compute_deployment_deployments_v2_compute_deployment_id_get(self) -> None:
+        """Test case for get_compute_deployment_deployments_v2_compute_deployment_id_get
 
         Get Compute Deployment
         """
@@ -82,6 +124,20 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_cserve_deployment_deployments_v2_cserve_deployment_id_get(self) -> None:
+        """Test case for get_cserve_deployment_deployments_v2_cserve_deployment_id_get
+
+        Get Cserve Deployment
+        """
+        pass
+
+    def test_get_cserve_recipe_deployments_v2_cserve_recipes_get(self) -> None:
+        """Test case for get_cserve_recipe_deployments_v2_cserve_recipes_get
+
+        Get Cserve Recipe
+        """
+        pass
+
     def test_get_deployment_logs_deployments_logs_deployment_id_get(self) -> None:
         """Test case for get_deployment_logs_deployments_logs_deployment_id_get
 
@@ -89,15 +145,15 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_deployment_status_deployments_status_deployment_id_get(self) -> None:
-        """Test case for get_deployment_status_deployments_status_deployment_id_get
+    def test_get_deployment_status_deployments_v2_status_deployment_id_get(self) -> None:
+        """Test case for get_deployment_status_deployments_v2_status_deployment_id_get
 
         Get Deployment Status
         """
         pass
 
-    def test_get_deployments_deployments_get(self) -> None:
-        """Test case for get_deployments_deployments_get
+    def test_get_deployments_deployments_v2_get(self) -> None:
+        """Test case for get_deployments_deployments_v2_get
 
         Get Deployments
         """
@@ -110,8 +166,15 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_inference_deployment_deployments_inference_deployment_id_get(self) -> None:
-        """Test case for get_inference_deployment_deployments_inference_deployment_id_get
+    def test_get_hardware_instances_hardware_instances_v2_get(self) -> None:
+        """Test case for get_hardware_instances_hardware_instances_v2_get
+
+        Get Hardware Instances
+        """
+        pass
+
+    def test_get_inference_deployment_deployments_v2_inference_deployment_id_get(self) -> None:
+        """Test case for get_inference_deployment_deployments_v2_inference_deployment_id_get
 
         Get Inference Deployment
         """
@@ -131,15 +194,22 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_training_deployment_deployments_training_deployment_id_get(self) -> None:
-        """Test case for get_training_deployment_deployments_training_deployment_id_get
+    def test_get_usage_daily_bills_get(self) -> None:
+        """Test case for get_usage_daily_bills_get
 
-        Get Training Deployment
+        Get Usage
         """
         pass
 
-    def test_update_deployment_status_deployments_status_deployment_id_put(self) -> None:
-        """Test case for update_deployment_status_deployments_status_deployment_id_put
+    def test_get_usage_deployments_usage_deployment_id_get(self) -> None:
+        """Test case for get_usage_deployments_usage_deployment_id_get
+
+        Get Usage
+        """
+        pass
+
+    def test_update_deployment_status_deployments_v2_status_deployment_id_put(self) -> None:
+        """Test case for update_deployment_status_deployments_v2_status_deployment_id_put
 
         Update Deployment Status
         """

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_recipe_output import CServeRecipeOutput
+from platform_api_external_client.models.c_serve_recipe_output import CServeRecipeOutput
 
 class TestCServeRecipeOutput(unittest.TestCase):
     """CServeRecipeOutput unit test stubs"""

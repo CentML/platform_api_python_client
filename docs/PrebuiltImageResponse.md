@@ -9,11 +9,13 @@ Name | Type | Description | Notes
 **label** | **str** |  | 
 **tags** | **List[str]** |  | 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
+**port** | **int** |  | 
+**healthcheck** | **str** |  | 
 
 ## Example
 
 ```python
-from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
+from platform_api_external_client.models.prebuilt_image_response import PrebuiltImageResponse
 
 # TODO update the JSON string below
 json = "{}"

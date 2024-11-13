@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_external_client.models.hardware_instance_response import HardwareInstanceResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
+from platform_api_external_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 
 class TestGetDeploymentUsageResponse(unittest.TestCase):
     """GetDeploymentUsageResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestGetDeploymentUsageResponse(unittest.TestCase):
         if include_optional:
             return GetDeploymentUsageResponse(
                 values = [
-                    platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
+                    platform_api_external_client.models.deployment_usage_value.DeploymentUsageValue(
                         timestamp = 56, 
                         value = 1.337, )
                     ]
@@ -44,7 +44,7 @@ class TestGetDeploymentUsageResponse(unittest.TestCase):
         else:
             return GetDeploymentUsageResponse(
                 values = [
-                    platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
+                    platform_api_external_client.models.deployment_usage_value.DeploymentUsageValue(
                         timestamp = 56, 
                         value = 1.337, )
                     ],

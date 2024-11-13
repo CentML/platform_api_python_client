@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.c_serve_recipe_input import CServeRecipeInput
+from platform_api_external_client.models.c_serve_recipe_input import CServeRecipeInput
 
 # TODO update the JSON string below
 json = "{}"

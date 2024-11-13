@@ -14,11 +14,12 @@ Name | Type | Description | Notes
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
 **concurrency** | **int** |  | [optional] 
+**env_vars** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 
 ```python
-from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
+from platform_api_external_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
 
 # TODO update the JSON string below
 json = "{}"

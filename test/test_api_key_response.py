@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.api_key_response import APIKeyResponse
+from platform_api_external_client.models.api_key_response import APIKeyResponse
 
 class TestAPIKeyResponse(unittest.TestCase):
     """APIKeyResponse unit test stubs"""

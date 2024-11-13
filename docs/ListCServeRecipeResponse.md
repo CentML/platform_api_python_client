@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
+from platform_api_external_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
 
 # TODO update the JSON string below
 json = "{}"

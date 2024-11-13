@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
+from platform_api_external_client.models.c_serve_recipe_response import CServeRecipeResponse
 
 class TestCServeRecipeResponse(unittest.TestCase):
     """CServeRecipeResponse unit test stubs"""
@@ -37,8 +37,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
             return CServeRecipeResponse(
                 model = '',
                 cluster_id = 56,
-                fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                fastest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 
@@ -70,8 +70,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             null
                             ]
                         ], ),
-                cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                cheapest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 
@@ -103,8 +103,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             null
                             ]
                         ], ),
-                best_value = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                best_value = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 
@@ -141,8 +141,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
             return CServeRecipeResponse(
                 model = '',
                 cluster_id = 56,
-                fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                fastest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 
@@ -174,8 +174,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             null
                             ]
                         ], ),
-                cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                cheapest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 
@@ -207,8 +207,8 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             null
                             ]
                         ], ),
-                best_value = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
+                best_value = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                    recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
                         model = '', 
                         is_embedding_model = True, 
                         tensor_parallel_size = 56, 

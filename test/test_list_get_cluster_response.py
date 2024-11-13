@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.list_get_cluster_response import ListGetClusterResponse
+from platform_api_external_client.models.list_get_cluster_response import ListGetClusterResponse
 
 class TestListGetClusterResponse(unittest.TestCase):
     """ListGetClusterResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestListGetClusterResponse(unittest.TestCase):
         if include_optional:
             return ListGetClusterResponse(
                 results = [
-                    platform_api_python_client.models.get_cluster_response.GetClusterResponse(
+                    platform_api_external_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
                         display_name = '', )
                     ]
@@ -44,7 +44,7 @@ class TestListGetClusterResponse(unittest.TestCase):
         else:
             return ListGetClusterResponse(
                 results = [
-                    platform_api_python_client.models.get_cluster_response.GetClusterResponse(
+                    platform_api_external_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
                         display_name = '', )
                     ],

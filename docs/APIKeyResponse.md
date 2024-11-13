@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.api_key_response import APIKeyResponse
+from platform_api_external_client.models.api_key_response import APIKeyResponse
 
 # TODO update the JSON string below
 json = "{}"

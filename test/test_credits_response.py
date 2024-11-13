@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.credits_response import CreditsResponse
+from platform_api_external_client.models.credits_response import CreditsResponse
 
 class TestCreditsResponse(unittest.TestCase):
     """CreditsResponse unit test stubs"""
@@ -35,11 +35,11 @@ class TestCreditsResponse(unittest.TestCase):
         model = CreditsResponse()
         if include_optional:
             return CreditsResponse(
-                credits = 56
+                credits = 1.337
             )
         else:
             return CreditsResponse(
-                credits = 56,
+                credits = 1.337,
         )
         """
 

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
+from platform_api_external_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
 
 class TestGetCServeDeploymentResponse(unittest.TestCase):
     """GetCServeDeploymentResponse unit test stubs"""
@@ -67,7 +67,10 @@ class TestGetCServeDeploymentResponse(unittest.TestCase):
                 min_scale = 56,
                 max_scale = 56,
                 endpoint_certificate_authority = '',
-                concurrency = 56
+                concurrency = 56,
+                env_vars = {
+                    'key' : ''
+                    }
             )
         else:
             return GetCServeDeploymentResponse(
@@ -104,6 +107,9 @@ class TestGetCServeDeploymentResponse(unittest.TestCase):
                 max_scale = 56,
                 endpoint_certificate_authority = '',
                 concurrency = 56,
+                env_vars = {
+                    'key' : ''
+                    },
         )
         """
 

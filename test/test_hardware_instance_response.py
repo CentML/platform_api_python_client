@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_external_client.models.hardware_instance_response import HardwareInstanceResponse
 
 class TestHardwareInstanceResponse(unittest.TestCase):
     """HardwareInstanceResponse unit test stubs"""

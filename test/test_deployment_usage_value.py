@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue
+from platform_api_external_client.models.deployment_usage_value import DeploymentUsageValue
 
 class TestDeploymentUsageValue(unittest.TestCase):
     """DeploymentUsageValue unit test stubs"""

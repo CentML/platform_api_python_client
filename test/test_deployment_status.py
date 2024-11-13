@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.deployment_status import DeploymentStatus
+from platform_api_external_client.models.deployment_status import DeploymentStatus
 
 class TestDeploymentStatus(unittest.TestCase):
     """DeploymentStatus unit test stubs"""

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.daily_bill_response import DailyBillResponse
+from platform_api_external_client.models.daily_bill_response import DailyBillResponse
 
 class TestDailyBillResponse(unittest.TestCase):
     """DailyBillResponse unit test stubs"""
@@ -36,12 +36,12 @@ class TestDailyBillResponse(unittest.TestCase):
         if include_optional:
             return DailyBillResponse(
                 var_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
-                credits = 56
+                credits = 1.337
             )
         else:
             return DailyBillResponse(
                 var_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
-                credits = 56,
+                credits = 1.337,
         )
         """
 

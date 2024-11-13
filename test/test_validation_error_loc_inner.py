@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_python_client.models.validation_error_loc_inner import ValidationErrorLocInner
+from platform_api_external_client.models.validation_error_loc_inner import ValidationErrorLocInner
 
 class TestValidationErrorLocInner(unittest.TestCase):
     """ValidationErrorLocInner unit test stubs"""

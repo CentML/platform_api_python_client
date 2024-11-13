@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
+from platform_api_external_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"

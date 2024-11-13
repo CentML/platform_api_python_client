@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
+from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
 
 class TestCreateCServeDeploymentRequest(unittest.TestCase):
     """CreateCServeDeploymentRequest unit test stubs"""
@@ -38,7 +38,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
                 name = '',
                 cluster_id = 56,
                 hardware_instance_id = 56,
-                recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 
@@ -73,7 +73,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
                 name = '',
                 cluster_id = 56,
                 hardware_instance_id = 56,
-                recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 

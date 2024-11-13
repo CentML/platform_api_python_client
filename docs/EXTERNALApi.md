@@ -1,4 +1,4 @@
-# platform_api_external_client.EXTERNALApi
+# platform_api_python_client.EXTERNALApi
 
 All URIs are relative to *http://localhost*
 
@@ -40,14 +40,14 @@ Add User Request
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.user_support_email_request import UserSupportEmailRequest
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.user_support_email_request import UserSupportEmailRequest
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -57,15 +57,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    user_support_email_request = platform_api_external_client.UserSupportEmailRequest() # UserSupportEmailRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    user_support_email_request = platform_api_python_client.UserSupportEmailRequest() # UserSupportEmailRequest | 
 
     try:
         # Add User Request
@@ -117,15 +117,15 @@ Create Api Key
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.api_key_request import APIKeyRequest
-from platform_api_external_client.models.api_key_response import APIKeyResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.api_key_request import APIKeyRequest
+from platform_api_python_client.models.api_key_response import APIKeyResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -135,15 +135,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    api_key_request = platform_api_external_client.APIKeyRequest() # APIKeyRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    api_key_request = platform_api_python_client.APIKeyRequest() # APIKeyRequest | 
 
     try:
         # Create Api Key
@@ -195,15 +195,15 @@ Create Checkout
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.create_checkout_request import CreateCheckoutRequest
-from platform_api_external_client.models.create_checkout_response import CreateCheckoutResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.create_checkout_request import CreateCheckoutRequest
+from platform_api_python_client.models.create_checkout_response import CreateCheckoutResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -213,15 +213,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    create_checkout_request = platform_api_external_client.CreateCheckoutRequest() # CreateCheckoutRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_checkout_request = platform_api_python_client.CreateCheckoutRequest() # CreateCheckoutRequest | 
 
     try:
         # Create Checkout
@@ -273,15 +273,15 @@ Create Compute Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
-from platform_api_external_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
+from platform_api_python_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -291,15 +291,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    create_compute_deployment_request = platform_api_external_client.CreateComputeDeploymentRequest() # CreateComputeDeploymentRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_compute_deployment_request = platform_api_python_client.CreateComputeDeploymentRequest() # CreateComputeDeploymentRequest | 
 
     try:
         # Create Compute Deployment
@@ -351,15 +351,15 @@ Create Cserve Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
-from platform_api_external_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
+from platform_api_python_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -369,15 +369,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    create_c_serve_deployment_request = platform_api_external_client.CreateCServeDeploymentRequest() # CreateCServeDeploymentRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_c_serve_deployment_request = platform_api_python_client.CreateCServeDeploymentRequest() # CreateCServeDeploymentRequest | 
 
     try:
         # Create Cserve Deployment
@@ -429,15 +429,15 @@ Create Inference Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
-from platform_api_external_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
+from platform_api_python_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -447,15 +447,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    create_inference_deployment_request = platform_api_external_client.CreateInferenceDeploymentRequest() # CreateInferenceDeploymentRequest | 
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_inference_deployment_request = platform_api_python_client.CreateInferenceDeploymentRequest() # CreateInferenceDeploymentRequest | 
 
     try:
         # Create Inference Deployment
@@ -507,13 +507,13 @@ Delete Api Key
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -523,14 +523,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     id = 'id_example' # str | 
 
     try:
@@ -583,14 +583,14 @@ Get Api Keys
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.list_api_key_response import ListAPIKeyResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -600,14 +600,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
         # Get Api Keys
@@ -655,14 +655,14 @@ Get Clusters
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.list_get_cluster_response import ListGetClusterResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.list_get_cluster_response import ListGetClusterResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -672,14 +672,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
         # Get Clusters
@@ -727,14 +727,14 @@ Get Compute Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -744,14 +744,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
 
     try:
@@ -804,14 +804,14 @@ Get Credits
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.credits_response import CreditsResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.credits_response import CreditsResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -821,14 +821,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
         # Get Credits
@@ -876,14 +876,14 @@ Get Cserve Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -893,14 +893,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
 
     try:
@@ -953,14 +953,14 @@ Get Cserve Recipe
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -970,14 +970,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     model = 'model_example' # str |  (optional)
     cluster_id = 56 # int |  (optional)
 
@@ -1032,14 +1032,14 @@ Get Deployment Logs
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_deployment_log_response import GetDeploymentLogResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1049,14 +1049,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
     start_time = 56 # int | 
     end_time = 56 # int | 
@@ -1115,14 +1115,14 @@ Get Deployment Status
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.deployment_status_response import DeploymentStatusResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1132,14 +1132,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
 
     try:
@@ -1192,15 +1192,15 @@ Get Deployments
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.deployment_type import DeploymentType
-from platform_api_external_client.models.list_get_deployment_response import ListGetDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1210,17 +1210,17 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     offset = 56 # int |  (optional)
     limit = 56 # int |  (optional)
-    type = platform_api_external_client.DeploymentType() # DeploymentType |  (optional)
+    type = platform_api_python_client.DeploymentType() # DeploymentType |  (optional)
     search_query = 'search_query_example' # str |  (optional)
 
     try:
@@ -1276,14 +1276,14 @@ Get Hardware Instances
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1293,14 +1293,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     cluster_id = 56 # int | 
 
     try:
@@ -1353,14 +1353,14 @@ Get Inference Deployment
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1370,14 +1370,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
 
     try:
@@ -1430,14 +1430,14 @@ Get Payments
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_payments_response import GetPaymentsResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_payments_response import GetPaymentsResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1447,14 +1447,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     limit = 10 # int |  (optional) (default to 10)
     starting_after = 'starting_after_example' # str |  (optional)
 
@@ -1509,15 +1509,15 @@ Get Prebuilt Images
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.deployment_type import DeploymentType
-from platform_api_external_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1527,15 +1527,15 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
-    type = platform_api_external_client.DeploymentType() # DeploymentType |  (optional)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    type = platform_api_python_client.DeploymentType() # DeploymentType |  (optional)
 
     try:
         # Get Prebuilt Images
@@ -1587,14 +1587,14 @@ Get Usage
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.list_daily_bill_response import ListDailyBillResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1604,14 +1604,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     start_date = '2013-10-20' # date | 
     end_date = '2013-10-20' # date | 
 
@@ -1666,15 +1666,15 @@ Get Usage
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
-from platform_api_external_client.models.metric import Metric
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
+from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1684,16 +1684,16 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
-    metric = platform_api_external_client.Metric() # Metric | 
+    metric = platform_api_python_client.Metric() # Metric | 
     duration = 56 # int | 
     end_time = 56 # int |  (optional)
 
@@ -1750,13 +1750,13 @@ Setup Stripe Customer
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1766,14 +1766,14 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
         # Setup Stripe Customer
@@ -1821,15 +1821,15 @@ Update Deployment Status
 * Bearer Authentication (HTTPBearer):
 
 ```python
-import platform_api_external_client
-from platform_api_external_client.models.deployment_status_request import DeploymentStatusRequest
-from platform_api_external_client.models.deployment_status_response import DeploymentStatusResponse
-from platform_api_external_client.rest import ApiException
+import platform_api_python_client
+from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
+from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
+from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
@@ -1839,16 +1839,16 @@ configuration = platform_api_external_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization: HTTPBearer
-configuration = platform_api_external_client.Configuration(
+configuration = platform_api_python_client.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with platform_api_external_client.ApiClient(configuration) as api_client:
+with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = platform_api_external_client.EXTERNALApi(api_client)
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
-    deployment_status_request = platform_api_external_client.DeploymentStatusRequest() # DeploymentStatusRequest | 
+    deployment_status_request = platform_api_python_client.DeploymentStatusRequest() # DeploymentStatusRequest | 
 
     try:
         # Update Deployment Status

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
+from platform_api_python_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
 
 class TestCreateInferenceDeploymentResponse(unittest.TestCase):
     """CreateInferenceDeploymentResponse unit test stubs"""

@@ -19,16 +19,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.deployment_usage_value import DeploymentUsageValue
+from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetDeploymentUsageResponse(BaseModel):
+class ListPrebuiltImageResponse(BaseModel):
     """
-    GetDeploymentUsageResponse
+    ListPrebuiltImageResponse
     """ # noqa: E501
-    values: List[DeploymentUsageValue]
-    __properties: ClassVar[List[str]] = ["values"]
+    results: List[PrebuiltImageResponse]
+    __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class GetDeploymentUsageResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeploymentUsageResponse from a JSON string"""
+        """Create an instance of ListPrebuiltImageResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,18 +69,18 @@ class GetDeploymentUsageResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in values (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
-        if self.values:
-            for _item_values in self.values:
-                if _item_values:
-                    _items.append(_item_values.to_dict())
-            _dict['values'] = _items
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeploymentUsageResponse from a dict"""
+        """Create an instance of ListPrebuiltImageResponse from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +88,7 @@ class GetDeploymentUsageResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "values": [DeploymentUsageValue.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None
+            "results": [PrebuiltImageResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

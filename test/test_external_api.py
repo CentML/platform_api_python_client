@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.api.external_api import EXTERNALApi
+from platform_api_python_client.api.external_api import EXTERNALApi
 
 
 class TestEXTERNALApi(unittest.TestCase):

@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.service_status import ServiceStatus
+from platform_api_python_client.models.service_status import ServiceStatus
 
 class TestServiceStatus(unittest.TestCase):
     """ServiceStatus unit test stubs"""

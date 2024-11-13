@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.prebuilt_image_response import PrebuiltImageResponse
+from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 
 # TODO update the JSON string below
 json = "{}"

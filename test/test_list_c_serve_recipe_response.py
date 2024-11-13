@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
+from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
 
 class TestListCServeRecipeResponse(unittest.TestCase):
     """ListCServeRecipeResponse unit test stubs"""
@@ -36,11 +36,11 @@ class TestListCServeRecipeResponse(unittest.TestCase):
         if include_optional:
             return ListCServeRecipeResponse(
                 results = [
-                    platform_api_external_client.models.c_serve_recipe_response.CServeRecipeResponse(
+                    platform_api_python_client.models.c_serve_recipe_response.CServeRecipeResponse(
                         model = '', 
                         cluster_id = 56, 
-                        fastest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                            recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                        fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                            recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                                 model = '', 
                                 is_embedding_model = True, 
                                 tensor_parallel_size = 56, 
@@ -72,8 +72,8 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                                     null
                                     ]
                                 ], ), 
-                        cheapest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                            recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                        cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                            recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                                 model = '', 
                                 is_embedding_model = True, 
                                 tensor_parallel_size = 56, 
@@ -111,11 +111,11 @@ class TestListCServeRecipeResponse(unittest.TestCase):
         else:
             return ListCServeRecipeResponse(
                 results = [
-                    platform_api_external_client.models.c_serve_recipe_response.CServeRecipeResponse(
+                    platform_api_python_client.models.c_serve_recipe_response.CServeRecipeResponse(
                         model = '', 
                         cluster_id = 56, 
-                        fastest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                            recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                        fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                            recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                                 model = '', 
                                 is_embedding_model = True, 
                                 tensor_parallel_size = 56, 
@@ -147,8 +147,8 @@ class TestListCServeRecipeResponse(unittest.TestCase):
                                     null
                                     ]
                                 ], ), 
-                        cheapest = platform_api_external_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                            recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                        cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
+                            recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                                 model = '', 
                                 is_embedding_model = True, 
                                 tensor_parallel_size = 56, 

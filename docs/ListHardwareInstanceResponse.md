@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
+from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
 
 # TODO update the JSON string below
 json = "{}"

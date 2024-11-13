@@ -17,23 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_external_client.models.deployment_type import DeploymentType
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PrebuiltImageResponse(BaseModel):
+class ListHardwareInstanceResponse(BaseModel):
     """
-    PrebuiltImageResponse
+    ListHardwareInstanceResponse
     """ # noqa: E501
-    image_name: StrictStr
-    label: StrictStr
-    tags: List[StrictStr]
-    type: DeploymentType
-    port: StrictInt
-    healthcheck: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["image_name", "label", "tags", "type", "port", "healthcheck"]
+    results: List[HardwareInstanceResponse]
+    __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +48,7 @@ class PrebuiltImageResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PrebuiltImageResponse from a JSON string"""
+        """Create an instance of ListHardwareInstanceResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,16 +69,18 @@ class PrebuiltImageResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if healthcheck (nullable) is None
-        # and model_fields_set contains the field
-        if self.healthcheck is None and "healthcheck" in self.model_fields_set:
-            _dict['healthcheck'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PrebuiltImageResponse from a dict"""
+        """Create an instance of ListHardwareInstanceResponse from a dict"""
         if obj is None:
             return None
 
@@ -91,12 +88,7 @@ class PrebuiltImageResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "image_name": obj.get("image_name"),
-            "label": obj.get("label"),
-            "tags": obj.get("tags"),
-            "type": obj.get("type"),
-            "port": obj.get("port"),
-            "healthcheck": obj.get("healthcheck")
+            "results": [HardwareInstanceResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

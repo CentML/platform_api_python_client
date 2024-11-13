@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
+from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.get_payments_response import GetPaymentsResponse
+from platform_api_python_client.models.get_payments_response import GetPaymentsResponse
 
 # TODO update the JSON string below
 json = "{}"

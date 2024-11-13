@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.get_deployment_response import GetDeploymentResponse
+from platform_api_python_client.models.get_deployment_response import GetDeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"

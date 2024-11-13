@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
+from platform_api_python_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.create_checkout_response import CreateCheckoutResponse
+from platform_api_python_client.models.create_checkout_response import CreateCheckoutResponse
 
 # TODO update the JSON string below
 json = "{}"

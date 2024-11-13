@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.create_checkout_request import CreateCheckoutRequest
+from platform_api_python_client.models.create_checkout_request import CreateCheckoutRequest
 
 # TODO update the JSON string below
 json = "{}"

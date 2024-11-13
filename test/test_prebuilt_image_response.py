@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.prebuilt_image_response import PrebuiltImageResponse
+from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 
 class TestPrebuiltImageResponse(unittest.TestCase):
     """PrebuiltImageResponse unit test stubs"""

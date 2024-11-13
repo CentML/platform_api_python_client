@@ -19,15 +19,15 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.daily_bill_response import DailyBillResponse
+from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListDailyBillResponse(BaseModel):
+class ListCServeRecipeResponse(BaseModel):
     """
-    ListDailyBillResponse
+    ListCServeRecipeResponse
     """ # noqa: E501
-    results: List[DailyBillResponse]
+    results: List[CServeRecipeResponse]
     __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
@@ -48,7 +48,7 @@ class ListDailyBillResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListDailyBillResponse from a JSON string"""
+        """Create an instance of ListCServeRecipeResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,7 +80,7 @@ class ListDailyBillResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListDailyBillResponse from a dict"""
+        """Create an instance of ListCServeRecipeResponse from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +88,7 @@ class ListDailyBillResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [DailyBillResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "results": [CServeRecipeResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

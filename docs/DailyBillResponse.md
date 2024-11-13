@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.daily_bill_response import DailyBillResponse
+from platform_api_python_client.models.daily_bill_response import DailyBillResponse
 
 # TODO update the JSON string below
 json = "{}"

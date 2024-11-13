@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.c_serve_recipe_response import CServeRecipeResponse
+from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 
 # TODO update the JSON string below
 json = "{}"

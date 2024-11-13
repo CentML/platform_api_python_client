@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.user_support_email_request import UserSupportEmailRequest
+from platform_api_python_client.models.user_support_email_request import UserSupportEmailRequest
 
 class TestUserSupportEmailRequest(unittest.TestCase):
     """UserSupportEmailRequest unit test stubs"""

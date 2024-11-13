@@ -17,22 +17,28 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.c_serve_recipe_perf import CServeRecipePerf
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.deployment_status import DeploymentStatus
+from platform_api_python_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CServeRecipeResponse(BaseModel):
+class GetDeploymentResponse(BaseModel):
     """
-    CServeRecipeResponse
+    GetDeploymentResponse
     """ # noqa: E501
-    model: StrictStr
     cluster_id: StrictInt
-    fastest: CServeRecipePerf
-    cheapest: CServeRecipePerf
-    best_value: CServeRecipePerf
-    __properties: ClassVar[List[str]] = ["model", "cluster_id", "fastest", "cheapest", "best_value"]
+    id: StrictInt
+    name: StrictStr
+    endpoint_url: StrictStr
+    image_url: Optional[StrictStr]
+    type: DeploymentType
+    status: DeploymentStatus
+    created_at: datetime
+    hardware_instance_id: StrictInt
+    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +58,7 @@ class CServeRecipeResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CServeRecipeResponse from a JSON string"""
+        """Create an instance of GetDeploymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,20 +79,16 @@ class CServeRecipeResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of fastest
-        if self.fastest:
-            _dict['fastest'] = self.fastest.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of cheapest
-        if self.cheapest:
-            _dict['cheapest'] = self.cheapest.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of best_value
-        if self.best_value:
-            _dict['best_value'] = self.best_value.to_dict()
+        # set to None if image_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_url is None and "image_url" in self.model_fields_set:
+            _dict['image_url'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CServeRecipeResponse from a dict"""
+        """Create an instance of GetDeploymentResponse from a dict"""
         if obj is None:
             return None
 
@@ -94,11 +96,15 @@ class CServeRecipeResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "model": obj.get("model"),
             "cluster_id": obj.get("cluster_id"),
-            "fastest": CServeRecipePerf.from_dict(obj["fastest"]) if obj.get("fastest") is not None else None,
-            "cheapest": CServeRecipePerf.from_dict(obj["cheapest"]) if obj.get("cheapest") is not None else None,
-            "best_value": CServeRecipePerf.from_dict(obj["best_value"]) if obj.get("best_value") is not None else None
+            "id": obj.get("id"),
+            "name": obj.get("name"),
+            "endpoint_url": obj.get("endpoint_url"),
+            "image_url": obj.get("image_url"),
+            "type": obj.get("type"),
+            "status": obj.get("status"),
+            "created_at": obj.get("created_at"),
+            "hardware_instance_id": obj.get("hardware_instance_id")
         })
         return _obj
 

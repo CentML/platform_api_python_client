@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
+from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
 
 class TestGetComputeDeploymentResponse(unittest.TestCase):
     """GetComputeDeploymentResponse unit test stubs"""

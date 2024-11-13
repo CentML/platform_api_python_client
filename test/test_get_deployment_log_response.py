@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.get_deployment_log_response import GetDeploymentLogResponse
+from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
 
 class TestGetDeploymentLogResponse(unittest.TestCase):
     """GetDeploymentLogResponse unit test stubs"""

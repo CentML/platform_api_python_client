@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.user_support_email_request import UserSupportEmailRequest
+from platform_api_python_client.models.user_support_email_request import UserSupportEmailRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
+from platform_api_python_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"

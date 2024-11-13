@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.deployment_type import DeploymentType
 
 class TestDeploymentType(unittest.TestCase):
     """DeploymentType unit test stubs"""

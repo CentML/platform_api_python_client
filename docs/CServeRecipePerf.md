@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.c_serve_recipe_perf import CServeRecipePerf
+from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 
 # TODO update the JSON string below
 json = "{}"

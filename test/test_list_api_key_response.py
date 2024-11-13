@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.list_api_key_response import ListAPIKeyResponse
+from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
 
 class TestListAPIKeyResponse(unittest.TestCase):
     """ListAPIKeyResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestListAPIKeyResponse(unittest.TestCase):
         if include_optional:
             return ListAPIKeyResponse(
                 results = [
-                    platform_api_external_client.models.api_key_response.APIKeyResponse(
+                    platform_api_python_client.models.api_key_response.APIKeyResponse(
                         name = '', 
                         id = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
@@ -45,7 +45,7 @@ class TestListAPIKeyResponse(unittest.TestCase):
         else:
             return ListAPIKeyResponse(
                 results = [
-                    platform_api_external_client.models.api_key_response.APIKeyResponse(
+                    platform_api_python_client.models.api_key_response.APIKeyResponse(
                         name = '', 
                         id = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )

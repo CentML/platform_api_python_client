@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.api_key_request import APIKeyRequest
+from platform_api_python_client.models.api_key_request import APIKeyRequest
 
 # TODO update the JSON string below
 json = "{}"

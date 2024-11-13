@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.list_daily_bill_response import ListDailyBillResponse
+from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
 
 class TestListDailyBillResponse(unittest.TestCase):
     """ListDailyBillResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestListDailyBillResponse(unittest.TestCase):
         if include_optional:
             return ListDailyBillResponse(
                 results = [
-                    platform_api_external_client.models.daily_bill_response.DailyBillResponse(
+                    platform_api_python_client.models.daily_bill_response.DailyBillResponse(
                         date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
                         credits = 1.337, )
                     ]
@@ -44,7 +44,7 @@ class TestListDailyBillResponse(unittest.TestCase):
         else:
             return ListDailyBillResponse(
                 results = [
-                    platform_api_external_client.models.daily_bill_response.DailyBillResponse(
+                    platform_api_python_client.models.daily_bill_response.DailyBillResponse(
                         date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(), 
                         credits = 1.337, )
                     ],

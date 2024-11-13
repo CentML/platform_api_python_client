@@ -17,18 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.get_cluster_response import GetClusterResponse
+from typing_extensions import Annotated
+from platform_api_python_client.models.c_serve_recipe_output import CServeRecipeOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListGetClusterResponse(BaseModel):
+class CServeRecipePerf(BaseModel):
     """
-    ListGetClusterResponse
+    CServeRecipePerf
     """ # noqa: E501
-    results: List[GetClusterResponse]
-    __properties: ClassVar[List[str]] = ["results"]
+    recipe: CServeRecipeOutput
+    hardware_instance_id: StrictInt
+    output_tp: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
+    mean_ttft: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
+    __properties: ClassVar[List[str]] = ["recipe", "hardware_instance_id", "output_tp", "mean_ttft"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +52,7 @@ class ListGetClusterResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListGetClusterResponse from a JSON string"""
+        """Create an instance of CServeRecipePerf from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,18 +73,14 @@ class ListGetClusterResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
-            _dict['results'] = _items
+        # override the default output from pydantic by calling `to_dict()` of recipe
+        if self.recipe:
+            _dict['recipe'] = self.recipe.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListGetClusterResponse from a dict"""
+        """Create an instance of CServeRecipePerf from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +88,10 @@ class ListGetClusterResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [GetClusterResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "recipe": CServeRecipeOutput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "hardware_instance_id": obj.get("hardware_instance_id"),
+            "output_tp": obj.get("output_tp"),
+            "mean_ttft": obj.get("mean_ttft")
         })
         return _obj
 

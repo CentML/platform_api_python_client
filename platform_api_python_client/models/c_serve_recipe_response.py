@@ -17,18 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListHardwareInstanceResponse(BaseModel):
+class CServeRecipeResponse(BaseModel):
     """
-    ListHardwareInstanceResponse
+    CServeRecipeResponse
     """ # noqa: E501
-    results: List[HardwareInstanceResponse]
-    __properties: ClassVar[List[str]] = ["results"]
+    model: StrictStr
+    cluster_id: StrictInt
+    fastest: CServeRecipePerf
+    cheapest: CServeRecipePerf
+    best_value: CServeRecipePerf
+    __properties: ClassVar[List[str]] = ["model", "cluster_id", "fastest", "cheapest", "best_value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +52,7 @@ class ListHardwareInstanceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListHardwareInstanceResponse from a JSON string"""
+        """Create an instance of CServeRecipeResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,18 +73,20 @@ class ListHardwareInstanceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
-            _dict['results'] = _items
+        # override the default output from pydantic by calling `to_dict()` of fastest
+        if self.fastest:
+            _dict['fastest'] = self.fastest.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cheapest
+        if self.cheapest:
+            _dict['cheapest'] = self.cheapest.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of best_value
+        if self.best_value:
+            _dict['best_value'] = self.best_value.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListHardwareInstanceResponse from a dict"""
+        """Create an instance of CServeRecipeResponse from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +94,11 @@ class ListHardwareInstanceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [HardwareInstanceResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "model": obj.get("model"),
+            "cluster_id": obj.get("cluster_id"),
+            "fastest": CServeRecipePerf.from_dict(obj["fastest"]) if obj.get("fastest") is not None else None,
+            "cheapest": CServeRecipePerf.from_dict(obj["cheapest"]) if obj.get("cheapest") is not None else None,
+            "best_value": CServeRecipePerf.from_dict(obj["best_value"]) if obj.get("best_value") is not None else None
         })
         return _obj
 

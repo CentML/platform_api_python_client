@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
+from platform_api_python_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
 
 class TestCreateCServeDeploymentResponse(unittest.TestCase):
     """CreateCServeDeploymentResponse unit test stubs"""

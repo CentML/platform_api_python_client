@@ -19,16 +19,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.deployment_status import DeploymentStatus
+from platform_api_python_client.models.api_key_response import APIKeyResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeploymentStatusRequest(BaseModel):
+class ListAPIKeyResponse(BaseModel):
     """
-    DeploymentStatusRequest
+    ListAPIKeyResponse
     """ # noqa: E501
-    status: DeploymentStatus
-    __properties: ClassVar[List[str]] = ["status"]
+    results: List[APIKeyResponse]
+    __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class DeploymentStatusRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeploymentStatusRequest from a JSON string"""
+        """Create an instance of ListAPIKeyResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +69,18 @@ class DeploymentStatusRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeploymentStatusRequest from a dict"""
+        """Create an instance of ListAPIKeyResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +88,7 @@ class DeploymentStatusRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "status": obj.get("status")
+            "results": [APIKeyResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

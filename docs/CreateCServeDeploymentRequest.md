@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
+from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
 
 # TODO update the JSON string below
 json = "{}"

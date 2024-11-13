@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.daily_bill_response import DailyBillResponse
+from platform_api_python_client.models.daily_bill_response import DailyBillResponse
 
 class TestDailyBillResponse(unittest.TestCase):
     """DailyBillResponse unit test stubs"""

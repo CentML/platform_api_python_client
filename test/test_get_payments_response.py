@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.get_payments_response import GetPaymentsResponse
+from platform_api_python_client.models.get_payments_response import GetPaymentsResponse
 
 class TestGetPaymentsResponse(unittest.TestCase):
     """GetPaymentsResponse unit test stubs"""

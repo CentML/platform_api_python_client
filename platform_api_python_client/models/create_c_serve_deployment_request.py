@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from platform_api_external_client.models.c_serve_recipe_input import CServeRecipeInput
+from platform_api_python_client.models.c_serve_recipe_input import CServeRecipeInput
 from typing import Optional, Set
 from typing_extensions import Self
 

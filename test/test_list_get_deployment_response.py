@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.list_get_deployment_response import ListGetDeploymentResponse
+from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 
 class TestListGetDeploymentResponse(unittest.TestCase):
     """ListGetDeploymentResponse unit test stubs"""
@@ -36,7 +36,7 @@ class TestListGetDeploymentResponse(unittest.TestCase):
         if include_optional:
             return ListGetDeploymentResponse(
                 results = [
-                    platform_api_external_client.models.get_deployment_response.GetDeploymentResponse(
+                    platform_api_python_client.models.get_deployment_response.GetDeploymentResponse(
                         cluster_id = 56, 
                         id = 56, 
                         name = '', 
@@ -51,7 +51,7 @@ class TestListGetDeploymentResponse(unittest.TestCase):
         else:
             return ListGetDeploymentResponse(
                 results = [
-                    platform_api_external_client.models.get_deployment_response.GetDeploymentResponse(
+                    platform_api_python_client.models.get_deployment_response.GetDeploymentResponse(
                         cluster_id = 56, 
                         id = 56, 
                         name = '', 

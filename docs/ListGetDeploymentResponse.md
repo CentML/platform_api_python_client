@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_external_client.models.list_get_deployment_response import ListGetDeploymentResponse
+from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"

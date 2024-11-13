@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.create_checkout_response import CreateCheckoutResponse
+from platform_api_python_client.models.create_checkout_response import CreateCheckoutResponse
 
 class TestCreateCheckoutResponse(unittest.TestCase):
     """CreateCheckoutResponse unit test stubs"""

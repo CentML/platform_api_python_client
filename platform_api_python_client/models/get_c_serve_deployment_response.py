@@ -21,8 +21,8 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
-from platform_api_external_client.models.deployment_status import DeploymentStatus
-from platform_api_external_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.deployment_status import DeploymentStatus
+from platform_api_python_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
 from typing_extensions import Self
 

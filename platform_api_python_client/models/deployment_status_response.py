@@ -17,18 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from platform_api_external_client.models.get_deployment_response import GetDeploymentResponse
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.deployment_status import DeploymentStatus
+from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.service_status import ServiceStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListGetDeploymentResponse(BaseModel):
+class DeploymentStatusResponse(BaseModel):
     """
-    ListGetDeploymentResponse
+    DeploymentStatusResponse
     """ # noqa: E501
-    results: List[GetDeploymentResponse]
-    __properties: ClassVar[List[str]] = ["results"]
+    id: StrictInt
+    type: DeploymentType
+    status: DeploymentStatus
+    service_status: Optional[ServiceStatus]
+    error_message: Optional[StrictStr]
+    endpoint_url: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "type", "status", "service_status", "error_message", "endpoint_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +55,7 @@ class ListGetDeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListGetDeploymentResponse from a JSON string"""
+        """Create an instance of DeploymentStatusResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,18 +76,26 @@ class ListGetDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
-        _items = []
-        if self.results:
-            for _item_results in self.results:
-                if _item_results:
-                    _items.append(_item_results.to_dict())
-            _dict['results'] = _items
+        # set to None if service_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_status is None and "service_status" in self.model_fields_set:
+            _dict['service_status'] = None
+
+        # set to None if error_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_message is None and "error_message" in self.model_fields_set:
+            _dict['error_message'] = None
+
+        # set to None if endpoint_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
+            _dict['endpoint_url'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListGetDeploymentResponse from a dict"""
+        """Create an instance of DeploymentStatusResponse from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +103,12 @@ class ListGetDeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [GetDeploymentResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "id": obj.get("id"),
+            "type": obj.get("type"),
+            "status": obj.get("status"),
+            "service_status": obj.get("service_status"),
+            "error_message": obj.get("error_message"),
+            "endpoint_url": obj.get("endpoint_url")
         })
         return _obj
 

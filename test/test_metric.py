@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.metric import Metric
+from platform_api_python_client.models.metric import Metric
 
 class TestMetric(unittest.TestCase):
     """Metric unit test stubs"""

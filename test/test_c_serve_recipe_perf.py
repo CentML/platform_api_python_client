@@ -14,7 +14,7 @@
 
 import unittest
 
-from platform_api_external_client.models.c_serve_recipe_perf import CServeRecipePerf
+from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 
 class TestCServeRecipePerf(unittest.TestCase):
     """CServeRecipePerf unit test stubs"""
@@ -35,7 +35,7 @@ class TestCServeRecipePerf(unittest.TestCase):
         model = CServeRecipePerf()
         if include_optional:
             return CServeRecipePerf(
-                recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 
@@ -70,7 +70,7 @@ class TestCServeRecipePerf(unittest.TestCase):
             )
         else:
             return CServeRecipePerf(
-                recipe = platform_api_external_client.models.c_serve_recipe.CServeRecipe(
+                recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 

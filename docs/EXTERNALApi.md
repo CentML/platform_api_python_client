@@ -9,14 +9,19 @@ Method | HTTP request | Description
 [**create_checkout_payments_checkout_post**](EXTERNALApi.md#create_checkout_payments_checkout_post) | **POST** /payments/checkout | Create Checkout
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
 [**create_cserve_deployment_deployments_cserve_post**](EXTERNALApi.md#create_cserve_deployment_deployments_cserve_post) | **POST** /deployments/cserve | Create Cserve Deployment
+[**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
+[**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
+[**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
+[**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
 [**get_api_keys_credentials_api_key_get**](EXTERNALApi.md#get_api_keys_credentials_api_key_get) | **GET** /credentials/api-key | Get Api Keys
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
 [**get_cserve_deployment_deployments_cserve_deployment_id_get**](EXTERNALApi.md#get_cserve_deployment_deployments_cserve_deployment_id_get) | **GET** /deployments/cserve/{deployment_id} | Get Cserve Deployment
 [**get_cserve_recipe_deployments_cserve_recipes_get**](EXTERNALApi.md#get_cserve_recipe_deployments_cserve_recipes_get) | **GET** /deployments/cserve/recipes | Get Cserve Recipe
+[**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Get Cserve V2 Deployment
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
 [**get_deployment_status_deployments_status_deployment_id_get**](EXTERNALApi.md#get_deployment_status_deployments_status_deployment_id_get) | **GET** /deployments/status/{deployment_id} | Get Deployment Status
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
@@ -24,10 +29,12 @@ Method | HTTP request | Description
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_payments_payments_get**](EXTERNALApi.md#get_payments_payments_get) | **GET** /payments | Get Payments
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
+[**get_rag_deployment_deployments_rag_deployment_id_get**](EXTERNALApi.md#get_rag_deployment_deployments_rag_deployment_id_get) | **GET** /deployments/rag/{deployment_id} | Get Rag Deployment
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
+[**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 
 
 # **add_user_request_support_user_requests_post**
@@ -419,6 +426,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_cserve_v2_deployment_deployments_cserve_v2_post**
+> CreateCServeV2DeploymentResponse create_cserve_v2_deployment_deployments_cserve_v2_post(create_c_serve_v2_deployment_request)
+
+Create Cserve V2 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_v2_deployment_request import CreateCServeV2DeploymentRequest
+from platform_api_python_client.models.create_c_serve_v2_deployment_response import CreateCServeV2DeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_c_serve_v2_deployment_request = platform_api_python_client.CreateCServeV2DeploymentRequest() # CreateCServeV2DeploymentRequest | 
+
+    try:
+        # Create Cserve V2 Deployment
+        api_response = api_instance.create_cserve_v2_deployment_deployments_cserve_v2_post(create_c_serve_v2_deployment_request)
+        print("The response of EXTERNALApi->create_cserve_v2_deployment_deployments_cserve_v2_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_cserve_v2_deployment_deployments_cserve_v2_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_c_serve_v2_deployment_request** | [**CreateCServeV2DeploymentRequest**](CreateCServeV2DeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateCServeV2DeploymentResponse**](CreateCServeV2DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_inference_deployment_deployments_inference_post**
 > CreateInferenceDeploymentResponse create_inference_deployment_deployments_inference_post(create_inference_deployment_request)
 
@@ -497,6 +582,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_rag_deployment_deployments_rag_post**
+> CreateRagDeploymentResponse create_rag_deployment_deployments_rag_post(create_rag_deployment_request)
+
+Create Rag Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
+from platform_api_python_client.models.create_rag_deployment_response import CreateRagDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_rag_deployment_request = platform_api_python_client.CreateRagDeploymentRequest() # CreateRagDeploymentRequest | 
+
+    try:
+        # Create Rag Deployment
+        api_response = api_instance.create_rag_deployment_deployments_rag_post(create_rag_deployment_request)
+        print("The response of EXTERNALApi->create_rag_deployment_deployments_rag_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_rag_deployment_deployments_rag_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_rag_deployment_request** | [**CreateRagDeploymentRequest**](CreateRagDeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateRagDeploymentResponse**](CreateRagDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_api_key_credentials_api_key_id_delete**
 > object delete_api_key_credentials_api_key_id_delete(id)
 
@@ -554,6 +717,167 @@ Name | Type | Description  | Notes
 ### Return type
 
 **object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_user_vault_item_endpoint_user_vault_delete**
+> object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item_input)
+
+Delete User Vault Item Endpoint
+
+Delete an item of a specific type for the user.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.user_vault_item_input import UserVaultItemInput
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    user_vault_item_input = platform_api_python_client.UserVaultItemInput() # UserVaultItemInput | 
+
+    try:
+        # Delete User Vault Item Endpoint
+        api_response = api_instance.delete_user_vault_item_endpoint_user_vault_delete(user_vault_item_input)
+        print("The response of EXTERNALApi->delete_user_vault_item_endpoint_user_vault_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_user_vault_item_endpoint_user_vault_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_vault_item_input** | [**UserVaultItemInput**](UserVaultItemInput.md)|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_all_user_vault_items_endpoint_user_vault_get**
+> ListUserVaultItemsResponse get_all_user_vault_items_endpoint_user_vault_get(type=type, search_query=search_query)
+
+Get All User Vault Items Endpoint
+
+Retrieve all items of a specific type for the user.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
+from platform_api_python_client.models.user_vault_type import UserVaultType
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    type = platform_api_python_client.UserVaultType() # UserVaultType |  (optional)
+    search_query = 'search_query_example' # str |  (optional)
+
+    try:
+        # Get All User Vault Items Endpoint
+        api_response = api_instance.get_all_user_vault_items_endpoint_user_vault_get(type=type, search_query=search_query)
+        print("The response of EXTERNALApi->get_all_user_vault_items_endpoint_user_vault_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_all_user_vault_items_endpoint_user_vault_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type** | [**UserVaultType**](.md)|  | [optional] 
+ **search_query** | **str**|  | [optional] 
+
+### Return type
+
+[**ListUserVaultItemsResponse**](ListUserVaultItemsResponse.md)
 
 ### Authorization
 
@@ -1022,6 +1346,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**
+> GetCServeV2DeploymentResponse get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
+
+Get Cserve V2 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Cserve V2 Deployment
+        api_response = api_instance.get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetCServeV2DeploymentResponse**](GetCServeV2DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_deployment_logs_deployments_logs_deployment_id_get**
 > GetDeploymentLogResponse get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token)
 
@@ -1267,7 +1668,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_hardware_instances_hardware_instances_get**
-> ListHardwareInstanceResponse get_hardware_instances_hardware_instances_get(cluster_id)
+> ListHardwareInstanceResponse get_hardware_instances_hardware_instances_get(cluster_id=cluster_id)
 
 Get Hardware Instances
 
@@ -1301,11 +1702,11 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    cluster_id = 56 # int | 
+    cluster_id = 56 # int |  (optional)
 
     try:
         # Get Hardware Instances
-        api_response = api_instance.get_hardware_instances_hardware_instances_get(cluster_id)
+        api_response = api_instance.get_hardware_instances_hardware_instances_get(cluster_id=cluster_id)
         print("The response of EXTERNALApi->get_hardware_instances_hardware_instances_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1319,7 +1720,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
+ **cluster_id** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1558,6 +1959,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListPrebuiltImageResponse**](ListPrebuiltImageResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_rag_deployment_deployments_rag_deployment_id_get**
+> GetRagDeploymentResponse get_rag_deployment_deployments_rag_deployment_id_get(deployment_id)
+
+Get Rag Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Rag Deployment
+        api_response = api_instance.get_rag_deployment_deployments_rag_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_rag_deployment_deployments_rag_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_rag_deployment_deployments_rag_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetRagDeploymentResponse**](GetRagDeploymentResponse.md)
 
 ### Authorization
 
@@ -1872,6 +2350,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeploymentStatusResponse**](DeploymentStatusResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_user_vault_item_endpoint_user_vault_put**
+> object update_user_vault_item_endpoint_user_vault_put(user_vault_item_input)
+
+Update User Vault Item Endpoint
+
+Update or add multiple items of a specific type for the user.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.user_vault_item_input import UserVaultItemInput
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    user_vault_item_input = platform_api_python_client.UserVaultItemInput() # UserVaultItemInput | 
+
+    try:
+        # Update User Vault Item Endpoint
+        api_response = api_instance.update_user_vault_item_endpoint_user_vault_put(user_vault_item_input)
+        print("The response of EXTERNALApi->update_user_vault_item_endpoint_user_vault_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_user_vault_item_endpoint_user_vault_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_vault_item_input** | [**UserVaultItemInput**](UserVaultItemInput.md)|  | 
+
+### Return type
+
+**object**
 
 ### Authorization
 

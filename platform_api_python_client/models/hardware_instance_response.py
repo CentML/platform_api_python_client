@@ -33,7 +33,8 @@ class HardwareInstanceResponse(BaseModel):
     cpu: StrictInt
     memory: StrictInt
     cost_per_hr: StrictInt
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr"]
+    cluster_id: StrictInt
+    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr", "cluster_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +93,8 @@ class HardwareInstanceResponse(BaseModel):
             "num_gpu": obj.get("num_gpu"),
             "cpu": obj.get("cpu"),
             "memory": obj.get("memory"),
-            "cost_per_hr": obj.get("cost_per_hr")
+            "cost_per_hr": obj.get("cost_per_hr"),
+            "cluster_id": obj.get("cluster_id")
         })
         return _obj
 

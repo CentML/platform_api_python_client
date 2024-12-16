@@ -13,8 +13,12 @@ Name | Type | Description | Notes
 **swap_space** | **int** |  | [default to 0]
 **gpu_mem_util** | **float** |  | [default to 0.95]
 **max_num_seqs** | **int** |  | [default to 256]
-**use_prefix_caching** | **bool** |  | 
 **offloading_num** | **int** |  | [default to 0]
+**use_prefix_caching** | **bool** |  | 
+**use_chunked_prefill** | **bool** |  | 
+**chunked_prefill_size** | **int** |  | 
+**eager_execution** | **bool** |  | 
+**num_scheduler_steps** | **int** |  | 
 **use_flashinfer** | **bool** |  | [default to False]
 **max_model_len** | **int** |  | 
 **dtype** | **str** |  | [default to 'auto']

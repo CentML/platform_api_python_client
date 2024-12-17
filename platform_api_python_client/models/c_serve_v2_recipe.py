@@ -17,37 +17,44 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CServeRecipeOutput(BaseModel):
+class CServeV2Recipe(BaseModel):
     """
-    Base class for deployment planner
+    Inputs to start deployment
     """ # noqa: E501
     model: StrictStr
+    max_model_len: Optional[StrictInt]
     is_embedding_model: StrictBool
+    tokenizer: StrictStr
     tensor_parallel_size: StrictInt
     pipeline_parallel_size: StrictInt
+    gpu_mem_util: Union[StrictFloat, StrictInt]
     block_size: StrictInt
-    swap_space: Annotated[int, Field(strict=True, ge=0)]
-    gpu_mem_util: Union[Annotated[float, Field(le=1.0, strict=True, ge=0.0)], Annotated[int, Field(le=1, strict=True, ge=0)]]
-    max_num_seqs: StrictInt
-    use_prefix_caching: Optional[StrictBool]
-    offloading_num: StrictInt
-    use_flashinfer: StrictBool
-    max_model_len: Optional[Annotated[int, Field(strict=True, ge=128)]]
+    swap_space: StrictInt
+    quantization: Optional[StrictStr]
     dtype: StrictStr
-    tokenizer: Optional[StrictStr]
-    spec_proposer: Optional[StrictStr]
+    cache_dtype: StrictStr
+    max_num_seqs: StrictInt
+    eager_execution: StrictBool
+    use_flashinfer: StrictBool
+    offloading_num: Union[StrictFloat, StrictInt]
     spec_draft_model: Optional[StrictStr]
     spec_tokens: Optional[StrictInt]
-    spec_prompt_lookup_min: Optional[Annotated[int, Field(strict=True, ge=1)]]
-    spec_prompt_lookup_max: Optional[Annotated[int, Field(strict=True, ge=1)]]
-    seed: StrictInt
-    __properties: ClassVar[List[str]] = ["model", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "use_prefix_caching", "offloading_num", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed"]
+    spec_prompt_lookup_max: Optional[StrictInt]
+    spec_prompt_lookup_min: Optional[StrictInt]
+    use_prefix_caching: StrictBool
+    use_chunked_prefill: StrictBool
+    chunked_prefill_size: Optional[StrictInt]
+    max_seq_len_to_capture: StrictInt
+    distributed_executor_backend: StrictStr
+    spec_max_batch_size: Optional[StrictInt]
+    spec_max_seq_len: Optional[StrictInt]
+    num_scheduler_steps: StrictInt
+    __properties: ClassVar[List[str]] = ["model", "max_model_len", "is_embedding_model", "tokenizer", "tensor_parallel_size", "pipeline_parallel_size", "gpu_mem_util", "block_size", "swap_space", "quantization", "dtype", "cache_dtype", "max_num_seqs", "eager_execution", "use_flashinfer", "offloading_num", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_max", "spec_prompt_lookup_min", "use_prefix_caching", "use_chunked_prefill", "chunked_prefill_size", "max_seq_len_to_capture", "distributed_executor_backend", "spec_max_batch_size", "spec_max_seq_len", "num_scheduler_steps"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -67,7 +74,7 @@ class CServeRecipeOutput(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CServeRecipeOutput from a JSON string"""
+        """Create an instance of CServeV2Recipe from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,25 +95,15 @@ class CServeRecipeOutput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if use_prefix_caching (nullable) is None
-        # and model_fields_set contains the field
-        if self.use_prefix_caching is None and "use_prefix_caching" in self.model_fields_set:
-            _dict['use_prefix_caching'] = None
-
         # set to None if max_model_len (nullable) is None
         # and model_fields_set contains the field
         if self.max_model_len is None and "max_model_len" in self.model_fields_set:
             _dict['max_model_len'] = None
 
-        # set to None if tokenizer (nullable) is None
+        # set to None if quantization (nullable) is None
         # and model_fields_set contains the field
-        if self.tokenizer is None and "tokenizer" in self.model_fields_set:
-            _dict['tokenizer'] = None
-
-        # set to None if spec_proposer (nullable) is None
-        # and model_fields_set contains the field
-        if self.spec_proposer is None and "spec_proposer" in self.model_fields_set:
-            _dict['spec_proposer'] = None
+        if self.quantization is None and "quantization" in self.model_fields_set:
+            _dict['quantization'] = None
 
         # set to None if spec_draft_model (nullable) is None
         # and model_fields_set contains the field
@@ -118,21 +115,36 @@ class CServeRecipeOutput(BaseModel):
         if self.spec_tokens is None and "spec_tokens" in self.model_fields_set:
             _dict['spec_tokens'] = None
 
-        # set to None if spec_prompt_lookup_min (nullable) is None
-        # and model_fields_set contains the field
-        if self.spec_prompt_lookup_min is None and "spec_prompt_lookup_min" in self.model_fields_set:
-            _dict['spec_prompt_lookup_min'] = None
-
         # set to None if spec_prompt_lookup_max (nullable) is None
         # and model_fields_set contains the field
         if self.spec_prompt_lookup_max is None and "spec_prompt_lookup_max" in self.model_fields_set:
             _dict['spec_prompt_lookup_max'] = None
 
+        # set to None if spec_prompt_lookup_min (nullable) is None
+        # and model_fields_set contains the field
+        if self.spec_prompt_lookup_min is None and "spec_prompt_lookup_min" in self.model_fields_set:
+            _dict['spec_prompt_lookup_min'] = None
+
+        # set to None if chunked_prefill_size (nullable) is None
+        # and model_fields_set contains the field
+        if self.chunked_prefill_size is None and "chunked_prefill_size" in self.model_fields_set:
+            _dict['chunked_prefill_size'] = None
+
+        # set to None if spec_max_batch_size (nullable) is None
+        # and model_fields_set contains the field
+        if self.spec_max_batch_size is None and "spec_max_batch_size" in self.model_fields_set:
+            _dict['spec_max_batch_size'] = None
+
+        # set to None if spec_max_seq_len (nullable) is None
+        # and model_fields_set contains the field
+        if self.spec_max_seq_len is None and "spec_max_seq_len" in self.model_fields_set:
+            _dict['spec_max_seq_len'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CServeRecipeOutput from a dict"""
+        """Create an instance of CServeV2Recipe from a dict"""
         if obj is None:
             return None
 
@@ -141,25 +153,33 @@ class CServeRecipeOutput(BaseModel):
 
         _obj = cls.model_validate({
             "model": obj.get("model"),
+            "max_model_len": obj.get("max_model_len"),
             "is_embedding_model": obj.get("is_embedding_model") if obj.get("is_embedding_model") is not None else False,
+            "tokenizer": obj.get("tokenizer"),
             "tensor_parallel_size": obj.get("tensor_parallel_size"),
             "pipeline_parallel_size": obj.get("pipeline_parallel_size"),
+            "gpu_mem_util": obj.get("gpu_mem_util") if obj.get("gpu_mem_util") is not None else 0.95,
             "block_size": obj.get("block_size") if obj.get("block_size") is not None else 32,
             "swap_space": obj.get("swap_space") if obj.get("swap_space") is not None else 0,
-            "gpu_mem_util": obj.get("gpu_mem_util") if obj.get("gpu_mem_util") is not None else 0.95,
-            "max_num_seqs": obj.get("max_num_seqs") if obj.get("max_num_seqs") is not None else 256,
-            "use_prefix_caching": obj.get("use_prefix_caching"),
-            "offloading_num": obj.get("offloading_num") if obj.get("offloading_num") is not None else 0,
-            "use_flashinfer": obj.get("use_flashinfer") if obj.get("use_flashinfer") is not None else False,
-            "max_model_len": obj.get("max_model_len"),
+            "quantization": obj.get("quantization"),
             "dtype": obj.get("dtype") if obj.get("dtype") is not None else 'auto',
-            "tokenizer": obj.get("tokenizer"),
-            "spec_proposer": obj.get("spec_proposer"),
+            "cache_dtype": obj.get("cache_dtype") if obj.get("cache_dtype") is not None else 'auto',
+            "max_num_seqs": obj.get("max_num_seqs") if obj.get("max_num_seqs") is not None else 256,
+            "eager_execution": obj.get("eager_execution") if obj.get("eager_execution") is not None else True,
+            "use_flashinfer": obj.get("use_flashinfer") if obj.get("use_flashinfer") is not None else False,
+            "offloading_num": obj.get("offloading_num") if obj.get("offloading_num") is not None else 0,
             "spec_draft_model": obj.get("spec_draft_model"),
             "spec_tokens": obj.get("spec_tokens"),
-            "spec_prompt_lookup_min": obj.get("spec_prompt_lookup_min"),
             "spec_prompt_lookup_max": obj.get("spec_prompt_lookup_max"),
-            "seed": obj.get("seed") if obj.get("seed") is not None else 0
+            "spec_prompt_lookup_min": obj.get("spec_prompt_lookup_min"),
+            "use_prefix_caching": obj.get("use_prefix_caching") if obj.get("use_prefix_caching") is not None else False,
+            "use_chunked_prefill": obj.get("use_chunked_prefill") if obj.get("use_chunked_prefill") is not None else False,
+            "chunked_prefill_size": obj.get("chunked_prefill_size"),
+            "max_seq_len_to_capture": obj.get("max_seq_len_to_capture") if obj.get("max_seq_len_to_capture") is not None else 1024,
+            "distributed_executor_backend": obj.get("distributed_executor_backend") if obj.get("distributed_executor_backend") is not None else 'ray',
+            "spec_max_batch_size": obj.get("spec_max_batch_size"),
+            "spec_max_seq_len": obj.get("spec_max_seq_len"),
+            "num_scheduler_steps": obj.get("num_scheduler_steps") if obj.get("num_scheduler_steps") is not None else 1
         })
         return _obj
 

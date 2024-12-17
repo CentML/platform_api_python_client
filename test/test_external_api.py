@@ -68,6 +68,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_rag_deployment_deployments_rag_post(self) -> None:
+        """Test case for create_rag_deployment_deployments_rag_post
+
+        Create Rag Deployment
+        """
+        pass
+
     def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
         """Test case for delete_api_key_credentials_api_key_id_delete
 
@@ -163,6 +170,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_prebuilt_images_prebuilt_images_get
 
         Get Prebuilt Images
+        """
+        pass
+
+    def test_get_rag_deployment_deployments_rag_deployment_id_get(self) -> None:
+        """Test case for get_rag_deployment_deployments_rag_deployment_id_get
+
+        Get Rag Deployment
         """
         pass
 

@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_recipe_output import CServeRecipeOutput
+from platform_api_python_client.models.c_serve_recipe import CServeRecipe
 
-class TestCServeRecipeOutput(unittest.TestCase):
-    """CServeRecipeOutput unit test stubs"""
+class TestCServeRecipe(unittest.TestCase):
+    """CServeRecipe unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,31 +25,35 @@ class TestCServeRecipeOutput(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CServeRecipeOutput:
-        """Test CServeRecipeOutput
+    def make_instance(self, include_optional) -> CServeRecipe:
+        """Test CServeRecipe
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CServeRecipeOutput`
+        # uncomment below to create an instance of `CServeRecipe`
         """
-        model = CServeRecipeOutput()
+        model = CServeRecipe()
         if include_optional:
-            return CServeRecipeOutput(
+            return CServeRecipe(
                 model = '',
                 is_embedding_model = True,
                 tensor_parallel_size = 56,
                 pipeline_parallel_size = 56,
-                block_size = 56,
+                block_size = 16,
                 swap_space = 0.0,
                 gpu_mem_util = 0.0,
                 max_num_seqs = 56,
-                use_prefix_caching = True,
                 offloading_num = 56,
+                use_prefix_caching = True,
+                use_chunked_prefill = True,
+                chunked_prefill_size = 56,
+                eager_execution = True,
+                num_scheduler_steps = 56,
                 use_flashinfer = True,
                 max_model_len = 128.0,
                 dtype = 'auto',
                 tokenizer = '',
-                spec_proposer = '',
+                spec_proposer = 'draft',
                 spec_draft_model = '',
                 spec_tokens = 56,
                 spec_prompt_lookup_min = 1.0,
@@ -57,32 +61,15 @@ class TestCServeRecipeOutput(unittest.TestCase):
                 seed = 56
             )
         else:
-            return CServeRecipeOutput(
+            return CServeRecipe(
                 model = '',
-                is_embedding_model = True,
                 tensor_parallel_size = 56,
                 pipeline_parallel_size = 56,
-                block_size = 56,
-                swap_space = 0.0,
-                gpu_mem_util = 0.0,
-                max_num_seqs = 56,
-                use_prefix_caching = True,
-                offloading_num = 56,
-                use_flashinfer = True,
-                max_model_len = 128.0,
-                dtype = 'auto',
-                tokenizer = '',
-                spec_proposer = '',
-                spec_draft_model = '',
-                spec_tokens = 56,
-                spec_prompt_lookup_min = 1.0,
-                spec_prompt_lookup_max = 1.0,
-                seed = 56,
         )
         """
 
-    def testCServeRecipeOutput(self):
-        """Test CServeRecipeOutput"""
+    def testCServeRecipe(self):
+        """Test CServeRecipe"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

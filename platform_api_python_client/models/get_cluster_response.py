@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,8 @@ class GetClusterResponse(BaseModel):
     """ # noqa: E501
     id: StrictInt
     display_name: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "display_name"]
+    region: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "display_name", "region"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,6 +70,11 @@ class GetClusterResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if region (nullable) is None
+        # and model_fields_set contains the field
+        if self.region is None and "region" in self.model_fields_set:
+            _dict['region'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class GetClusterResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "display_name": obj.get("display_name")
+            "display_name": obj.get("display_name"),
+            "region": obj.get("region")
         })
         return _obj
 

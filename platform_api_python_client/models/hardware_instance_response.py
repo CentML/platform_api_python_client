@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,9 @@ class HardwareInstanceResponse(BaseModel):
     memory: StrictInt
     cost_per_hr: StrictInt
     cluster_id: StrictInt
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr", "cluster_id"]
+    provider: Optional[StrictStr]
+    num_accelerators: Optional[StrictInt]
+    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr", "cluster_id", "provider", "num_accelerators"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +77,16 @@ class HardwareInstanceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if provider (nullable) is None
+        # and model_fields_set contains the field
+        if self.provider is None and "provider" in self.model_fields_set:
+            _dict['provider'] = None
+
+        # set to None if num_accelerators (nullable) is None
+        # and model_fields_set contains the field
+        if self.num_accelerators is None and "num_accelerators" in self.model_fields_set:
+            _dict['num_accelerators'] = None
+
         return _dict
 
     @classmethod
@@ -94,7 +106,9 @@ class HardwareInstanceResponse(BaseModel):
             "cpu": obj.get("cpu"),
             "memory": obj.get("memory"),
             "cost_per_hr": obj.get("cost_per_hr"),
-            "cluster_id": obj.get("cluster_id")
+            "cluster_id": obj.get("cluster_id"),
+            "provider": obj.get("provider"),
+            "num_accelerators": obj.get("num_accelerators")
         })
         return _obj
 

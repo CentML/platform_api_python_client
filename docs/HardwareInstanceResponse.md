@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **cpu** | **int** |  | 
 **memory** | **int** |  | 
 **cost_per_hr** | **int** |  | 
+**cluster_id** | **int** |  | 
+**provider** | **str** |  | 
+**num_accelerators** | **int** |  | 
 
 ## Example
 

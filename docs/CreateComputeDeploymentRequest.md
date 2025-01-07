@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
 **image_url** | **str** |  | 
+**enable_jupyter** | **bool** |  | [optional] [default to False]
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 

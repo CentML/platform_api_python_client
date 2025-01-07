@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +31,8 @@ class CreateComputeDeploymentResponse(BaseModel):
     created_at: datetime
     endpoint_url: StrictStr
     port: StrictInt
-    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url", "port"]
+    jupyter_token: Optional[StrictStr]
+    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url", "port", "jupyter_token"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,6 +73,11 @@ class CreateComputeDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if jupyter_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.jupyter_token is None and "jupyter_token" in self.model_fields_set:
+            _dict['jupyter_token'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +93,8 @@ class CreateComputeDeploymentResponse(BaseModel):
             "id": obj.get("id"),
             "created_at": obj.get("created_at"),
             "endpoint_url": obj.get("endpoint_url"),
-            "port": obj.get("port")
+            "port": obj.get("port"),
+            "jupyter_token": obj.get("jupyter_token")
         })
         return _obj
 

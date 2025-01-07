@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **str** |  | 
 **subject** | **str** |  | 
+**send_to_sales** | **bool** |  | 
 
 ## Example
 

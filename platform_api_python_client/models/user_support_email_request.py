@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,8 @@ class UserSupportEmailRequest(BaseModel):
     """ # noqa: E501
     message: StrictStr
     subject: StrictStr
-    __properties: ClassVar[List[str]] = ["message", "subject"]
+    send_to_sales: StrictBool
+    __properties: ClassVar[List[str]] = ["message", "subject", "send_to_sales"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +83,8 @@ class UserSupportEmailRequest(BaseModel):
 
         _obj = cls.model_validate({
             "message": obj.get("message"),
-            "subject": obj.get("subject")
+            "subject": obj.get("subject"),
+            "send_to_sales": obj.get("send_to_sales")
         })
         return _obj
 

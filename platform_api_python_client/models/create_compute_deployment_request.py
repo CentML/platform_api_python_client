@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -31,9 +31,10 @@ class CreateComputeDeploymentRequest(BaseModel):
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     image_url: StrictStr
+    enable_jupyter: Optional[StrictBool] = False
     ssh_public_key: Optional[StrictStr] = None
     ssh_password: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "ssh_public_key", "ssh_password"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key", "ssh_password"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +101,7 @@ class CreateComputeDeploymentRequest(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "image_url": obj.get("image_url"),
+            "enable_jupyter": obj.get("enable_jupyter") if obj.get("enable_jupyter") is not None else False,
             "ssh_public_key": obj.get("ssh_public_key"),
             "ssh_password": obj.get("ssh_password")
         })

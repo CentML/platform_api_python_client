@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
-from platform_api_python_client.models.c_serve_recipe_output import CServeRecipeOutput
+from platform_api_python_client.models.c_serve_v2_recipe_output import CServeV2RecipeOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class CServeRecipePerf(BaseModel):
     """
     CServeRecipePerf
     """ # noqa: E501
-    recipe: CServeRecipeOutput
+    recipe: CServeV2RecipeOutput
     hardware_instance_id: StrictInt
     output_tp: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
     mean_ttft: List[Annotated[List[Any], Field(min_length=2, max_length=2)]]
@@ -88,7 +88,7 @@ class CServeRecipePerf(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "recipe": CServeRecipeOutput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "recipe": CServeV2RecipeOutput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "output_tp": obj.get("output_tp"),
             "mean_ttft": obj.get("mean_ttft")

@@ -17,7 +17,11 @@
 
 * `CSERVE` (value: `'cserve'`)
 
+* `CSERVE_V2` (value: `'cserve_v2'`)
+
 * `DEPLOYMENT` (value: `'deployment'`)
+
+* `RAG` (value: `'rag'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

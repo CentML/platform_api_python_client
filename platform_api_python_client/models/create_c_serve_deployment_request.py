@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from platform_api_python_client.models.c_serve_recipe_input import CServeRecipeInput
+from platform_api_python_client.models.c_serve_recipe import CServeRecipe
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +31,8 @@ class CreateCServeDeploymentRequest(BaseModel):
     name: Annotated[str, Field(strict=True, max_length=12)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
-    recipe: CServeRecipeInput
-    hf_token: StrictStr
+    recipe: CServeRecipe
+    hf_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     min_scale: StrictInt
     max_scale: StrictInt
@@ -82,6 +82,11 @@ class CreateCServeDeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipe
         if self.recipe:
             _dict['recipe'] = self.recipe.to_dict()
+        # set to None if hf_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token is None and "hf_token" in self.model_fields_set:
+            _dict['hf_token'] = None
+
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
@@ -107,7 +112,7 @@ class CreateCServeDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "recipe": CServeRecipeInput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "recipe": CServeRecipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "hf_token": obj.get("hf_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "min_scale": obj.get("min_scale"),

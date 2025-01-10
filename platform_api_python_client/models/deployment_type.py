@@ -33,7 +33,9 @@ class DeploymentType(str, Enum):
     INFERENCE_V2 = 'inference_v2'
     COMPUTE_V2 = 'compute_v2'
     CSERVE = 'cserve'
+    CSERVE_V2 = 'cserve_v2'
     DEPLOYMENT = 'deployment'
+    RAG = 'rag'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

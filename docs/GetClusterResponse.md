@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **display_name** | **str** |  | 
+**region** | **str** |  | 
 
 ## Example
 

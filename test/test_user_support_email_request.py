@@ -36,12 +36,14 @@ class TestUserSupportEmailRequest(unittest.TestCase):
         if include_optional:
             return UserSupportEmailRequest(
                 message = '',
-                subject = ''
+                subject = '',
+                send_to_sales = True
             )
         else:
             return UserSupportEmailRequest(
                 message = '',
                 subject = '',
+                send_to_sales = True,
         )
         """
 

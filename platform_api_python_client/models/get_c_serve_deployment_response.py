@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -38,8 +38,12 @@ class GetCServeDeploymentResponse(BaseModel):
     swap_space: Annotated[int, Field(strict=True, ge=0)]
     gpu_mem_util: Union[Annotated[float, Field(le=1.0, strict=True, ge=0.0)], Annotated[int, Field(le=1, strict=True, ge=0)]]
     max_num_seqs: StrictInt
-    use_prefix_caching: Optional[StrictBool]
     offloading_num: StrictInt
+    use_prefix_caching: Optional[StrictBool]
+    use_chunked_prefill: Optional[StrictBool]
+    chunked_prefill_size: Optional[StrictInt]
+    eager_execution: Optional[StrictBool]
+    num_scheduler_steps: Optional[StrictInt]
     use_flashinfer: StrictBool
     max_model_len: Optional[Annotated[int, Field(strict=True, ge=128)]]
     dtype: StrictStr
@@ -64,7 +68,31 @@ class GetCServeDeploymentResponse(BaseModel):
     endpoint_certificate_authority: Optional[StrictStr]
     concurrency: Optional[StrictInt]
     env_vars: Dict[str, StrictStr]
-    __properties: ClassVar[List[str]] = ["model", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "use_prefix_caching", "offloading_num", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["model", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "offloading_num", "use_prefix_caching", "use_chunked_prefill", "chunked_prefill_size", "eager_execution", "num_scheduler_steps", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
+
+    @field_validator('block_size')
+    def block_size_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set([16, 32]):
+            raise ValueError("must be one of enum values (16, 32)")
+        return value
+
+    @field_validator('dtype')
+    def dtype_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['auto', 'float16', 'float32', 'bfloat16']):
+            raise ValueError("must be one of enum values ('auto', 'float16', 'float32', 'bfloat16')")
+        return value
+
+    @field_validator('spec_proposer')
+    def spec_proposer_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['draft', 'prompt_lookup']):
+            raise ValueError("must be one of enum values ('draft', 'prompt_lookup')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,6 +137,26 @@ class GetCServeDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.use_prefix_caching is None and "use_prefix_caching" in self.model_fields_set:
             _dict['use_prefix_caching'] = None
+
+        # set to None if use_chunked_prefill (nullable) is None
+        # and model_fields_set contains the field
+        if self.use_chunked_prefill is None and "use_chunked_prefill" in self.model_fields_set:
+            _dict['use_chunked_prefill'] = None
+
+        # set to None if chunked_prefill_size (nullable) is None
+        # and model_fields_set contains the field
+        if self.chunked_prefill_size is None and "chunked_prefill_size" in self.model_fields_set:
+            _dict['chunked_prefill_size'] = None
+
+        # set to None if eager_execution (nullable) is None
+        # and model_fields_set contains the field
+        if self.eager_execution is None and "eager_execution" in self.model_fields_set:
+            _dict['eager_execution'] = None
+
+        # set to None if num_scheduler_steps (nullable) is None
+        # and model_fields_set contains the field
+        if self.num_scheduler_steps is None and "num_scheduler_steps" in self.model_fields_set:
+            _dict['num_scheduler_steps'] = None
 
         # set to None if max_model_len (nullable) is None
         # and model_fields_set contains the field
@@ -180,8 +228,12 @@ class GetCServeDeploymentResponse(BaseModel):
             "swap_space": obj.get("swap_space") if obj.get("swap_space") is not None else 0,
             "gpu_mem_util": obj.get("gpu_mem_util") if obj.get("gpu_mem_util") is not None else 0.95,
             "max_num_seqs": obj.get("max_num_seqs") if obj.get("max_num_seqs") is not None else 256,
-            "use_prefix_caching": obj.get("use_prefix_caching"),
             "offloading_num": obj.get("offloading_num") if obj.get("offloading_num") is not None else 0,
+            "use_prefix_caching": obj.get("use_prefix_caching"),
+            "use_chunked_prefill": obj.get("use_chunked_prefill"),
+            "chunked_prefill_size": obj.get("chunked_prefill_size"),
+            "eager_execution": obj.get("eager_execution"),
+            "num_scheduler_steps": obj.get("num_scheduler_steps"),
             "use_flashinfer": obj.get("use_flashinfer") if obj.get("use_flashinfer") is not None else False,
             "max_model_len": obj.get("max_model_len"),
             "dtype": obj.get("dtype") if obj.get("dtype") is not None else 'auto',

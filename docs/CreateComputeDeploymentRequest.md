@@ -10,8 +10,7 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **image_url** | **str** |  | 
 **enable_jupyter** | **bool** |  | [optional] [default to False]
-**ssh_public_key** | **str** |  | [optional] 
-**ssh_password** | **str** |  | [optional] 
+**ssh_public_key** | **str** |  | 
 
 ## Example
 

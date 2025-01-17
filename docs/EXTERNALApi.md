@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
 [**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
+[**create_setup_payments_setup_checkout_post**](EXTERNALApi.md#create_setup_payments_setup_checkout_post) | **POST** /payments/setup_checkout | Create Setup
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
@@ -193,7 +194,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_checkout_payments_checkout_post**
-> CreateCheckoutResponse create_checkout_payments_checkout_post(create_checkout_request)
+> CreateCheckoutSessionResponse create_checkout_payments_checkout_post(create_checkout_request)
 
 Create Checkout
 
@@ -204,7 +205,7 @@ Create Checkout
 ```python
 import platform_api_python_client
 from platform_api_python_client.models.create_checkout_request import CreateCheckoutRequest
-from platform_api_python_client.models.create_checkout_response import CreateCheckoutResponse
+from platform_api_python_client.models.create_checkout_session_response import CreateCheckoutSessionResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -250,7 +251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateCheckoutResponse**](CreateCheckoutResponse.md)
+[**CreateCheckoutSessionResponse**](CreateCheckoutSessionResponse.md)
 
 ### Authorization
 
@@ -641,6 +642,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateRagDeploymentResponse**](CreateRagDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_setup_payments_setup_checkout_post**
+> CreateCheckoutSessionResponse create_setup_payments_setup_checkout_post(create_setup_checkout_request)
+
+Create Setup
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_checkout_session_response import CreateCheckoutSessionResponse
+from platform_api_python_client.models.create_setup_checkout_request import CreateSetupCheckoutRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_setup_checkout_request = platform_api_python_client.CreateSetupCheckoutRequest() # CreateSetupCheckoutRequest | 
+
+    try:
+        # Create Setup
+        api_response = api_instance.create_setup_payments_setup_checkout_post(create_setup_checkout_request)
+        print("The response of EXTERNALApi->create_setup_payments_setup_checkout_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_setup_payments_setup_checkout_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_setup_checkout_request** | [**CreateSetupCheckoutRequest**](CreateSetupCheckoutRequest.md)|  | 
+
+### Return type
+
+[**CreateCheckoutSessionResponse**](CreateCheckoutSessionResponse.md)
 
 ### Authorization
 

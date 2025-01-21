@@ -17,23 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateComputeDeploymentRequest(BaseModel):
+class ClientSecretResponse(BaseModel):
     """
-    CreateComputeDeploymentRequest
+    ClientSecretResponse
     """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=12)]
-    cluster_id: StrictInt
-    hardware_instance_id: StrictInt
-    image_url: StrictStr
-    enable_jupyter: Optional[StrictBool] = False
-    ssh_public_key: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key"]
+    client_secret: StrictStr
+    __properties: ClassVar[List[str]] = ["client_secret"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +47,7 @@ class CreateComputeDeploymentRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateComputeDeploymentRequest from a JSON string"""
+        """Create an instance of ClientSecretResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,7 +72,7 @@ class CreateComputeDeploymentRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateComputeDeploymentRequest from a dict"""
+        """Create an instance of ClientSecretResponse from a dict"""
         if obj is None:
             return None
 
@@ -86,12 +80,7 @@ class CreateComputeDeploymentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "cluster_id": obj.get("cluster_id"),
-            "hardware_instance_id": obj.get("hardware_instance_id"),
-            "image_url": obj.get("image_url"),
-            "enable_jupyter": obj.get("enable_jupyter") if obj.get("enable_jupyter") is not None else False,
-            "ssh_public_key": obj.get("ssh_public_key")
+            "client_secret": obj.get("client_secret")
         })
         return _obj
 

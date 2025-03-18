@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **endpoint_url** | **str** |  | 
 **port** | **int** |  | 
-**jupyter_token** | **str** |  | 
+**jupyter_token** | **str** |  | [optional] 
 
 ## Example
 

@@ -17,25 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_python_client.models.deployment_status import DeploymentStatus
-from platform_api_python_client.models.deployment_type import DeploymentType
-from platform_api_python_client.models.service_status import ServiceStatus
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from platform_api_python_client.models.get_payment_response import GetPaymentResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class DeploymentStatusResponse(BaseModel):
+class ListPaymentsResponse(BaseModel):
     """
-    DeploymentStatusResponse
+    ListPaymentsResponse
     """ # noqa: E501
-    id: StrictInt
-    type: DeploymentType
-    status: DeploymentStatus
-    service_status: Optional[ServiceStatus] = None
-    error_message: Optional[StrictStr] = None
-    endpoint_url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "type", "status", "service_status", "error_message", "endpoint_url"]
+    payments: List[GetPaymentResponse]
+    __properties: ClassVar[List[str]] = ["payments"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -55,7 +48,7 @@ class DeploymentStatusResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeploymentStatusResponse from a JSON string"""
+        """Create an instance of ListPaymentsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -76,26 +69,18 @@ class DeploymentStatusResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if service_status (nullable) is None
-        # and model_fields_set contains the field
-        if self.service_status is None and "service_status" in self.model_fields_set:
-            _dict['service_status'] = None
-
-        # set to None if error_message (nullable) is None
-        # and model_fields_set contains the field
-        if self.error_message is None and "error_message" in self.model_fields_set:
-            _dict['error_message'] = None
-
-        # set to None if endpoint_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
-            _dict['endpoint_url'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in payments (list)
+        _items = []
+        if self.payments:
+            for _item_payments in self.payments:
+                if _item_payments:
+                    _items.append(_item_payments.to_dict())
+            _dict['payments'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeploymentStatusResponse from a dict"""
+        """Create an instance of ListPaymentsResponse from a dict"""
         if obj is None:
             return None
 
@@ -103,12 +88,7 @@ class DeploymentStatusResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
-            "service_status": obj.get("service_status"),
-            "error_message": obj.get("error_message"),
-            "endpoint_url": obj.get("endpoint_url")
+            "payments": [GetPaymentResponse.from_dict(_item) for _item in obj["payments"]] if obj.get("payments") is not None else None
         })
         return _obj
 

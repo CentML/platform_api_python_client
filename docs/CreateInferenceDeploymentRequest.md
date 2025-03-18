@@ -15,8 +15,7 @@ Name | Type | Description | Notes
 **concurrency** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
-**command** | **List[str]** |  | [optional] 
-**command_args** | **List[str]** |  | [optional] 
+**command** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 
 ## Example

@@ -33,7 +33,7 @@ class GetInferenceDeploymentResponse(BaseModel):
     id: StrictInt
     name: StrictStr
     endpoint_url: StrictStr
-    image_url: Optional[StrictStr]
+    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
     created_at: datetime
@@ -41,12 +41,12 @@ class GetInferenceDeploymentResponse(BaseModel):
     container_port: StrictInt
     min_scale: StrictInt
     max_scale: StrictInt
-    concurrency: Optional[StrictInt]
-    healthcheck: Optional[StrictStr]
-    endpoint_certificate_authority: Optional[StrictStr]
-    env_vars: Optional[Dict[str, StrictStr]]
-    command: Optional[List[StrictStr]]
-    command_args: Optional[List[StrictStr]]
+    concurrency: Optional[StrictInt] = None
+    healthcheck: Optional[StrictStr] = None
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    env_vars: Optional[Dict[str, StrictStr]] = None
+    command: Optional[List[StrictStr]] = None
+    command_args: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "container_port", "min_scale", "max_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "env_vars", "command", "command_args"]
 
     model_config = ConfigDict(

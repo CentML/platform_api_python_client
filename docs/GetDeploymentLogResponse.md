@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **events** | **List[object]** |  | 
-**next_page_token** | **str** |  | 
+**next_page_token** | **str** |  | [optional] 
 
 ## Example
 

@@ -17,18 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetPaymentsResponse(BaseModel):
+class CreateUrlRequest(BaseModel):
     """
-    GetPaymentsResponse
+    CreateUrlRequest
     """ # noqa: E501
-    has_more: StrictBool
-    payments: List[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["has_more", "payments"]
+    filename: StrictStr
+    extension: StrictStr
+    __properties: ClassVar[List[str]] = ["filename", "extension"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class GetPaymentsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetPaymentsResponse from a JSON string"""
+        """Create an instance of CreateUrlRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class GetPaymentsResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetPaymentsResponse from a dict"""
+        """Create an instance of CreateUrlRequest from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +81,8 @@ class GetPaymentsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "has_more": obj.get("has_more"),
-            "payments": obj.get("payments")
+            "filename": obj.get("filename"),
+            "extension": obj.get("extension")
         })
         return _obj
 

@@ -51,7 +51,6 @@ class TestGetDeploymentResponse(unittest.TestCase):
                 id = 56,
                 name = '',
                 endpoint_url = '',
-                image_url = '',
                 type = 'inference',
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

@@ -28,7 +28,7 @@ class GetClusterResponse(BaseModel):
     """ # noqa: E501
     id: StrictInt
     display_name: StrictStr
-    region: Optional[StrictStr]
+    region: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["id", "display_name", "region"]
 
     model_config = ConfigDict(

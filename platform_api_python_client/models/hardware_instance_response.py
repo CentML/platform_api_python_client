@@ -34,9 +34,10 @@ class HardwareInstanceResponse(BaseModel):
     memory: StrictInt
     cost_per_hr: StrictInt
     cluster_id: StrictInt
-    provider: Optional[StrictStr]
-    num_accelerators: Optional[StrictInt]
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr", "cluster_id", "provider", "num_accelerators"]
+    provider: Optional[StrictStr] = None
+    num_accelerators: Optional[StrictInt] = None
+    accelerator_memory: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cost_per_hr", "cluster_id", "provider", "num_accelerators", "accelerator_memory"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +88,11 @@ class HardwareInstanceResponse(BaseModel):
         if self.num_accelerators is None and "num_accelerators" in self.model_fields_set:
             _dict['num_accelerators'] = None
 
+        # set to None if accelerator_memory (nullable) is None
+        # and model_fields_set contains the field
+        if self.accelerator_memory is None and "accelerator_memory" in self.model_fields_set:
+            _dict['accelerator_memory'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +114,8 @@ class HardwareInstanceResponse(BaseModel):
             "cost_per_hr": obj.get("cost_per_hr"),
             "cluster_id": obj.get("cluster_id"),
             "provider": obj.get("provider"),
-            "num_accelerators": obj.get("num_accelerators")
+            "num_accelerators": obj.get("num_accelerators"),
+            "accelerator_memory": obj.get("accelerator_memory")
         })
         return _obj
 

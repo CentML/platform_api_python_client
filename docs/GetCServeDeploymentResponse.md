@@ -6,43 +6,43 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **model** | **str** |  | 
-**is_embedding_model** | **bool** |  | [default to False]
+**is_embedding_model** | **bool** |  | [optional] [default to False]
 **tensor_parallel_size** | **int** |  | 
 **pipeline_parallel_size** | **int** |  | 
-**block_size** | **int** |  | [default to 32]
-**swap_space** | **int** |  | [default to 0]
-**gpu_mem_util** | **float** |  | [default to 0.95]
-**max_num_seqs** | **int** |  | [default to 256]
-**offloading_num** | **int** |  | [default to 0]
-**use_prefix_caching** | **bool** |  | 
-**use_chunked_prefill** | **bool** |  | 
-**chunked_prefill_size** | **int** |  | 
-**eager_execution** | **bool** |  | 
-**num_scheduler_steps** | **int** |  | 
-**use_flashinfer** | **bool** |  | [default to False]
-**max_model_len** | **int** |  | 
-**dtype** | **str** |  | [default to 'auto']
-**tokenizer** | **str** |  | 
-**spec_proposer** | **str** |  | 
-**spec_draft_model** | **str** |  | 
-**spec_tokens** | **int** |  | 
-**spec_prompt_lookup_min** | **int** |  | 
-**spec_prompt_lookup_max** | **int** |  | 
-**seed** | **int** |  | [default to 0]
+**block_size** | **int** |  | [optional] [default to 32]
+**swap_space** | **int** |  | [optional] [default to 0]
+**gpu_mem_util** | **float** |  | [optional] [default to 0.95]
+**max_num_seqs** | **int** |  | [optional] [default to 256]
+**offloading_num** | **int** |  | [optional] [default to 0]
+**use_prefix_caching** | **bool** |  | [optional] 
+**use_chunked_prefill** | **bool** |  | [optional] 
+**chunked_prefill_size** | **int** |  | [optional] 
+**eager_execution** | **bool** |  | [optional] 
+**num_scheduler_steps** | **int** |  | [optional] 
+**use_flashinfer** | **bool** |  | [optional] [default to False]
+**max_model_len** | **int** |  | [optional] 
+**dtype** | **str** |  | [optional] [default to 'auto']
+**tokenizer** | **str** |  | [optional] 
+**spec_proposer** | **str** |  | [optional] 
+**spec_draft_model** | **str** |  | [optional] 
+**spec_tokens** | **int** |  | [optional] 
+**spec_prompt_lookup_min** | **int** |  | [optional] 
+**spec_prompt_lookup_max** | **int** |  | [optional] 
+**seed** | **int** |  | [optional] [default to 0]
 **cluster_id** | **int** |  | 
 **id** | **int** |  | 
 **name** | **str** |  | 
 **endpoint_url** | **str** |  | 
-**image_url** | **str** |  | 
+**image_url** | **str** |  | [optional] 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
-**endpoint_certificate_authority** | **str** |  | 
-**concurrency** | **int** |  | 
-**env_vars** | **Dict[str, str]** |  | 
+**endpoint_certificate_authority** | **str** |  | [optional] 
+**concurrency** | **int** |  | [optional] 
+**env_vars** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 

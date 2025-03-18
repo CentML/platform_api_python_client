@@ -27,7 +27,7 @@ class GetDeploymentLogResponse(BaseModel):
     GetDeploymentLogResponse
     """ # noqa: E501
     events: List[Dict[str, Any]]
-    next_page_token: Optional[StrictStr]
+    next_page_token: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["events", "next_page_token"]
 
     model_config = ConfigDict(

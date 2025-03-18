@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **tags** | **List[str]** |  | 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **port** | **int** |  | 
-**healthcheck** | **str** |  | 
+**healthcheck** | **str** |  | [optional] 
 
 ## Example
 

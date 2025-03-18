@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**recipe** | [**CServeV2RecipeOutput**](CServeV2RecipeOutput.md) |  | 
+**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **hardware_instance_id** | **int** |  | 
 **output_tp** | **List[List[object]]** |  | 
 **mean_ttft** | **List[List[object]]** |  | 

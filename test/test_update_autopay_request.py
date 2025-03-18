@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_v2_recipe_output import CServeV2RecipeOutput
+from platform_api_python_client.models.update_autopay_request import UpdateAutopayRequest
 
-class TestCServeV2RecipeOutput(unittest.TestCase):
-    """CServeV2RecipeOutput unit test stubs"""
+class TestUpdateAutopayRequest(unittest.TestCase):
+    """UpdateAutopayRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,25 @@ class TestCServeV2RecipeOutput(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CServeV2RecipeOutput:
-        """Test CServeV2RecipeOutput
+    def make_instance(self, include_optional) -> UpdateAutopayRequest:
+        """Test UpdateAutopayRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CServeV2RecipeOutput`
+        # uncomment below to create an instance of `UpdateAutopayRequest`
         """
-        model = CServeV2RecipeOutput()
+        model = UpdateAutopayRequest()
         if include_optional:
-            return CServeV2RecipeOutput(
-                model = '',
-                is_embedding_model = True
+            return UpdateAutopayRequest(
+                threshold = 56
             )
         else:
-            return CServeV2RecipeOutput(
-                model = '',
-                is_embedding_model = True,
+            return UpdateAutopayRequest(
         )
         """
 
-    def testCServeV2RecipeOutput(self):
-        """Test CServeV2RecipeOutput"""
+    def testUpdateAutopayRequest(self):
+        """Test UpdateAutopayRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

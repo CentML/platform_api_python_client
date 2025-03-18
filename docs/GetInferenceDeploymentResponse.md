@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **endpoint_url** | **str** |  | 
-**image_url** | **str** |  | 
+**image_url** | **str** |  | [optional] 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
@@ -17,12 +17,12 @@ Name | Type | Description | Notes
 **container_port** | **int** |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
-**concurrency** | **int** |  | 
-**healthcheck** | **str** |  | 
-**endpoint_certificate_authority** | **str** |  | 
-**env_vars** | **Dict[str, str]** |  | 
-**command** | **List[str]** |  | 
-**command_args** | **List[str]** |  | 
+**concurrency** | **int** |  | [optional] 
+**healthcheck** | **str** |  | [optional] 
+**endpoint_certificate_authority** | **str** |  | [optional] 
+**env_vars** | **Dict[str, str]** |  | [optional] 
+**command** | **List[str]** |  | [optional] 
+**command_args** | **List[str]** |  | [optional] 
 
 ## Example
 

@@ -17,17 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateCheckoutResponse(BaseModel):
+class GetPaymentResponse(BaseModel):
     """
-    CreateCheckoutResponse
+    GetPaymentResponse
     """ # noqa: E501
-    url: StrictStr
-    __properties: ClassVar[List[str]] = ["url"]
+    id: StrictStr
+    created: StrictInt
+    amount_total: StrictInt
+    credit_total: StrictInt
+    __properties: ClassVar[List[str]] = ["id", "created", "amount_total", "credit_total"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +50,7 @@ class CreateCheckoutResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateCheckoutResponse from a JSON string"""
+        """Create an instance of GetPaymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,7 +75,7 @@ class CreateCheckoutResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateCheckoutResponse from a dict"""
+        """Create an instance of GetPaymentResponse from a dict"""
         if obj is None:
             return None
 
@@ -80,7 +83,10 @@ class CreateCheckoutResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url")
+            "id": obj.get("id"),
+            "created": obj.get("created"),
+            "amount_total": obj.get("amount_total"),
+            "credit_total": obj.get("credit_total")
         })
         return _obj
 

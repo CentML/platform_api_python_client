@@ -17,17 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ClientSecretResponse(BaseModel):
+class UpdateAutopayRequest(BaseModel):
     """
-    ClientSecretResponse
+    UpdateAutopayRequest
     """ # noqa: E501
-    client_secret: StrictStr
-    __properties: ClassVar[List[str]] = ["client_secret"]
+    threshold: Optional[StrictInt] = None
+    amount: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["threshold", "amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +48,7 @@ class ClientSecretResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ClientSecretResponse from a JSON string"""
+        """Create an instance of UpdateAutopayRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,11 +69,21 @@ class ClientSecretResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if threshold (nullable) is None
+        # and model_fields_set contains the field
+        if self.threshold is None and "threshold" in self.model_fields_set:
+            _dict['threshold'] = None
+
+        # set to None if amount (nullable) is None
+        # and model_fields_set contains the field
+        if self.amount is None and "amount" in self.model_fields_set:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ClientSecretResponse from a dict"""
+        """Create an instance of UpdateAutopayRequest from a dict"""
         if obj is None:
             return None
 
@@ -80,7 +91,8 @@ class ClientSecretResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "client_secret": obj.get("client_secret")
+            "threshold": obj.get("threshold"),
+            "amount": obj.get("amount")
         })
         return _obj
 

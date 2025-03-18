@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
-**recipe** | [**CServeV2RecipeInput**](CServeV2RecipeInput.md) |  | 
+**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **hf_token** | **str** |  | [optional] 
 **llm_model** | **str** |  | 
 **centml_api_key** | **str** |  | 

@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from platform_api_python_client.models.user_vault_item_output import UserVaultItemOutput
+from platform_api_python_client.models.user_vault_item import UserVaultItem
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class ListUserVaultItemsResponse(BaseModel):
     """
     ListUserVaultItemsResponse
     """ # noqa: E501
-    results: List[UserVaultItemOutput]
+    results: List[UserVaultItem]
     __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
@@ -88,7 +88,7 @@ class ListUserVaultItemsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [UserVaultItemOutput.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "results": [UserVaultItem.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

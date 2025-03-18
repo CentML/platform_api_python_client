@@ -17,10 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from platform_api_python_client.models.c_serve_v2_recipe_input import CServeV2RecipeInput
+from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,10 +28,10 @@ class CreateRagDeploymentRequest(BaseModel):
     """
     CreateRagDeploymentRequest
     """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=12)]
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
-    recipe: CServeV2RecipeInput
+    recipe: CServeV2Recipe
     hf_token: Optional[StrictStr] = None
     llm_model: StrictStr
     centml_api_key: StrictStr
@@ -41,6 +41,13 @@ class CreateRagDeploymentRequest(BaseModel):
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "hf_token", "llm_model", "centml_api_key", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,7 +121,7 @@ class CreateRagDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "recipe": CServeV2RecipeInput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "hf_token": obj.get("hf_token"),
             "llm_model": obj.get("llm_model"),
             "centml_api_key": obj.get("centml_api_key"),

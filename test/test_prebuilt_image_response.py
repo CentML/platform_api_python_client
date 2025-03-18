@@ -53,7 +53,6 @@ class TestPrebuiltImageResponse(unittest.TestCase):
                     ],
                 type = 'inference',
                 port = 56,
-                healthcheck = '',
         )
         """
 

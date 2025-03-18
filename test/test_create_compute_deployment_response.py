@@ -38,7 +38,8 @@ class TestCreateComputeDeploymentResponse(unittest.TestCase):
                 id = 56,
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 endpoint_url = '',
-                port = 56
+                port = 56,
+                jupyter_token = ''
             )
         else:
             return CreateComputeDeploymentResponse(

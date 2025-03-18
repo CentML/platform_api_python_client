@@ -47,9 +47,6 @@ class TestDeploymentStatusResponse(unittest.TestCase):
                 id = 56,
                 type = 'inference',
                 status = 'active',
-                service_status = 'Healthy',
-                error_message = '',
-                endpoint_url = '',
         )
         """
 

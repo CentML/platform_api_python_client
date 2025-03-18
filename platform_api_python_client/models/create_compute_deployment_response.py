@@ -31,7 +31,7 @@ class CreateComputeDeploymentResponse(BaseModel):
     created_at: datetime
     endpoint_url: StrictStr
     port: StrictInt
-    jupyter_token: Optional[StrictStr]
+    jupyter_token: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url", "port", "jupyter_token"]
 
     model_config = ConfigDict(

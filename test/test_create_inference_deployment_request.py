@@ -35,7 +35,7 @@ class TestCreateInferenceDeploymentRequest(unittest.TestCase):
         model = CreateInferenceDeploymentRequest()
         if include_optional:
             return CreateInferenceDeploymentRequest(
-                name = '',
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',
@@ -47,17 +47,12 @@ class TestCreateInferenceDeploymentRequest(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                command = [
-                    ''
-                    ],
-                command_args = [
-                    ''
-                    ],
+                command = '',
                 endpoint_certificate_authority = ''
             )
         else:
             return CreateInferenceDeploymentRequest(
-                name = '',
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',

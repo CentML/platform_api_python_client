@@ -66,7 +66,6 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 id = 56,
                 name = '',
                 endpoint_url = '',
-                image_url = '',
                 type = 'inference',
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -74,18 +73,6 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 container_port = 56,
                 min_scale = 56,
                 max_scale = 56,
-                concurrency = 56,
-                healthcheck = '',
-                endpoint_certificate_authority = '',
-                env_vars = {
-                    'key' : ''
-                    },
-                command = [
-                    ''
-                    ],
-                command_args = [
-                    ''
-                    ],
         )
         """
 

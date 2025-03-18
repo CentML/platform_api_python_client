@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
 from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from typing import Optional, Set
@@ -28,11 +28,10 @@ class CServeRecipeResponse(BaseModel):
     CServeRecipeResponse
     """ # noqa: E501
     model: StrictStr
-    cluster_id: StrictInt
     fastest: CServeRecipePerf
     cheapest: CServeRecipePerf
     best_value: CServeRecipePerf
-    __properties: ClassVar[List[str]] = ["model", "cluster_id", "fastest", "cheapest", "best_value"]
+    __properties: ClassVar[List[str]] = ["model", "fastest", "cheapest", "best_value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +94,6 @@ class CServeRecipeResponse(BaseModel):
 
         _obj = cls.model_validate({
             "model": obj.get("model"),
-            "cluster_id": obj.get("cluster_id"),
             "fastest": CServeRecipePerf.from_dict(obj["fastest"]) if obj.get("fastest") is not None else None,
             "cheapest": CServeRecipePerf.from_dict(obj["cheapest"]) if obj.get("cheapest") is not None else None,
             "best_value": CServeRecipePerf.from_dict(obj["best_value"]) if obj.get("best_value") is not None else None

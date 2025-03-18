@@ -32,7 +32,7 @@ class PrebuiltImageResponse(BaseModel):
     tags: List[StrictStr]
     type: DeploymentType
     port: StrictInt
-    healthcheck: Optional[StrictStr]
+    healthcheck: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["image_name", "label", "tags", "type", "port", "healthcheck"]
 
     model_config = ConfigDict(

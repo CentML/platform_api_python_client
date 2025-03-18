@@ -38,7 +38,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                 results = [
                     platform_api_python_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
-                        display_name = '', )
+                        display_name = '', 
+                        region = '', )
                     ]
             )
         else:
@@ -46,7 +47,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                 results = [
                     platform_api_python_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
-                        display_name = '', )
+                        display_name = '', 
+                        region = '', )
                     ],
         )
         """

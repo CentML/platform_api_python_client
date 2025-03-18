@@ -33,7 +33,7 @@ class GetDeploymentResponse(BaseModel):
     id: StrictInt
     name: StrictStr
     endpoint_url: StrictStr
-    image_url: Optional[StrictStr]
+    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
     created_at: datetime

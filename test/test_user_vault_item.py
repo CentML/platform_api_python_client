@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_checkout_response import CreateCheckoutResponse
+from platform_api_python_client.models.user_vault_item import UserVaultItem
 
-class TestCreateCheckoutResponse(unittest.TestCase):
-    """CreateCheckoutResponse unit test stubs"""
+class TestUserVaultItem(unittest.TestCase):
+    """UserVaultItem unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,29 @@ class TestCreateCheckoutResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateCheckoutResponse:
-        """Test CreateCheckoutResponse
+    def make_instance(self, include_optional) -> UserVaultItem:
+        """Test UserVaultItem
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateCheckoutResponse`
+        # uncomment below to create an instance of `UserVaultItem`
         """
-        model = CreateCheckoutResponse()
+        model = UserVaultItem()
         if include_optional:
-            return CreateCheckoutResponse(
-                url = ''
+            return UserVaultItem(
+                type = 'env_vars',
+                key = '',
+                value = ''
             )
         else:
-            return CreateCheckoutResponse(
-                url = '',
+            return UserVaultItem(
+                type = 'env_vars',
+                key = '',
         )
         """
 
-    def testCreateCheckoutResponse(self):
-        """Test CreateCheckoutResponse"""
+    def testUserVaultItem(self):
+        """Test UserVaultItem"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

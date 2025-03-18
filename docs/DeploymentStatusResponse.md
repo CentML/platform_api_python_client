@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
-**service_status** | [**ServiceStatus**](ServiceStatus.md) |  | 
-**error_message** | **str** |  | 
-**endpoint_url** | **str** |  | 
+**service_status** | [**ServiceStatus**](ServiceStatus.md) |  | [optional] 
+**error_message** | **str** |  | [optional] 
+**endpoint_url** | **str** |  | [optional] 
 
 ## Example
 

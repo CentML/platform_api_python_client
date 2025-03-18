@@ -31,48 +31,51 @@ class GetCServeDeploymentResponse(BaseModel):
     GetCServeDeploymentResponse
     """ # noqa: E501
     model: StrictStr
-    is_embedding_model: StrictBool
+    is_embedding_model: Optional[StrictBool] = False
     tensor_parallel_size: StrictInt
     pipeline_parallel_size: StrictInt
-    block_size: StrictInt
-    swap_space: Annotated[int, Field(strict=True, ge=0)]
-    gpu_mem_util: Union[Annotated[float, Field(le=1.0, strict=True, ge=0.0)], Annotated[int, Field(le=1, strict=True, ge=0)]]
-    max_num_seqs: StrictInt
-    offloading_num: StrictInt
-    use_prefix_caching: Optional[StrictBool]
-    use_chunked_prefill: Optional[StrictBool]
-    chunked_prefill_size: Optional[StrictInt]
-    eager_execution: Optional[StrictBool]
-    num_scheduler_steps: Optional[StrictInt]
-    use_flashinfer: StrictBool
-    max_model_len: Optional[Annotated[int, Field(strict=True, ge=128)]]
-    dtype: StrictStr
-    tokenizer: Optional[StrictStr]
-    spec_proposer: Optional[StrictStr]
-    spec_draft_model: Optional[StrictStr]
-    spec_tokens: Optional[StrictInt]
-    spec_prompt_lookup_min: Optional[Annotated[int, Field(strict=True, ge=1)]]
-    spec_prompt_lookup_max: Optional[Annotated[int, Field(strict=True, ge=1)]]
-    seed: StrictInt
+    block_size: Optional[StrictInt] = 32
+    swap_space: Optional[Annotated[int, Field(strict=True, ge=0)]] = 0
+    gpu_mem_util: Optional[Union[Annotated[float, Field(le=1.0, strict=True, ge=0.0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = 0.95
+    max_num_seqs: Optional[StrictInt] = 256
+    offloading_num: Optional[StrictInt] = 0
+    use_prefix_caching: Optional[StrictBool] = None
+    use_chunked_prefill: Optional[StrictBool] = None
+    chunked_prefill_size: Optional[StrictInt] = None
+    eager_execution: Optional[StrictBool] = None
+    num_scheduler_steps: Optional[StrictInt] = None
+    use_flashinfer: Optional[StrictBool] = False
+    max_model_len: Optional[Annotated[int, Field(strict=True, ge=128)]] = None
+    dtype: Optional[StrictStr] = 'auto'
+    tokenizer: Optional[StrictStr] = None
+    spec_proposer: Optional[StrictStr] = None
+    spec_draft_model: Optional[StrictStr] = None
+    spec_tokens: Optional[StrictInt] = None
+    spec_prompt_lookup_min: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    spec_prompt_lookup_max: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    seed: Optional[StrictInt] = 0
     cluster_id: StrictInt
     id: StrictInt
     name: StrictStr
     endpoint_url: StrictStr
-    image_url: Optional[StrictStr]
+    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
     min_scale: StrictInt
     max_scale: StrictInt
-    endpoint_certificate_authority: Optional[StrictStr]
-    concurrency: Optional[StrictInt]
-    env_vars: Dict[str, StrictStr]
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    concurrency: Optional[StrictInt] = None
+    env_vars: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["model", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "offloading_num", "use_prefix_caching", "use_chunked_prefill", "chunked_prefill_size", "eager_execution", "num_scheduler_steps", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
 
     @field_validator('block_size')
     def block_size_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set([16, 32]):
             raise ValueError("must be one of enum values (16, 32)")
         return value
@@ -80,6 +83,9 @@ class GetCServeDeploymentResponse(BaseModel):
     @field_validator('dtype')
     def dtype_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(['auto', 'float16', 'float32', 'bfloat16']):
             raise ValueError("must be one of enum values ('auto', 'float16', 'float32', 'bfloat16')")
         return value

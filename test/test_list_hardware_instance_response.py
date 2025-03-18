@@ -43,7 +43,11 @@ class TestListHardwareInstanceResponse(unittest.TestCase):
                         num_gpu = 56, 
                         cpu = 56, 
                         memory = 56, 
-                        cost_per_hr = 56, )
+                        cost_per_hr = 56, 
+                        cluster_id = 56, 
+                        provider = '', 
+                        num_accelerators = 56, 
+                        accelerator_memory = 56, )
                     ]
             )
         else:
@@ -56,7 +60,11 @@ class TestListHardwareInstanceResponse(unittest.TestCase):
                         num_gpu = 56, 
                         cpu = 56, 
                         memory = 56, 
-                        cost_per_hr = 56, )
+                        cost_per_hr = 56, 
+                        cluster_id = 56, 
+                        provider = '', 
+                        num_accelerators = 56, 
+                        accelerator_memory = 56, )
                     ],
         )
         """

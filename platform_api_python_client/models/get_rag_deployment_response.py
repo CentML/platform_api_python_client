@@ -20,7 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_python_client.models.c_serve_v2_recipe_output import CServeV2RecipeOutput
+from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
@@ -34,19 +34,19 @@ class GetRagDeploymentResponse(BaseModel):
     id: StrictInt
     name: StrictStr
     endpoint_url: StrictStr
-    image_url: Optional[StrictStr]
+    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
-    recipe: CServeV2RecipeOutput
+    recipe: CServeV2Recipe
     llm_model: StrictStr
     centml_api_key: StrictStr
-    min_scale: StrictInt
-    max_scale: StrictInt
-    endpoint_certificate_authority: Optional[StrictStr]
-    concurrency: Optional[StrictInt]
-    env_vars: Dict[str, StrictStr]
+    min_scale: Optional[StrictInt] = 1
+    max_scale: Optional[StrictInt] = 1
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    concurrency: Optional[StrictInt] = None
+    env_vars: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "llm_model", "centml_api_key", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
 
     model_config = ConfigDict(
@@ -127,7 +127,7 @@ class GetRagDeploymentResponse(BaseModel):
             "status": obj.get("status"),
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "recipe": CServeV2RecipeOutput.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "llm_model": obj.get("llm_model"),
             "centml_api_key": obj.get("centml_api_key"),
             "min_scale": obj.get("min_scale") if obj.get("min_scale") is not None else 1,

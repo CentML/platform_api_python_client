@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.c_serve_recipe import CServeRecipe
@@ -28,7 +28,7 @@ class CreateCServeDeploymentRequest(BaseModel):
     """
     CreateCServeDeploymentRequest
     """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=12)]
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     recipe: CServeRecipe
@@ -39,6 +39,13 @@ class CreateCServeDeploymentRequest(BaseModel):
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "hf_token", "endpoint_certificate_authority", "min_scale", "max_scale", "concurrency", "env_vars"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

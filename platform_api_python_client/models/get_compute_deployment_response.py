@@ -33,15 +33,15 @@ class GetComputeDeploymentResponse(BaseModel):
     id: StrictInt
     name: StrictStr
     endpoint_url: StrictStr
-    image_url: Optional[StrictStr]
+    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
     exposed_port: StrictInt
-    ssh_public_key: Optional[StrictStr]
-    ssh_password: Optional[StrictStr]
-    env_vars: Optional[Dict[str, StrictStr]]
+    ssh_public_key: Optional[StrictStr] = None
+    ssh_password: Optional[StrictStr] = None
+    env_vars: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "exposed_port", "ssh_public_key", "ssh_password", "env_vars"]
 
     model_config = ConfigDict(

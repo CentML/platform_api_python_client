@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**create_setup_payments_setup_checkout_post**](EXTERNALApi.md#create_setup_payments_setup_checkout_post) | **POST** /payments/setup_checkout | Create Setup
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
+[**download_url_file_url_download_post**](EXTERNALApi.md#download_url_file_url_download_post) | **POST** /file_url/download | Download Url
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
 [**get_api_keys_credentials_api_key_get**](EXTERNALApi.md#get_api_keys_credentials_api_key_get) | **GET** /credentials/api-key | Get Api Keys
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
@@ -34,8 +35,10 @@ Method | HTTP request | Description
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
+[**update_autopay_preferences_autopay_put**](EXTERNALApi.md#update_autopay_preferences_autopay_put) | **PUT** /preferences/autopay | Update Autopay
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
+[**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
 
 
 # **add_user_request_support_user_requests_post**
@@ -816,7 +819,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_user_vault_item_endpoint_user_vault_delete**
-> object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item_input)
+> object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
 
 Delete User Vault Item Endpoint
 
@@ -828,7 +831,7 @@ Delete an item of a specific type for the user.
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.user_vault_item_input import UserVaultItemInput
+from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -852,11 +855,11 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    user_vault_item_input = platform_api_python_client.UserVaultItemInput() # UserVaultItemInput | 
+    user_vault_item = platform_api_python_client.UserVaultItem() # UserVaultItem | 
 
     try:
         # Delete User Vault Item Endpoint
-        api_response = api_instance.delete_user_vault_item_endpoint_user_vault_delete(user_vault_item_input)
+        api_response = api_instance.delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
         print("The response of EXTERNALApi->delete_user_vault_item_endpoint_user_vault_delete:\n")
         pprint(api_response)
     except Exception as e:
@@ -870,11 +873,89 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_vault_item_input** | [**UserVaultItemInput**](UserVaultItemInput.md)|  | 
+ **user_vault_item** | [**UserVaultItem**](UserVaultItem.md)|  | 
 
 ### Return type
 
 **object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **download_url_file_url_download_post**
+> CreateUrlResponse download_url_file_url_download_post(create_url_request)
+
+Download Url
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_url_request import CreateUrlRequest
+from platform_api_python_client.models.create_url_response import CreateUrlResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_url_request = platform_api_python_client.CreateUrlRequest() # CreateUrlRequest | 
+
+    try:
+        # Download Url
+        api_response = api_instance.download_url_file_url_download_post(create_url_request)
+        print("The response of EXTERNALApi->download_url_file_url_download_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->download_url_file_url_download_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_url_request** | [**CreateUrlRequest**](CreateUrlRequest.md)|  | 
+
+### Return type
+
+[**CreateUrlResponse**](CreateUrlResponse.md)
 
 ### Authorization
 
@@ -1347,7 +1428,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cserve_recipe_deployments_cserve_recipes_get**
-> ListCServeRecipeResponse get_cserve_recipe_deployments_cserve_recipes_get(model=model, cluster_id=cluster_id)
+> ListCServeRecipeResponse get_cserve_recipe_deployments_cserve_recipes_get(model=model, hf_token=hf_token)
 
 Get Cserve Recipe
 
@@ -1382,11 +1463,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     model = 'model_example' # str |  (optional)
-    cluster_id = 56 # int |  (optional)
+    hf_token = 'hf_token_example' # str |  (optional)
 
     try:
         # Get Cserve Recipe
-        api_response = api_instance.get_cserve_recipe_deployments_cserve_recipes_get(model=model, cluster_id=cluster_id)
+        api_response = api_instance.get_cserve_recipe_deployments_cserve_recipes_get(model=model, hf_token=hf_token)
         print("The response of EXTERNALApi->get_cserve_recipe_deployments_cserve_recipes_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1401,7 +1482,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **model** | **str**|  | [optional] 
- **cluster_id** | **int**|  | [optional] 
+ **hf_token** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1503,7 +1584,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_deployment_logs_deployments_logs_deployment_id_get**
-> GetDeploymentLogResponse get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token)
+> GetDeploymentLogResponse get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token, start_from_head=start_from_head, line_count=line_count)
 
 Get Deployment Logs
 
@@ -1541,10 +1622,12 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     start_time = 56 # int | 
     end_time = 56 # int | 
     next_page_token = 'next_page_token_example' # str |  (optional)
+    start_from_head = True # bool |  (optional) (default to True)
+    line_count = 56 # int |  (optional)
 
     try:
         # Get Deployment Logs
-        api_response = api_instance.get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token)
+        api_response = api_instance.get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token, start_from_head=start_from_head, line_count=line_count)
         print("The response of EXTERNALApi->get_deployment_logs_deployments_logs_deployment_id_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1562,6 +1645,8 @@ Name | Type | Description  | Notes
  **start_time** | **int**|  | 
  **end_time** | **int**|  | 
  **next_page_token** | **str**|  | [optional] 
+ **start_from_head** | **bool**|  | [optional] [default to True]
+ **line_count** | **int**|  | [optional] 
 
 ### Return type
 
@@ -1901,7 +1986,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payments_payments_get**
-> GetPaymentsResponse get_payments_payments_get(limit=limit, starting_after=starting_after)
+> ListPaymentsResponse get_payments_payments_get()
 
 Get Payments
 
@@ -1911,7 +1996,7 @@ Get Payments
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.get_payments_response import GetPaymentsResponse
+from platform_api_python_client.models.list_payments_response import ListPaymentsResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1935,12 +2020,10 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    limit = 10 # int |  (optional) (default to 10)
-    starting_after = 'starting_after_example' # str |  (optional)
 
     try:
         # Get Payments
-        api_response = api_instance.get_payments_payments_get(limit=limit, starting_after=starting_after)
+        api_response = api_instance.get_payments_payments_get()
         print("The response of EXTERNALApi->get_payments_payments_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -1951,15 +2034,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int**|  | [optional] [default to 10]
- **starting_after** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**GetPaymentsResponse**](GetPaymentsResponse.md)
+[**ListPaymentsResponse**](ListPaymentsResponse.md)
 
 ### Authorization
 
@@ -1975,7 +2054,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2214,7 +2292,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_deployments_usage_deployment_id_get**
-> GetDeploymentUsageResponse get_usage_deployments_usage_deployment_id_get(deployment_id, metric, duration, end_time=end_time)
+> GetDeploymentUsageResponse get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step)
 
 Get Usage
 
@@ -2251,12 +2329,13 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
     metric = platform_api_python_client.Metric() # Metric | 
-    duration = 56 # int | 
-    end_time = 56 # int |  (optional)
+    start_time_in_seconds = 56 # int | 
+    end_time_in_seconds = 56 # int | 
+    step = 15 # int |  (optional) (default to 15)
 
     try:
         # Get Usage
-        api_response = api_instance.get_usage_deployments_usage_deployment_id_get(deployment_id, metric, duration, end_time=end_time)
+        api_response = api_instance.get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step)
         print("The response of EXTERNALApi->get_usage_deployments_usage_deployment_id_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -2272,8 +2351,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
  **metric** | [**Metric**](.md)|  | 
- **duration** | **int**|  | 
- **end_time** | **int**|  | [optional] 
+ **start_time_in_seconds** | **int**|  | 
+ **end_time_in_seconds** | **int**|  | 
+ **step** | **int**|  | [optional] [default to 15]
 
 ### Return type
 
@@ -2368,6 +2448,83 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_autopay_preferences_autopay_put**
+> object update_autopay_preferences_autopay_put(update_autopay_request)
+
+Update Autopay
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.update_autopay_request import UpdateAutopayRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    update_autopay_request = platform_api_python_client.UpdateAutopayRequest() # UpdateAutopayRequest | 
+
+    try:
+        # Update Autopay
+        api_response = api_instance.update_autopay_preferences_autopay_put(update_autopay_request)
+        print("The response of EXTERNALApi->update_autopay_preferences_autopay_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_autopay_preferences_autopay_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_autopay_request** | [**UpdateAutopayRequest**](UpdateAutopayRequest.md)|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_deployment_status_deployments_status_deployment_id_put**
 > DeploymentStatusResponse update_deployment_status_deployments_status_deployment_id_put(deployment_id, deployment_status_request)
 
@@ -2449,7 +2606,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_vault_item_endpoint_user_vault_put**
-> object update_user_vault_item_endpoint_user_vault_put(user_vault_item_input)
+> object update_user_vault_item_endpoint_user_vault_put(user_vault_item)
 
 Update User Vault Item Endpoint
 
@@ -2461,7 +2618,7 @@ Update or add multiple items of a specific type for the user.
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.user_vault_item_input import UserVaultItemInput
+from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2485,11 +2642,11 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    user_vault_item_input = platform_api_python_client.UserVaultItemInput() # UserVaultItemInput | 
+    user_vault_item = platform_api_python_client.UserVaultItem() # UserVaultItem | 
 
     try:
         # Update User Vault Item Endpoint
-        api_response = api_instance.update_user_vault_item_endpoint_user_vault_put(user_vault_item_input)
+        api_response = api_instance.update_user_vault_item_endpoint_user_vault_put(user_vault_item)
         print("The response of EXTERNALApi->update_user_vault_item_endpoint_user_vault_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -2503,11 +2660,89 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_vault_item_input** | [**UserVaultItemInput**](UserVaultItemInput.md)|  | 
+ **user_vault_item** | [**UserVaultItem**](UserVaultItem.md)|  | 
 
 ### Return type
 
 **object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_url_file_url_upload_post**
+> CreateUrlResponse upload_url_file_url_upload_post(create_url_request)
+
+Upload Url
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_url_request import CreateUrlRequest
+from platform_api_python_client.models.create_url_response import CreateUrlResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_url_request = platform_api_python_client.CreateUrlRequest() # CreateUrlRequest | 
+
+    try:
+        # Upload Url
+        api_response = api_instance.upload_url_file_url_upload_post(create_url_request)
+        print("The response of EXTERNALApi->upload_url_file_url_upload_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->upload_url_file_url_upload_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_url_request** | [**CreateUrlRequest**](CreateUrlRequest.md)|  | 
+
+### Return type
+
+[**CreateUrlResponse**](CreateUrlResponse.md)
 
 ### Authorization
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List[UserVaultItemOutput]**](UserVaultItemOutput.md) |  | 
+**results** | [**List[UserVaultItem]**](UserVaultItem.md) |  | 
 
 ## Example
 

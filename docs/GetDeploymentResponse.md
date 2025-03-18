@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **endpoint_url** | **str** |  | 
-**image_url** | **str** |  | 
+**image_url** | **str** |  | [optional] 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 

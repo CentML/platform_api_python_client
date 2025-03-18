@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **endpoint_url** | **str** |  | 
-**image_url** | **str** |  | 
+**image_url** | **str** |  | [optional] 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **exposed_port** | **int** |  | 
-**ssh_public_key** | **str** |  | 
-**ssh_password** | **str** |  | 
-**env_vars** | **Dict[str, str]** |  | 
+**ssh_public_key** | **str** |  | [optional] 
+**ssh_password** | **str** |  | [optional] 
+**env_vars** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 

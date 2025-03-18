@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -27,7 +27,7 @@ class CreateInferenceDeploymentRequest(BaseModel):
     """
     CreateInferenceDeploymentRequest
     """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=12)]
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     image_url: StrictStr
@@ -37,10 +37,16 @@ class CreateInferenceDeploymentRequest(BaseModel):
     concurrency: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    command: Optional[List[StrictStr]] = None
-    command_args: Optional[List[StrictStr]] = None
+    command: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_scale", "max_scale", "concurrency", "healthcheck", "env_vars", "command", "command_args", "endpoint_certificate_authority"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_scale", "max_scale", "concurrency", "healthcheck", "env_vars", "command", "endpoint_certificate_authority"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,11 +107,6 @@ class CreateInferenceDeploymentRequest(BaseModel):
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
-        # set to None if command_args (nullable) is None
-        # and model_fields_set contains the field
-        if self.command_args is None and "command_args" in self.model_fields_set:
-            _dict['command_args'] = None
-
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
@@ -134,7 +135,6 @@ class CreateInferenceDeploymentRequest(BaseModel):
             "healthcheck": obj.get("healthcheck"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
-            "command_args": obj.get("command_args"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")
         })
         return _obj

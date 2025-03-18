@@ -45,7 +45,6 @@ class TestGetDeploymentLogResponse(unittest.TestCase):
                 events = [
                     None
                     ],
-                next_page_token = '',
         )
         """
 

@@ -61,6 +61,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_cserve_v2_deployment_deployments_cserve_v2_post(self) -> None:
+        """Test case for create_cserve_v2_deployment_deployments_cserve_v2_post
+
+        Create Cserve V2 Deployment
+        """
+        pass
+
     def test_create_inference_deployment_deployments_inference_post(self) -> None:
         """Test case for create_inference_deployment_deployments_inference_post
 
@@ -75,10 +82,38 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_setup_payments_setup_checkout_post(self) -> None:
+        """Test case for create_setup_payments_setup_checkout_post
+
+        Create Setup
+        """
+        pass
+
     def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
         """Test case for delete_api_key_credentials_api_key_id_delete
 
         Delete Api Key
+        """
+        pass
+
+    def test_delete_user_vault_item_endpoint_user_vault_delete(self) -> None:
+        """Test case for delete_user_vault_item_endpoint_user_vault_delete
+
+        Delete User Vault Item Endpoint
+        """
+        pass
+
+    def test_download_url_file_url_download_post(self) -> None:
+        """Test case for download_url_file_url_download_post
+
+        Download Url
+        """
+        pass
+
+    def test_get_all_user_vault_items_endpoint_user_vault_get(self) -> None:
+        """Test case for get_all_user_vault_items_endpoint_user_vault_get
+
+        Get All User Vault Items Endpoint
         """
         pass
 
@@ -121,6 +156,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_cserve_recipe_deployments_cserve_recipes_get
 
         Get Cserve Recipe
+        """
+        pass
+
+    def test_get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(self) -> None:
+        """Test case for get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get
+
+        Get Cserve V2 Deployment
         """
         pass
 
@@ -205,6 +247,20 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_deployment_status_deployments_status_deployment_id_put
 
         Update Deployment Status
+        """
+        pass
+
+    def test_update_user_vault_item_endpoint_user_vault_put(self) -> None:
+        """Test case for update_user_vault_item_endpoint_user_vault_put
+
+        Update User Vault Item Endpoint
+        """
+        pass
+
+    def test_upload_url_file_url_upload_post(self) -> None:
+        """Test case for upload_url_file_url_upload_post
+
+        Upload Url
         """
         pass
 

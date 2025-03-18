@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import date
-from pydantic import StrictInt, StrictStr
+from pydantic import StrictBool, StrictInt, StrictStr
 from typing import Any, Optional
 from platform_api_python_client.models.api_key_request import APIKeyRequest
 from platform_api_python_client.models.api_key_response import APIKeyResponse
@@ -34,6 +34,8 @@ from platform_api_python_client.models.create_inference_deployment_response impo
 from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
 from platform_api_python_client.models.create_rag_deployment_response import CreateRagDeploymentResponse
 from platform_api_python_client.models.create_setup_checkout_request import CreateSetupCheckoutRequest
+from platform_api_python_client.models.create_url_request import CreateUrlRequest
+from platform_api_python_client.models.create_url_response import CreateUrlResponse
 from platform_api_python_client.models.credits_response import CreditsResponse
 from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
 from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
@@ -44,7 +46,6 @@ from platform_api_python_client.models.get_compute_deployment_response import Ge
 from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
 from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 from platform_api_python_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
-from platform_api_python_client.models.get_payments_response import GetPaymentsResponse
 from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
 from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
 from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
@@ -52,11 +53,13 @@ from platform_api_python_client.models.list_daily_bill_response import ListDaily
 from platform_api_python_client.models.list_get_cluster_response import ListGetClusterResponse
 from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
+from platform_api_python_client.models.list_payments_response import ListPaymentsResponse
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
 from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.update_autopay_request import UpdateAutopayRequest
 from platform_api_python_client.models.user_support_email_request import UserSupportEmailRequest
-from platform_api_python_client.models.user_vault_item_input import UserVaultItemInput
+from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType
 
 from platform_api_python_client.api_client import ApiClient, RequestSerialized
@@ -2807,7 +2810,7 @@ class EXTERNALApi:
     @validate_call
     def delete_user_vault_item_endpoint_user_vault_delete(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2825,8 +2828,8 @@ class EXTERNALApi:
 
         Delete an item of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2850,7 +2853,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2875,7 +2878,7 @@ class EXTERNALApi:
     @validate_call
     def delete_user_vault_item_endpoint_user_vault_delete_with_http_info(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2893,8 +2896,8 @@ class EXTERNALApi:
 
         Delete an item of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2918,7 +2921,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2943,7 +2946,7 @@ class EXTERNALApi:
     @validate_call
     def delete_user_vault_item_endpoint_user_vault_delete_without_preload_content(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2961,8 +2964,8 @@ class EXTERNALApi:
 
         Delete an item of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2986,7 +2989,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3006,7 +3009,7 @@ class EXTERNALApi:
 
     def _delete_user_vault_item_endpoint_user_vault_delete_serialize(
         self,
-        user_vault_item_input,
+        user_vault_item,
         _request_auth,
         _content_type,
         _headers,
@@ -3032,8 +3035,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if user_vault_item_input is not None:
-            _body_params = user_vault_item_input
+        if user_vault_item is not None:
+            _body_params = user_vault_item
 
 
         # set the HTTP header `Accept`
@@ -3066,6 +3069,280 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='DELETE',
             resource_path='/user_vault',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def download_url_file_url_download_post(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CreateUrlResponse:
+        """Download Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_url_file_url_download_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def download_url_file_url_download_post_with_http_info(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CreateUrlResponse]:
+        """Download Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_url_file_url_download_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def download_url_file_url_download_post_without_preload_content(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Download Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_url_file_url_download_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _download_url_file_url_download_post_serialize(
+        self,
+        create_url_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_url_request is not None:
+            _body_params = create_url_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/file_url/download',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4619,7 +4896,7 @@ class EXTERNALApi:
     def get_cserve_recipe_deployments_cserve_recipes_get(
         self,
         model: Optional[StrictStr] = None,
-        cluster_id: Optional[StrictInt] = None,
+        hf_token: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4638,8 +4915,8 @@ class EXTERNALApi:
 
         :param model:
         :type model: str
-        :param cluster_id:
-        :type cluster_id: int
+        :param hf_token:
+        :type hf_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4664,7 +4941,7 @@ class EXTERNALApi:
 
         _param = self._get_cserve_recipe_deployments_cserve_recipes_get_serialize(
             model=model,
-            cluster_id=cluster_id,
+            hf_token=hf_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4690,7 +4967,7 @@ class EXTERNALApi:
     def get_cserve_recipe_deployments_cserve_recipes_get_with_http_info(
         self,
         model: Optional[StrictStr] = None,
-        cluster_id: Optional[StrictInt] = None,
+        hf_token: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4709,8 +4986,8 @@ class EXTERNALApi:
 
         :param model:
         :type model: str
-        :param cluster_id:
-        :type cluster_id: int
+        :param hf_token:
+        :type hf_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4735,7 +5012,7 @@ class EXTERNALApi:
 
         _param = self._get_cserve_recipe_deployments_cserve_recipes_get_serialize(
             model=model,
-            cluster_id=cluster_id,
+            hf_token=hf_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4761,7 +5038,7 @@ class EXTERNALApi:
     def get_cserve_recipe_deployments_cserve_recipes_get_without_preload_content(
         self,
         model: Optional[StrictStr] = None,
-        cluster_id: Optional[StrictInt] = None,
+        hf_token: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4780,8 +5057,8 @@ class EXTERNALApi:
 
         :param model:
         :type model: str
-        :param cluster_id:
-        :type cluster_id: int
+        :param hf_token:
+        :type hf_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4806,7 +5083,7 @@ class EXTERNALApi:
 
         _param = self._get_cserve_recipe_deployments_cserve_recipes_get_serialize(
             model=model,
-            cluster_id=cluster_id,
+            hf_token=hf_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4827,7 +5104,7 @@ class EXTERNALApi:
     def _get_cserve_recipe_deployments_cserve_recipes_get_serialize(
         self,
         model,
-        cluster_id,
+        hf_token,
         _request_auth,
         _content_type,
         _headers,
@@ -4854,9 +5131,9 @@ class EXTERNALApi:
             
             _query_params.append(('model', model))
             
-        if cluster_id is not None:
+        if hf_token is not None:
             
-            _query_params.append(('cluster_id', cluster_id))
+            _query_params.append(('hf_token', hf_token))
             
         # process the header parameters
         # process the form parameters
@@ -5163,6 +5440,8 @@ class EXTERNALApi:
         start_time: StrictInt,
         end_time: StrictInt,
         next_page_token: Optional[StrictStr] = None,
+        start_from_head: Optional[StrictBool] = None,
+        line_count: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5187,6 +5466,10 @@ class EXTERNALApi:
         :type end_time: int
         :param next_page_token:
         :type next_page_token: str
+        :param start_from_head:
+        :type start_from_head: bool
+        :param line_count:
+        :type line_count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5214,6 +5497,8 @@ class EXTERNALApi:
             start_time=start_time,
             end_time=end_time,
             next_page_token=next_page_token,
+            start_from_head=start_from_head,
+            line_count=line_count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5242,6 +5527,8 @@ class EXTERNALApi:
         start_time: StrictInt,
         end_time: StrictInt,
         next_page_token: Optional[StrictStr] = None,
+        start_from_head: Optional[StrictBool] = None,
+        line_count: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5266,6 +5553,10 @@ class EXTERNALApi:
         :type end_time: int
         :param next_page_token:
         :type next_page_token: str
+        :param start_from_head:
+        :type start_from_head: bool
+        :param line_count:
+        :type line_count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5293,6 +5584,8 @@ class EXTERNALApi:
             start_time=start_time,
             end_time=end_time,
             next_page_token=next_page_token,
+            start_from_head=start_from_head,
+            line_count=line_count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5321,6 +5614,8 @@ class EXTERNALApi:
         start_time: StrictInt,
         end_time: StrictInt,
         next_page_token: Optional[StrictStr] = None,
+        start_from_head: Optional[StrictBool] = None,
+        line_count: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5345,6 +5640,10 @@ class EXTERNALApi:
         :type end_time: int
         :param next_page_token:
         :type next_page_token: str
+        :param start_from_head:
+        :type start_from_head: bool
+        :param line_count:
+        :type line_count: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5372,6 +5671,8 @@ class EXTERNALApi:
             start_time=start_time,
             end_time=end_time,
             next_page_token=next_page_token,
+            start_from_head=start_from_head,
+            line_count=line_count,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5395,6 +5696,8 @@ class EXTERNALApi:
         start_time,
         end_time,
         next_page_token,
+        start_from_head,
+        line_count,
         _request_auth,
         _content_type,
         _headers,
@@ -5430,6 +5733,14 @@ class EXTERNALApi:
         if end_time is not None:
             
             _query_params.append(('end_time', end_time))
+            
+        if start_from_head is not None:
+            
+            _query_params.append(('start_from_head', start_from_head))
+            
+        if line_count is not None:
+            
+            _query_params.append(('line_count', line_count))
             
         # process the header parameters
         # process the form parameters
@@ -6570,8 +6881,6 @@ class EXTERNALApi:
     @validate_call
     def get_payments_payments_get(
         self,
-        limit: Optional[StrictInt] = None,
-        starting_after: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6584,14 +6893,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetPaymentsResponse:
+    ) -> ListPaymentsResponse:
         """Get Payments
 
 
-        :param limit:
-        :type limit: int
-        :param starting_after:
-        :type starting_after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6615,8 +6920,6 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._get_payments_payments_get_serialize(
-            limit=limit,
-            starting_after=starting_after,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6624,8 +6927,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetPaymentsResponse",
-            '422': "HTTPValidationError",
+            '200': "ListPaymentsResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6641,8 +6943,6 @@ class EXTERNALApi:
     @validate_call
     def get_payments_payments_get_with_http_info(
         self,
-        limit: Optional[StrictInt] = None,
-        starting_after: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6655,14 +6955,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetPaymentsResponse]:
+    ) -> ApiResponse[ListPaymentsResponse]:
         """Get Payments
 
 
-        :param limit:
-        :type limit: int
-        :param starting_after:
-        :type starting_after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6686,8 +6982,6 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._get_payments_payments_get_serialize(
-            limit=limit,
-            starting_after=starting_after,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6695,8 +6989,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetPaymentsResponse",
-            '422': "HTTPValidationError",
+            '200': "ListPaymentsResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6712,8 +7005,6 @@ class EXTERNALApi:
     @validate_call
     def get_payments_payments_get_without_preload_content(
         self,
-        limit: Optional[StrictInt] = None,
-        starting_after: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6730,10 +7021,6 @@ class EXTERNALApi:
         """Get Payments
 
 
-        :param limit:
-        :type limit: int
-        :param starting_after:
-        :type starting_after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6757,8 +7044,6 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._get_payments_payments_get_serialize(
-            limit=limit,
-            starting_after=starting_after,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6766,8 +7051,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetPaymentsResponse",
-            '422': "HTTPValidationError",
+            '200': "ListPaymentsResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -6778,8 +7062,6 @@ class EXTERNALApi:
 
     def _get_payments_payments_get_serialize(
         self,
-        limit,
-        starting_after,
         _request_auth,
         _content_type,
         _headers,
@@ -6802,14 +7084,6 @@ class EXTERNALApi:
 
         # process the path parameters
         # process the query parameters
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if starting_after is not None:
-            
-            _query_params.append(('starting_after', starting_after))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -7674,8 +7948,9 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         metric: Metric,
-        duration: StrictInt,
-        end_time: Optional[StrictInt] = None,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7696,10 +7971,12 @@ class EXTERNALApi:
         :type deployment_id: int
         :param metric: (required)
         :type metric: Metric
-        :param duration: (required)
-        :type duration: int
-        :param end_time:
-        :type end_time: int
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7725,8 +8002,9 @@ class EXTERNALApi:
         _param = self._get_usage_deployments_usage_deployment_id_get_serialize(
             deployment_id=deployment_id,
             metric=metric,
-            duration=duration,
-            end_time=end_time,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7753,8 +8031,9 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         metric: Metric,
-        duration: StrictInt,
-        end_time: Optional[StrictInt] = None,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7775,10 +8054,12 @@ class EXTERNALApi:
         :type deployment_id: int
         :param metric: (required)
         :type metric: Metric
-        :param duration: (required)
-        :type duration: int
-        :param end_time:
-        :type end_time: int
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7804,8 +8085,9 @@ class EXTERNALApi:
         _param = self._get_usage_deployments_usage_deployment_id_get_serialize(
             deployment_id=deployment_id,
             metric=metric,
-            duration=duration,
-            end_time=end_time,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7832,8 +8114,9 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         metric: Metric,
-        duration: StrictInt,
-        end_time: Optional[StrictInt] = None,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7854,10 +8137,12 @@ class EXTERNALApi:
         :type deployment_id: int
         :param metric: (required)
         :type metric: Metric
-        :param duration: (required)
-        :type duration: int
-        :param end_time:
-        :type end_time: int
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7883,8 +8168,9 @@ class EXTERNALApi:
         _param = self._get_usage_deployments_usage_deployment_id_get_serialize(
             deployment_id=deployment_id,
             metric=metric,
-            duration=duration,
-            end_time=end_time,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7906,8 +8192,9 @@ class EXTERNALApi:
         self,
         deployment_id,
         metric,
-        duration,
-        end_time,
+        start_time_in_seconds,
+        end_time_in_seconds,
+        step,
         _request_auth,
         _content_type,
         _headers,
@@ -7936,13 +8223,17 @@ class EXTERNALApi:
             
             _query_params.append(('metric', metric.value))
             
-        if duration is not None:
+        if start_time_in_seconds is not None:
             
-            _query_params.append(('duration', duration))
+            _query_params.append(('start_time_in_seconds', start_time_in_seconds))
             
-        if end_time is not None:
+        if end_time_in_seconds is not None:
             
-            _query_params.append(('end_time', end_time))
+            _query_params.append(('end_time_in_seconds', end_time_in_seconds))
+            
+        if step is not None:
+            
+            _query_params.append(('step', step))
             
         # process the header parameters
         # process the form parameters
@@ -8209,6 +8500,280 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/payments/setup',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_autopay_preferences_autopay_put(
+        self,
+        update_autopay_request: UpdateAutopayRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Update Autopay
+
+
+        :param update_autopay_request: (required)
+        :type update_autopay_request: UpdateAutopayRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_autopay_preferences_autopay_put_serialize(
+            update_autopay_request=update_autopay_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_autopay_preferences_autopay_put_with_http_info(
+        self,
+        update_autopay_request: UpdateAutopayRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Update Autopay
+
+
+        :param update_autopay_request: (required)
+        :type update_autopay_request: UpdateAutopayRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_autopay_preferences_autopay_put_serialize(
+            update_autopay_request=update_autopay_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_autopay_preferences_autopay_put_without_preload_content(
+        self,
+        update_autopay_request: UpdateAutopayRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Autopay
+
+
+        :param update_autopay_request: (required)
+        :type update_autopay_request: UpdateAutopayRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_autopay_preferences_autopay_put_serialize(
+            update_autopay_request=update_autopay_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_autopay_preferences_autopay_put_serialize(
+        self,
+        update_autopay_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_autopay_request is not None:
+            _body_params = update_autopay_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/preferences/autopay',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8516,7 +9081,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8534,8 +9099,8 @@ class EXTERNALApi:
 
         Update or add multiple items of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8559,7 +9124,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8584,7 +9149,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put_with_http_info(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8602,8 +9167,8 @@ class EXTERNALApi:
 
         Update or add multiple items of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8627,7 +9192,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8652,7 +9217,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put_without_preload_content(
         self,
-        user_vault_item_input: UserVaultItemInput,
+        user_vault_item: UserVaultItem,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8670,8 +9235,8 @@ class EXTERNALApi:
 
         Update or add multiple items of a specific type for the user.
 
-        :param user_vault_item_input: (required)
-        :type user_vault_item_input: UserVaultItemInput
+        :param user_vault_item: (required)
+        :type user_vault_item: UserVaultItem
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8695,7 +9260,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item_input=user_vault_item_input,
+            user_vault_item=user_vault_item,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8715,7 +9280,7 @@ class EXTERNALApi:
 
     def _update_user_vault_item_endpoint_user_vault_put_serialize(
         self,
-        user_vault_item_input,
+        user_vault_item,
         _request_auth,
         _content_type,
         _headers,
@@ -8741,8 +9306,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if user_vault_item_input is not None:
-            _body_params = user_vault_item_input
+        if user_vault_item is not None:
+            _body_params = user_vault_item
 
 
         # set the HTTP header `Accept`
@@ -8775,6 +9340,280 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/user_vault',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def upload_url_file_url_upload_post(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CreateUrlResponse:
+        """Upload Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upload_url_file_url_upload_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def upload_url_file_url_upload_post_with_http_info(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CreateUrlResponse]:
+        """Upload Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upload_url_file_url_upload_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def upload_url_file_url_upload_post_without_preload_content(
+        self,
+        create_url_request: CreateUrlRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Upload Url
+
+
+        :param create_url_request: (required)
+        :type create_url_request: CreateUrlRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._upload_url_file_url_upload_post_serialize(
+            create_url_request=create_url_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateUrlResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _upload_url_file_url_upload_post_serialize(
+        self,
+        create_url_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_url_request is not None:
+            _body_params = create_url_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/file_url/upload',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -35,19 +35,20 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
         model = CreateComputeDeploymentRequest()
         if include_optional:
             return CreateComputeDeploymentRequest(
-                name = '',
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
+                cluster_id = 56,
+                hardware_instance_id = 56,
+                image_url = '',
+                enable_jupyter = True,
+                ssh_public_key = ''
+            )
+        else:
+            return CreateComputeDeploymentRequest(
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',
                 ssh_public_key = '',
-                ssh_password = ''
-            )
-        else:
-            return CreateComputeDeploymentRequest(
-                name = '',
-                cluster_id = 56,
-                hardware_instance_id = 56,
-                image_url = '',
         )
         """
 

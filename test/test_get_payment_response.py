@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.client_secret_response import ClientSecretResponse
+from platform_api_python_client.models.get_payment_response import GetPaymentResponse
 
-class TestClientSecretResponse(unittest.TestCase):
-    """ClientSecretResponse unit test stubs"""
+class TestGetPaymentResponse(unittest.TestCase):
+    """GetPaymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,32 @@ class TestClientSecretResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ClientSecretResponse:
-        """Test ClientSecretResponse
+    def make_instance(self, include_optional) -> GetPaymentResponse:
+        """Test GetPaymentResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ClientSecretResponse`
+        # uncomment below to create an instance of `GetPaymentResponse`
         """
-        model = ClientSecretResponse()
+        model = GetPaymentResponse()
         if include_optional:
-            return ClientSecretResponse(
-                client_secret = ''
+            return GetPaymentResponse(
+                id = '',
+                created = 56,
+                amount_total = 56,
+                credit_total = 56
             )
         else:
-            return ClientSecretResponse(
-                client_secret = '',
+            return GetPaymentResponse(
+                id = '',
+                created = 56,
+                amount_total = 56,
+                credit_total = 56,
         )
         """
 
-    def testClientSecretResponse(self):
-        """Test ClientSecretResponse"""
+    def testGetPaymentResponse(self):
+        """Test GetPaymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

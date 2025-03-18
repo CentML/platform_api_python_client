@@ -57,17 +57,11 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 id = 56,
                 name = '',
                 endpoint_url = '',
-                image_url = '',
                 type = 'inference',
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 exposed_port = 56,
-                ssh_public_key = '',
-                ssh_password = '',
-                env_vars = {
-                    'key' : ''
-                    },
         )
         """
 

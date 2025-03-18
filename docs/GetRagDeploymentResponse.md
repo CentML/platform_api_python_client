@@ -9,19 +9,19 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **endpoint_url** | **str** |  | 
-**image_url** | **str** |  | 
+**image_url** | **str** |  | [optional] 
 **type** | [**DeploymentType**](DeploymentType.md) |  | 
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
-**recipe** | [**CServeV2RecipeOutput**](CServeV2RecipeOutput.md) |  | 
+**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **llm_model** | **str** |  | 
 **centml_api_key** | **str** |  | 
-**min_scale** | **int** |  | [default to 1]
-**max_scale** | **int** |  | [default to 1]
-**endpoint_certificate_authority** | **str** |  | 
-**concurrency** | **int** |  | 
-**env_vars** | **Dict[str, str]** |  | 
+**min_scale** | **int** |  | [optional] [default to 1]
+**max_scale** | **int** |  | [optional] [default to 1]
+**endpoint_certificate_authority** | **str** |  | [optional] 
+**concurrency** | **int** |  | [optional] 
+**env_vars** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 

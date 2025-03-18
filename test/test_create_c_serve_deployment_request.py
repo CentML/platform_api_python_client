@@ -35,7 +35,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
         model = CreateCServeDeploymentRequest()
         if include_optional:
             return CreateCServeDeploymentRequest(
-                name = '',
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
@@ -74,7 +74,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
             )
         else:
             return CreateCServeDeploymentRequest(
-                name = '',
+                name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(

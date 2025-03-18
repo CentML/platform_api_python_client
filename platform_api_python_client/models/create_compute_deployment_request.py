@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -27,13 +27,20 @@ class CreateComputeDeploymentRequest(BaseModel):
     """
     CreateComputeDeploymentRequest
     """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=12)]
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     image_url: StrictStr
     enable_jupyter: Optional[StrictBool] = False
     ssh_public_key: StrictStr
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
-**recipe** | [**CServeV2RecipeInput**](CServeV2RecipeInput.md) |  | 
+**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **hf_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **min_scale** | **int** |  | 

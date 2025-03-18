@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **model** | **str** |  | 
-**cluster_id** | **int** |  | 
 **fastest** | [**CServeRecipePerf**](CServeRecipePerf.md) |  | 
 **cheapest** | [**CServeRecipePerf**](CServeRecipePerf.md) |  | 
 **best_value** | [**CServeRecipePerf**](CServeRecipePerf.md) |  | 

@@ -96,6 +96,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_payment_method_payments_methods_delete(self) -> None:
+        """Test case for delete_payment_method_payments_methods_delete
+
+        Delete Payment Method
+        """
+        pass
+
     def test_delete_user_vault_item_endpoint_user_vault_delete(self) -> None:
         """Test case for delete_user_vault_item_endpoint_user_vault_delete
 
@@ -121,6 +128,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_api_keys_credentials_api_key_get
 
         Get Api Keys
+        """
+        pass
+
+    def test_get_autocharge_preferences_autocharge_preferences_get(self) -> None:
+        """Test case for get_autocharge_preferences_autocharge_preferences_get
+
+        Get Autocharge Preferences
         """
         pass
 
@@ -201,6 +215,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_payment_method_payments_methods_get(self) -> None:
+        """Test case for get_payment_method_payments_methods_get
+
+        Get Payment Method
+        """
+        pass
+
     def test_get_payments_payments_get(self) -> None:
         """Test case for get_payments_payments_get
 
@@ -240,6 +261,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for setup_stripe_customer_payments_setup_post
 
         Setup Stripe Customer
+        """
+        pass
+
+    def test_update_autocharge_preferences_autocharge_preferences_put(self) -> None:
+        """Test case for update_autocharge_preferences_autocharge_preferences_put
+
+        Update Autocharge Preferences
         """
         pass
 

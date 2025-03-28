@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.user_vault_item_output import UserVaultItemOutput
+from platform_api_python_client.models.get_autocharge_preferences_response import GetAutochargePreferencesResponse
 
-class TestUserVaultItemOutput(unittest.TestCase):
-    """UserVaultItemOutput unit test stubs"""
+class TestGetAutochargePreferencesResponse(unittest.TestCase):
+    """GetAutochargePreferencesResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,30 +25,28 @@ class TestUserVaultItemOutput(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> UserVaultItemOutput:
-        """Test UserVaultItemOutput
+    def make_instance(self, include_optional) -> GetAutochargePreferencesResponse:
+        """Test GetAutochargePreferencesResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `UserVaultItemOutput`
+        # uncomment below to create an instance of `GetAutochargePreferencesResponse`
         """
-        model = UserVaultItemOutput()
+        model = GetAutochargePreferencesResponse()
         if include_optional:
-            return UserVaultItemOutput(
-                type = 'env_vars',
-                key = '',
-                value = ''
+            return GetAutochargePreferencesResponse(
+                threshold_in_cents = 56,
+                amount_in_cents = 56
             )
         else:
-            return UserVaultItemOutput(
-                type = 'env_vars',
-                key = '',
-                value = '',
+            return GetAutochargePreferencesResponse(
+                threshold_in_cents = 56,
+                amount_in_cents = 56,
         )
         """
 
-    def testUserVaultItemOutput(self):
-        """Test UserVaultItemOutput"""
+    def testGetAutochargePreferencesResponse(self):
+        """Test GetAutochargePreferencesResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

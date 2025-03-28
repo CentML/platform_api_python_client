@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_v2_recipe_output import CServeV2RecipeOutput
+from platform_api_python_client.models.payment_method_response import PaymentMethodResponse
 
-class TestCServeV2RecipeOutput(unittest.TestCase):
-    """CServeV2RecipeOutput unit test stubs"""
+class TestPaymentMethodResponse(unittest.TestCase):
+    """PaymentMethodResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,26 @@ class TestCServeV2RecipeOutput(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CServeV2RecipeOutput:
-        """Test CServeV2RecipeOutput
+    def make_instance(self, include_optional) -> PaymentMethodResponse:
+        """Test PaymentMethodResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CServeV2RecipeOutput`
+        # uncomment below to create an instance of `PaymentMethodResponse`
         """
-        model = CServeV2RecipeOutput()
+        model = PaymentMethodResponse()
         if include_optional:
-            return CServeV2RecipeOutput(
-                model = '',
-                is_embedding_model = True
+            return PaymentMethodResponse(
+                result = None
             )
         else:
-            return CServeV2RecipeOutput(
-                model = '',
-                is_embedding_model = True,
+            return PaymentMethodResponse(
+                result = None,
         )
         """
 
-    def testCServeV2RecipeOutput(self):
-        """Test CServeV2RecipeOutput"""
+    def testPaymentMethodResponse(self):
+        """Test PaymentMethodResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

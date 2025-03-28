@@ -17,19 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CServeV2RecipeOutput(BaseModel):
+class GetAutochargePreferencesResponse(BaseModel):
     """
-    Inputs to start deployment
+    GetAutochargePreferencesResponse
     """ # noqa: E501
-    model: StrictStr
-    is_embedding_model: StrictBool
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["model", "is_embedding_model"]
+    threshold_in_cents: StrictInt
+    amount_in_cents: StrictInt
+    __properties: ClassVar[List[str]] = ["threshold_in_cents", "amount_in_cents"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +48,7 @@ class CServeV2RecipeOutput(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CServeV2RecipeOutput from a JSON string"""
+        """Create an instance of GetAutochargePreferencesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -61,10 +60,8 @@ class CServeV2RecipeOutput(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -72,16 +69,11 @@ class CServeV2RecipeOutput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CServeV2RecipeOutput from a dict"""
+        """Create an instance of GetAutochargePreferencesResponse from a dict"""
         if obj is None:
             return None
 
@@ -89,14 +81,9 @@ class CServeV2RecipeOutput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "model": obj.get("model"),
-            "is_embedding_model": obj.get("is_embedding_model") if obj.get("is_embedding_model") is not None else False
+            "threshold_in_cents": obj.get("threshold_in_cents"),
+            "amount_in_cents": obj.get("amount_in_cents")
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

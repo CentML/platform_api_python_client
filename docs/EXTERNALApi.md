@@ -14,10 +14,13 @@ Method | HTTP request | Description
 [**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
 [**create_setup_payments_setup_checkout_post**](EXTERNALApi.md#create_setup_payments_setup_checkout_post) | **POST** /payments/setup_checkout | Create Setup
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
+[**delete_autocharge_preferences_autocharge_preferences_delete**](EXTERNALApi.md#delete_autocharge_preferences_autocharge_preferences_delete) | **DELETE** /autocharge/preferences | Delete Autocharge Preferences
+[**delete_payment_method_payments_methods_delete**](EXTERNALApi.md#delete_payment_method_payments_methods_delete) | **DELETE** /payments/methods | Delete Payment Method
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**download_url_file_url_download_post**](EXTERNALApi.md#download_url_file_url_download_post) | **POST** /file_url/download | Download Url
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
 [**get_api_keys_credentials_api_key_get**](EXTERNALApi.md#get_api_keys_credentials_api_key_get) | **GET** /credentials/api-key | Get Api Keys
+[**get_autocharge_preferences_autocharge_preferences_get**](EXTERNALApi.md#get_autocharge_preferences_autocharge_preferences_get) | **GET** /autocharge/preferences | Get Autocharge Preferences
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
@@ -29,13 +32,14 @@ Method | HTTP request | Description
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
+[**get_payment_method_payments_methods_get**](EXTERNALApi.md#get_payment_method_payments_methods_get) | **GET** /payments/methods | Get Payment Method
 [**get_payments_payments_get**](EXTERNALApi.md#get_payments_payments_get) | **GET** /payments | Get Payments
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
 [**get_rag_deployment_deployments_rag_deployment_id_get**](EXTERNALApi.md#get_rag_deployment_deployments_rag_deployment_id_get) | **GET** /deployments/rag/{deployment_id} | Get Rag Deployment
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
-[**update_autopay_preferences_autopay_put**](EXTERNALApi.md#update_autopay_preferences_autopay_put) | **PUT** /preferences/autopay | Update Autopay
+[**update_autocharge_preferences_autocharge_preferences_put**](EXTERNALApi.md#update_autocharge_preferences_autocharge_preferences_put) | **PUT** /autocharge/preferences | Update Autocharge Preferences
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
@@ -818,6 +822,148 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_autocharge_preferences_autocharge_preferences_delete**
+> object delete_autocharge_preferences_autocharge_preferences_delete()
+
+Delete Autocharge Preferences
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Delete Autocharge Preferences
+        api_response = api_instance.delete_autocharge_preferences_autocharge_preferences_delete()
+        print("The response of EXTERNALApi->delete_autocharge_preferences_autocharge_preferences_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_autocharge_preferences_autocharge_preferences_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_payment_method_payments_methods_delete**
+> object delete_payment_method_payments_methods_delete()
+
+Delete Payment Method
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Delete Payment Method
+        api_response = api_instance.delete_payment_method_payments_methods_delete()
+        print("The response of EXTERNALApi->delete_payment_method_payments_methods_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_payment_method_payments_methods_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_user_vault_item_endpoint_user_vault_delete**
 > object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
 
@@ -1111,6 +1257,78 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ListAPIKeyResponse**](ListAPIKeyResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_autocharge_preferences_autocharge_preferences_get**
+> GetAutochargePreferencesResponse get_autocharge_preferences_autocharge_preferences_get()
+
+Get Autocharge Preferences
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_autocharge_preferences_response import GetAutochargePreferencesResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Get Autocharge Preferences
+        api_response = api_instance.get_autocharge_preferences_autocharge_preferences_get()
+        print("The response of EXTERNALApi->get_autocharge_preferences_autocharge_preferences_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_autocharge_preferences_autocharge_preferences_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAutochargePreferencesResponse**](GetAutochargePreferencesResponse.md)
 
 ### Authorization
 
@@ -1985,6 +2203,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_payment_method_payments_methods_get**
+> PaymentMethodResponse get_payment_method_payments_methods_get()
+
+Get Payment Method
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.payment_method_response import PaymentMethodResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Get Payment Method
+        api_response = api_instance.get_payment_method_payments_methods_get()
+        print("The response of EXTERNALApi->get_payment_method_payments_methods_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_payment_method_payments_methods_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PaymentMethodResponse**](PaymentMethodResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_payments_payments_get**
 > ListPaymentsResponse get_payments_payments_get()
 
@@ -2448,10 +2738,10 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_autopay_preferences_autopay_put**
-> object update_autopay_preferences_autopay_put(update_autopay_request)
+# **update_autocharge_preferences_autocharge_preferences_put**
+> object update_autocharge_preferences_autocharge_preferences_put(update_autocharge_preferences_request)
 
-Update Autopay
+Update Autocharge Preferences
 
 ### Example
 
@@ -2459,7 +2749,7 @@ Update Autopay
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.update_autopay_request import UpdateAutopayRequest
+from platform_api_python_client.models.update_autocharge_preferences_request import UpdateAutochargePreferencesRequest
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2483,15 +2773,15 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    update_autopay_request = platform_api_python_client.UpdateAutopayRequest() # UpdateAutopayRequest | 
+    update_autocharge_preferences_request = platform_api_python_client.UpdateAutochargePreferencesRequest() # UpdateAutochargePreferencesRequest | 
 
     try:
-        # Update Autopay
-        api_response = api_instance.update_autopay_preferences_autopay_put(update_autopay_request)
-        print("The response of EXTERNALApi->update_autopay_preferences_autopay_put:\n")
+        # Update Autocharge Preferences
+        api_response = api_instance.update_autocharge_preferences_autocharge_preferences_put(update_autocharge_preferences_request)
+        print("The response of EXTERNALApi->update_autocharge_preferences_autocharge_preferences_put:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EXTERNALApi->update_autopay_preferences_autopay_put: %s\n" % e)
+        print("Exception when calling EXTERNALApi->update_autocharge_preferences_autocharge_preferences_put: %s\n" % e)
 ```
 
 
@@ -2501,7 +2791,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_autopay_request** | [**UpdateAutopayRequest**](UpdateAutopayRequest.md)|  | 
+ **update_autocharge_preferences_request** | [**UpdateAutochargePreferencesRequest**](UpdateAutochargePreferencesRequest.md)|  | 
 
 ### Return type
 

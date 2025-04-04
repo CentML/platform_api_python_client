@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.2.5"
+__version__ = "3.2.7"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -86,6 +86,7 @@ from platform_api_python_client.models.payment_method_response import PaymentMet
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 from platform_api_python_client.models.service_status import ServiceStatus
 from platform_api_python_client.models.update_autocharge_preferences_request import UpdateAutochargePreferencesRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.user_support_email_request import UserSupportEmailRequest
 from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType

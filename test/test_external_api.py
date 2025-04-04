@@ -96,6 +96,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_autocharge_preferences_autocharge_preferences_delete(self) -> None:
+        """Test case for delete_autocharge_preferences_autocharge_preferences_delete
+
+        Delete Autocharge Preferences
+        """
+        pass
+
     def test_delete_payment_method_payments_methods_delete(self) -> None:
         """Test case for delete_payment_method_payments_methods_delete
 
@@ -271,10 +278,38 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_update_compute_deployment_deployments_compute_put(self) -> None:
+        """Test case for update_compute_deployment_deployments_compute_put
+
+        Update Compute Deployment
+        """
+        pass
+
+    def test_update_cserve_v2_deployment_deployments_cserve_v2_put(self) -> None:
+        """Test case for update_cserve_v2_deployment_deployments_cserve_v2_put
+
+        Update Cserve V2 Deployment
+        """
+        pass
+
     def test_update_deployment_status_deployments_status_deployment_id_put(self) -> None:
         """Test case for update_deployment_status_deployments_status_deployment_id_put
 
         Update Deployment Status
+        """
+        pass
+
+    def test_update_inference_deployment_deployments_inference_put(self) -> None:
+        """Test case for update_inference_deployment_deployments_inference_put
+
+        Update Inference Deployment
+        """
+        pass
+
+    def test_update_rag_deployment_deployments_rag_put(self) -> None:
+        """Test case for update_rag_deployment_deployments_rag_put
+
+        Update Rag Deployment
         """
         pass
 

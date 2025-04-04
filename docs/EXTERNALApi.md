@@ -40,7 +40,11 @@ Method | HTTP request | Description
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_autocharge_preferences_autocharge_preferences_put**](EXTERNALApi.md#update_autocharge_preferences_autocharge_preferences_put) | **PUT** /autocharge/preferences | Update Autocharge Preferences
+[**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
+[**update_cserve_v2_deployment_deployments_cserve_v2_put**](EXTERNALApi.md#update_cserve_v2_deployment_deployments_cserve_v2_put) | **PUT** /deployments/cserve_v2 | Update Cserve V2 Deployment
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
+[**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
+[**update_rag_deployment_deployments_rag_put**](EXTERNALApi.md#update_rag_deployment_deployments_rag_put) | **PUT** /deployments/rag | Update Rag Deployment
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
 
@@ -2815,6 +2819,166 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_compute_deployment_deployments_compute_put**
+> UpdateDeploymentResponse update_compute_deployment_deployments_compute_put(deployment_id, create_compute_deployment_request)
+
+Update Compute Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_compute_deployment_request = platform_api_python_client.CreateComputeDeploymentRequest() # CreateComputeDeploymentRequest | 
+
+    try:
+        # Update Compute Deployment
+        api_response = api_instance.update_compute_deployment_deployments_compute_put(deployment_id, create_compute_deployment_request)
+        print("The response of EXTERNALApi->update_compute_deployment_deployments_compute_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_compute_deployment_deployments_compute_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_compute_deployment_request** | [**CreateComputeDeploymentRequest**](CreateComputeDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_cserve_v2_deployment_deployments_cserve_v2_put**
+> UpdateDeploymentResponse update_cserve_v2_deployment_deployments_cserve_v2_put(deployment_id, create_c_serve_v2_deployment_request)
+
+Update Cserve V2 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_v2_deployment_request import CreateCServeV2DeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_c_serve_v2_deployment_request = platform_api_python_client.CreateCServeV2DeploymentRequest() # CreateCServeV2DeploymentRequest | 
+
+    try:
+        # Update Cserve V2 Deployment
+        api_response = api_instance.update_cserve_v2_deployment_deployments_cserve_v2_put(deployment_id, create_c_serve_v2_deployment_request)
+        print("The response of EXTERNALApi->update_cserve_v2_deployment_deployments_cserve_v2_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_cserve_v2_deployment_deployments_cserve_v2_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_c_serve_v2_deployment_request** | [**CreateCServeV2DeploymentRequest**](CreateCServeV2DeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_deployment_status_deployments_status_deployment_id_put**
 > DeploymentStatusResponse update_deployment_status_deployments_status_deployment_id_put(deployment_id, deployment_status_request)
 
@@ -2876,6 +3040,166 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeploymentStatusResponse**](DeploymentStatusResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_inference_deployment_deployments_inference_put**
+> UpdateDeploymentResponse update_inference_deployment_deployments_inference_put(deployment_id, create_inference_deployment_request)
+
+Update Inference Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_inference_deployment_request = platform_api_python_client.CreateInferenceDeploymentRequest() # CreateInferenceDeploymentRequest | 
+
+    try:
+        # Update Inference Deployment
+        api_response = api_instance.update_inference_deployment_deployments_inference_put(deployment_id, create_inference_deployment_request)
+        print("The response of EXTERNALApi->update_inference_deployment_deployments_inference_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_inference_deployment_deployments_inference_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_inference_deployment_request** | [**CreateInferenceDeploymentRequest**](CreateInferenceDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_rag_deployment_deployments_rag_put**
+> UpdateDeploymentResponse update_rag_deployment_deployments_rag_put(deployment_id, create_rag_deployment_request)
+
+Update Rag Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_rag_deployment_request = platform_api_python_client.CreateRagDeploymentRequest() # CreateRagDeploymentRequest | 
+
+    try:
+        # Update Rag Deployment
+        api_response = api_instance.update_rag_deployment_deployments_rag_put(deployment_id, create_rag_deployment_request)
+        print("The response of EXTERNALApi->update_rag_deployment_deployments_rag_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_rag_deployment_deployments_rag_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_rag_deployment_request** | [**CreateRagDeploymentRequest**](CreateRagDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
 
 ### Authorization
 

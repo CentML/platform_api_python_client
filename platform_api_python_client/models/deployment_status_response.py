@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.service_status import ServiceStatus
@@ -35,7 +36,8 @@ class DeploymentStatusResponse(BaseModel):
     service_status: Optional[ServiceStatus] = None
     error_message: Optional[StrictStr] = None
     endpoint_url: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "type", "status", "service_status", "error_message", "endpoint_url"]
+    pod_status: Optional[List[Annotated[List[Any], Field(min_length=2, max_length=2)]]] = None
+    __properties: ClassVar[List[str]] = ["id", "type", "status", "service_status", "error_message", "endpoint_url", "pod_status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +93,11 @@ class DeploymentStatusResponse(BaseModel):
         if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
             _dict['endpoint_url'] = None
 
+        # set to None if pod_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.pod_status is None and "pod_status" in self.model_fields_set:
+            _dict['pod_status'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +115,8 @@ class DeploymentStatusResponse(BaseModel):
             "status": obj.get("status"),
             "service_status": obj.get("service_status"),
             "error_message": obj.get("error_message"),
-            "endpoint_url": obj.get("endpoint_url")
+            "endpoint_url": obj.get("endpoint_url"),
+            "pod_status": obj.get("pod_status")
         })
         return _obj
 

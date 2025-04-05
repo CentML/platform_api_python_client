@@ -40,7 +40,12 @@ class TestDeploymentStatusResponse(unittest.TestCase):
                 status = 'active',
                 service_status = 'Healthy',
                 error_message = '',
-                endpoint_url = ''
+                endpoint_url = '',
+                pod_status = [
+                    [
+                        null
+                        ]
+                    ]
             )
         else:
             return DeploymentStatusResponse(

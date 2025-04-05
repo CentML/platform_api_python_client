@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **service_status** | [**ServiceStatus**](ServiceStatus.md) |  | [optional] 
 **error_message** | **str** |  | [optional] 
 **endpoint_url** | **str** |  | [optional] 
+**pod_status** | **List[List[object]]** |  | [optional] 
 
 ## Example
 

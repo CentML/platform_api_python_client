@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "platform_api_python_client"
-version = "3.2.8"
+version = "3.2.9"
 description = "Platform External API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"

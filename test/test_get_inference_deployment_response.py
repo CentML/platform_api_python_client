@@ -47,9 +47,11 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 container_port = 56,
                 min_scale = 56,
                 max_scale = 56,
+                initial_scale = 56,
                 concurrency = 56,
                 healthcheck = '',
                 endpoint_certificate_authority = '',
+                endpoint_bearer_token = '',
                 env_vars = {
                     'key' : ''
                     },

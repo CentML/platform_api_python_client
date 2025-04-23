@@ -42,12 +42,14 @@ class TestCreateInferenceDeploymentRequest(unittest.TestCase):
                 port = 56,
                 min_scale = 56,
                 max_scale = 56,
+                initial_scale = 56,
                 concurrency = 56,
                 healthcheck = '',
                 env_vars = {
                     'key' : ''
                     },
                 command = '',
+                endpoint_bearer_token = '',
                 endpoint_certificate_authority = ''
             )
         else:

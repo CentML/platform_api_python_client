@@ -34,12 +34,14 @@ class CreateInferenceDeploymentRequest(BaseModel):
     port: StrictInt
     min_scale: StrictInt
     max_scale: StrictInt
+    initial_scale: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[StrictStr] = None
+    endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_scale", "max_scale", "concurrency", "healthcheck", "env_vars", "command", "endpoint_certificate_authority"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -87,6 +89,11 @@ class CreateInferenceDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if initial_scale (nullable) is None
+        # and model_fields_set contains the field
+        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
+            _dict['initial_scale'] = None
+
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -106,6 +113,11 @@ class CreateInferenceDeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
+
+        # set to None if endpoint_bearer_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
+            _dict['endpoint_bearer_token'] = None
 
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
@@ -131,10 +143,12 @@ class CreateInferenceDeploymentRequest(BaseModel):
             "port": obj.get("port"),
             "min_scale": obj.get("min_scale"),
             "max_scale": obj.get("max_scale"),
+            "initial_scale": obj.get("initial_scale"),
             "concurrency": obj.get("concurrency"),
             "healthcheck": obj.get("healthcheck"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
+            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")
         })
         return _obj

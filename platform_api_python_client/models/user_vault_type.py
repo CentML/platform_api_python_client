@@ -28,6 +28,7 @@ class UserVaultType(str, Enum):
     """
     ENV_VARS = 'env_vars'
     SSH_KEYS = 'ssh_keys'
+    BEARER_TOKENS = 'bearer_tokens'
     ACCESS_TOKENS = 'access_tokens'
     CERTIFICATES = 'certificates'
 

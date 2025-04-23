@@ -19,7 +19,9 @@ Name | Type | Description | Notes
 **centml_api_key** | **str** |  | 
 **min_scale** | **int** |  | [optional] [default to 1]
 **max_scale** | **int** |  | [optional] [default to 1]
+**initial_scale** | **int** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
+**endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 

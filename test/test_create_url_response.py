@@ -35,11 +35,11 @@ class TestCreateUrlResponse(unittest.TestCase):
         model = CreateUrlResponse()
         if include_optional:
             return CreateUrlResponse(
-                url = ''
+                url = '0'
             )
         else:
             return CreateUrlResponse(
-                url = '',
+                url = '0',
         )
         """
 

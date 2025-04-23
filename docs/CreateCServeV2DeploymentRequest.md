@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **hf_token** | **str** |  | [optional] 
+**endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
+**initial_scale** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 

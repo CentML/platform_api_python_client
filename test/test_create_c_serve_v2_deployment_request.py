@@ -40,9 +40,11 @@ class TestCreateCServeV2DeploymentRequest(unittest.TestCase):
                 hardware_instance_id = 56,
                 recipe = { },
                 hf_token = '',
+                endpoint_bearer_token = '',
                 endpoint_certificate_authority = '',
                 min_scale = 56,
                 max_scale = 56,
+                initial_scale = 56,
                 concurrency = 56,
                 env_vars = {
                     'key' : ''

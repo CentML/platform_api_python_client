@@ -44,6 +44,8 @@ class TestCreateRagDeploymentRequest(unittest.TestCase):
                 centml_api_key = '',
                 min_scale = 56,
                 max_scale = 56,
+                initial_scale = 56,
+                endpoint_bearer_token = '',
                 endpoint_certificate_authority = '',
                 concurrency = 56,
                 env_vars = {

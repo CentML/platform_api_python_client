@@ -7,6 +7,8 @@
 
 * `SSH_KEYS` (value: `'ssh_keys'`)
 
+* `BEARER_TOKENS` (value: `'bearer_tokens'`)
+
 * `ACCESS_TOKENS` (value: `'access_tokens'`)
 
 * `CERTIFICATES` (value: `'certificates'`)

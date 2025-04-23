@@ -41,13 +41,14 @@ class GetInferenceDeploymentResponse(BaseModel):
     container_port: StrictInt
     min_scale: StrictInt
     max_scale: StrictInt
+    initial_scale: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     command_args: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "container_port", "min_scale", "max_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "env_vars", "command", "command_args"]
+    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "container_port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "env_vars", "command", "command_args"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +93,11 @@ class GetInferenceDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
+
+        # set to None if initial_scale (nullable) is None
+        # and model_fields_set contains the field
+        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
+            _dict['initial_scale'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -147,6 +153,7 @@ class GetInferenceDeploymentResponse(BaseModel):
             "container_port": obj.get("container_port"),
             "min_scale": obj.get("min_scale"),
             "max_scale": obj.get("max_scale"),
+            "initial_scale": obj.get("initial_scale"),
             "concurrency": obj.get("concurrency"),
             "healthcheck": obj.get("healthcheck"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),

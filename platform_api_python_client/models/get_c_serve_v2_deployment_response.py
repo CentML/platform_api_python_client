@@ -42,10 +42,11 @@ class GetCServeV2DeploymentResponse(BaseModel):
     recipe: CServeV2Recipe
     min_scale: StrictInt
     max_scale: StrictInt
+    initial_scale: Optional[StrictInt] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "min_scale", "max_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "concurrency", "env_vars"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +95,11 @@ class GetCServeV2DeploymentResponse(BaseModel):
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
 
+        # set to None if initial_scale (nullable) is None
+        # and model_fields_set contains the field
+        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
+            _dict['initial_scale'] = None
+
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
@@ -128,6 +134,7 @@ class GetCServeV2DeploymentResponse(BaseModel):
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "min_scale": obj.get("min_scale"),
             "max_scale": obj.get("max_scale"),
+            "initial_scale": obj.get("initial_scale"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "concurrency": obj.get("concurrency"),
             "env_vars": obj.get("env_vars")

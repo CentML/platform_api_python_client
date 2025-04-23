@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **container_port** | **int** |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
+**initial_scale** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 

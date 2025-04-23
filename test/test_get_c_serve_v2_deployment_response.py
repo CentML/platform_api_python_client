@@ -47,6 +47,7 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                 recipe = { },
                 min_scale = 56,
                 max_scale = 56,
+                initial_scale = 56,
                 endpoint_certificate_authority = '',
                 concurrency = 56,
                 env_vars = {

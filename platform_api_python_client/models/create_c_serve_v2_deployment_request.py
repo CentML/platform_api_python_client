@@ -33,12 +33,14 @@ class CreateCServeV2DeploymentRequest(BaseModel):
     hardware_instance_id: StrictInt
     recipe: CServeV2Recipe
     hf_token: Optional[StrictStr] = None
+    endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     min_scale: StrictInt
     max_scale: StrictInt
+    initial_scale: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "hf_token", "endpoint_certificate_authority", "min_scale", "max_scale", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_scale", "max_scale", "initial_scale", "concurrency", "env_vars"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -94,10 +96,20 @@ class CreateCServeV2DeploymentRequest(BaseModel):
         if self.hf_token is None and "hf_token" in self.model_fields_set:
             _dict['hf_token'] = None
 
+        # set to None if endpoint_bearer_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
+            _dict['endpoint_bearer_token'] = None
+
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
             _dict['endpoint_certificate_authority'] = None
+
+        # set to None if initial_scale (nullable) is None
+        # and model_fields_set contains the field
+        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
+            _dict['initial_scale'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -121,9 +133,11 @@ class CreateCServeV2DeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "hf_token": obj.get("hf_token"),
+            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "min_scale": obj.get("min_scale"),
             "max_scale": obj.get("max_scale"),
+            "initial_scale": obj.get("initial_scale"),
             "concurrency": obj.get("concurrency"),
             "env_vars": obj.get("env_vars")
         })

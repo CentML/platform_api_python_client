@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
+**initial_scale** | **int** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 

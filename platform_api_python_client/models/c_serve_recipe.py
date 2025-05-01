@@ -28,6 +28,7 @@ class CServeRecipe(BaseModel):
     Base class for deployment planner
     """ # noqa: E501
     model: StrictStr
+    revision: Optional[StrictStr] = None
     is_embedding_model: Optional[StrictBool] = False
     tensor_parallel_size: StrictInt
     pipeline_parallel_size: StrictInt
@@ -51,7 +52,7 @@ class CServeRecipe(BaseModel):
     spec_prompt_lookup_min: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     spec_prompt_lookup_max: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     seed: Optional[StrictInt] = 0
-    __properties: ClassVar[List[str]] = ["model", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "offloading_num", "use_prefix_caching", "use_chunked_prefill", "chunked_prefill_size", "eager_execution", "num_scheduler_steps", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed"]
+    __properties: ClassVar[List[str]] = ["model", "revision", "is_embedding_model", "tensor_parallel_size", "pipeline_parallel_size", "block_size", "swap_space", "gpu_mem_util", "max_num_seqs", "offloading_num", "use_prefix_caching", "use_chunked_prefill", "chunked_prefill_size", "eager_execution", "num_scheduler_steps", "use_flashinfer", "max_model_len", "dtype", "tokenizer", "spec_proposer", "spec_draft_model", "spec_tokens", "spec_prompt_lookup_min", "spec_prompt_lookup_max", "seed"]
 
     @field_validator('block_size')
     def block_size_validate_enum(cls, value):
@@ -122,6 +123,11 @@ class CServeRecipe(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.revision is None and "revision" in self.model_fields_set:
+            _dict['revision'] = None
+
         # set to None if use_prefix_caching (nullable) is None
         # and model_fields_set contains the field
         if self.use_prefix_caching is None and "use_prefix_caching" in self.model_fields_set:
@@ -195,6 +201,7 @@ class CServeRecipe(BaseModel):
 
         _obj = cls.model_validate({
             "model": obj.get("model"),
+            "revision": obj.get("revision"),
             "is_embedding_model": obj.get("is_embedding_model") if obj.get("is_embedding_model") is not None else False,
             "tensor_parallel_size": obj.get("tensor_parallel_size"),
             "pipeline_parallel_size": obj.get("pipeline_parallel_size"),

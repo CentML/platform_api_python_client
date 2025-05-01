@@ -26,13 +26,6 @@ class TestEXTERNALApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_add_user_request_support_user_requests_post(self) -> None:
-        """Test case for add_user_request_support_user_requests_post
-
-        Add User Request
-        """
-        pass
-
     def test_create_api_key_credentials_api_key_post(self) -> None:
         """Test case for create_api_key_credentials_api_key_post
 
@@ -86,6 +79,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for create_setup_payments_setup_checkout_post
 
         Create Setup
+        """
+        pass
+
+    def test_create_support_ticket_support_post(self) -> None:
+        """Test case for create_support_ticket_support_post
+
+        Create Support Ticket
         """
         pass
 

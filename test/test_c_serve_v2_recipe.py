@@ -36,6 +36,7 @@ class TestCServeV2Recipe(unittest.TestCase):
         if include_optional:
             return CServeV2Recipe(
                 model = '',
+                revision = '',
                 is_embedding_model = True
             )
         else:

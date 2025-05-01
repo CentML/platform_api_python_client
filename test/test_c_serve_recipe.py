@@ -36,6 +36,7 @@ class TestCServeRecipe(unittest.TestCase):
         if include_optional:
             return CServeRecipe(
                 model = '',
+                revision = '',
                 is_embedding_model = True,
                 tensor_parallel_size = 56,
                 pipeline_parallel_size = 56,

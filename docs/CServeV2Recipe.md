@@ -7,6 +7,7 @@ Inputs to start deployment
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **model** | **str** |  | 
+**revision** | **str** |  | [optional] 
 **is_embedding_model** | **bool** |  | [optional] [default to False]
 
 ## Example

@@ -27,9 +27,10 @@ class CServeV2Recipe(BaseModel):
     Inputs to start deployment
     """ # noqa: E501
     model: StrictStr
+    revision: Optional[StrictStr] = None
     is_embedding_model: Optional[StrictBool] = False
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["model", "is_embedding_model"]
+    __properties: ClassVar[List[str]] = ["model", "revision", "is_embedding_model"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +78,11 @@ class CServeV2Recipe(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.revision is None and "revision" in self.model_fields_set:
+            _dict['revision'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +96,7 @@ class CServeV2Recipe(BaseModel):
 
         _obj = cls.model_validate({
             "model": obj.get("model"),
+            "revision": obj.get("revision"),
             "is_embedding_model": obj.get("is_embedding_model") if obj.get("is_embedding_model") is not None else False
         })
         # store additional fields in additional_properties

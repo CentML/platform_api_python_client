@@ -40,6 +40,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
                 hardware_instance_id = 56,
                 recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
+                    revision = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 
                     pipeline_parallel_size = 56, 
@@ -79,6 +80,7 @@ class TestCreateCServeDeploymentRequest(unittest.TestCase):
                 hardware_instance_id = 56,
                 recipe = platform_api_python_client.models.c_serve_recipe.CServeRecipe(
                     model = '', 
+                    revision = '', 
                     is_embedding_model = True, 
                     tensor_parallel_size = 56, 
                     pipeline_parallel_size = 56, 

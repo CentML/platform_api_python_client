@@ -7,6 +7,7 @@ Base class for deployment planner
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **model** | **str** |  | 
+**revision** | **str** |  | [optional] 
 **is_embedding_model** | **bool** |  | [optional] [default to False]
 **tensor_parallel_size** | **int** |  | 
 **pipeline_parallel_size** | **int** |  | 

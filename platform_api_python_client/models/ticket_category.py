@@ -18,25 +18,26 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class Metric(str, Enum):
+class TicketCategory(str, Enum):
     """
-    Metric
+    TicketCategory
     """
 
     """
     allowed enum values
     """
-    CPU = 'cpu'
-    MEMORY = 'memory'
-    GPU = 'gpu'
-    HTTP_REQUESTS = 'http_requests'
-    REQUEST_LATENCY_50_PERCENTILE = 'request_latency_50_percentile'
-    REQUEST_LATENCY_90_PERCENTILE = 'request_latency_90_percentile'
-    REQUEST_LATENCY_99_PERCENTILE = 'request_latency_99_percentile'
+    GENERAL_QUESTIONS = 'general_questions'
+    SALES_QUESTIONS = 'sales_questions'
+    PERFORMANCE_QUESTIONS = 'performance_questions'
+    BILLING_AND_FINANCE = 'billing_and_finance'
+    DATA_PRIVACY_ACCOUNT_DELETION = 'data_privacy_account_deletion'
+    ADD_A_NEW_CLUSTER = 'add_a_new_cluster'
+    REQUEST_A_NEW_SERVERLESS_MODEL = 'request_a_new_serverless_model'
+    OTHER = 'other'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of Metric from a JSON string"""
+        """Create an instance of TicketCategory from a JSON string"""
         return cls(json.loads(json_str))
 
 

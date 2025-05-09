@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.3"
+__version__ = "4.0.8"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -86,6 +86,7 @@ from platform_api_python_client.models.payment_method_response import PaymentMet
 from platform_api_python_client.models.pod_status import PodStatus
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 from platform_api_python_client.models.service_status import ServiceStatus
+from platform_api_python_client.models.setup_user_response import SetupUserResponse
 from platform_api_python_client.models.ticket_category import TicketCategory
 from platform_api_python_client.models.ticket_priority import TicketPriority
 from platform_api_python_client.models.update_autocharge_preferences_request import UpdateAutochargePreferencesRequest

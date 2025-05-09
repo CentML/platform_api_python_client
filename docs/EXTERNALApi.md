@@ -2679,7 +2679,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setup_stripe_customer_payments_setup_post**
-> object setup_stripe_customer_payments_setup_post()
+> SetupUserResponse setup_stripe_customer_payments_setup_post()
 
 Setup Stripe Customer
 
@@ -2689,6 +2689,7 @@ Setup Stripe Customer
 
 ```python
 import platform_api_python_client
+from platform_api_python_client.models.setup_user_response import SetupUserResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2730,7 +2731,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**SetupUserResponse**](SetupUserResponse.md)
 
 ### Authorization
 

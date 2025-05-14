@@ -59,6 +59,7 @@ from platform_api_python_client.models.list_prebuilt_image_response import ListP
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
 from platform_api_python_client.models.metric import Metric
 from platform_api_python_client.models.payment_method_response import PaymentMethodResponse
+from platform_api_python_client.models.setup_user_response import SetupUserResponse
 from platform_api_python_client.models.ticket_category import TicketCategory
 from platform_api_python_client.models.ticket_priority import TicketPriority
 from platform_api_python_client.models.update_autocharge_preferences_request import UpdateAutochargePreferencesRequest
@@ -9308,7 +9309,7 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> SetupUserResponse:
         """Setup Stripe Customer
 
 
@@ -9342,7 +9343,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SetupUserResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9370,7 +9371,7 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[SetupUserResponse]:
         """Setup Stripe Customer
 
 
@@ -9404,7 +9405,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SetupUserResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9466,7 +9467,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "SetupUserResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

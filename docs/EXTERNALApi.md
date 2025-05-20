@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**create_api_key_credentials_api_key_post**](EXTERNALApi.md#create_api_key_credentials_api_key_post) | **POST** /credentials/api-key | Create Api Key
 [**create_checkout_payments_checkout_post**](EXTERNALApi.md#create_checkout_payments_checkout_post) | **POST** /payments/checkout | Create Checkout
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
-[**create_cserve_deployment_deployments_cserve_post**](EXTERNALApi.md#create_cserve_deployment_deployments_cserve_post) | **POST** /deployments/cserve | Create Cserve Deployment
 [**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
 [**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
@@ -24,7 +23,6 @@ Method | HTTP request | Description
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
-[**get_cserve_deployment_deployments_cserve_deployment_id_get**](EXTERNALApi.md#get_cserve_deployment_deployments_cserve_deployment_id_get) | **GET** /deployments/cserve/{deployment_id} | Get Cserve Deployment
 [**get_cserve_recipe_deployments_cserve_recipes_get**](EXTERNALApi.md#get_cserve_recipe_deployments_cserve_recipes_get) | **GET** /deployments/cserve/recipes | Get Cserve Recipe
 [**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Get Cserve V2 Deployment
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
@@ -264,84 +262,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateComputeDeploymentResponse**](CreateComputeDeploymentResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_cserve_deployment_deployments_cserve_post**
-> CreateCServeDeploymentResponse create_cserve_deployment_deployments_cserve_post(create_c_serve_deployment_request)
-
-Create Cserve Deployment
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
-from platform_api_python_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    create_c_serve_deployment_request = platform_api_python_client.CreateCServeDeploymentRequest() # CreateCServeDeploymentRequest | 
-
-    try:
-        # Create Cserve Deployment
-        api_response = api_instance.create_cserve_deployment_deployments_cserve_post(create_c_serve_deployment_request)
-        print("The response of EXTERNALApi->create_cserve_deployment_deployments_cserve_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->create_cserve_deployment_deployments_cserve_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_c_serve_deployment_request** | [**CreateCServeDeploymentRequest**](CreateCServeDeploymentRequest.md)|  | 
-
-### Return type
-
-[**CreateCServeDeploymentResponse**](CreateCServeDeploymentResponse.md)
 
 ### Authorization
 
@@ -1576,83 +1496,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_cserve_deployment_deployments_cserve_deployment_id_get**
-> GetCServeDeploymentResponse get_cserve_deployment_deployments_cserve_deployment_id_get(deployment_id)
-
-Get Cserve Deployment
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    deployment_id = 56 # int | 
-
-    try:
-        # Get Cserve Deployment
-        api_response = api_instance.get_cserve_deployment_deployments_cserve_deployment_id_get(deployment_id)
-        print("The response of EXTERNALApi->get_cserve_deployment_deployments_cserve_deployment_id_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->get_cserve_deployment_deployments_cserve_deployment_id_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deployment_id** | **int**|  | 
-
-### Return type
-
-[**GetCServeDeploymentResponse**](GetCServeDeploymentResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

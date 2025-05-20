@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.9"
+__version__ = "4.0.10"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -33,12 +33,9 @@ from platform_api_python_client.exceptions import ApiException
 # import models into sdk package
 from platform_api_python_client.models.api_key_request import APIKeyRequest
 from platform_api_python_client.models.api_key_response import APIKeyResponse
-from platform_api_python_client.models.c_serve_recipe import CServeRecipe
 from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
-from platform_api_python_client.models.create_c_serve_deployment_request import CreateCServeDeploymentRequest
-from platform_api_python_client.models.create_c_serve_deployment_response import CreateCServeDeploymentResponse
 from platform_api_python_client.models.create_c_serve_v2_deployment_request import CreateCServeV2DeploymentRequest
 from platform_api_python_client.models.create_c_serve_v2_deployment_response import CreateCServeV2DeploymentResponse
 from platform_api_python_client.models.create_checkout_request import CreateCheckoutRequest
@@ -60,7 +57,6 @@ from platform_api_python_client.models.deployment_status_response import Deploym
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue
 from platform_api_python_client.models.get_autocharge_preferences_response import GetAutochargePreferencesResponse
-from platform_api_python_client.models.get_c_serve_deployment_response import GetCServeDeploymentResponse
 from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse

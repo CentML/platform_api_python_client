@@ -47,13 +47,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_create_cserve_deployment_deployments_cserve_post(self) -> None:
-        """Test case for create_cserve_deployment_deployments_cserve_post
-
-        Create Cserve Deployment
-        """
-        pass
-
     def test_create_cserve_v2_deployment_deployments_cserve_v2_post(self) -> None:
         """Test case for create_cserve_v2_deployment_deployments_cserve_v2_post
 
@@ -163,13 +156,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_credits_credits_get
 
         Get Credits
-        """
-        pass
-
-    def test_get_cserve_deployment_deployments_cserve_deployment_id_get(self) -> None:
-        """Test case for get_cserve_deployment_deployments_cserve_deployment_id_get
-
-        Get Cserve Deployment
         """
         pass
 

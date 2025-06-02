@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.10"
+__version__ = "4.0.12"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -55,6 +55,7 @@ from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
 from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.deployment_usage import DeploymentUsage
 from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue
 from platform_api_python_client.models.get_autocharge_preferences_response import GetAutochargePreferencesResponse
 from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse

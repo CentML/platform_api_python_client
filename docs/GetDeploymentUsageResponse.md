@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**List[DeploymentUsageValue]**](DeploymentUsageValue.md) |  | 
+**values** | [**List[DeploymentUsage]**](DeploymentUsage.md) |  | 
 
 ## Example
 

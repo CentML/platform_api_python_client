@@ -40,6 +40,7 @@ class GetRagDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     recipe: CServeV2Recipe
+    cserve_version: Optional[StrictStr] = None
     llm_model: StrictStr
     centml_api_key: StrictStr
     min_scale: Optional[StrictInt] = 1
@@ -49,7 +50,7 @@ class GetRagDeploymentResponse(BaseModel):
     endpoint_bearer_token: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "llm_model", "centml_api_key", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "cserve_version", "llm_model", "centml_api_key", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,6 +99,11 @@ class GetRagDeploymentResponse(BaseModel):
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
 
+        # set to None if cserve_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.cserve_version is None and "cserve_version" in self.model_fields_set:
+            _dict['cserve_version'] = None
+
         # set to None if initial_scale (nullable) is None
         # and model_fields_set contains the field
         if self.initial_scale is None and "initial_scale" in self.model_fields_set:
@@ -140,6 +146,7 @@ class GetRagDeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "cserve_version": obj.get("cserve_version"),
             "llm_model": obj.get("llm_model"),
             "centml_api_key": obj.get("centml_api_key"),
             "min_scale": obj.get("min_scale") if obj.get("min_scale") is not None else 1,

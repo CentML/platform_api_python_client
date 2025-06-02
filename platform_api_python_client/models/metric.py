@@ -30,9 +30,13 @@ class Metric(str, Enum):
     MEMORY = 'memory'
     GPU = 'gpu'
     HTTP_REQUESTS = 'http_requests'
+    HTTP_REQUESTS_BY_STATUS = 'http_requests_by_status'
+    ERROR_CODE = 'error_code'
     REQUEST_LATENCY_50_PERCENTILE = 'request_latency_50_percentile'
     REQUEST_LATENCY_90_PERCENTILE = 'request_latency_90_percentile'
     REQUEST_LATENCY_99_PERCENTILE = 'request_latency_99_percentile'
+    TOKENS_PER_SECOND = 'tokens_per_second'
+    TIME_TO_FIRST_TOKEN = 'time_to_first_token'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

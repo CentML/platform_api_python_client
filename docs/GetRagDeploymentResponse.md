@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
+**cserve_version** | **str** |  | [optional] 
 **llm_model** | **str** |  | 
 **centml_api_key** | **str** |  | 
 **min_scale** | **int** |  | [optional] [default to 1]

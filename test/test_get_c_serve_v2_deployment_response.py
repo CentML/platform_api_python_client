@@ -45,6 +45,7 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 recipe = { },
+                cserve_version = '',
                 min_scale = 56,
                 max_scale = 56,
                 initial_scale = 56,

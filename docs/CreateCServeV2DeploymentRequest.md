@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
+**cserve_version** | **str** |  | [optional] 
 **hf_token** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 

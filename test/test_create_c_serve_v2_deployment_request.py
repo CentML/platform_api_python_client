@@ -39,6 +39,7 @@ class TestCreateCServeV2DeploymentRequest(unittest.TestCase):
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 recipe = { },
+                cserve_version = '',
                 hf_token = '',
                 endpoint_bearer_token = '',
                 endpoint_certificate_authority = '',

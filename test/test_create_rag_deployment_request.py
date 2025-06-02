@@ -39,6 +39,7 @@ class TestCreateRagDeploymentRequest(unittest.TestCase):
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 recipe = { },
+                cserve_version = '',
                 hf_token = '',
                 llm_model = '',
                 centml_api_key = '',

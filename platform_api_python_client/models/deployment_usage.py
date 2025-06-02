@@ -17,18 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List
-from platform_api_python_client.models.deployment_usage import DeploymentUsage
+from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetDeploymentUsageResponse(BaseModel):
+class DeploymentUsage(BaseModel):
     """
-    GetDeploymentUsageResponse
+    DeploymentUsage
     """ # noqa: E501
-    values: List[DeploymentUsage]
-    __properties: ClassVar[List[str]] = ["values"]
+    metric: Dict[str, StrictStr]
+    values: List[DeploymentUsageValue]
+    __properties: ClassVar[List[str]] = ["metric", "values"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +49,7 @@ class GetDeploymentUsageResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeploymentUsageResponse from a JSON string"""
+        """Create an instance of DeploymentUsage from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,7 +81,7 @@ class GetDeploymentUsageResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeploymentUsageResponse from a dict"""
+        """Create an instance of DeploymentUsage from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +89,8 @@ class GetDeploymentUsageResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "values": [DeploymentUsage.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None
+            "metric": obj.get("metric"),
+            "values": [DeploymentUsageValue.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None
         })
         return _obj
 

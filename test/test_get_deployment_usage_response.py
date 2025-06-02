@@ -36,17 +36,29 @@ class TestGetDeploymentUsageResponse(unittest.TestCase):
         if include_optional:
             return GetDeploymentUsageResponse(
                 values = [
-                    platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
-                        timestamp = 56, 
-                        value = 1.337, )
+                    platform_api_python_client.models.deployment_usage.DeploymentUsage(
+                        metric = {
+                            'key' : ''
+                            }, 
+                        values = [
+                            platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
+                                timestamp = 56, 
+                                value = 1.337, )
+                            ], )
                     ]
             )
         else:
             return GetDeploymentUsageResponse(
                 values = [
-                    platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
-                        timestamp = 56, 
-                        value = 1.337, )
+                    platform_api_python_client.models.deployment_usage.DeploymentUsage(
+                        metric = {
+                            'key' : ''
+                            }, 
+                        values = [
+                            platform_api_python_client.models.deployment_usage_value.DeploymentUsageValue(
+                                timestamp = 56, 
+                                value = 1.337, )
+                            ], )
                     ],
         )
         """

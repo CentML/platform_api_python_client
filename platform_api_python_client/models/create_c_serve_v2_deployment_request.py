@@ -32,6 +32,7 @@ class CreateCServeV2DeploymentRequest(BaseModel):
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     recipe: CServeV2Recipe
+    cserve_version: Optional[StrictStr] = None
     hf_token: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
@@ -40,7 +41,7 @@ class CreateCServeV2DeploymentRequest(BaseModel):
     initial_scale: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_scale", "max_scale", "initial_scale", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_scale", "max_scale", "initial_scale", "concurrency", "env_vars"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -91,6 +92,11 @@ class CreateCServeV2DeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipe
         if self.recipe:
             _dict['recipe'] = self.recipe.to_dict()
+        # set to None if cserve_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.cserve_version is None and "cserve_version" in self.model_fields_set:
+            _dict['cserve_version'] = None
+
         # set to None if hf_token (nullable) is None
         # and model_fields_set contains the field
         if self.hf_token is None and "hf_token" in self.model_fields_set:
@@ -132,6 +138,7 @@ class CreateCServeV2DeploymentRequest(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
+            "cserve_version": obj.get("cserve_version"),
             "hf_token": obj.get("hf_token"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),

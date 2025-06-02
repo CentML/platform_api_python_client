@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
+**cserve_version** | **str** |  | [optional] 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 
 **initial_scale** | **int** |  | [optional] 

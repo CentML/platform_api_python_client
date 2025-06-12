@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.setup_user_response import SetupUserResponse
+from platform_api_python_client.models.create_organization_request import CreateOrganizationRequest
 
-class TestSetupUserResponse(unittest.TestCase):
-    """SetupUserResponse unit test stubs"""
+class TestCreateOrganizationRequest(unittest.TestCase):
+    """CreateOrganizationRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,26 @@ class TestSetupUserResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> SetupUserResponse:
-        """Test SetupUserResponse
+    def make_instance(self, include_optional) -> CreateOrganizationRequest:
+        """Test CreateOrganizationRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SetupUserResponse`
+        # uncomment below to create an instance of `CreateOrganizationRequest`
         """
-        model = SetupUserResponse()
+        model = CreateOrganizationRequest()
         if include_optional:
-            return SetupUserResponse(
-                created_workos_organization_id = ''
+            return CreateOrganizationRequest(
+                name = ''
             )
         else:
-            return SetupUserResponse(
-                created_workos_organization_id = '',
+            return CreateOrganizationRequest(
+                name = '',
         )
         """
 
-    def testSetupUserResponse(self):
-        """Test SetupUserResponse"""
+    def testCreateOrganizationRequest(self):
+        """Test CreateOrganizationRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

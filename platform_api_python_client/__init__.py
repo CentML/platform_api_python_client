@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.13"
+__version__ = "4.0.14"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -44,6 +44,8 @@ from platform_api_python_client.models.create_compute_deployment_request import 
 from platform_api_python_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
 from platform_api_python_client.models.create_inference_deployment_request import CreateInferenceDeploymentRequest
 from platform_api_python_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
+from platform_api_python_client.models.create_organization_request import CreateOrganizationRequest
+from platform_api_python_client.models.create_organization_response import CreateOrganizationResponse
 from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
 from platform_api_python_client.models.create_rag_deployment_response import CreateRagDeploymentResponse
 from platform_api_python_client.models.create_setup_checkout_request import CreateSetupCheckoutRequest
@@ -83,7 +85,6 @@ from platform_api_python_client.models.payment_method_response import PaymentMet
 from platform_api_python_client.models.pod_status import PodStatus
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 from platform_api_python_client.models.service_status import ServiceStatus
-from platform_api_python_client.models.setup_user_response import SetupUserResponse
 from platform_api_python_client.models.ticket_category import TicketCategory
 from platform_api_python_client.models.ticket_priority import TicketPriority
 from platform_api_python_client.models.update_autocharge_preferences_request import UpdateAutochargePreferencesRequest

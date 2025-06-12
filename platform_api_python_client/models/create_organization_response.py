@@ -18,16 +18,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SetupUserResponse(BaseModel):
+class CreateOrganizationResponse(BaseModel):
     """
-    SetupUserResponse
+    CreateOrganizationResponse
     """ # noqa: E501
-    created_workos_organization_id: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["created_workos_organization_id"]
+    id: StrictStr
+    name: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +48,7 @@ class SetupUserResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SetupUserResponse from a JSON string"""
+        """Create an instance of CreateOrganizationResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,16 +69,11 @@ class SetupUserResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if created_workos_organization_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.created_workos_organization_id is None and "created_workos_organization_id" in self.model_fields_set:
-            _dict['created_workos_organization_id'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SetupUserResponse from a dict"""
+        """Create an instance of CreateOrganizationResponse from a dict"""
         if obj is None:
             return None
 
@@ -85,7 +81,8 @@ class SetupUserResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "created_workos_organization_id": obj.get("created_workos_organization_id")
+            "id": obj.get("id"),
+            "name": obj.get("name")
         })
         return _obj
 

@@ -61,6 +61,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_new_organization_organizations_post(self) -> None:
+        """Test case for create_new_organization_organizations_post
+
+        Create New Organization
+        """
+        pass
+
     def test_create_rag_deployment_deployments_rag_post(self) -> None:
         """Test case for create_rag_deployment_deployments_rag_post
 

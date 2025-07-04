@@ -35,6 +35,7 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
         model = GetInferenceDeploymentResponse()
         if include_optional:
             return GetInferenceDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',
@@ -64,6 +65,7 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
             )
         else:
             return GetInferenceDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',

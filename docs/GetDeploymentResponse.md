@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**creator_email** | **str** |  | 
 **cluster_id** | **int** |  | 
 **id** | **int** |  | 
 **name** | **str** |  | 

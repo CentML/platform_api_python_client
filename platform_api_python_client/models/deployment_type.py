@@ -31,9 +31,11 @@ class DeploymentType(str, Enum):
     COMPUTE = 'compute'
     COMPILATION = 'compilation'
     INFERENCE_V2 = 'inference_v2'
+    INFERENCE_V3 = 'inference_v3'
     COMPUTE_V2 = 'compute_v2'
     CSERVE = 'cserve'
     CSERVE_V2 = 'cserve_v2'
+    CSERVE_V3 = 'cserve_v3'
     DEPLOYMENT = 'deployment'
     RAG = 'rag'
 

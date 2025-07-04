@@ -25,9 +25,9 @@ from platform_api_python_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetComputeDeploymentResponse(BaseModel):
+class GetInferenceV3DeploymentResponse(BaseModel):
     """
-    GetComputeDeploymentResponse
+    GetInferenceV3DeploymentResponse
     """ # noqa: E501
     creator_email: StrictStr
     cluster_id: StrictInt
@@ -39,11 +39,18 @@ class GetComputeDeploymentResponse(BaseModel):
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
-    exposed_port: StrictInt
-    ssh_public_key: Optional[StrictStr] = None
-    ssh_password: Optional[StrictStr] = None
+    container_port: StrictInt
+    min_replicas: StrictInt
+    max_replicas: StrictInt
+    initial_replicas: Optional[StrictInt] = None
+    concurrency: Optional[StrictInt] = None
+    healthcheck: Optional[StrictStr] = None
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    endpoint_bearer_token: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "exposed_port", "ssh_public_key", "ssh_password", "env_vars"]
+    command: Optional[List[StrictStr]] = None
+    command_args: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,7 +70,7 @@ class GetComputeDeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetComputeDeploymentResponse from a JSON string"""
+        """Create an instance of GetInferenceV3DeploymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -89,26 +96,51 @@ class GetComputeDeploymentResponse(BaseModel):
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
 
-        # set to None if ssh_public_key (nullable) is None
+        # set to None if initial_replicas (nullable) is None
         # and model_fields_set contains the field
-        if self.ssh_public_key is None and "ssh_public_key" in self.model_fields_set:
-            _dict['ssh_public_key'] = None
+        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
+            _dict['initial_replicas'] = None
 
-        # set to None if ssh_password (nullable) is None
+        # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
-        if self.ssh_password is None and "ssh_password" in self.model_fields_set:
-            _dict['ssh_password'] = None
+        if self.concurrency is None and "concurrency" in self.model_fields_set:
+            _dict['concurrency'] = None
+
+        # set to None if healthcheck (nullable) is None
+        # and model_fields_set contains the field
+        if self.healthcheck is None and "healthcheck" in self.model_fields_set:
+            _dict['healthcheck'] = None
+
+        # set to None if endpoint_certificate_authority (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
+            _dict['endpoint_certificate_authority'] = None
+
+        # set to None if endpoint_bearer_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
+            _dict['endpoint_bearer_token'] = None
 
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
         if self.env_vars is None and "env_vars" in self.model_fields_set:
             _dict['env_vars'] = None
 
+        # set to None if command (nullable) is None
+        # and model_fields_set contains the field
+        if self.command is None and "command" in self.model_fields_set:
+            _dict['command'] = None
+
+        # set to None if command_args (nullable) is None
+        # and model_fields_set contains the field
+        if self.command_args is None and "command_args" in self.model_fields_set:
+            _dict['command_args'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetComputeDeploymentResponse from a dict"""
+        """Create an instance of GetInferenceV3DeploymentResponse from a dict"""
         if obj is None:
             return None
 
@@ -126,10 +158,17 @@ class GetComputeDeploymentResponse(BaseModel):
             "status": obj.get("status"),
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "exposed_port": obj.get("exposed_port"),
-            "ssh_public_key": obj.get("ssh_public_key"),
-            "ssh_password": obj.get("ssh_password"),
-            "env_vars": obj.get("env_vars")
+            "container_port": obj.get("container_port"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
+            "initial_replicas": obj.get("initial_replicas"),
+            "concurrency": obj.get("concurrency"),
+            "healthcheck": obj.get("healthcheck"),
+            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "env_vars": obj.get("env_vars"),
+            "command": obj.get("command"),
+            "command_args": obj.get("command_args")
         })
         return _obj
 

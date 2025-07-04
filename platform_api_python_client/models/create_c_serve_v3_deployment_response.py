@@ -19,27 +19,18 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_python_client.models.deployment_status import DeploymentStatus
-from platform_api_python_client.models.deployment_type import DeploymentType
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetDeploymentResponse(BaseModel):
+class CreateCServeV3DeploymentResponse(BaseModel):
     """
-    GetDeploymentResponse
+    CreateCServeV3DeploymentResponse
     """ # noqa: E501
-    creator_email: StrictStr
-    cluster_id: StrictInt
     id: StrictInt
-    name: StrictStr
-    endpoint_url: StrictStr
-    image_url: Optional[StrictStr] = None
-    type: DeploymentType
-    status: DeploymentStatus
     created_at: datetime
-    hardware_instance_id: StrictInt
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id"]
+    endpoint_url: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -59,7 +50,7 @@ class GetDeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeploymentResponse from a JSON string"""
+        """Create an instance of CreateCServeV3DeploymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,16 +71,11 @@ class GetDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if image_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_url is None and "image_url" in self.model_fields_set:
-            _dict['image_url'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeploymentResponse from a dict"""
+        """Create an instance of CreateCServeV3DeploymentResponse from a dict"""
         if obj is None:
             return None
 
@@ -97,16 +83,9 @@ class GetDeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "creator_email": obj.get("creator_email"),
-            "cluster_id": obj.get("cluster_id"),
             "id": obj.get("id"),
-            "name": obj.get("name"),
-            "endpoint_url": obj.get("endpoint_url"),
-            "image_url": obj.get("image_url"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
             "created_at": obj.get("created_at"),
-            "hardware_instance_id": obj.get("hardware_instance_id")
+            "endpoint_url": obj.get("endpoint_url")
         })
         return _obj
 

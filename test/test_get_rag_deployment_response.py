@@ -35,6 +35,7 @@ class TestGetRagDeploymentResponse(unittest.TestCase):
         model = GetRagDeploymentResponse()
         if include_optional:
             return GetRagDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',
@@ -60,6 +61,7 @@ class TestGetRagDeploymentResponse(unittest.TestCase):
             )
         else:
             return GetRagDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',

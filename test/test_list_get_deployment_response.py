@@ -37,6 +37,7 @@ class TestListGetDeploymentResponse(unittest.TestCase):
             return ListGetDeploymentResponse(
                 results = [
                     platform_api_python_client.models.get_deployment_response.GetDeploymentResponse(
+                        creator_email = '', 
                         cluster_id = 56, 
                         id = 56, 
                         name = '', 
@@ -52,6 +53,7 @@ class TestListGetDeploymentResponse(unittest.TestCase):
             return ListGetDeploymentResponse(
                 results = [
                     platform_api_python_client.models.get_deployment_response.GetDeploymentResponse(
+                        creator_email = '', 
                         cluster_id = 56, 
                         id = 56, 
                         name = '', 

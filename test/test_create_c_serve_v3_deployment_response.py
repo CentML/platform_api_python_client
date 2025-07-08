@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.get_deployment_response import GetDeploymentResponse
+from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
 
-class TestGetDeploymentResponse(unittest.TestCase):
-    """GetDeploymentResponse unit test stubs"""
+class TestCreateCServeV3DeploymentResponse(unittest.TestCase):
+    """CreateCServeV3DeploymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,43 +25,30 @@ class TestGetDeploymentResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetDeploymentResponse:
-        """Test GetDeploymentResponse
+    def make_instance(self, include_optional) -> CreateCServeV3DeploymentResponse:
+        """Test CreateCServeV3DeploymentResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetDeploymentResponse`
+        # uncomment below to create an instance of `CreateCServeV3DeploymentResponse`
         """
-        model = GetDeploymentResponse()
+        model = CreateCServeV3DeploymentResponse()
         if include_optional:
-            return GetDeploymentResponse(
-                creator_email = '',
-                cluster_id = 56,
+            return CreateCServeV3DeploymentResponse(
                 id = 56,
-                name = '',
-                endpoint_url = '',
-                image_url = '',
-                type = 'inference',
-                status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                hardware_instance_id = 56
+                endpoint_url = ''
             )
         else:
-            return GetDeploymentResponse(
-                creator_email = '',
-                cluster_id = 56,
+            return CreateCServeV3DeploymentResponse(
                 id = 56,
-                name = '',
-                endpoint_url = '',
-                type = 'inference',
-                status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                hardware_instance_id = 56,
+                endpoint_url = '',
         )
         """
 
-    def testGetDeploymentResponse(self):
-        """Test GetDeploymentResponse"""
+    def testCreateCServeV3DeploymentResponse(self):
+        """Test CreateCServeV3DeploymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -54,10 +54,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_cserve_v3_deployment_deployments_cserve_v3_post(self) -> None:
+        """Test case for create_cserve_v3_deployment_deployments_cserve_v3_post
+
+        Create Cserve V3 Deployment
+        """
+        pass
+
     def test_create_inference_deployment_deployments_inference_post(self) -> None:
         """Test case for create_inference_deployment_deployments_inference_post
 
         Create Inference Deployment
+        """
+        pass
+
+    def test_create_inference_v3_deployment_deployments_inference_v3_post(self) -> None:
+        """Test case for create_inference_v3_deployment_deployments_inference_v3_post
+
+        Create Inference V3 Deployment
         """
         pass
 
@@ -180,6 +194,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(self) -> None:
+        """Test case for get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get
+
+        Get Cserve V3 Deployment
+        """
+        pass
+
     def test_get_deployment_logs_deployments_logs_deployment_id_get(self) -> None:
         """Test case for get_deployment_logs_deployments_logs_deployment_id_get
 
@@ -212,6 +233,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_inference_deployment_deployments_inference_deployment_id_get
 
         Get Inference Deployment
+        """
+        pass
+
+    def test_get_inference_v3_deployment_deployments_inference_v3_deployment_id_get(self) -> None:
+        """Test case for get_inference_v3_deployment_deployments_inference_v3_deployment_id_get
+
+        Get Inference V3 Deployment
         """
         pass
 
@@ -285,6 +313,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_update_cserve_v3_deployment_deployments_cserve_v3_put(self) -> None:
+        """Test case for update_cserve_v3_deployment_deployments_cserve_v3_put
+
+        Update Cserve V3 Deployment
+        """
+        pass
+
     def test_update_deployment_status_deployments_status_deployment_id_put(self) -> None:
         """Test case for update_deployment_status_deployments_status_deployment_id_put
 
@@ -296,6 +331,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_inference_deployment_deployments_inference_put
 
         Update Inference Deployment
+        """
+        pass
+
+    def test_update_inference_v3_deployment_deployments_inference_v3_put(self) -> None:
+        """Test case for update_inference_v3_deployment_deployments_inference_v3_put
+
+        Update Inference V3 Deployment
         """
         pass
 

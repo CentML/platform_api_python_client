@@ -1,4 +1,4 @@
-# GetRagDeploymentResponse
+# GetCServeV3DeploymentResponse
 
 
 ## Properties
@@ -17,11 +17,9 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
-**llm_model** | **str** |  | 
-**centml_api_key** | **str** |  | 
-**min_scale** | **int** |  | [optional] [default to 1]
-**max_scale** | **int** |  | [optional] [default to 1]
-**initial_scale** | **int** |  | [optional] 
+**min_replicas** | **int** |  | 
+**max_replicas** | **int** |  | 
+**initial_replicas** | **int** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
@@ -30,19 +28,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
+from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of GetRagDeploymentResponse from a JSON string
-get_rag_deployment_response_instance = GetRagDeploymentResponse.from_json(json)
+# create an instance of GetCServeV3DeploymentResponse from a JSON string
+get_c_serve_v3_deployment_response_instance = GetCServeV3DeploymentResponse.from_json(json)
 # print the JSON string representation of the object
-print(GetRagDeploymentResponse.to_json())
+print(GetCServeV3DeploymentResponse.to_json())
 
 # convert the object into a dict
-get_rag_deployment_response_dict = get_rag_deployment_response_instance.to_dict()
-# create an instance of GetRagDeploymentResponse from a dict
-get_rag_deployment_response_from_dict = GetRagDeploymentResponse.from_dict(get_rag_deployment_response_dict)
+get_c_serve_v3_deployment_response_dict = get_c_serve_v3_deployment_response_instance.to_dict()
+# create an instance of GetCServeV3DeploymentResponse from a dict
+get_c_serve_v3_deployment_response_from_dict = GetCServeV3DeploymentResponse.from_dict(get_c_serve_v3_deployment_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

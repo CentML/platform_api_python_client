@@ -17,39 +17,38 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
-from platform_api_python_client.models.deployment_status import DeploymentStatus
-from platform_api_python_client.models.deployment_type import DeploymentType
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetCServeV2DeploymentResponse(BaseModel):
+class CreateCServeV3DeploymentRequest(BaseModel):
     """
-    GetCServeV2DeploymentResponse
+    CreateCServeV3DeploymentRequest
     """ # noqa: E501
-    creator_email: StrictStr
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    id: StrictInt
-    name: StrictStr
-    endpoint_url: StrictStr
-    image_url: Optional[StrictStr] = None
-    type: DeploymentType
-    status: DeploymentStatus
-    created_at: datetime
     hardware_instance_id: StrictInt
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
-    min_scale: StrictInt
-    max_scale: StrictInt
-    initial_scale: Optional[StrictInt] = None
-    endpoint_certificate_authority: Optional[StrictStr] = None
+    hf_token: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    min_replicas: StrictInt
+    max_replicas: StrictInt
+    initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "cserve_version", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -69,7 +68,7 @@ class GetCServeV2DeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetCServeV2DeploymentResponse from a JSON string"""
+        """Create an instance of CreateCServeV3DeploymentRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -93,30 +92,30 @@ class GetCServeV2DeploymentResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipe
         if self.recipe:
             _dict['recipe'] = self.recipe.to_dict()
-        # set to None if image_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_url is None and "image_url" in self.model_fields_set:
-            _dict['image_url'] = None
-
         # set to None if cserve_version (nullable) is None
         # and model_fields_set contains the field
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
             _dict['cserve_version'] = None
 
-        # set to None if initial_scale (nullable) is None
+        # set to None if hf_token (nullable) is None
         # and model_fields_set contains the field
-        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
-            _dict['initial_scale'] = None
+        if self.hf_token is None and "hf_token" in self.model_fields_set:
+            _dict['hf_token'] = None
+
+        # set to None if endpoint_bearer_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
+            _dict['endpoint_bearer_token'] = None
 
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
             _dict['endpoint_certificate_authority'] = None
 
-        # set to None if endpoint_bearer_token (nullable) is None
+        # set to None if initial_replicas (nullable) is None
         # and model_fields_set contains the field
-        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
-            _dict['endpoint_bearer_token'] = None
+        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
+            _dict['initial_replicas'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -127,7 +126,7 @@ class GetCServeV2DeploymentResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetCServeV2DeploymentResponse from a dict"""
+        """Create an instance of CreateCServeV3DeploymentRequest from a dict"""
         if obj is None:
             return None
 
@@ -135,23 +134,17 @@ class GetCServeV2DeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "creator_email": obj.get("creator_email"),
-            "cluster_id": obj.get("cluster_id"),
-            "id": obj.get("id"),
             "name": obj.get("name"),
-            "endpoint_url": obj.get("endpoint_url"),
-            "image_url": obj.get("image_url"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
-            "created_at": obj.get("created_at"),
+            "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
-            "min_scale": obj.get("min_scale"),
-            "max_scale": obj.get("max_scale"),
-            "initial_scale": obj.get("initial_scale"),
-            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "hf_token": obj.get("hf_token"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
+            "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
             "env_vars": obj.get("env_vars")
         })

@@ -13,11 +13,15 @@
 
 * `INFERENCE_V2` (value: `'inference_v2'`)
 
+* `INFERENCE_V3` (value: `'inference_v3'`)
+
 * `COMPUTE_V2` (value: `'compute_v2'`)
 
 * `CSERVE` (value: `'cserve'`)
 
 * `CSERVE_V2` (value: `'cserve_v2'`)
+
+* `CSERVE_V3` (value: `'cserve_v3'`)
 
 * `DEPLOYMENT` (value: `'deployment'`)
 

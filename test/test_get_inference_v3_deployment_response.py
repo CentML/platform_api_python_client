@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
+from platform_api_python_client.models.get_inference_v3_deployment_response import GetInferenceV3DeploymentResponse
 
-class TestGetCServeV2DeploymentResponse(unittest.TestCase):
-    """GetCServeV2DeploymentResponse unit test stubs"""
+class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
+    """GetInferenceV3DeploymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetCServeV2DeploymentResponse:
-        """Test GetCServeV2DeploymentResponse
+    def make_instance(self, include_optional) -> GetInferenceV3DeploymentResponse:
+        """Test GetInferenceV3DeploymentResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetCServeV2DeploymentResponse`
+        # uncomment below to create an instance of `GetInferenceV3DeploymentResponse`
         """
-        model = GetCServeV2DeploymentResponse()
+        model = GetInferenceV3DeploymentResponse()
         if include_optional:
-            return GetCServeV2DeploymentResponse(
+            return GetInferenceV3DeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -45,20 +45,26 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
-                recipe = { },
-                cserve_version = '',
-                min_scale = 56,
-                max_scale = 56,
-                initial_scale = 56,
+                container_port = 56,
+                min_replicas = 56,
+                max_replicas = 56,
+                initial_replicas = 56,
+                concurrency = 56,
+                healthcheck = '',
                 endpoint_certificate_authority = '',
                 endpoint_bearer_token = '',
-                concurrency = 56,
                 env_vars = {
                     'key' : ''
-                    }
+                    },
+                command = [
+                    ''
+                    ],
+                command_args = [
+                    ''
+                    ]
             )
         else:
-            return GetCServeV2DeploymentResponse(
+            return GetInferenceV3DeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -68,14 +74,14 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
-                recipe = { },
-                min_scale = 56,
-                max_scale = 56,
+                container_port = 56,
+                min_replicas = 56,
+                max_replicas = 56,
         )
         """
 
-    def testGetCServeV2DeploymentResponse(self):
-        """Test GetCServeV2DeploymentResponse"""
+    def testGetInferenceV3DeploymentResponse(self):
+        """Test GetInferenceV3DeploymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

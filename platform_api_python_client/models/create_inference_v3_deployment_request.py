@@ -17,40 +17,38 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_python_client.models.deployment_status import DeploymentStatus
-from platform_api_python_client.models.deployment_type import DeploymentType
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetInferenceDeploymentResponse(BaseModel):
+class CreateInferenceV3DeploymentRequest(BaseModel):
     """
-    GetInferenceDeploymentResponse
+    CreateInferenceV3DeploymentRequest
     """ # noqa: E501
-    creator_email: StrictStr
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    id: StrictInt
-    name: StrictStr
-    endpoint_url: StrictStr
-    image_url: Optional[StrictStr] = None
-    type: DeploymentType
-    status: DeploymentStatus
-    created_at: datetime
     hardware_instance_id: StrictInt
-    container_port: StrictInt
-    min_scale: StrictInt
-    max_scale: StrictInt
-    initial_scale: Optional[StrictInt] = None
+    image_url: StrictStr
+    port: StrictInt
+    min_replicas: StrictInt
+    max_replicas: StrictInt
+    initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
-    endpoint_certificate_authority: Optional[StrictStr] = None
-    endpoint_bearer_token: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    command: Optional[List[StrictStr]] = None
-    command_args: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "container_port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args"]
+    command: Optional[StrictStr] = None
+    endpoint_bearer_token: Optional[StrictStr] = None
+    endpoint_certificate_authority: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,7 +68,7 @@ class GetInferenceDeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetInferenceDeploymentResponse from a JSON string"""
+        """Create an instance of CreateInferenceV3DeploymentRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,15 +89,10 @@ class GetInferenceDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if image_url (nullable) is None
+        # set to None if initial_replicas (nullable) is None
         # and model_fields_set contains the field
-        if self.image_url is None and "image_url" in self.model_fields_set:
-            _dict['image_url'] = None
-
-        # set to None if initial_scale (nullable) is None
-        # and model_fields_set contains the field
-        if self.initial_scale is None and "initial_scale" in self.model_fields_set:
-            _dict['initial_scale'] = None
+        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
+            _dict['initial_replicas'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -111,16 +104,6 @@ class GetInferenceDeploymentResponse(BaseModel):
         if self.healthcheck is None and "healthcheck" in self.model_fields_set:
             _dict['healthcheck'] = None
 
-        # set to None if endpoint_certificate_authority (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
-            _dict['endpoint_certificate_authority'] = None
-
-        # set to None if endpoint_bearer_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
-            _dict['endpoint_bearer_token'] = None
-
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
         if self.env_vars is None and "env_vars" in self.model_fields_set:
@@ -131,16 +114,21 @@ class GetInferenceDeploymentResponse(BaseModel):
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
-        # set to None if command_args (nullable) is None
+        # set to None if endpoint_bearer_token (nullable) is None
         # and model_fields_set contains the field
-        if self.command_args is None and "command_args" in self.model_fields_set:
-            _dict['command_args'] = None
+        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
+            _dict['endpoint_bearer_token'] = None
+
+        # set to None if endpoint_certificate_authority (nullable) is None
+        # and model_fields_set contains the field
+        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
+            _dict['endpoint_certificate_authority'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetInferenceDeploymentResponse from a dict"""
+        """Create an instance of CreateInferenceV3DeploymentRequest from a dict"""
         if obj is None:
             return None
 
@@ -148,27 +136,20 @@ class GetInferenceDeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "creator_email": obj.get("creator_email"),
-            "cluster_id": obj.get("cluster_id"),
-            "id": obj.get("id"),
             "name": obj.get("name"),
-            "endpoint_url": obj.get("endpoint_url"),
-            "image_url": obj.get("image_url"),
-            "type": obj.get("type"),
-            "status": obj.get("status"),
-            "created_at": obj.get("created_at"),
+            "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "container_port": obj.get("container_port"),
-            "min_scale": obj.get("min_scale"),
-            "max_scale": obj.get("max_scale"),
-            "initial_scale": obj.get("initial_scale"),
+            "image_url": obj.get("image_url"),
+            "port": obj.get("port"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
+            "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
             "healthcheck": obj.get("healthcheck"),
-            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
-            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
-            "command_args": obj.get("command_args")
+            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority")
         })
         return _obj
 

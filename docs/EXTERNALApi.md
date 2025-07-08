@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**create_checkout_payments_checkout_post**](EXTERNALApi.md#create_checkout_payments_checkout_post) | **POST** /payments/checkout | Create Checkout
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
 [**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
+[**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Create Cserve V3 Deployment
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
+[**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
 [**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
 [**create_setup_payments_setup_checkout_post**](EXTERNALApi.md#create_setup_payments_setup_checkout_post) | **POST** /payments/setup_checkout | Create Setup
@@ -26,11 +28,13 @@ Method | HTTP request | Description
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
 [**get_cserve_recipe_deployments_cserve_recipes_get**](EXTERNALApi.md#get_cserve_recipe_deployments_cserve_recipes_get) | **GET** /deployments/cserve/recipes | Get Cserve Recipe
 [**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Get Cserve V2 Deployment
+[**get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**](EXTERNALApi.md#get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get) | **GET** /deployments/cserve_v3/{deployment_id} | Get Cserve V3 Deployment
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
 [**get_deployment_status_deployments_status_deployment_id_get**](EXTERNALApi.md#get_deployment_status_deployments_status_deployment_id_get) | **GET** /deployments/status/{deployment_id} | Get Deployment Status
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
+[**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
 [**get_payment_method_payments_methods_get**](EXTERNALApi.md#get_payment_method_payments_methods_get) | **GET** /payments/methods | Get Payment Method
 [**get_payments_payments_get**](EXTERNALApi.md#get_payments_payments_get) | **GET** /payments | Get Payments
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
@@ -41,8 +45,10 @@ Method | HTTP request | Description
 [**update_autocharge_preferences_autocharge_preferences_put**](EXTERNALApi.md#update_autocharge_preferences_autocharge_preferences_put) | **PUT** /autocharge/preferences | Update Autocharge Preferences
 [**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
 [**update_cserve_v2_deployment_deployments_cserve_v2_put**](EXTERNALApi.md#update_cserve_v2_deployment_deployments_cserve_v2_put) | **PUT** /deployments/cserve_v2 | Update Cserve V2 Deployment
+[**update_cserve_v3_deployment_deployments_cserve_v3_put**](EXTERNALApi.md#update_cserve_v3_deployment_deployments_cserve_v3_put) | **PUT** /deployments/cserve_v3 | Update Cserve V3 Deployment
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
 [**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
+[**update_inference_v3_deployment_deployments_inference_v3_put**](EXTERNALApi.md#update_inference_v3_deployment_deployments_inference_v3_put) | **PUT** /deployments/inference_v3 | Update Inference V3 Deployment
 [**update_rag_deployment_deployments_rag_put**](EXTERNALApi.md#update_rag_deployment_deployments_rag_put) | **PUT** /deployments/rag | Update Rag Deployment
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
@@ -360,6 +366,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_cserve_v3_deployment_deployments_cserve_v3_post**
+> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
+
+Create Cserve V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
+from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
+
+    try:
+        # Create Cserve V3 Deployment
+        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
+        print("The response of EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateCServeV3DeploymentResponse**](CreateCServeV3DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_inference_deployment_deployments_inference_post**
 > CreateInferenceDeploymentResponse create_inference_deployment_deployments_inference_post(create_inference_deployment_request)
 
@@ -415,6 +499,84 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_inference_deployment_request** | [**CreateInferenceDeploymentRequest**](CreateInferenceDeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateInferenceDeploymentResponse**](CreateInferenceDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_inference_v3_deployment_deployments_inference_v3_post**
+> CreateInferenceDeploymentResponse create_inference_v3_deployment_deployments_inference_v3_post(create_inference_v3_deployment_request)
+
+Create Inference V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_inference_deployment_response import CreateInferenceDeploymentResponse
+from platform_api_python_client.models.create_inference_v3_deployment_request import CreateInferenceV3DeploymentRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_inference_v3_deployment_request = platform_api_python_client.CreateInferenceV3DeploymentRequest() # CreateInferenceV3DeploymentRequest | 
+
+    try:
+        # Create Inference V3 Deployment
+        api_response = api_instance.create_inference_v3_deployment_deployments_inference_v3_post(create_inference_v3_deployment_request)
+        print("The response of EXTERNALApi->create_inference_v3_deployment_deployments_inference_v3_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_inference_v3_deployment_deployments_inference_v3_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_inference_v3_deployment_request** | [**CreateInferenceV3DeploymentRequest**](CreateInferenceV3DeploymentRequest.md)|  | 
 
 ### Return type
 
@@ -1734,6 +1896,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**
+> GetCServeV3DeploymentResponse get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
+
+Get Cserve V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Cserve V3 Deployment
+        api_response = api_instance.get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetCServeV3DeploymentResponse**](GetCServeV3DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_deployment_logs_deployments_logs_deployment_id_get**
 > GetDeploymentLogResponse get_deployment_logs_deployments_logs_deployment_id_get(deployment_id, start_time, end_time, next_page_token=next_page_token, start_from_head=start_from_head, line_count=line_count)
 
@@ -2117,6 +2356,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetInferenceDeploymentResponse**](GetInferenceDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**
+> GetInferenceV3DeploymentResponse get_inference_v3_deployment_deployments_inference_v3_deployment_id_get(deployment_id)
+
+Get Inference V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_inference_v3_deployment_response import GetInferenceV3DeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Inference V3 Deployment
+        api_response = api_instance.get_inference_v3_deployment_deployments_inference_v3_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_inference_v3_deployment_deployments_inference_v3_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_inference_v3_deployment_deployments_inference_v3_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetInferenceV3DeploymentResponse**](GetInferenceV3DeploymentResponse.md)
 
 ### Authorization
 
@@ -2908,6 +3224,86 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_cserve_v3_deployment_deployments_cserve_v3_put**
+> UpdateDeploymentResponse update_cserve_v3_deployment_deployments_cserve_v3_put(deployment_id, create_c_serve_v3_deployment_request)
+
+Update Cserve V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
+
+    try:
+        # Update Cserve V3 Deployment
+        api_response = api_instance.update_cserve_v3_deployment_deployments_cserve_v3_put(deployment_id, create_c_serve_v3_deployment_request)
+        print("The response of EXTERNALApi->update_cserve_v3_deployment_deployments_cserve_v3_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_cserve_v3_deployment_deployments_cserve_v3_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_deployment_status_deployments_status_deployment_id_put**
 > DeploymentStatusResponse update_deployment_status_deployments_status_deployment_id_put(deployment_id, deployment_status_request)
 
@@ -3045,6 +3441,86 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
  **create_inference_deployment_request** | [**CreateInferenceDeploymentRequest**](CreateInferenceDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_inference_v3_deployment_deployments_inference_v3_put**
+> UpdateDeploymentResponse update_inference_v3_deployment_deployments_inference_v3_put(deployment_id, create_inference_v3_deployment_request)
+
+Update Inference V3 Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_inference_v3_deployment_request import CreateInferenceV3DeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_inference_v3_deployment_request = platform_api_python_client.CreateInferenceV3DeploymentRequest() # CreateInferenceV3DeploymentRequest | 
+
+    try:
+        # Update Inference V3 Deployment
+        api_response = api_instance.update_inference_v3_deployment_deployments_inference_v3_put(deployment_id, create_inference_v3_deployment_request)
+        print("The response of EXTERNALApi->update_inference_v3_deployment_deployments_inference_v3_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_inference_v3_deployment_deployments_inference_v3_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_inference_v3_deployment_request** | [**CreateInferenceV3DeploymentRequest**](CreateInferenceV3DeploymentRequest.md)|  | 
 
 ### Return type
 

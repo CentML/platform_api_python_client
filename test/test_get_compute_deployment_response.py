@@ -35,6 +35,7 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
         model = GetComputeDeploymentResponse()
         if include_optional:
             return GetComputeDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',
@@ -53,6 +54,7 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
             )
         else:
             return GetComputeDeploymentResponse(
+                creator_email = '',
                 cluster_id = 56,
                 id = 56,
                 name = '',

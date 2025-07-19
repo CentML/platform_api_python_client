@@ -96,13 +96,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_create_support_ticket_support_post(self) -> None:
-        """Test case for create_support_ticket_support_post
-
-        Create Support Ticket
-        """
-        pass
-
     def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
         """Test case for delete_api_key_credentials_api_key_id_delete
 

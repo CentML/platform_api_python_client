@@ -14,7 +14,6 @@ Method | HTTP request | Description
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
 [**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
 [**create_setup_payments_setup_checkout_post**](EXTERNALApi.md#create_setup_payments_setup_checkout_post) | **POST** /payments/setup_checkout | Create Setup
-[**create_support_ticket_support_post**](EXTERNALApi.md#create_support_ticket_support_post) | **POST** /support | Create Support Ticket
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_autocharge_preferences_autocharge_preferences_delete**](EXTERNALApi.md#delete_autocharge_preferences_autocharge_preferences_delete) | **DELETE** /autocharge/preferences | Delete Autocharge Preferences
 [**delete_payment_method_payments_methods_delete**](EXTERNALApi.md#delete_payment_method_payments_methods_delete) | **DELETE** /payments/methods | Delete Payment Method
@@ -823,90 +822,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_support_ticket_support_post**
-> object create_support_ticket_support_post(message, category, priority, upload_file=upload_file)
-
-Create Support Ticket
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.ticket_category import TicketCategory
-from platform_api_python_client.models.ticket_priority import TicketPriority
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    message = 'message_example' # str | 
-    category = platform_api_python_client.TicketCategory() # TicketCategory | 
-    priority = platform_api_python_client.TicketPriority() # TicketPriority | 
-    upload_file = None # bytearray |  (optional)
-
-    try:
-        # Create Support Ticket
-        api_response = api_instance.create_support_ticket_support_post(message, category, priority, upload_file=upload_file)
-        print("The response of EXTERNALApi->create_support_ticket_support_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->create_support_ticket_support_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **message** | **str**|  | 
- **category** | [**TicketCategory**](TicketCategory.md)|  | 
- **priority** | [**TicketPriority**](TicketPriority.md)|  | 
- **upload_file** | **bytearray**|  | [optional] 
-
-### Return type
-
-**object**
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

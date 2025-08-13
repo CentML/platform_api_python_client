@@ -40,6 +40,7 @@ class GetRagDeploymentResponse(BaseModel):
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
+    revision_number: StrictInt
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
     llm_model: StrictStr
@@ -51,7 +52,7 @@ class GetRagDeploymentResponse(BaseModel):
     endpoint_bearer_token: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "recipe", "cserve_version", "llm_model", "centml_api_key", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "recipe", "cserve_version", "llm_model", "centml_api_key", "min_scale", "max_scale", "initial_scale", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -147,6 +148,7 @@ class GetRagDeploymentResponse(BaseModel):
             "status": obj.get("status"),
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
+            "revision_number": obj.get("revision_number"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
             "llm_model": obj.get("llm_model"),

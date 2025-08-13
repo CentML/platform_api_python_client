@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
+**revision_number** | **int** |  | 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
 **min_scale** | **int** |  | 

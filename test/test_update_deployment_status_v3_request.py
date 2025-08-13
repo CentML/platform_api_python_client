@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_checkout_request import CreateCheckoutRequest
+from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
 
-class TestCreateCheckoutRequest(unittest.TestCase):
-    """CreateCheckoutRequest unit test stubs"""
+class TestUpdateDeploymentStatusV3Request(unittest.TestCase):
+    """UpdateDeploymentStatusV3Request unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,26 @@ class TestCreateCheckoutRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateCheckoutRequest:
-        """Test CreateCheckoutRequest
+    def make_instance(self, include_optional) -> UpdateDeploymentStatusV3Request:
+        """Test UpdateDeploymentStatusV3Request
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateCheckoutRequest`
+        # uncomment below to create an instance of `UpdateDeploymentStatusV3Request`
         """
-        model = CreateCheckoutRequest()
+        model = UpdateDeploymentStatusV3Request()
         if include_optional:
-            return CreateCheckoutRequest(
-                amount_credits = 56,
-                success_url = ''
+            return UpdateDeploymentStatusV3Request(
+                status = 'active',
+                rollout_status = 'Progressing'
             )
         else:
-            return CreateCheckoutRequest(
-                amount_credits = 56,
-                success_url = '',
+            return UpdateDeploymentStatusV3Request(
         )
         """
 
-    def testCreateCheckoutRequest(self):
-        """Test CreateCheckoutRequest"""
+    def testUpdateDeploymentStatusV3Request(self):
+        """Test UpdateDeploymentStatusV3Request"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

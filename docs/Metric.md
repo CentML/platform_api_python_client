@@ -25,6 +25,8 @@
 
 * `TIME_TO_FIRST_TOKEN` (value: `'time_to_first_token'`)
 
+* `PREFIX_CACHE_HIT_RATE` (value: `'prefix_cache_hit_rate'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

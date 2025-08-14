@@ -18,19 +18,21 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.pod_details import PodDetails
+from platform_api_python_client.models.service_status import ServiceStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetPaymentResponse(BaseModel):
+class RevisionPodDetails(BaseModel):
     """
-    GetPaymentResponse
+    RevisionPodDetails
     """ # noqa: E501
-    id: StrictStr
-    created: StrictInt
-    amount_total: StrictInt
-    credit_total: StrictInt
-    __properties: ClassVar[List[str]] = ["id", "created", "amount_total", "credit_total"]
+    revision_number: Optional[StrictInt] = None
+    revision_status: ServiceStatus
+    pod_details_list: Optional[List[PodDetails]] = None
+    error_message: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["revision_number", "revision_status", "pod_details_list", "error_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +52,7 @@ class GetPaymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetPaymentResponse from a JSON string"""
+        """Create an instance of RevisionPodDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,11 +73,33 @@ class GetPaymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in pod_details_list (list)
+        _items = []
+        if self.pod_details_list:
+            for _item_pod_details_list in self.pod_details_list:
+                if _item_pod_details_list:
+                    _items.append(_item_pod_details_list.to_dict())
+            _dict['pod_details_list'] = _items
+        # set to None if revision_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.revision_number is None and "revision_number" in self.model_fields_set:
+            _dict['revision_number'] = None
+
+        # set to None if pod_details_list (nullable) is None
+        # and model_fields_set contains the field
+        if self.pod_details_list is None and "pod_details_list" in self.model_fields_set:
+            _dict['pod_details_list'] = None
+
+        # set to None if error_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_message is None and "error_message" in self.model_fields_set:
+            _dict['error_message'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetPaymentResponse from a dict"""
+        """Create an instance of RevisionPodDetails from a dict"""
         if obj is None:
             return None
 
@@ -83,10 +107,10 @@ class GetPaymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "created": obj.get("created"),
-            "amount_total": obj.get("amount_total"),
-            "credit_total": obj.get("credit_total")
+            "revision_number": obj.get("revision_number"),
+            "revision_status": obj.get("revision_status"),
+            "pod_details_list": [PodDetails.from_dict(_item) for _item in obj["pod_details_list"]] if obj.get("pod_details_list") is not None else None,
+            "error_message": obj.get("error_message")
         })
         return _obj
 

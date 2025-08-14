@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_checkout_session_response import CreateCheckoutSessionResponse
+from platform_api_python_client.models.pod_details import PodDetails
 
-class TestCreateCheckoutSessionResponse(unittest.TestCase):
-    """CreateCheckoutSessionResponse unit test stubs"""
+class TestPodDetails(unittest.TestCase):
+    """PodDetails unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,29 @@ class TestCreateCheckoutSessionResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateCheckoutSessionResponse:
-        """Test CreateCheckoutSessionResponse
+    def make_instance(self, include_optional) -> PodDetails:
+        """Test PodDetails
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateCheckoutSessionResponse`
+        # uncomment below to create an instance of `PodDetails`
         """
-        model = CreateCheckoutSessionResponse()
+        model = PodDetails()
         if include_optional:
-            return CreateCheckoutSessionResponse(
-                url = ''
+            return PodDetails(
+                name = '',
+                revision_number = 56,
+                status = 'ScalingUp',
+                error_message = ''
             )
         else:
-            return CreateCheckoutSessionResponse(
-                url = '',
+            return PodDetails(
+                status = 'ScalingUp',
         )
         """
 
-    def testCreateCheckoutSessionResponse(self):
-        """Test CreateCheckoutSessionResponse"""
+    def testPodDetails(self):
+        """Test PodDetails"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

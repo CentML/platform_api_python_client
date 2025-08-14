@@ -44,7 +44,8 @@ class TestGetDeploymentResponse(unittest.TestCase):
                 type = 'inference',
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                hardware_instance_id = 56
+                hardware_instance_id = 56,
+                revision_number = 56
             )
         else:
             return GetDeploymentResponse(
@@ -57,6 +58,7 @@ class TestGetDeploymentResponse(unittest.TestCase):
                 status = 'active',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
+                revision_number = 56,
         )
         """
 

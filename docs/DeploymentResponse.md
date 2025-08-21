@@ -1,4 +1,4 @@
-# GetCServeV3DeploymentResponse
+# DeploymentResponse
 
 
 ## Properties
@@ -25,23 +25,27 @@ Name | Type | Description | Notes
 **endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**container_port** | **int** |  | 
+**healthcheck** | **str** |  | [optional] 
+**command** | **List[str]** |  | [optional] 
+**command_args** | **List[str]** |  | [optional] 
 
 ## Example
 
 ```python
-from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
+from platform_api_python_client.models.deployment_response import DeploymentResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of GetCServeV3DeploymentResponse from a JSON string
-get_c_serve_v3_deployment_response_instance = GetCServeV3DeploymentResponse.from_json(json)
+# create an instance of DeploymentResponse from a JSON string
+deployment_response_instance = DeploymentResponse.from_json(json)
 # print the JSON string representation of the object
-print(GetCServeV3DeploymentResponse.to_json())
+print(DeploymentResponse.to_json())
 
 # convert the object into a dict
-get_c_serve_v3_deployment_response_dict = get_c_serve_v3_deployment_response_instance.to_dict()
-# create an instance of GetCServeV3DeploymentResponse from a dict
-get_c_serve_v3_deployment_response_from_dict = GetCServeV3DeploymentResponse.from_dict(get_c_serve_v3_deployment_response_dict)
+deployment_response_dict = deployment_response_instance.to_dict()
+# create an instance of DeploymentResponse from a dict
+deployment_response_from_dict = DeploymentResponse.from_dict(deployment_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

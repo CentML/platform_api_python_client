@@ -17,17 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.deployment_response import DeploymentResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateCheckoutSessionResponse(BaseModel):
+class GetDeploymentRevisionResponse(BaseModel):
     """
-    CreateCheckoutSessionResponse
+    GetDeploymentRevisionResponse
     """ # noqa: E501
-    url: StrictStr
-    __properties: ClassVar[List[str]] = ["url"]
+    id: StrictInt
+    revision_number: StrictInt
+    deployment_id: StrictInt
+    deployment_response: DeploymentResponse
+    notes: Optional[StrictStr] = None
+    created_at: datetime
+    updated_at: datetime
+    __properties: ClassVar[List[str]] = ["id", "revision_number", "deployment_id", "deployment_response", "notes", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +55,7 @@ class CreateCheckoutSessionResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateCheckoutSessionResponse from a JSON string"""
+        """Create an instance of GetDeploymentRevisionResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,11 +76,19 @@ class CreateCheckoutSessionResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of deployment_response
+        if self.deployment_response:
+            _dict['deployment_response'] = self.deployment_response.to_dict()
+        # set to None if notes (nullable) is None
+        # and model_fields_set contains the field
+        if self.notes is None and "notes" in self.model_fields_set:
+            _dict['notes'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateCheckoutSessionResponse from a dict"""
+        """Create an instance of GetDeploymentRevisionResponse from a dict"""
         if obj is None:
             return None
 
@@ -80,7 +96,13 @@ class CreateCheckoutSessionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url")
+            "id": obj.get("id"),
+            "revision_number": obj.get("revision_number"),
+            "deployment_id": obj.get("deployment_id"),
+            "deployment_response": DeploymentResponse.from_dict(obj["deployment_response"]) if obj.get("deployment_response") is not None else None,
+            "notes": obj.get("notes"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

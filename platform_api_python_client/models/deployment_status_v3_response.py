@@ -17,34 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.revision_pod_details import RevisionPodDetails
+from platform_api_python_client.models.rollout_status import RolloutStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetComputeDeploymentResponse(BaseModel):
+class DeploymentStatusV3Response(BaseModel):
     """
-    GetComputeDeploymentResponse
+    DeploymentStatusV3Response
     """ # noqa: E501
-    creator_email: StrictStr
-    cluster_id: StrictInt
     id: StrictInt
-    name: StrictStr
-    endpoint_url: StrictStr
-    image_url: Optional[StrictStr] = None
     type: DeploymentType
     status: DeploymentStatus
-    created_at: datetime
-    hardware_instance_id: StrictInt
-    revision_number: StrictInt
-    exposed_port: StrictInt
-    ssh_public_key: Optional[StrictStr] = None
-    ssh_password: Optional[StrictStr] = None
-    env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "exposed_port", "ssh_public_key", "ssh_password", "env_vars"]
+    rollout_status: Optional[RolloutStatus] = None
+    endpoint_url: Optional[StrictStr] = None
+    revision_pod_details_list: Optional[List[RevisionPodDetails]] = None
+    __properties: ClassVar[List[str]] = ["id", "type", "status", "rollout_status", "endpoint_url", "revision_pod_details_list"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -64,7 +56,7 @@ class GetComputeDeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetComputeDeploymentResponse from a JSON string"""
+        """Create an instance of DeploymentStatusV3Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -85,31 +77,33 @@ class GetComputeDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if image_url (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of each item in revision_pod_details_list (list)
+        _items = []
+        if self.revision_pod_details_list:
+            for _item_revision_pod_details_list in self.revision_pod_details_list:
+                if _item_revision_pod_details_list:
+                    _items.append(_item_revision_pod_details_list.to_dict())
+            _dict['revision_pod_details_list'] = _items
+        # set to None if rollout_status (nullable) is None
         # and model_fields_set contains the field
-        if self.image_url is None and "image_url" in self.model_fields_set:
-            _dict['image_url'] = None
+        if self.rollout_status is None and "rollout_status" in self.model_fields_set:
+            _dict['rollout_status'] = None
 
-        # set to None if ssh_public_key (nullable) is None
+        # set to None if endpoint_url (nullable) is None
         # and model_fields_set contains the field
-        if self.ssh_public_key is None and "ssh_public_key" in self.model_fields_set:
-            _dict['ssh_public_key'] = None
+        if self.endpoint_url is None and "endpoint_url" in self.model_fields_set:
+            _dict['endpoint_url'] = None
 
-        # set to None if ssh_password (nullable) is None
+        # set to None if revision_pod_details_list (nullable) is None
         # and model_fields_set contains the field
-        if self.ssh_password is None and "ssh_password" in self.model_fields_set:
-            _dict['ssh_password'] = None
-
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
+        if self.revision_pod_details_list is None and "revision_pod_details_list" in self.model_fields_set:
+            _dict['revision_pod_details_list'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetComputeDeploymentResponse from a dict"""
+        """Create an instance of DeploymentStatusV3Response from a dict"""
         if obj is None:
             return None
 
@@ -117,21 +111,12 @@ class GetComputeDeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "creator_email": obj.get("creator_email"),
-            "cluster_id": obj.get("cluster_id"),
             "id": obj.get("id"),
-            "name": obj.get("name"),
-            "endpoint_url": obj.get("endpoint_url"),
-            "image_url": obj.get("image_url"),
             "type": obj.get("type"),
             "status": obj.get("status"),
-            "created_at": obj.get("created_at"),
-            "hardware_instance_id": obj.get("hardware_instance_id"),
-            "revision_number": obj.get("revision_number"),
-            "exposed_port": obj.get("exposed_port"),
-            "ssh_public_key": obj.get("ssh_public_key"),
-            "ssh_password": obj.get("ssh_password"),
-            "env_vars": obj.get("env_vars")
+            "rollout_status": obj.get("rollout_status"),
+            "endpoint_url": obj.get("endpoint_url"),
+            "revision_pod_details_list": [RevisionPodDetails.from_dict(_item) for _item in obj["revision_pod_details_list"]] if obj.get("revision_pod_details_list") is not None else None
         })
         return _obj
 

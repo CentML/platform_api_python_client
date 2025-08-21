@@ -17,18 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.deployment_status import DeploymentStatus
+from platform_api_python_client.models.rollout_status import RolloutStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateCheckoutRequest(BaseModel):
+class UpdateDeploymentStatusV3Request(BaseModel):
     """
-    CreateCheckoutRequest
+    UpdateDeploymentStatusV3Request
     """ # noqa: E501
-    amount_credits: StrictInt
-    success_url: StrictStr
-    __properties: ClassVar[List[str]] = ["amount_credits", "success_url"]
+    status: Optional[DeploymentStatus] = None
+    rollout_status: Optional[RolloutStatus] = None
+    __properties: ClassVar[List[str]] = ["status", "rollout_status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +50,7 @@ class CreateCheckoutRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateCheckoutRequest from a JSON string"""
+        """Create an instance of UpdateDeploymentStatusV3Request from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +71,21 @@ class CreateCheckoutRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if status (nullable) is None
+        # and model_fields_set contains the field
+        if self.status is None and "status" in self.model_fields_set:
+            _dict['status'] = None
+
+        # set to None if rollout_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.rollout_status is None and "rollout_status" in self.model_fields_set:
+            _dict['rollout_status'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateCheckoutRequest from a dict"""
+        """Create an instance of UpdateDeploymentStatusV3Request from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +93,8 @@ class CreateCheckoutRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "amount_credits": obj.get("amount_credits"),
-            "success_url": obj.get("success_url")
+            "status": obj.get("status"),
+            "rollout_status": obj.get("rollout_status")
         })
         return _obj
 

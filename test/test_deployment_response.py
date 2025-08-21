@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
+from platform_api_python_client.models.deployment_response import DeploymentResponse
 
-class TestGetComputeDeploymentResponse(unittest.TestCase):
-    """GetComputeDeploymentResponse unit test stubs"""
+class TestDeploymentResponse(unittest.TestCase):
+    """DeploymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetComputeDeploymentResponse:
-        """Test GetComputeDeploymentResponse
+    def make_instance(self, include_optional) -> DeploymentResponse:
+        """Test DeploymentResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetComputeDeploymentResponse`
+        # uncomment below to create an instance of `DeploymentResponse`
         """
-        model = GetComputeDeploymentResponse()
+        model = DeploymentResponse()
         if include_optional:
-            return GetComputeDeploymentResponse(
+            return DeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -46,15 +46,28 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                exposed_port = 56,
-                ssh_public_key = '',
-                ssh_password = '',
+                recipe = { },
+                cserve_version = '',
+                min_replicas = 56,
+                max_replicas = 56,
+                initial_replicas = 56,
+                endpoint_certificate_authority = '',
+                endpoint_bearer_token = '',
+                concurrency = 56,
                 env_vars = {
                     'key' : ''
-                    }
+                    },
+                container_port = 56,
+                healthcheck = '',
+                command = [
+                    ''
+                    ],
+                command_args = [
+                    ''
+                    ]
             )
         else:
-            return GetComputeDeploymentResponse(
+            return DeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -65,12 +78,15 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                exposed_port = 56,
+                recipe = { },
+                min_replicas = 56,
+                max_replicas = 56,
+                container_port = 56,
         )
         """
 
-    def testGetComputeDeploymentResponse(self):
-        """Test GetComputeDeploymentResponse"""
+    def testDeploymentResponse(self):
+        """Test DeploymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

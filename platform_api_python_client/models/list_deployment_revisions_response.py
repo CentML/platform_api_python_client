@@ -17,18 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
+from platform_api_python_client.models.get_deployment_revision_response import GetDeploymentRevisionResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class UpdateAutochargePreferencesRequest(BaseModel):
+class ListDeploymentRevisionsResponse(BaseModel):
     """
-    UpdateAutochargePreferencesRequest
+    ListDeploymentRevisionsResponse
     """ # noqa: E501
-    threshold_in_cents: StrictInt
-    amount_in_cents: StrictInt
-    __properties: ClassVar[List[str]] = ["threshold_in_cents", "amount_in_cents"]
+    results: List[GetDeploymentRevisionResponse]
+    __properties: ClassVar[List[str]] = ["results"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class UpdateAutochargePreferencesRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UpdateAutochargePreferencesRequest from a JSON string"""
+        """Create an instance of ListDeploymentRevisionsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,11 +69,18 @@ class UpdateAutochargePreferencesRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
+        _items = []
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UpdateAutochargePreferencesRequest from a dict"""
+        """Create an instance of ListDeploymentRevisionsResponse from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +88,7 @@ class UpdateAutochargePreferencesRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "threshold_in_cents": obj.get("threshold_in_cents"),
-            "amount_in_cents": obj.get("amount_in_cents")
+            "results": [GetDeploymentRevisionResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
         })
         return _obj
 

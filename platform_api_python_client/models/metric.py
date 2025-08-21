@@ -37,6 +37,7 @@ class Metric(str, Enum):
     REQUEST_LATENCY_99_PERCENTILE = 'request_latency_99_percentile'
     TOKENS_PER_SECOND = 'tokens_per_second'
     TIME_TO_FIRST_TOKEN = 'time_to_first_token'
+    PREFIX_CACHE_HIT_RATE = 'prefix_cache_hit_rate'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

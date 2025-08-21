@@ -17,17 +17,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.pod_status import PodStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateSetupCheckoutRequest(BaseModel):
+class PodDetails(BaseModel):
     """
-    CreateSetupCheckoutRequest
+    PodDetails
     """ # noqa: E501
-    success_url: StrictStr
-    __properties: ClassVar[List[str]] = ["success_url"]
+    name: Optional[StrictStr] = None
+    revision_number: Optional[StrictInt] = None
+    status: PodStatus
+    error_message: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["name", "revision_number", "status", "error_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,7 +51,7 @@ class CreateSetupCheckoutRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateSetupCheckoutRequest from a JSON string"""
+        """Create an instance of PodDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,11 +72,26 @@ class CreateSetupCheckoutRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if revision_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.revision_number is None and "revision_number" in self.model_fields_set:
+            _dict['revision_number'] = None
+
+        # set to None if error_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_message is None and "error_message" in self.model_fields_set:
+            _dict['error_message'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateSetupCheckoutRequest from a dict"""
+        """Create an instance of PodDetails from a dict"""
         if obj is None:
             return None
 
@@ -80,7 +99,10 @@ class CreateSetupCheckoutRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "success_url": obj.get("success_url")
+            "name": obj.get("name"),
+            "revision_number": obj.get("revision_number"),
+            "status": obj.get("status"),
+            "error_message": obj.get("error_message")
         })
         return _obj
 

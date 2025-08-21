@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **status** | [**DeploymentStatus**](DeploymentStatus.md) |  | 
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
+**revision_number** | **int** |  | 
 **exposed_port** | **int** |  | 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 

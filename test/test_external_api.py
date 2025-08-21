@@ -33,13 +33,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_create_checkout_payments_checkout_post(self) -> None:
-        """Test case for create_checkout_payments_checkout_post
-
-        Create Checkout
-        """
-        pass
-
     def test_create_compute_deployment_deployments_compute_post(self) -> None:
         """Test case for create_compute_deployment_deployments_compute_post
 
@@ -89,31 +82,10 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_create_setup_payments_setup_checkout_post(self) -> None:
-        """Test case for create_setup_payments_setup_checkout_post
-
-        Create Setup
-        """
-        pass
-
     def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
         """Test case for delete_api_key_credentials_api_key_id_delete
 
         Delete Api Key
-        """
-        pass
-
-    def test_delete_autocharge_preferences_autocharge_preferences_delete(self) -> None:
-        """Test case for delete_autocharge_preferences_autocharge_preferences_delete
-
-        Delete Autocharge Preferences
-        """
-        pass
-
-    def test_delete_payment_method_payments_methods_delete(self) -> None:
-        """Test case for delete_payment_method_payments_methods_delete
-
-        Delete Payment Method
         """
         pass
 
@@ -142,13 +114,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_api_keys_credentials_api_key_get
 
         Get Api Keys
-        """
-        pass
-
-    def test_get_autocharge_preferences_autocharge_preferences_get(self) -> None:
-        """Test case for get_autocharge_preferences_autocharge_preferences_get
-
-        Get Autocharge Preferences
         """
         pass
 
@@ -201,10 +166,38 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get(self) -> None:
+        """Test case for get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get
+
+        Get Deployment Logs V3
+        """
+        pass
+
+    def test_get_deployment_revision_deployments_revisions_deployment_id_revision_number_get(self) -> None:
+        """Test case for get_deployment_revision_deployments_revisions_deployment_id_revision_number_get
+
+        Get Deployment Revision
+        """
+        pass
+
+    def test_get_deployment_revisions_deployments_revisions_deployment_id_get(self) -> None:
+        """Test case for get_deployment_revisions_deployments_revisions_deployment_id_get
+
+        Get Deployment Revisions
+        """
+        pass
+
     def test_get_deployment_status_deployments_status_deployment_id_get(self) -> None:
         """Test case for get_deployment_status_deployments_status_deployment_id_get
 
         Get Deployment Status
+        """
+        pass
+
+    def test_get_deployment_status_v3_deployments_status_v3_deployment_id_get(self) -> None:
+        """Test case for get_deployment_status_v3_deployments_status_v3_deployment_id_get
+
+        Get Deployment Status V3
         """
         pass
 
@@ -236,20 +229,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_payment_method_payments_methods_get(self) -> None:
-        """Test case for get_payment_method_payments_methods_get
-
-        Get Payment Method
-        """
-        pass
-
-    def test_get_payments_payments_get(self) -> None:
-        """Test case for get_payments_payments_get
-
-        Get Payments
-        """
-        pass
-
     def test_get_prebuilt_images_prebuilt_images_get(self) -> None:
         """Test case for get_prebuilt_images_prebuilt_images_get
 
@@ -278,17 +257,17 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(self) -> None:
+        """Test case for rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put
+
+        Rollout Existing Revision
+        """
+        pass
+
     def test_setup_stripe_customer_payments_setup_post(self) -> None:
         """Test case for setup_stripe_customer_payments_setup_post
 
         Setup Stripe Customer
-        """
-        pass
-
-    def test_update_autocharge_preferences_autocharge_preferences_put(self) -> None:
-        """Test case for update_autocharge_preferences_autocharge_preferences_put
-
-        Update Autocharge Preferences
         """
         pass
 
@@ -317,6 +296,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_deployment_status_deployments_status_deployment_id_put
 
         Update Deployment Status
+        """
+        pass
+
+    def test_update_deployment_status_v3_deployments_status_v3_deployment_id_put(self) -> None:
+        """Test case for update_deployment_status_v3_deployments_status_v3_deployment_id_put
+
+        Update Deployment Status V3
         """
         pass
 

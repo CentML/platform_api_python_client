@@ -39,7 +39,8 @@ class GetDeploymentResponse(BaseModel):
     status: DeploymentStatus
     created_at: datetime
     hardware_instance_id: StrictInt
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id"]
+    revision_number: StrictInt
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -106,7 +107,8 @@ class GetDeploymentResponse(BaseModel):
             "type": obj.get("type"),
             "status": obj.get("status"),
             "created_at": obj.get("created_at"),
-            "hardware_instance_id": obj.get("hardware_instance_id")
+            "hardware_instance_id": obj.get("hardware_instance_id"),
+            "revision_number": obj.get("revision_number")
         })
         return _obj
 

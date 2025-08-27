@@ -5,10 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**max_surge** | **int** |  | [optional] 
+**max_unavailable** | **int** |  | [optional] 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
 **image_url** | **str** |  | 
+**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **port** | **int** |  | 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 

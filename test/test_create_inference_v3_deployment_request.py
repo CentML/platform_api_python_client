@@ -35,10 +35,15 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
         model = CreateInferenceV3DeploymentRequest()
         if include_optional:
             return CreateInferenceV3DeploymentRequest(
+                max_surge = 56,
+                max_unavailable = 56,
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',
+                image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
+                    username = '', 
+                    password = '', ),
                 port = 56,
                 min_replicas = 56,
                 max_replicas = 56,

@@ -28,6 +28,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     """
     CreateCServeV3DeploymentRequest
     """ # noqa: E501
+    max_surge: Optional[StrictInt] = None
+    max_unavailable: Optional[StrictInt] = None
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
@@ -41,7 +43,7 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -92,6 +94,16 @@ class CreateCServeV3DeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipe
         if self.recipe:
             _dict['recipe'] = self.recipe.to_dict()
+        # set to None if max_surge (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_surge is None and "max_surge" in self.model_fields_set:
+            _dict['max_surge'] = None
+
+        # set to None if max_unavailable (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_unavailable is None and "max_unavailable" in self.model_fields_set:
+            _dict['max_unavailable'] = None
+
         # set to None if cserve_version (nullable) is None
         # and model_fields_set contains the field
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
@@ -134,6 +146,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "max_surge": obj.get("max_surge"),
+            "max_unavailable": obj.get("max_unavailable"),
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),

@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -51,7 +52,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     command_args: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args"]
+    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "image_pull_secret_credentials"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +94,9 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
+        if self.image_pull_secret_credentials:
+            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -137,6 +142,11 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.command_args is None and "command_args" in self.model_fields_set:
             _dict['command_args'] = None
 
+        # set to None if image_pull_secret_credentials (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
+            _dict['image_pull_secret_credentials'] = None
+
         return _dict
 
     @classmethod
@@ -170,7 +180,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
-            "command_args": obj.get("command_args")
+            "command_args": obj.get("command_args"),
+            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None
         })
         return _obj
 

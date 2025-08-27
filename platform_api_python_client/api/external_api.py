@@ -60,6 +60,7 @@ from platform_api_python_client.models.list_hardware_instance_response import Li
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
 from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
 from platform_api_python_client.models.user_vault_item import UserVaultItem
@@ -9189,6 +9190,7 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         revision_number: StrictInt,
+        rollout_strategy_params: Optional[RolloutStrategyParams] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9210,6 +9212,8 @@ class EXTERNALApi:
         :type deployment_id: int
         :param revision_number: (required)
         :type revision_number: int
+        :param rollout_strategy_params:
+        :type rollout_strategy_params: RolloutStrategyParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9235,6 +9239,7 @@ class EXTERNALApi:
         _param = self._rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put_serialize(
             deployment_id=deployment_id,
             revision_number=revision_number,
+            rollout_strategy_params=rollout_strategy_params,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9261,6 +9266,7 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         revision_number: StrictInt,
+        rollout_strategy_params: Optional[RolloutStrategyParams] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9282,6 +9288,8 @@ class EXTERNALApi:
         :type deployment_id: int
         :param revision_number: (required)
         :type revision_number: int
+        :param rollout_strategy_params:
+        :type rollout_strategy_params: RolloutStrategyParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9307,6 +9315,7 @@ class EXTERNALApi:
         _param = self._rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put_serialize(
             deployment_id=deployment_id,
             revision_number=revision_number,
+            rollout_strategy_params=rollout_strategy_params,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9333,6 +9342,7 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         revision_number: StrictInt,
+        rollout_strategy_params: Optional[RolloutStrategyParams] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9354,6 +9364,8 @@ class EXTERNALApi:
         :type deployment_id: int
         :param revision_number: (required)
         :type revision_number: int
+        :param rollout_strategy_params:
+        :type rollout_strategy_params: RolloutStrategyParams
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9379,6 +9391,7 @@ class EXTERNALApi:
         _param = self._rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put_serialize(
             deployment_id=deployment_id,
             revision_number=revision_number,
+            rollout_strategy_params=rollout_strategy_params,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9400,6 +9413,7 @@ class EXTERNALApi:
         self,
         deployment_id,
         revision_number,
+        rollout_strategy_params,
         _request_auth,
         _content_type,
         _headers,
@@ -9429,6 +9443,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if rollout_strategy_params is not None:
+            _body_params = rollout_strategy_params
 
 
         # set the HTTP header `Accept`
@@ -9439,6 +9455,19 @@ class EXTERNALApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

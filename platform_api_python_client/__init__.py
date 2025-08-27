@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.1.7"
+__version__ = "4.1.8"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -74,6 +74,7 @@ from platform_api_python_client.models.get_inference_v3_deployment_response impo
 from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
 from platform_api_python_client.models.http_validation_error import HTTPValidationError
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
 from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
 from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
@@ -89,6 +90,7 @@ from platform_api_python_client.models.pod_status import PodStatus
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse
 from platform_api_python_client.models.revision_pod_details import RevisionPodDetails
 from platform_api_python_client.models.rollout_status import RolloutStatus
+from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.service_status import ServiceStatus
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request

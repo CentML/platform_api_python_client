@@ -62,7 +62,10 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                     ],
                 command_args = [
                     ''
-                    ]
+                    ],
+                image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
+                    username = '', 
+                    password = '', )
             )
         else:
             return GetInferenceV3DeploymentResponse(

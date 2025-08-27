@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **List[str]** |  | [optional] 
 **command_args** | **List[str]** |  | [optional] 
+**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 
 ## Example
 

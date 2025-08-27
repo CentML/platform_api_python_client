@@ -35,6 +35,8 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
         model = CreateCServeV3DeploymentRequest()
         if include_optional:
             return CreateCServeV3DeploymentRequest(
+                max_surge = 56,
+                max_unavailable = 56,
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,

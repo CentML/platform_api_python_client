@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +28,13 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     """
     CreateInferenceV3DeploymentRequest
     """ # noqa: E501
+    max_surge: Optional[StrictInt] = None
+    max_unavailable: Optional[StrictInt] = None
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     image_url: StrictStr
+    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     port: StrictInt
     min_replicas: StrictInt
     max_replicas: StrictInt
@@ -41,7 +45,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     command: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -89,6 +93,24 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
+        if self.image_pull_secret_credentials:
+            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # set to None if max_surge (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_surge is None and "max_surge" in self.model_fields_set:
+            _dict['max_surge'] = None
+
+        # set to None if max_unavailable (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_unavailable is None and "max_unavailable" in self.model_fields_set:
+            _dict['max_unavailable'] = None
+
+        # set to None if image_pull_secret_credentials (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
+            _dict['image_pull_secret_credentials'] = None
+
         # set to None if initial_replicas (nullable) is None
         # and model_fields_set contains the field
         if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
@@ -136,10 +158,13 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "max_surge": obj.get("max_surge"),
+            "max_unavailable": obj.get("max_unavailable"),
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "image_url": obj.get("image_url"),
+            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),

@@ -2642,7 +2642,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**
-> UpdateDeploymentResponse rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(deployment_id, revision_number)
+> UpdateDeploymentResponse rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(deployment_id, revision_number, rollout_strategy_params=rollout_strategy_params)
 
 Rollout Existing Revision
 
@@ -2654,6 +2654,7 @@ Change the selected revision for a deployment and apply the changes.
 
 ```python
 import platform_api_python_client
+from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -2680,10 +2681,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
     revision_number = 56 # int | 
+    rollout_strategy_params = platform_api_python_client.RolloutStrategyParams() # RolloutStrategyParams |  (optional)
 
     try:
         # Rollout Existing Revision
-        api_response = api_instance.rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(deployment_id, revision_number)
+        api_response = api_instance.rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(deployment_id, revision_number, rollout_strategy_params=rollout_strategy_params)
         print("The response of EXTERNALApi->rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -2699,6 +2701,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
  **revision_number** | **int**|  | 
+ **rollout_strategy_params** | [**RolloutStrategyParams**](RolloutStrategyParams.md)|  | [optional] 
 
 ### Return type
 
@@ -2710,7 +2713,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

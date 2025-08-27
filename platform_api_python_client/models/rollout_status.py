@@ -30,7 +30,7 @@ class RolloutStatus(str, Enum):
     PAUSED = 'Paused'
     HEALTHY = 'Healthy'
     DEGRADED = 'Degraded'
-    UNKNOWN = 'Unknown'
+    MISSING = 'Missing'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

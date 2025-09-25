@@ -52,8 +52,9 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     command_args: Optional[List[StrictStr]] = None
+    original_command: Optional[StrictStr] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "image_pull_secret_credentials"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -142,6 +143,11 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.command_args is None and "command_args" in self.model_fields_set:
             _dict['command_args'] = None
 
+        # set to None if original_command (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_command is None and "original_command" in self.model_fields_set:
+            _dict['original_command'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
@@ -181,6 +187,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "command_args": obj.get("command_args"),
+            "original_command": obj.get("original_command"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None
         })
         return _obj

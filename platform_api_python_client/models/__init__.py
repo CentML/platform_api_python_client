@@ -16,6 +16,7 @@
 # import models into model package
 from platform_api_python_client.models.api_key_request import APIKeyRequest
 from platform_api_python_client.models.api_key_response import APIKeyResponse
+from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe

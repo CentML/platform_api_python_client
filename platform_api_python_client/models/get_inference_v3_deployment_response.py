@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
@@ -54,7 +55,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     command_args: Optional[List[StrictStr]] = None
     original_command: Optional[StrictStr] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials"]
+    backend_protocol: Optional[BackendProtocol] = None
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -188,7 +190,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "command": obj.get("command"),
             "command_args": obj.get("command_args"),
             "original_command": obj.get("original_command"),
-            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None
+            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "backend_protocol": obj.get("backend_protocol")
         })
         return _obj
 

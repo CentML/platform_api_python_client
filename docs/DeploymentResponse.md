@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **command_args** | **List[str]** |  | [optional] 
 **original_command** | **str** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
+**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 
 ## Example
 

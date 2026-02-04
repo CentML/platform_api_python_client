@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.4.0"
+__version__ = "4.5.1"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -33,6 +33,7 @@ from platform_api_python_client.exceptions import ApiException
 # import models into sdk package
 from platform_api_python_client.models.api_key_request import APIKeyRequest
 from platform_api_python_client.models.api_key_response import APIKeyResponse
+from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe

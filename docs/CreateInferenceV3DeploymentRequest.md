@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **command** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
+**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 
 ## Example
 

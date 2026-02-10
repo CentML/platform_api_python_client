@@ -37,7 +37,8 @@ class TestUserVaultItem(unittest.TestCase):
             return UserVaultItem(
                 type = 'env_vars',
                 key = '',
-                value = ''
+                value = '',
+                visibility = 'USER'
             )
         else:
             return UserVaultItem(

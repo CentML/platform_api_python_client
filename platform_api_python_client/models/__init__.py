@@ -82,3 +82,4 @@ from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.validation_error import ValidationError
 from platform_api_python_client.models.validation_error_loc_inner import ValidationErrorLocInner
+from platform_api_python_client.models.vault_scope import VaultScope

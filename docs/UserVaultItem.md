@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | [**UserVaultType**](UserVaultType.md) |  | 
 **key** | **str** |  | 
 **value** | **str** |  | [optional] 
+**visibility** | [**VaultScope**](VaultScope.md) |  | [optional] 
 
 ## Example
 

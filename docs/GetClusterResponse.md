@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
+**cluster_name** | **str** |  | 
 **display_name** | **str** |  | 
 **region** | **str** |  | [optional] 
 

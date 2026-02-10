@@ -36,12 +36,14 @@ class TestGetClusterResponse(unittest.TestCase):
         if include_optional:
             return GetClusterResponse(
                 id = 56,
+                cluster_name = '',
                 display_name = '',
                 region = ''
             )
         else:
             return GetClusterResponse(
                 id = 56,
+                cluster_name = '',
                 display_name = '',
         )
         """

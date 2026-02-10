@@ -3108,7 +3108,7 @@ class EXTERNALApi:
     ) -> ListUserVaultItemsResponse:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items of a specific type for the user.
+        Retrieve all items the user has access to (both USER and ORG scoped).
 
         :param type:
         :type type: UserVaultType
@@ -3180,7 +3180,7 @@ class EXTERNALApi:
     ) -> ApiResponse[ListUserVaultItemsResponse]:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items of a specific type for the user.
+        Retrieve all items the user has access to (both USER and ORG scoped).
 
         :param type:
         :type type: UserVaultType
@@ -3252,7 +3252,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items of a specific type for the user.
+        Retrieve all items the user has access to (both USER and ORG scoped).
 
         :param type:
         :type type: UserVaultType
@@ -12078,7 +12078,7 @@ class EXTERNALApi:
     ) -> object:
         """Update User Vault Item Endpoint
 
-        Update or add multiple items of a specific type for the user.
+        Update or add an item of a specific type for the user.
 
         :param user_vault_item: (required)
         :type user_vault_item: UserVaultItem
@@ -12146,7 +12146,7 @@ class EXTERNALApi:
     ) -> ApiResponse[object]:
         """Update User Vault Item Endpoint
 
-        Update or add multiple items of a specific type for the user.
+        Update or add an item of a specific type for the user.
 
         :param user_vault_item: (required)
         :type user_vault_item: UserVaultItem
@@ -12214,7 +12214,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update User Vault Item Endpoint
 
-        Update or add multiple items of a specific type for the user.
+        Update or add an item of a specific type for the user.
 
         :param user_vault_item: (required)
         :type user_vault_item: UserVaultItem

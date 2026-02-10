@@ -27,9 +27,10 @@ class GetClusterResponse(BaseModel):
     GetClusterResponse
     """ # noqa: E501
     id: StrictInt
+    cluster_name: StrictStr
     display_name: StrictStr
     region: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "display_name", "region"]
+    __properties: ClassVar[List[str]] = ["id", "cluster_name", "display_name", "region"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +89,7 @@ class GetClusterResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "cluster_name": obj.get("cluster_name"),
             "display_name": obj.get("display_name"),
             "region": obj.get("region")
         })

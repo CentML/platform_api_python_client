@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.5.1"
+__version__ = "4.6.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -99,3 +99,4 @@ from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.validation_error import ValidationError
 from platform_api_python_client.models.validation_error_loc_inner import ValidationErrorLocInner
+from platform_api_python_client.models.vault_scope import VaultScope

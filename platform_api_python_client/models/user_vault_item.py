@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.user_vault_type import UserVaultType
+from platform_api_python_client.models.vault_scope import VaultScope
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,8 @@ class UserVaultItem(BaseModel):
     type: UserVaultType
     key: StrictStr
     value: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["type", "key", "value"]
+    visibility: Optional[VaultScope] = None
+    __properties: ClassVar[List[str]] = ["type", "key", "value", "visibility"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,7 +92,8 @@ class UserVaultItem(BaseModel):
         _obj = cls.model_validate({
             "type": obj.get("type"),
             "key": obj.get("key"),
-            "value": obj.get("value")
+            "value": obj.get("value"),
+            "visibility": obj.get("visibility")
         })
         return _obj
 

@@ -913,7 +913,7 @@ Name | Type | Description  | Notes
 
 Get All User Vault Items Endpoint
 
-Retrieve all items of a specific type for the user.
+Retrieve all items the user has access to (both USER and ORG scoped).
 
 ### Example
 
@@ -3441,7 +3441,7 @@ Name | Type | Description  | Notes
 
 Update User Vault Item Endpoint
 
-Update or add multiple items of a specific type for the user.
+Update or add an item of a specific type for the user.
 
 ### Example
 

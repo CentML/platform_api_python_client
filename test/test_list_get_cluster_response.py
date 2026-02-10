@@ -38,6 +38,7 @@ class TestListGetClusterResponse(unittest.TestCase):
                 results = [
                     platform_api_python_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
+                        cluster_name = '', 
                         display_name = '', 
                         region = '', )
                     ]
@@ -47,6 +48,7 @@ class TestListGetClusterResponse(unittest.TestCase):
                 results = [
                     platform_api_python_client.models.get_cluster_response.GetClusterResponse(
                         id = 56, 
+                        cluster_name = '', 
                         display_name = '', 
                         region = '', )
                     ],

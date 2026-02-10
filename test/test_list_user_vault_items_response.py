@@ -39,7 +39,8 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
                     platform_api_python_client.models.user_vault_item.UserVaultItem(
                         type = 'env_vars', 
                         key = '', 
-                        value = '', )
+                        value = '', 
+                        visibility = 'USER', )
                     ]
             )
         else:
@@ -48,7 +49,8 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
                     platform_api_python_client.models.user_vault_item.UserVaultItem(
                         type = 'env_vars', 
                         key = '', 
-                        value = '', )
+                        value = '', 
+                        visibility = 'USER', )
                     ],
         )
         """

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**enable_logging** | **bool** |  | [optional] [default to True]
 
 ## Example
 

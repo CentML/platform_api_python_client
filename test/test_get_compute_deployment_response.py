@@ -51,7 +51,8 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 ssh_password = '',
                 env_vars = {
                     'key' : ''
-                    }
+                    },
+                enable_logging = True
             )
         else:
             return GetComputeDeploymentResponse(

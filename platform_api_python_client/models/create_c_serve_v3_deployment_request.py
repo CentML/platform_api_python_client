@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
@@ -43,7 +43,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars"]
+    enable_logging: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -160,7 +161,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "max_replicas": obj.get("max_replicas"),
             "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
-            "env_vars": obj.get("env_vars")
+            "env_vars": obj.get("env_vars"),
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

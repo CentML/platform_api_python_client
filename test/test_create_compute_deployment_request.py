@@ -40,7 +40,8 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                 hardware_instance_id = 56,
                 image_url = '',
                 enable_jupyter = True,
-                ssh_public_key = ''
+                ssh_public_key = '',
+                enable_logging = True
             )
         else:
             return CreateComputeDeploymentRequest(

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -50,7 +50,8 @@ class GetCServeV3DeploymentResponse(BaseModel):
     endpoint_bearer_token: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars"]
+    enable_logging: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -155,7 +156,8 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "concurrency": obj.get("concurrency"),
-            "env_vars": obj.get("env_vars")
+            "env_vars": obj.get("env_vars"),
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

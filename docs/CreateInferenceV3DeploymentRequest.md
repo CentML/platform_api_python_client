@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**enable_logging** | **bool** |  | [optional] [default to False]
 
 ## Example
 

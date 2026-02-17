@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **image_url** | **str** |  | 
 **enable_jupyter** | **bool** |  | [optional] [default to False]
 **ssh_public_key** | **str** |  | 
+**enable_logging** | **bool** |  | [optional] [default to False]
 
 ## Example
 

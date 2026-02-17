@@ -57,6 +57,7 @@ class TestDeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
+                enable_logging = True,
                 container_port = 56,
                 healthcheck = '',
                 command = [

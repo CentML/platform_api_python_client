@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **original_command** | **str** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**enable_logging** | **bool** |  | [optional] [default to True]
 
 ## Example
 

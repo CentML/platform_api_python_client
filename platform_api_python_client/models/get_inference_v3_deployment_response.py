@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -56,7 +56,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     original_command: Optional[StrictStr] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol"]
+    enable_logging: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -191,7 +192,8 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "command_args": obj.get("command_args"),
             "original_command": obj.get("original_command"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
-            "backend_protocol": obj.get("backend_protocol")
+            "backend_protocol": obj.get("backend_protocol"),
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

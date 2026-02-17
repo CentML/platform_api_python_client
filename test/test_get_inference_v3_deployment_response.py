@@ -67,7 +67,8 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                backend_protocol = 'HTTP'
+                backend_protocol = 'HTTP',
+                enable_logging = True
             )
         else:
             return GetInferenceV3DeploymentResponse(

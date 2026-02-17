@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
@@ -44,7 +44,8 @@ class GetComputeDeploymentResponse(BaseModel):
     ssh_public_key: Optional[StrictStr] = None
     ssh_password: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "exposed_port", "ssh_public_key", "ssh_password", "env_vars"]
+    enable_logging: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "exposed_port", "ssh_public_key", "ssh_password", "env_vars", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,7 +132,8 @@ class GetComputeDeploymentResponse(BaseModel):
             "exposed_port": obj.get("exposed_port"),
             "ssh_public_key": obj.get("ssh_public_key"),
             "ssh_password": obj.get("ssh_password"),
-            "env_vars": obj.get("env_vars")
+            "env_vars": obj.get("env_vars"),
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

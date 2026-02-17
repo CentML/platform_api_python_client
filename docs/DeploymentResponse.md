@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**enable_logging** | **bool** |  | [optional] [default to True]
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
 **command** | **List[str]** |  | [optional] 

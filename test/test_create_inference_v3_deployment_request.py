@@ -56,7 +56,8 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 command = '',
                 endpoint_bearer_token = '',
                 endpoint_certificate_authority = '',
-                backend_protocol = 'HTTP'
+                backend_protocol = 'HTTP',
+                enable_logging = True
             )
         else:
             return CreateInferenceV3DeploymentRequest(

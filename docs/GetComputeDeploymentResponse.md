@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**enable_logging** | **bool** |  | [optional] [default to True]
 
 ## Example
 

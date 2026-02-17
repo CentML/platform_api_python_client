@@ -33,7 +33,8 @@ class CreateComputeDeploymentRequest(BaseModel):
     image_url: StrictStr
     enable_jupyter: Optional[StrictBool] = False
     ssh_public_key: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key"]
+    enable_logging: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -98,7 +99,8 @@ class CreateComputeDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "image_url": obj.get("image_url"),
             "enable_jupyter": obj.get("enable_jupyter") if obj.get("enable_jupyter") is not None else False,
-            "ssh_public_key": obj.get("ssh_public_key")
+            "ssh_public_key": obj.get("ssh_public_key"),
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
         })
         return _obj
 

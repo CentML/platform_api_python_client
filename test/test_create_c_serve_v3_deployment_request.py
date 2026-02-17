@@ -51,7 +51,8 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                 concurrency = 56,
                 env_vars = {
                     'key' : ''
-                    }
+                    },
+                enable_logging = True
             )
         else:
             return CreateCServeV3DeploymentRequest(

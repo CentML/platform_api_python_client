@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.7.0"
+__version__ = "4.8.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi

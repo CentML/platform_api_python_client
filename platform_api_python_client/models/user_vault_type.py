@@ -31,6 +31,7 @@ class UserVaultType(str, Enum):
     BEARER_TOKENS = 'bearer_tokens'
     ACCESS_TOKENS = 'access_tokens'
     CERTIFICATES = 'certificates'
+    REGISTRY_CREDENTIALS = 'registry_credentials'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -257,6 +257,20 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_invite_user_organizations_invite_post(self) -> None:
+        """Test case for invite_user_organizations_invite_post
+
+        Invite User
+        """
+        pass
+
+    def test_list_cluster_capacity_capacity_get(self) -> None:
+        """Test case for list_cluster_capacity_capacity_get
+
+        List Cluster Capacity
+        """
+        pass
+
     def test_rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(self) -> None:
         """Test case for rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put
 

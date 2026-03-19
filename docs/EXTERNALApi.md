@@ -37,6 +37,8 @@ Method | HTTP request | Description
 [**get_rag_deployment_deployments_rag_deployment_id_get**](EXTERNALApi.md#get_rag_deployment_deployments_rag_deployment_id_get) | **GET** /deployments/rag/{deployment_id} | Get Rag Deployment
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
+[**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
+[**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
 [**rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**](EXTERNALApi.md#rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put) | **PUT** /deployments/revisions/{deployment_id}/{revision_number} | Rollout Existing Revision
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
@@ -2622,6 +2624,162 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDeploymentUsageResponse**](GetDeploymentUsageResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **invite_user_organizations_invite_post**
+> object invite_user_organizations_invite_post(invite_user_request)
+
+Invite User
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.invite_user_request import InviteUserRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    invite_user_request = platform_api_python_client.InviteUserRequest() # InviteUserRequest | 
+
+    try:
+        # Invite User
+        api_response = api_instance.invite_user_organizations_invite_post(invite_user_request)
+        print("The response of EXTERNALApi->invite_user_organizations_invite_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->invite_user_organizations_invite_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **invite_user_request** | [**InviteUserRequest**](InviteUserRequest.md)|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_cluster_capacity_capacity_get**
+> ListClusterCapacityResponse list_cluster_capacity_capacity_get(cluster_id=cluster_id)
+
+List Cluster Capacity
+
+Return GPU capacity breakdown for accessible clusters.  When *cluster_id* is supplied only that cluster is included (if accessible).  Clusters whose Prometheus data is unavailable are omitted from the results rather than failing the entire request.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int |  (optional)
+
+    try:
+        # List Cluster Capacity
+        api_response = api_instance.list_cluster_capacity_capacity_get(cluster_id=cluster_id)
+        print("The response of EXTERNALApi->list_cluster_capacity_capacity_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->list_cluster_capacity_capacity_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | [optional] 
+
+### Return type
+
+[**ListClusterCapacityResponse**](ListClusterCapacityResponse.md)
 
 ### Authorization
 

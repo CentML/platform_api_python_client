@@ -46,6 +46,9 @@ class TestDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
+                user_annotations = {
+                    'key' : ''
+                    },
                 recipe = { },
                 cserve_version = '',
                 min_replicas = 56,

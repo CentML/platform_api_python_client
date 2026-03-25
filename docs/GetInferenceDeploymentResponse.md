@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**user_annotations** | **Dict[str, str]** |  | [optional] 
 **container_port** | **int** |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 

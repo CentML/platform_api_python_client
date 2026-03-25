@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
+**user_annotations** | **Dict[str, str]** |  | [optional] 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
 **hf_token** | **str** |  | [optional] 

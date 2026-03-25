@@ -42,6 +42,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
+    user_annotations: Optional[Dict[str, StrictStr]] = None
     container_port: StrictInt
     min_replicas: StrictInt
     max_replicas: StrictInt
@@ -57,7 +58,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +106,11 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
+
+        # set to None if user_annotations (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_annotations is None and "user_annotations" in self.model_fields_set:
+            _dict['user_annotations'] = None
 
         # set to None if initial_replicas (nullable) is None
         # and model_fields_set contains the field
@@ -179,6 +185,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
+            "user_annotations": obj.get("user_annotations"),
             "container_port": obj.get("container_port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),

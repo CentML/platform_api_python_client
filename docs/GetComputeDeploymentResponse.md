@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**user_annotations** | **Dict[str, str]** |  | [optional] 
 **exposed_port** | **int** |  | 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 

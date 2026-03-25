@@ -46,6 +46,9 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
+                user_annotations = {
+                    'key' : ''
+                    },
                 exposed_port = 56,
                 ssh_public_key = '',
                 ssh_password = '',

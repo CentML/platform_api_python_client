@@ -40,7 +40,8 @@ class GetDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number"]
+    user_annotations: Optional[Dict[str, StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +87,11 @@ class GetDeploymentResponse(BaseModel):
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
 
+        # set to None if user_annotations (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_annotations is None and "user_annotations" in self.model_fields_set:
+            _dict['user_annotations'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +114,8 @@ class GetDeploymentResponse(BaseModel):
             "status": obj.get("status"),
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "revision_number": obj.get("revision_number")
+            "revision_number": obj.get("revision_number"),
+            "user_annotations": obj.get("user_annotations")
         })
         return _obj
 

@@ -38,6 +38,9 @@ class TestCreateInferenceDeploymentRequest(unittest.TestCase):
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
+                user_annotations = {
+                    'key' : ''
+                    },
                 image_url = '',
                 port = 56,
                 min_scale = 56,

@@ -30,11 +30,12 @@ class CreateComputeDeploymentRequest(BaseModel):
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
+    user_annotations: Optional[Dict[str, StrictStr]] = None
     image_url: StrictStr
     enable_jupyter: Optional[StrictBool] = False
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "enable_jupyter", "ssh_public_key", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "enable_jupyter", "ssh_public_key", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -82,6 +83,11 @@ class CreateComputeDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_annotations (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_annotations is None and "user_annotations" in self.model_fields_set:
+            _dict['user_annotations'] = None
+
         return _dict
 
     @classmethod
@@ -97,6 +103,7 @@ class CreateComputeDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
+            "user_annotations": obj.get("user_annotations"),
             "image_url": obj.get("image_url"),
             "enable_jupyter": obj.get("enable_jupyter") if obj.get("enable_jupyter") is not None else False,
             "ssh_public_key": obj.get("ssh_public_key"),

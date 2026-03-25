@@ -30,6 +30,7 @@ class CreateInferenceDeploymentRequest(BaseModel):
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
+    user_annotations: Optional[Dict[str, StrictStr]] = None
     image_url: StrictStr
     port: StrictInt
     min_scale: StrictInt
@@ -41,7 +42,7 @@ class CreateInferenceDeploymentRequest(BaseModel):
     command: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "image_url", "port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -89,6 +90,11 @@ class CreateInferenceDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_annotations (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_annotations is None and "user_annotations" in self.model_fields_set:
+            _dict['user_annotations'] = None
+
         # set to None if initial_scale (nullable) is None
         # and model_fields_set contains the field
         if self.initial_scale is None and "initial_scale" in self.model_fields_set:
@@ -139,6 +145,7 @@ class CreateInferenceDeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
+            "user_annotations": obj.get("user_annotations"),
             "image_url": obj.get("image_url"),
             "port": obj.get("port"),
             "min_scale": obj.get("min_scale"),

@@ -34,6 +34,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
+    user_annotations: Optional[Dict[str, StrictStr]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     port: StrictInt
@@ -48,7 +49,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     endpoint_certificate_authority: Optional[StrictStr] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "backend_protocol", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "backend_protocol", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -109,6 +110,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.max_unavailable is None and "max_unavailable" in self.model_fields_set:
             _dict['max_unavailable'] = None
 
+        # set to None if user_annotations (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_annotations is None and "user_annotations" in self.model_fields_set:
+            _dict['user_annotations'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
@@ -166,6 +172,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
+            "user_annotations": obj.get("user_annotations"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "port": obj.get("port"),

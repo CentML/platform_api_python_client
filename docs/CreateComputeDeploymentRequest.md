@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
+**user_annotations** | **Dict[str, str]** |  | [optional] 
 **image_url** | **str** |  | 
 **enable_jupyter** | **bool** |  | [optional] [default to False]
 **ssh_public_key** | **str** |  | 

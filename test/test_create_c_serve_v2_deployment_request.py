@@ -38,6 +38,9 @@ class TestCreateCServeV2DeploymentRequest(unittest.TestCase):
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
+                user_annotations = {
+                    'key' : ''
+                    },
                 recipe = { },
                 cserve_version = '',
                 hf_token = '',

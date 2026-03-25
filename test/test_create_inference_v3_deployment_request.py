@@ -40,6 +40,9 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
+                user_annotations = {
+                    'key' : ''
+                    },
                 image_url = '',
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 

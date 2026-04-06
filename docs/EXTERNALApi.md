@@ -11,7 +11,6 @@ Method | HTTP request | Description
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
 [**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
-[**create_rag_deployment_deployments_rag_post**](EXTERNALApi.md#create_rag_deployment_deployments_rag_post) | **POST** /deployments/rag | Create Rag Deployment
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**download_url_file_url_download_post**](EXTERNALApi.md#download_url_file_url_download_post) | **POST** /file_url/download | Download Url
@@ -34,7 +33,6 @@ Method | HTTP request | Description
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
-[**get_rag_deployment_deployments_rag_deployment_id_get**](EXTERNALApi.md#get_rag_deployment_deployments_rag_deployment_id_get) | **GET** /deployments/rag/{deployment_id} | Get Rag Deployment
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
@@ -48,7 +46,6 @@ Method | HTTP request | Description
 [**update_deployment_status_v3_deployments_status_v3_deployment_id_put**](EXTERNALApi.md#update_deployment_status_v3_deployments_status_v3_deployment_id_put) | **PUT** /deployments/status_v3/{deployment_id} | Update Deployment Status V3
 [**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
 [**update_inference_v3_deployment_deployments_inference_v3_put**](EXTERNALApi.md#update_inference_v3_deployment_deployments_inference_v3_put) | **PUT** /deployments/inference_v3 | Update Inference V3 Deployment
-[**update_rag_deployment_deployments_rag_put**](EXTERNALApi.md#update_rag_deployment_deployments_rag_put) | **PUT** /deployments/rag | Update Rag Deployment
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
 
@@ -580,84 +577,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateOrganizationResponse**](CreateOrganizationResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_rag_deployment_deployments_rag_post**
-> CreateRagDeploymentResponse create_rag_deployment_deployments_rag_post(create_rag_deployment_request)
-
-Create Rag Deployment
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
-from platform_api_python_client.models.create_rag_deployment_response import CreateRagDeploymentResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    create_rag_deployment_request = platform_api_python_client.CreateRagDeploymentRequest() # CreateRagDeploymentRequest | 
-
-    try:
-        # Create Rag Deployment
-        api_response = api_instance.create_rag_deployment_deployments_rag_post(create_rag_deployment_request)
-        print("The response of EXTERNALApi->create_rag_deployment_deployments_rag_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->create_rag_deployment_deployments_rag_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_rag_deployment_request** | [**CreateRagDeploymentRequest**](CreateRagDeploymentRequest.md)|  | 
-
-### Return type
-
-[**CreateRagDeploymentResponse**](CreateRagDeploymentResponse.md)
 
 ### Authorization
 
@@ -2401,83 +2320,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_rag_deployment_deployments_rag_deployment_id_get**
-> GetRagDeploymentResponse get_rag_deployment_deployments_rag_deployment_id_get(deployment_id)
-
-Get Rag Deployment
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    deployment_id = 56 # int | 
-
-    try:
-        # Get Rag Deployment
-        api_response = api_instance.get_rag_deployment_deployments_rag_deployment_id_get(deployment_id)
-        print("The response of EXTERNALApi->get_rag_deployment_deployments_rag_deployment_id_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->get_rag_deployment_deployments_rag_deployment_id_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deployment_id** | **int**|  | 
-
-### Return type
-
-[**GetRagDeploymentResponse**](GetRagDeploymentResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_usage_daily_bills_get**
 > ListDailyBillResponse get_usage_daily_bills_get(start_date, end_date)
 
@@ -3491,86 +3333,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
  **create_inference_v3_deployment_request** | [**CreateInferenceV3DeploymentRequest**](CreateInferenceV3DeploymentRequest.md)|  | 
-
-### Return type
-
-[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_rag_deployment_deployments_rag_put**
-> UpdateDeploymentResponse update_rag_deployment_deployments_rag_put(deployment_id, create_rag_deployment_request)
-
-Update Rag Deployment
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
-from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    deployment_id = 56 # int | 
-    create_rag_deployment_request = platform_api_python_client.CreateRagDeploymentRequest() # CreateRagDeploymentRequest | 
-
-    try:
-        # Update Rag Deployment
-        api_response = api_instance.update_rag_deployment_deployments_rag_put(deployment_id, create_rag_deployment_request)
-        print("The response of EXTERNALApi->update_rag_deployment_deployments_rag_put:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->update_rag_deployment_deployments_rag_put: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deployment_id** | **int**|  | 
- **create_rag_deployment_request** | [**CreateRagDeploymentRequest**](CreateRagDeploymentRequest.md)|  | 
 
 ### Return type
 

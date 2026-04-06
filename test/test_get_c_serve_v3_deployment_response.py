@@ -60,7 +60,8 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                enable_logging = True
+                enable_logging = True,
+                enable_node_model_cache = True
             )
         else:
             return GetCServeV3DeploymentResponse(

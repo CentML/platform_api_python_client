@@ -61,6 +61,7 @@ class TestDeploymentResponse(unittest.TestCase):
                     'key' : ''
                     },
                 enable_logging = True,
+                enable_node_model_cache = True,
                 container_port = 56,
                 healthcheck = '',
                 command = [

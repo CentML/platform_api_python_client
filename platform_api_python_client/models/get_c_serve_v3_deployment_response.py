@@ -52,7 +52,8 @@ class GetCServeV3DeploymentResponse(BaseModel):
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars", "enable_logging"]
+    enable_node_model_cache: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars", "enable_logging", "enable_node_model_cache"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -164,7 +165,8 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "concurrency": obj.get("concurrency"),
             "env_vars": obj.get("env_vars"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
+            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False
         })
         return _obj
 

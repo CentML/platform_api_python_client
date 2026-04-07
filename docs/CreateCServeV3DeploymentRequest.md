@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **concurrency** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
+**enable_node_model_cache** | **bool** |  | [optional] [default to False]
 
 ## Example
 

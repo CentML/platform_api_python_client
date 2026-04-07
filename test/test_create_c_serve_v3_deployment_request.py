@@ -55,7 +55,8 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
-                enable_logging = True
+                enable_logging = True,
+                enable_node_model_cache = True
             )
         else:
             return CreateCServeV3DeploymentRequest(

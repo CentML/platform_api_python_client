@@ -45,7 +45,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     concurrency: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars", "enable_logging"]
+    enable_node_model_cache: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars", "enable_logging", "enable_node_model_cache"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -169,7 +170,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
             "env_vars": obj.get("env_vars"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
+            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False
         })
         return _obj
 

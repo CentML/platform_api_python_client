@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.8.4"
+__version__ = "4.9.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -49,8 +49,6 @@ from platform_api_python_client.models.create_inference_deployment_response impo
 from platform_api_python_client.models.create_inference_v3_deployment_request import CreateInferenceV3DeploymentRequest
 from platform_api_python_client.models.create_organization_request import CreateOrganizationRequest
 from platform_api_python_client.models.create_organization_response import CreateOrganizationResponse
-from platform_api_python_client.models.create_rag_deployment_request import CreateRagDeploymentRequest
-from platform_api_python_client.models.create_rag_deployment_response import CreateRagDeploymentResponse
 from platform_api_python_client.models.create_url_request import CreateUrlRequest
 from platform_api_python_client.models.create_url_response import CreateUrlResponse
 from platform_api_python_client.models.credits_response import CreditsResponse
@@ -73,7 +71,6 @@ from platform_api_python_client.models.get_deployment_revision_response import G
 from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 from platform_api_python_client.models.get_inference_deployment_response import GetInferenceDeploymentResponse
 from platform_api_python_client.models.get_inference_v3_deployment_response import GetInferenceV3DeploymentResponse
-from platform_api_python_client.models.get_rag_deployment_response import GetRagDeploymentResponse
 from platform_api_python_client.models.gpu_type_capacity import GpuTypeCapacity
 from platform_api_python_client.models.http_validation_error import HTTPValidationError
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse

@@ -37,6 +37,7 @@ class ServiceStatus(str, Enum):
     IMAGEPULLBACKOFF = 'ImagePullBackOff'
     PROGRESSDEADLINEEXCEEDED = 'ProgressDeadlineExceeded'
     NOTREADY = 'NotReady'
+    SCALEDTOZERO = 'ScaledToZero'
     UNKNOWN = 'Unknown'
 
     @classmethod

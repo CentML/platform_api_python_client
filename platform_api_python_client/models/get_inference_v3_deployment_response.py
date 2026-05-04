@@ -48,6 +48,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     max_replicas: StrictInt
     initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = 1800
     healthcheck: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
@@ -58,7 +59,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -191,6 +192,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "max_replicas": obj.get("max_replicas"),
             "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period") if obj.get("cooldown_period") is not None else 1800,
             "healthcheck": obj.get("healthcheck"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),

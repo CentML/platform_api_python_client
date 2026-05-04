@@ -57,6 +57,7 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 endpoint_certificate_authority = '',
                 endpoint_bearer_token = '',
                 concurrency = 56,
+                cooldown_period = 56,
                 env_vars = {
                     'key' : ''
                     },

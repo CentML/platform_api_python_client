@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **max_replicas** | **int** |  | 
 **initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]

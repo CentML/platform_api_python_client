@@ -42,14 +42,16 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     max_replicas: StrictInt
     initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
+    hf_token: Optional[StrictStr] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "backend_protocol", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -130,6 +132,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.concurrency is None and "concurrency" in self.model_fields_set:
             _dict['concurrency'] = None
 
+        # set to None if cooldown_period (nullable) is None
+        # and model_fields_set contains the field
+        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
+            _dict['cooldown_period'] = None
+
         # set to None if healthcheck (nullable) is None
         # and model_fields_set contains the field
         if self.healthcheck is None and "healthcheck" in self.model_fields_set:
@@ -154,6 +161,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
             _dict['endpoint_certificate_authority'] = None
+
+        # set to None if hf_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token is None and "hf_token" in self.model_fields_set:
+            _dict['hf_token'] = None
 
         return _dict
 
@@ -180,11 +192,13 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "max_replicas": obj.get("max_replicas"),
             "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period"),
             "healthcheck": obj.get("healthcheck"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "hf_token": obj.get("hf_token"),
             "backend_protocol": obj.get("backend_protocol"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
         })

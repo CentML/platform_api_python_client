@@ -52,6 +52,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 max_replicas = 56,
                 initial_replicas = 56,
                 concurrency = 56,
+                cooldown_period = 56,
                 healthcheck = '',
                 env_vars = {
                     'key' : ''
@@ -59,6 +60,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 command = '',
                 endpoint_bearer_token = '',
                 endpoint_certificate_authority = '',
+                hf_token = '',
                 backend_protocol = 'HTTP',
                 enable_logging = True
             )

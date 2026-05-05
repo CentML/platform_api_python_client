@@ -18,11 +18,13 @@ Name | Type | Description | Notes
 **max_replicas** | **int** |  | 
 **initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
+**hf_token** | **str** |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to False]
 

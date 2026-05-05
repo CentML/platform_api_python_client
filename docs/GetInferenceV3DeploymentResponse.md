@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **max_replicas** | **int** |  | 
 **initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] [default to 1800]
 **healthcheck** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 

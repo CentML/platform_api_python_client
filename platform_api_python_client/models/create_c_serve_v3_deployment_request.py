@@ -43,10 +43,11 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     max_replicas: StrictInt
     initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "env_vars", "enable_logging", "enable_node_model_cache"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -142,6 +143,11 @@ class CreateCServeV3DeploymentRequest(BaseModel):
         if self.concurrency is None and "concurrency" in self.model_fields_set:
             _dict['concurrency'] = None
 
+        # set to None if cooldown_period (nullable) is None
+        # and model_fields_set contains the field
+        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
+            _dict['cooldown_period'] = None
+
         return _dict
 
     @classmethod
@@ -169,6 +175,7 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "max_replicas": obj.get("max_replicas"),
             "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period"),
             "env_vars": obj.get("env_vars"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False

@@ -50,10 +50,11 @@ class GetCServeV3DeploymentResponse(BaseModel):
     endpoint_certificate_authority: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = 1800
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "env_vars", "enable_logging", "enable_node_model_cache"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -164,6 +165,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period") if obj.get("cooldown_period") is not None else 1800,
             "env_vars": obj.get("env_vars"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False

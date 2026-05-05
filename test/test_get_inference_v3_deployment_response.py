@@ -54,6 +54,7 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                 max_replicas = 56,
                 initial_replicas = 56,
                 concurrency = 56,
+                cooldown_period = 56,
                 healthcheck = '',
                 endpoint_certificate_authority = '',
                 endpoint_bearer_token = '',

@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
+**session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
 **command** | **List[str]** |  | [optional] 

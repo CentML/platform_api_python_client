@@ -62,7 +62,8 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 endpoint_certificate_authority = '',
                 hf_token = '',
                 backend_protocol = 'HTTP',
-                enable_logging = True
+                enable_logging = True,
+                session_affinity = True
             )
         else:
             return CreateInferenceV3DeploymentRequest(

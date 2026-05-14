@@ -57,7 +57,8 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 enable_logging = True,
-                enable_node_model_cache = True
+                enable_node_model_cache = True,
+                session_affinity = True
             )
         else:
             return CreateCServeV3DeploymentRequest(

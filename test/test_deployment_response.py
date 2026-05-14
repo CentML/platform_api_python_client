@@ -63,6 +63,7 @@ class TestDeploymentResponse(unittest.TestCase):
                     },
                 enable_logging = True,
                 enable_node_model_cache = True,
+                session_affinity = True,
                 container_port = 56,
                 healthcheck = '',
                 command = [

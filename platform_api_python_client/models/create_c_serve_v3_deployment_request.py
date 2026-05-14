@@ -47,7 +47,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache"]
+    session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -178,7 +179,8 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "cooldown_period": obj.get("cooldown_period"),
             "env_vars": obj.get("env_vars"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
-            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False
+            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
+            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False
         })
         return _obj
 

@@ -68,6 +68,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_job_deployment_deployments_job_post(self) -> None:
+        """Test case for create_job_deployment_deployments_job_post
+
+        Create Job Deployment
+        """
+        pass
+
     def test_create_new_organization_organizations_post(self) -> None:
         """Test case for create_new_organization_organizations_post
 
@@ -219,6 +226,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_inference_v3_deployment_deployments_inference_v3_deployment_id_get
 
         Get Inference V3 Deployment
+        """
+        pass
+
+    def test_get_job_deployment_deployments_job_deployment_id_get(self) -> None:
+        """Test case for get_job_deployment_deployments_job_deployment_id_get
+
+        Get Job Deployment
         """
         pass
 

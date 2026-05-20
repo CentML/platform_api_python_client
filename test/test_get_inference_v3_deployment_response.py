@@ -73,7 +73,11 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                     password = '', ),
                 backend_protocol = 'HTTP',
                 enable_logging = True,
-                session_affinity = True
+                session_affinity = True,
+                config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
+                    filename = '20', 
+                    mount_path = '0', 
+                    content = '0', )
             )
         else:
             return GetInferenceV3DeploymentResponse(

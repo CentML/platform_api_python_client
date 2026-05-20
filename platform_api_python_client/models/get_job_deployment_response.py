@@ -18,19 +18,17 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from platform_api_python_client.models.backend_protocol import BackendProtocol
-from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetInferenceV3DeploymentResponse(BaseModel):
+class GetJobDeploymentResponse(BaseModel):
     """
-    GetInferenceV3DeploymentResponse
+    GetJobDeploymentResponse
     """ # noqa: E501
     creator_email: StrictStr
     cluster_id: StrictInt
@@ -44,25 +42,14 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
-    container_port: StrictInt
-    min_replicas: StrictInt
-    max_replicas: StrictInt
-    initial_replicas: Optional[StrictInt] = None
-    concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[StrictInt] = 1800
-    healthcheck: Optional[StrictStr] = None
-    endpoint_certificate_authority: Optional[StrictStr] = None
-    endpoint_bearer_token: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
-    command_args: Optional[List[StrictStr]] = None
-    original_command: Optional[StrictStr] = None
+    args: Optional[List[StrictStr]] = None
+    completions: Optional[StrictInt] = 1
+    parallelism: Optional[StrictInt] = 1
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = True
-    session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    config_file: Optional[ConfigFileMount] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "container_port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging", "session_affinity", "config_file"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "completions", "parallelism", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,7 +69,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetInferenceV3DeploymentResponse from a JSON string"""
+        """Create an instance of GetJobDeploymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -106,9 +93,6 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:
             _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of config_file
-        if self.config_file:
-            _dict['config_file'] = self.config_file.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -118,31 +102,6 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
-
-        # set to None if initial_replicas (nullable) is None
-        # and model_fields_set contains the field
-        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
-            _dict['initial_replicas'] = None
-
-        # set to None if concurrency (nullable) is None
-        # and model_fields_set contains the field
-        if self.concurrency is None and "concurrency" in self.model_fields_set:
-            _dict['concurrency'] = None
-
-        # set to None if healthcheck (nullable) is None
-        # and model_fields_set contains the field
-        if self.healthcheck is None and "healthcheck" in self.model_fields_set:
-            _dict['healthcheck'] = None
-
-        # set to None if endpoint_certificate_authority (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
-            _dict['endpoint_certificate_authority'] = None
-
-        # set to None if endpoint_bearer_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
-            _dict['endpoint_bearer_token'] = None
 
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
@@ -154,31 +113,21 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
-        # set to None if command_args (nullable) is None
+        # set to None if args (nullable) is None
         # and model_fields_set contains the field
-        if self.command_args is None and "command_args" in self.model_fields_set:
-            _dict['command_args'] = None
-
-        # set to None if original_command (nullable) is None
-        # and model_fields_set contains the field
-        if self.original_command is None and "original_command" in self.model_fields_set:
-            _dict['original_command'] = None
+        if self.args is None and "args" in self.model_fields_set:
+            _dict['args'] = None
 
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
-        # set to None if config_file (nullable) is None
-        # and model_fields_set contains the field
-        if self.config_file is None and "config_file" in self.model_fields_set:
-            _dict['config_file'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetInferenceV3DeploymentResponse from a dict"""
+        """Create an instance of GetJobDeploymentResponse from a dict"""
         if obj is None:
             return None
 
@@ -198,24 +147,13 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
-            "container_port": obj.get("container_port"),
-            "min_replicas": obj.get("min_replicas"),
-            "max_replicas": obj.get("max_replicas"),
-            "initial_replicas": obj.get("initial_replicas"),
-            "concurrency": obj.get("concurrency"),
-            "cooldown_period": obj.get("cooldown_period") if obj.get("cooldown_period") is not None else 1800,
-            "healthcheck": obj.get("healthcheck"),
-            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
-            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
-            "command_args": obj.get("command_args"),
-            "original_command": obj.get("original_command"),
+            "args": obj.get("args"),
+            "completions": obj.get("completions") if obj.get("completions") is not None else 1,
+            "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
-            "backend_protocol": obj.get("backend_protocol"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
-            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,
-            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

@@ -38,6 +38,7 @@ class DeploymentType(str, Enum):
     CSERVE_V3 = 'cserve_v3'
     DEPLOYMENT = 'deployment'
     RAG = 'rag'
+    JOB = 'job'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

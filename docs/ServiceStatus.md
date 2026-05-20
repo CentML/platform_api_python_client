@@ -13,6 +13,8 @@
 
 * `INITIALIZING` (value: `'Initializing'`)
 
+* `CLEANEDUP` (value: `'CleanedUp'`)
+
 * `ERROR` (value: `'Error'`)
 
 * `CREATECONTAINERCONFIGERROR` (value: `'CreateContainerConfigError'`)
@@ -24,6 +26,10 @@
 * `PROGRESSDEADLINEEXCEEDED` (value: `'ProgressDeadlineExceeded'`)
 
 * `NOTREADY` (value: `'NotReady'`)
+
+* `COMPLETED` (value: `'Completed'`)
+
+* `FAILED` (value: `'Failed'`)
 
 * `SCALEDTOZERO` (value: `'ScaledToZero'`)
 

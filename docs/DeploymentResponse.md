@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **original_command** | **str** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 
 ## Example
 

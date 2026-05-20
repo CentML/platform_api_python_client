@@ -36,6 +36,8 @@ class PodStatus(str, Enum):
     PROGRESSDEADLINEEXCEEDED = 'ProgressDeadlineExceeded'
     RUNNING = 'Running'
     NOTREADY = 'NotReady'
+    COMPLETED = 'Completed'
+    FAILED = 'Failed'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

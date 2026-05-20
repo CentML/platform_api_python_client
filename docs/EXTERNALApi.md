@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Create Cserve V3 Deployment
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
 [**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
+[**create_job_deployment_deployments_job_post**](EXTERNALApi.md#create_job_deployment_deployments_job_post) | **POST** /deployments/job | Create Job Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
 [**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
@@ -32,6 +33,7 @@ Method | HTTP request | Description
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
+[**get_job_deployment_deployments_job_deployment_id_get**](EXTERNALApi.md#get_job_deployment_deployments_job_deployment_id_get) | **GET** /deployments/job/{deployment_id} | Get Job Deployment
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
@@ -499,6 +501,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateInferenceDeploymentResponse**](CreateInferenceDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_job_deployment_deployments_job_post**
+> CreateJobDeploymentResponse create_job_deployment_deployments_job_post(create_job_deployment_request)
+
+Create Job Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_job_deployment_request import CreateJobDeploymentRequest
+from platform_api_python_client.models.create_job_deployment_response import CreateJobDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_job_deployment_request = platform_api_python_client.CreateJobDeploymentRequest() # CreateJobDeploymentRequest | 
+
+    try:
+        # Create Job Deployment
+        api_response = api_instance.create_job_deployment_deployments_job_post(create_job_deployment_request)
+        print("The response of EXTERNALApi->create_job_deployment_deployments_job_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_job_deployment_deployments_job_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_job_deployment_request** | [**CreateJobDeploymentRequest**](CreateJobDeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateJobDeploymentResponse**](CreateJobDeploymentResponse.md)
 
 ### Authorization
 
@@ -2223,6 +2303,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetInferenceV3DeploymentResponse**](GetInferenceV3DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_job_deployment_deployments_job_deployment_id_get**
+> GetJobDeploymentResponse get_job_deployment_deployments_job_deployment_id_get(deployment_id)
+
+Get Job Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_job_deployment_response import GetJobDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Job Deployment
+        api_response = api_instance.get_job_deployment_deployments_job_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_job_deployment_deployments_job_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_job_deployment_deployments_job_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetJobDeploymentResponse**](GetJobDeploymentResponse.md)
 
 ### Authorization
 

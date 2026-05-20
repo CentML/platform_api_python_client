@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
+from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
@@ -52,7 +53,8 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "session_affinity"]
+    config_file: Optional[ConfigFileMount] = None
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "session_affinity", "config_file"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -103,6 +105,9 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:
             _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of config_file
+        if self.config_file:
+            _dict['config_file'] = self.config_file.to_dict()
         # set to None if max_surge (nullable) is None
         # and model_fields_set contains the field
         if self.max_surge is None and "max_surge" in self.model_fields_set:
@@ -168,6 +173,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.hf_token is None and "hf_token" in self.model_fields_set:
             _dict['hf_token'] = None
 
+        # set to None if config_file (nullable) is None
+        # and model_fields_set contains the field
+        if self.config_file is None and "config_file" in self.model_fields_set:
+            _dict['config_file'] = None
+
         return _dict
 
     @classmethod
@@ -202,7 +212,8 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "hf_token": obj.get("hf_token"),
             "backend_protocol": obj.get("backend_protocol"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
-            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False
+            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,
+            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
         })
         return _obj
 

@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.deployment_response import DeploymentResponse
+from platform_api_python_client.models.get_job_deployment_response import GetJobDeploymentResponse
 
-class TestDeploymentResponse(unittest.TestCase):
-    """DeploymentResponse unit test stubs"""
+class TestGetJobDeploymentResponse(unittest.TestCase):
+    """GetJobDeploymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,16 +25,16 @@ class TestDeploymentResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DeploymentResponse:
-        """Test DeploymentResponse
+    def make_instance(self, include_optional) -> GetJobDeploymentResponse:
+        """Test GetJobDeploymentResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `DeploymentResponse`
+        # uncomment below to create an instance of `GetJobDeploymentResponse`
         """
-        model = DeploymentResponse()
+        model = GetJobDeploymentResponse()
         if include_optional:
-            return DeploymentResponse(
+            return GetJobDeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -49,41 +49,24 @@ class TestDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
-                recipe = { },
-                cserve_version = '',
-                min_replicas = 56,
-                max_replicas = 56,
-                initial_replicas = 56,
-                endpoint_certificate_authority = '',
-                endpoint_bearer_token = '',
-                concurrency = 56,
-                cooldown_period = 56,
                 env_vars = {
                     'key' : ''
                     },
-                enable_logging = True,
-                enable_node_model_cache = True,
-                session_affinity = True,
-                container_port = 56,
-                healthcheck = '',
                 command = [
                     ''
                     ],
-                command_args = [
+                args = [
                     ''
                     ],
-                original_command = '',
+                completions = 56,
+                parallelism = 56,
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                backend_protocol = 'HTTP',
-                config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
-                    filename = '20', 
-                    mount_path = '0', 
-                    content = '0', )
+                enable_logging = True
             )
         else:
-            return DeploymentResponse(
+            return GetJobDeploymentResponse(
                 creator_email = '',
                 cluster_id = 56,
                 id = 56,
@@ -94,15 +77,11 @@ class TestDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                recipe = { },
-                min_replicas = 56,
-                max_replicas = 56,
-                container_port = 56,
         )
         """
 
-    def testDeploymentResponse(self):
-        """Test DeploymentResponse"""
+    def testGetJobDeploymentResponse(self):
+        """Test GetJobDeploymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

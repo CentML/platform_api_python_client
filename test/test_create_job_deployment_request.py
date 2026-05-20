@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_inference_v3_deployment_request import CreateInferenceV3DeploymentRequest
+from platform_api_python_client.models.create_job_deployment_request import CreateJobDeploymentRequest
 
-class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
-    """CreateInferenceV3DeploymentRequest unit test stubs"""
+class TestCreateJobDeploymentRequest(unittest.TestCase):
+    """CreateJobDeploymentRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,18 +25,16 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateInferenceV3DeploymentRequest:
-        """Test CreateInferenceV3DeploymentRequest
+    def make_instance(self, include_optional) -> CreateJobDeploymentRequest:
+        """Test CreateJobDeploymentRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateInferenceV3DeploymentRequest`
+        # uncomment below to create an instance of `CreateJobDeploymentRequest`
         """
-        model = CreateInferenceV3DeploymentRequest()
+        model = CreateJobDeploymentRequest()
         if include_optional:
-            return CreateInferenceV3DeploymentRequest(
-                max_surge = 56,
-                max_unavailable = 56,
+            return CreateJobDeploymentRequest(
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
@@ -47,42 +45,25 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                port = 56,
-                min_replicas = 56,
-                max_replicas = 56,
-                initial_replicas = 56,
-                concurrency = 56,
-                cooldown_period = 56,
-                healthcheck = '',
                 env_vars = {
                     'key' : ''
                     },
                 command = '',
-                endpoint_bearer_token = '',
-                endpoint_certificate_authority = '',
-                hf_token = '',
-                backend_protocol = 'HTTP',
-                enable_logging = True,
-                session_affinity = True,
-                config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
-                    filename = '20', 
-                    mount_path = '0', 
-                    content = '0', )
+                completions = 56,
+                parallelism = 56,
+                enable_logging = True
             )
         else:
-            return CreateInferenceV3DeploymentRequest(
+            return CreateJobDeploymentRequest(
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',
-                port = 56,
-                min_replicas = 56,
-                max_replicas = 56,
         )
         """
 
-    def testCreateInferenceV3DeploymentRequest(self):
-        """Test CreateInferenceV3DeploymentRequest"""
+    def testCreateJobDeploymentRequest(self):
+        """Test CreateJobDeploymentRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

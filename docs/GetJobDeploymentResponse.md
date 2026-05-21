@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **List[str]** |  | [optional] 
 **args** | **List[str]** |  | [optional] 
+**original_command** | **str** |  | [optional] 
 **completions** | **int** |  | [optional] [default to 1]
 **parallelism** | **int** |  | [optional] [default to 1]
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 

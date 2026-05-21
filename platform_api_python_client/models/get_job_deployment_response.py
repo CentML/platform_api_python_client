@@ -45,11 +45,12 @@ class GetJobDeploymentResponse(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     args: Optional[List[StrictStr]] = None
+    original_command: Optional[StrictStr] = None
     completions: Optional[StrictInt] = 1
     parallelism: Optional[StrictInt] = 1
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "completions", "parallelism", "image_pull_secret_credentials", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -118,6 +119,11 @@ class GetJobDeploymentResponse(BaseModel):
         if self.args is None and "args" in self.model_fields_set:
             _dict['args'] = None
 
+        # set to None if original_command (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_command is None and "original_command" in self.model_fields_set:
+            _dict['original_command'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
@@ -150,6 +156,7 @@ class GetJobDeploymentResponse(BaseModel):
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "args": obj.get("args"),
+            "original_command": obj.get("original_command"),
             "completions": obj.get("completions") if obj.get("completions") is not None else 1,
             "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,

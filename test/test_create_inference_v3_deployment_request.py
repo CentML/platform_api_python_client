@@ -63,6 +63,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 hf_token = '',
                 backend_protocol = 'HTTP',
                 enable_logging = True,
+                enable_node_model_cache = True,
                 session_affinity = True,
                 config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
                     filename = '20', 

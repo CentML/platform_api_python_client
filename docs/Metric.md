@@ -9,6 +9,8 @@
 
 * `GPU` (value: `'gpu'`)
 
+* `GPU_MEMORY` (value: `'gpu_memory'`)
+
 * `HTTP_REQUESTS` (value: `'http_requests'`)
 
 * `HTTP_REQUESTS_BY_STATUS` (value: `'http_requests_by_status'`)

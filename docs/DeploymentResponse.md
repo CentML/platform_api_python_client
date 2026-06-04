@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
+**metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 
 ## Example
 

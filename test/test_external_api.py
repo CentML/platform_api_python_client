@@ -26,13 +26,6 @@ class TestEXTERNALApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_create_api_key_credentials_api_key_post(self) -> None:
-        """Test case for create_api_key_credentials_api_key_post
-
-        Create Api Key
-        """
-        pass
-
     def test_create_compute_deployment_deployments_compute_post(self) -> None:
         """Test case for create_compute_deployment_deployments_compute_post
 
@@ -82,13 +75,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_delete_api_key_credentials_api_key_id_delete(self) -> None:
-        """Test case for delete_api_key_credentials_api_key_id_delete
-
-        Delete Api Key
-        """
-        pass
-
     def test_delete_user_vault_item_endpoint_user_vault_delete(self) -> None:
         """Test case for delete_user_vault_item_endpoint_user_vault_delete
 
@@ -107,13 +93,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_all_user_vault_items_endpoint_user_vault_get
 
         Get All User Vault Items Endpoint
-        """
-        pass
-
-    def test_get_api_keys_credentials_api_key_get(self) -> None:
-        """Test case for get_api_keys_credentials_api_key_get
-
-        Get Api Keys
         """
         pass
 

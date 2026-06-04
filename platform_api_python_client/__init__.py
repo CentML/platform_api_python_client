@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.10.0"
+__version__ = "4.13.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -31,8 +31,6 @@ from platform_api_python_client.exceptions import ApiAttributeError
 from platform_api_python_client.exceptions import ApiException
 
 # import models into sdk package
-from platform_api_python_client.models.api_key_request import APIKeyRequest
-from platform_api_python_client.models.api_key_response import APIKeyResponse
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
 from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
@@ -80,7 +78,6 @@ from platform_api_python_client.models.http_validation_error import HTTPValidati
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from platform_api_python_client.models.invite_user_request import InviteUserRequest
-from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
 from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
 from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse
 from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
@@ -91,6 +88,7 @@ from platform_api_python_client.models.list_hardware_instance_response import Li
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
 from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.metrics_config import MetricsConfig
 from platform_api_python_client.models.pod_details import PodDetails
 from platform_api_python_client.models.pod_status import PodStatus
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse

@@ -51,6 +51,8 @@ class TestCreateJobDeploymentRequest(unittest.TestCase):
                 command = '',
                 completions = 56,
                 parallelism = 56,
+                backoff_limit = 56,
+                active_deadline_seconds = 56,
                 enable_logging = True
             )
         else:

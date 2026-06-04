@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **original_command** | **str** |  | [optional] 
 **completions** | **int** |  | [optional] [default to 1]
 **parallelism** | **int** |  | [optional] [default to 1]
+**backoff_limit** | **int** |  | [optional] [default to 3]
+**active_deadline_seconds** | **int** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 

@@ -4,7 +4,6 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_api_key_credentials_api_key_post**](EXTERNALApi.md#create_api_key_credentials_api_key_post) | **POST** /credentials/api-key | Create Api Key
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
 [**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
 [**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Create Cserve V3 Deployment
@@ -12,11 +11,9 @@ Method | HTTP request | Description
 [**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
 [**create_job_deployment_deployments_job_post**](EXTERNALApi.md#create_job_deployment_deployments_job_post) | **POST** /deployments/job | Create Job Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
-[**delete_api_key_credentials_api_key_id_delete**](EXTERNALApi.md#delete_api_key_credentials_api_key_id_delete) | **DELETE** /credentials/api-key/{id} | Delete Api Key
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**download_url_file_url_download_post**](EXTERNALApi.md#download_url_file_url_download_post) | **POST** /file_url/download | Download Url
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
-[**get_api_keys_credentials_api_key_get**](EXTERNALApi.md#get_api_keys_credentials_api_key_get) | **GET** /credentials/api-key | Get Api Keys
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
@@ -51,84 +48,6 @@ Method | HTTP request | Description
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
 
-
-# **create_api_key_credentials_api_key_post**
-> APIKeyResponse create_api_key_credentials_api_key_post(api_key_request)
-
-Create Api Key
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.api_key_request import APIKeyRequest
-from platform_api_python_client.models.api_key_response import APIKeyResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    api_key_request = platform_api_python_client.APIKeyRequest() # APIKeyRequest | 
-
-    try:
-        # Create Api Key
-        api_response = api_instance.create_api_key_credentials_api_key_post(api_key_request)
-        print("The response of EXTERNALApi->create_api_key_credentials_api_key_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->create_api_key_credentials_api_key_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **api_key_request** | [**APIKeyRequest**](APIKeyRequest.md)|  | 
-
-### Return type
-
-[**APIKeyResponse**](APIKeyResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_compute_deployment_deployments_compute_post**
 > CreateComputeDeploymentResponse create_compute_deployment_deployments_compute_post(create_compute_deployment_request)
@@ -676,82 +595,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_api_key_credentials_api_key_id_delete**
-> object delete_api_key_credentials_api_key_id_delete(id)
-
-Delete Api Key
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    id = 'id_example' # str | 
-
-    try:
-        # Delete Api Key
-        api_response = api_instance.delete_api_key_credentials_api_key_id_delete(id)
-        print("The response of EXTERNALApi->delete_api_key_credentials_api_key_id_delete:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->delete_api_key_credentials_api_key_id_delete: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **str**|  | 
-
-### Return type
-
-**object**
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **delete_user_vault_item_endpoint_user_vault_delete**
 > object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
 
@@ -988,78 +831,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_api_keys_credentials_api_key_get**
-> ListAPIKeyResponse get_api_keys_credentials_api_key_get()
-
-Get Api Keys
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.list_api_key_response import ListAPIKeyResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-
-    try:
-        # Get Api Keys
-        api_response = api_instance.get_api_keys_credentials_api_key_get()
-        print("The response of EXTERNALApi->get_api_keys_credentials_api_key_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->get_api_keys_credentials_api_key_get: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**ListAPIKeyResponse**](ListAPIKeyResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

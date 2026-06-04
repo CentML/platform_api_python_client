@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.api_key_request import APIKeyRequest
+from platform_api_python_client.models.metrics_config import MetricsConfig
 
-class TestAPIKeyRequest(unittest.TestCase):
-    """APIKeyRequest unit test stubs"""
+class TestMetricsConfig(unittest.TestCase):
+    """MetricsConfig unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,28 @@ class TestAPIKeyRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> APIKeyRequest:
-        """Test APIKeyRequest
+    def make_instance(self, include_optional) -> MetricsConfig:
+        """Test MetricsConfig
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `APIKeyRequest`
+        # uncomment below to create an instance of `MetricsConfig`
         """
-        model = APIKeyRequest()
+        model = MetricsConfig()
         if include_optional:
-            return APIKeyRequest(
-                name = ''
+            return MetricsConfig(
+                port = 1.0,
+                path = '/W(,j>6>eow3jCO&}nl`:&~'
             )
         else:
-            return APIKeyRequest(
-                name = '',
+            return MetricsConfig(
+                port = 1.0,
+                path = '/W(,j>6>eow3jCO&}nl`:&~',
         )
         """
 
-    def testAPIKeyRequest(self):
-        """Test APIKeyRequest"""
+    def testMetricsConfig(self):
+        """Test MetricsConfig"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

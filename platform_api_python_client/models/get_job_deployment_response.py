@@ -48,9 +48,11 @@ class GetJobDeploymentResponse(BaseModel):
     original_command: Optional[StrictStr] = None
     completions: Optional[StrictInt] = 1
     parallelism: Optional[StrictInt] = 1
+    backoff_limit: Optional[StrictInt] = 3
+    active_deadline_seconds: Optional[StrictInt] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "image_pull_secret_credentials", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,6 +126,11 @@ class GetJobDeploymentResponse(BaseModel):
         if self.original_command is None and "original_command" in self.model_fields_set:
             _dict['original_command'] = None
 
+        # set to None if active_deadline_seconds (nullable) is None
+        # and model_fields_set contains the field
+        if self.active_deadline_seconds is None and "active_deadline_seconds" in self.model_fields_set:
+            _dict['active_deadline_seconds'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
@@ -159,6 +166,8 @@ class GetJobDeploymentResponse(BaseModel):
             "original_command": obj.get("original_command"),
             "completions": obj.get("completions") if obj.get("completions") is not None else 1,
             "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,
+            "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
+            "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })

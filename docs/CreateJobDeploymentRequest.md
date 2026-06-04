@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **command** | **str** |  | [optional] 
 **completions** | **int** |  | [optional] [default to 1]
 **parallelism** | **int** |  | [optional] [default to 1]
+**backoff_limit** | **int** |  | [optional] [default to 3]
+**active_deadline_seconds** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 
 ## Example

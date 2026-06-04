@@ -61,6 +61,8 @@ class TestGetJobDeploymentResponse(unittest.TestCase):
                 original_command = '',
                 completions = 56,
                 parallelism = 56,
+                backoff_limit = 56,
+                active_deadline_seconds = 56,
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),

@@ -29,6 +29,7 @@ class Metric(str, Enum):
     CPU = 'cpu'
     MEMORY = 'memory'
     GPU = 'gpu'
+    GPU_MEMORY = 'gpu_memory'
     HTTP_REQUESTS = 'http_requests'
     HTTP_REQUESTS_BY_STATUS = 'http_requests_by_status'
     ERROR_CODE = 'error_code'

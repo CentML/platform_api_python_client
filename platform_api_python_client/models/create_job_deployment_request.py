@@ -38,8 +38,10 @@ class CreateJobDeploymentRequest(BaseModel):
     command: Optional[StrictStr] = None
     completions: Optional[StrictInt] = 1
     parallelism: Optional[StrictInt] = 1
+    backoff_limit: Optional[StrictInt] = 3
+    active_deadline_seconds: Optional[StrictInt] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -110,6 +112,11 @@ class CreateJobDeploymentRequest(BaseModel):
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
+        # set to None if active_deadline_seconds (nullable) is None
+        # and model_fields_set contains the field
+        if self.active_deadline_seconds is None and "active_deadline_seconds" in self.model_fields_set:
+            _dict['active_deadline_seconds'] = None
+
         return _dict
 
     @classmethod
@@ -132,6 +139,8 @@ class CreateJobDeploymentRequest(BaseModel):
             "command": obj.get("command"),
             "completions": obj.get("completions") if obj.get("completions") is not None else 1,
             "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,
+            "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
+            "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj

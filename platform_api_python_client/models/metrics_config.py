@@ -17,20 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class APIKeyResponse(BaseModel):
+class MetricsConfig(BaseModel):
     """
-    APIKeyResponse
+    User-application Prometheus metrics endpoint.  Atomic: both `port` and `path` must be supplied together. To omit the endpoint entirely, leave the parent request's `metrics` field unset — `CreateInferenceV3DeploymentRequest.fill_metrics_defaults` substitutes a `container_port` + `/metrics` bundle before persistence.
     """ # noqa: E501
-    name: StrictStr
-    id: StrictStr
-    created_at: datetime
-    __properties: ClassVar[List[str]] = ["name", "id", "created_at"]
+    port: Annotated[int, Field(le=65535, strict=True, ge=1)]
+    path: Annotated[str, Field(strict=True)]
+    __properties: ClassVar[List[str]] = ["port", "path"]
+
+    @field_validator('path')
+    def path_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^\/[^\s?#]*$", value):
+            raise ValueError(r"must validate the regular expression /^\/[^\s?#]*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +56,7 @@ class APIKeyResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of APIKeyResponse from a JSON string"""
+        """Create an instance of MetricsConfig from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +81,7 @@ class APIKeyResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of APIKeyResponse from a dict"""
+        """Create an instance of MetricsConfig from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +89,8 @@ class APIKeyResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "id": obj.get("id"),
-            "created_at": obj.get("created_at")
+            "port": obj.get("port"),
+            "path": obj.get("path")
         })
         return _obj
 

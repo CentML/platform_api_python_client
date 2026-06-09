@@ -47,6 +47,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_hardware_instance_hardware_instances_post(self) -> None:
+        """Test case for create_hardware_instance_hardware_instances_post
+
+        Create Hardware Instance
+        """
+        pass
+
     def test_create_inference_deployment_deployments_inference_post(self) -> None:
         """Test case for create_inference_deployment_deployments_inference_post
 
@@ -72,6 +79,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for create_new_organization_organizations_post
 
         Create New Organization
+        """
+        pass
+
+    def test_delete_hardware_instance_hardware_instances_hardware_instance_id_delete(self) -> None:
+        """Test case for delete_hardware_instance_hardware_instances_hardware_instance_id_delete
+
+        Delete Hardware Instance
         """
         pass
 

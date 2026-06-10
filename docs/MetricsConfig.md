@@ -1,6 +1,6 @@
 # MetricsConfig
 
-User-application Prometheus metrics endpoint.  Atomic: both `port` and `path` must be supplied together. To omit the endpoint entirely, leave the parent request's `metrics` field unset — `CreateInferenceV3DeploymentRequest.fill_metrics_defaults` substitutes a `container_port` + `/metrics` bundle before persistence.
+User-application Prometheus metrics endpoint.  Atomic: both `port` and `path` must be supplied together. To omit the endpoint entirely, leave the parent request's `metrics` field unset — it persists as null and the Helm chart applies the defaults (`container_port` + `/metrics`) at render time. The API never synthesizes these values.
 
 ## Properties
 

@@ -39,7 +39,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    port: StrictInt
+    port: Annotated[int, Field(le=65535, strict=True, ge=1)]
     min_replicas: StrictInt
     max_replicas: StrictInt
     initial_replicas: Optional[StrictInt] = None

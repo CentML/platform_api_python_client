@@ -47,7 +47,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                port = 56,
+                port = 1.0,
                 min_replicas = 56,
                 max_replicas = 56,
                 initial_replicas = 56,
@@ -79,7 +79,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 cluster_id = 56,
                 hardware_instance_id = 56,
                 image_url = '',
-                port = 56,
+                port = 1.0,
                 min_replicas = 56,
                 max_replicas = 56,
         )

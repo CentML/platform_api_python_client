@@ -17,26 +17,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class MetricsConfig(BaseModel):
+class CreateHardwareInstanceRequest(BaseModel):
     """
-    User-application Prometheus metrics endpoint.  Atomic: both `port` and `path` must be supplied together. To omit the endpoint entirely, leave the parent request's `metrics` field unset — it persists as null and the Helm chart applies the defaults (`container_port` + `/metrics`) at render time. The API never synthesizes these values.
+    CreateHardwareInstanceRequest
     """ # noqa: E501
-    port: Annotated[int, Field(le=65535, strict=True, ge=1)]
-    path: Annotated[str, Field(strict=True)]
-    __properties: ClassVar[List[str]] = ["port", "path"]
-
-    @field_validator('path')
-    def path_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^\/[^\s?#]*$", value):
-            raise ValueError(r"must validate the regular expression /^\/[^\s?#]*$/")
-        return value
+    cluster_id: StrictInt
+    name: StrictStr
+    gpu_type: StrictStr
+    num_gpu: StrictInt
+    cpu: StrictInt
+    memory: StrictInt
+    accelerator_resource_key: StrictStr
+    node_affinity_labels: Dict[str, StrictStr]
+    accelerator_memory: StrictInt
+    __properties: ClassVar[List[str]] = ["cluster_id", "name", "gpu_type", "num_gpu", "cpu", "memory", "accelerator_resource_key", "node_affinity_labels", "accelerator_memory"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -56,7 +55,7 @@ class MetricsConfig(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of MetricsConfig from a JSON string"""
+        """Create an instance of CreateHardwareInstanceRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,7 +80,7 @@ class MetricsConfig(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of MetricsConfig from a dict"""
+        """Create an instance of CreateHardwareInstanceRequest from a dict"""
         if obj is None:
             return None
 
@@ -89,8 +88,15 @@ class MetricsConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "port": obj.get("port"),
-            "path": obj.get("path")
+            "cluster_id": obj.get("cluster_id"),
+            "name": obj.get("name"),
+            "gpu_type": obj.get("gpu_type"),
+            "num_gpu": obj.get("num_gpu"),
+            "cpu": obj.get("cpu"),
+            "memory": obj.get("memory"),
+            "accelerator_resource_key": obj.get("accelerator_resource_key"),
+            "node_affinity_labels": obj.get("node_affinity_labels"),
+            "accelerator_memory": obj.get("accelerator_memory")
         })
         return _obj
 

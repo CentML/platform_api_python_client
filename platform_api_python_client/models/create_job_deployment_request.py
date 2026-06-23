@@ -32,6 +32,7 @@ class CreateJobDeploymentRequest(BaseModel):
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    chart_revision: Optional[StrictStr] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
@@ -41,7 +42,7 @@ class CreateJobDeploymentRequest(BaseModel):
     backoff_limit: Optional[StrictInt] = 3
     active_deadline_seconds: Optional[StrictInt] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -133,6 +134,7 @@ class CreateJobDeploymentRequest(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
+            "chart_revision": obj.get("chart_revision"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "env_vars": obj.get("env_vars"),

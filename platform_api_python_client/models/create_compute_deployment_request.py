@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,11 +32,12 @@ class CreateComputeDeploymentRequest(BaseModel):
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    chart_revision: Optional[StrictStr] = None
     image_url: StrictStr
-    enable_jupyter: Optional[StrictBool] = False
+    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "enable_jupyter", "ssh_public_key", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -83,10 +85,18 @@ class CreateComputeDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
+        if self.image_pull_secret_credentials:
+            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
+
+        # set to None if image_pull_secret_credentials (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
+            _dict['image_pull_secret_credentials'] = None
 
         return _dict
 
@@ -104,8 +114,9 @@ class CreateComputeDeploymentRequest(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
+            "chart_revision": obj.get("chart_revision"),
             "image_url": obj.get("image_url"),
-            "enable_jupyter": obj.get("enable_jupyter") if obj.get("enable_jupyter") is not None else False,
+            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "ssh_public_key": obj.get("ssh_public_key"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
         })

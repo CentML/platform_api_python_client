@@ -37,6 +37,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     cluster_id: StrictInt
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    chart_revision: Optional[StrictStr] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     port: Annotated[int, Field(le=65535, strict=True, ge=1)]
@@ -57,7 +58,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -207,6 +208,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
+            "chart_revision": obj.get("chart_revision"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "port": obj.get("port"),

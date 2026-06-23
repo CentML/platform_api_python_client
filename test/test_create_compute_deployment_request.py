@@ -41,8 +41,11 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                chart_revision = '',
                 image_url = '',
-                enable_jupyter = True,
+                image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
+                    username = '', 
+                    password = '', ),
                 ssh_public_key = '',
                 enable_logging = True
             )

@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 
 ## Example

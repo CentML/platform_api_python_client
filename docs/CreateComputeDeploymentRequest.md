@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**chart_revision** | **str** |  | [optional] 
 **image_url** | **str** |  | 
-**enable_jupyter** | **bool** |  | [optional] [default to False]
+**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **ssh_public_key** | **str** |  | 
 **enable_logging** | **bool** |  | [optional] [default to False]
 

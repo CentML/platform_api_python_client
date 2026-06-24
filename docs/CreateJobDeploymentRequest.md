@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **int** |  | 
 **hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**chart_revision** | **str** |  | [optional] 
 **image_url** | **str** |  | 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 

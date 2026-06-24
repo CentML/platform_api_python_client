@@ -43,6 +43,7 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                chart_revision = '',
                 recipe = { },
                 cserve_version = '',
                 hf_token = '',

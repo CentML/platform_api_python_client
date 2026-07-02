@@ -12,9 +12,12 @@ Method | HTTP request | Description
 [**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
 [**create_job_deployment_deployments_job_post**](EXTERNALApi.md#create_job_deployment_deployments_job_post) | **POST** /deployments/job | Create Job Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
+[**create_service_account_service_accounts_post**](EXTERNALApi.md#create_service_account_service_accounts_post) | **POST** /service-accounts | Create Service Account
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
+[**delete_service_account_service_accounts_workos_id_delete**](EXTERNALApi.md#delete_service_account_service_accounts_workos_id_delete) | **DELETE** /service-accounts/{workos_id} | Delete Service Account
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**download_url_file_url_download_post**](EXTERNALApi.md#download_url_file_url_download_post) | **POST** /file_url/download | Download Url
+[**generate_service_account_secret_service_accounts_workos_id_secrets_post**](EXTERNALApi.md#generate_service_account_secret_service_accounts_workos_id_secrets_post) | **POST** /service-accounts/{workos_id}/secrets | Generate Service Account Secret
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
@@ -38,6 +41,7 @@ Method | HTTP request | Description
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
 [**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
+[**list_service_accounts_service_accounts_get**](EXTERNALApi.md#list_service_accounts_service_accounts_get) | **GET** /service-accounts | List Service Accounts
 [**rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**](EXTERNALApi.md#rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put) | **PUT** /deployments/revisions/{deployment_id}/{revision_number} | Rollout Existing Revision
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
@@ -47,6 +51,7 @@ Method | HTTP request | Description
 [**update_deployment_status_v3_deployments_status_v3_deployment_id_put**](EXTERNALApi.md#update_deployment_status_v3_deployments_status_v3_deployment_id_put) | **PUT** /deployments/status_v3/{deployment_id} | Update Deployment Status V3
 [**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
 [**update_inference_v3_deployment_deployments_inference_v3_put**](EXTERNALApi.md#update_inference_v3_deployment_deployments_inference_v3_put) | **PUT** /deployments/inference_v3 | Update Inference V3 Deployment
+[**update_service_account_service_accounts_workos_id_put**](EXTERNALApi.md#update_service_account_service_accounts_workos_id_put) | **PUT** /service-accounts/{workos_id} | Update Service Account
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 [**upload_url_file_url_upload_post**](EXTERNALApi.md#upload_url_file_url_upload_post) | **POST** /file_url/upload | Upload Url
 
@@ -192,17 +197,15 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_cserve_v3_deployment_deployments_cserve_v3_post**
-> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
+> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post()
 
 Create Cserve V3 Deployment
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
 from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -213,25 +216,15 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
 
     try:
         # Create Cserve V3 Deployment
-        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
+        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post()
         print("The response of EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -242,10 +235,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -253,11 +243,11 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -265,7 +255,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -643,6 +632,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_service_account_service_accounts_post**
+> CreateServiceAccountResponse create_service_account_service_accounts_post(create_service_account_request)
+
+Create Service Account
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_service_account_request import CreateServiceAccountRequest
+from platform_api_python_client.models.create_service_account_response import CreateServiceAccountResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_service_account_request = platform_api_python_client.CreateServiceAccountRequest() # CreateServiceAccountRequest | 
+
+    try:
+        # Create Service Account
+        api_response = api_instance.create_service_account_service_accounts_post(create_service_account_request)
+        print("The response of EXTERNALApi->create_service_account_service_accounts_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_service_account_service_accounts_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_service_account_request** | [**CreateServiceAccountRequest**](CreateServiceAccountRequest.md)|  | 
+
+### Return type
+
+[**CreateServiceAccountResponse**](CreateServiceAccountResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_hardware_instance_hardware_instances_hardware_instance_id_delete**
 > delete_hardware_instance_hardware_instances_hardware_instance_id_delete(hardware_instance_id)
 
@@ -694,6 +761,80 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hardware_instance_id** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_service_account_service_accounts_workos_id_delete**
+> delete_service_account_service_accounts_workos_id_delete(workos_id)
+
+Delete Service Account
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    workos_id = 'workos_id_example' # str | 
+
+    try:
+        # Delete Service Account
+        api_instance.delete_service_account_service_accounts_workos_id_delete(workos_id)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_service_account_service_accounts_workos_id_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workos_id** | **str**|  | 
 
 ### Return type
 
@@ -863,6 +1004,83 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **generate_service_account_secret_service_accounts_workos_id_secrets_post**
+> GenerateServiceAccountSecretResponse generate_service_account_secret_service_accounts_workos_id_secrets_post(workos_id)
+
+Generate Service Account Secret
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    workos_id = 'workos_id_example' # str | 
+
+    try:
+        # Generate Service Account Secret
+        api_response = api_instance.generate_service_account_secret_service_accounts_workos_id_secrets_post(workos_id)
+        print("The response of EXTERNALApi->generate_service_account_secret_service_accounts_workos_id_secrets_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->generate_service_account_secret_service_accounts_workos_id_secrets_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workos_id** | **str**|  | 
+
+### Return type
+
+[**GenerateServiceAccountSecretResponse**](GenerateServiceAccountSecretResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2691,6 +2909,78 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_service_accounts_service_accounts_get**
+> ListServiceAccountsResponse list_service_accounts_service_accounts_get()
+
+List Service Accounts
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_service_accounts_response import ListServiceAccountsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # List Service Accounts
+        api_response = api_instance.list_service_accounts_service_accounts_get()
+        print("The response of EXTERNALApi->list_service_accounts_service_accounts_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->list_service_accounts_service_accounts_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListServiceAccountsResponse**](ListServiceAccountsResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**
 > UpdateDeploymentResponse rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(deployment_id, revision_number, rollout_strategy_params=rollout_strategy_params)
 
@@ -3351,6 +3641,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_service_account_service_accounts_workos_id_put**
+> ServiceAccountResponse update_service_account_service_accounts_workos_id_put(workos_id, update_service_account_request)
+
+Update Service Account
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.service_account_response import ServiceAccountResponse
+from platform_api_python_client.models.update_service_account_request import UpdateServiceAccountRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    workos_id = 'workos_id_example' # str | 
+    update_service_account_request = platform_api_python_client.UpdateServiceAccountRequest() # UpdateServiceAccountRequest | 
+
+    try:
+        # Update Service Account
+        api_response = api_instance.update_service_account_service_accounts_workos_id_put(workos_id, update_service_account_request)
+        print("The response of EXTERNALApi->update_service_account_service_accounts_workos_id_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_service_account_service_accounts_workos_id_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workos_id** | **str**|  | 
+ **update_service_account_request** | [**UpdateServiceAccountRequest**](UpdateServiceAccountRequest.md)|  | 
+
+### Return type
+
+[**ServiceAccountResponse**](ServiceAccountResponse.md)
 
 ### Authorization
 

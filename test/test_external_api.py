@@ -82,10 +82,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_service_account_service_accounts_post(self) -> None:
+        """Test case for create_service_account_service_accounts_post
+
+        Create Service Account
+        """
+        pass
+
     def test_delete_hardware_instance_hardware_instances_hardware_instance_id_delete(self) -> None:
         """Test case for delete_hardware_instance_hardware_instances_hardware_instance_id_delete
 
         Delete Hardware Instance
+        """
+        pass
+
+    def test_delete_service_account_service_accounts_workos_id_delete(self) -> None:
+        """Test case for delete_service_account_service_accounts_workos_id_delete
+
+        Delete Service Account
         """
         pass
 
@@ -100,6 +114,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for download_url_file_url_download_post
 
         Download Url
+        """
+        pass
+
+    def test_generate_service_account_secret_service_accounts_workos_id_secrets_post(self) -> None:
+        """Test case for generate_service_account_secret_service_accounts_workos_id_secrets_post
+
+        Generate Service Account Secret
         """
         pass
 
@@ -264,6 +285,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_list_service_accounts_service_accounts_get(self) -> None:
+        """Test case for list_service_accounts_service_accounts_get
+
+        List Service Accounts
+        """
+        pass
+
     def test_rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put(self) -> None:
         """Test case for rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put
 
@@ -324,6 +352,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_inference_v3_deployment_deployments_inference_v3_put
 
         Update Inference V3 Deployment
+        """
+        pass
+
+    def test_update_service_account_service_accounts_workos_id_put(self) -> None:
+        """Test case for update_service_account_service_accounts_workos_id_put
+
+        Update Service Account
         """
         pass
 

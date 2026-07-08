@@ -26,6 +26,13 @@ class TestEXTERNALApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_create_cluster_clusters_post(self) -> None:
+        """Test case for create_cluster_clusters_post
+
+        Create Cluster
+        """
+        pass
+
     def test_create_compute_deployment_deployments_compute_post(self) -> None:
         """Test case for create_compute_deployment_deployments_compute_post
 
@@ -89,6 +96,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_cluster_clusters_cluster_id_delete(self) -> None:
+        """Test case for delete_cluster_clusters_cluster_id_delete
+
+        Delete Cluster
+        """
+        pass
+
     def test_delete_hardware_instance_hardware_instances_hardware_instance_id_delete(self) -> None:
         """Test case for delete_hardware_instance_hardware_instances_hardware_instance_id_delete
 
@@ -107,13 +121,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for delete_user_vault_item_endpoint_user_vault_delete
 
         Delete User Vault Item Endpoint
-        """
-        pass
-
-    def test_download_url_file_url_download_post(self) -> None:
-        """Test case for download_url_file_url_download_post
-
-        Download Url
         """
         pass
 
@@ -306,6 +313,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_update_cluster_clusters_cluster_id_put(self) -> None:
+        """Test case for update_cluster_clusters_cluster_id_put
+
+        Update Cluster
+        """
+        pass
+
     def test_update_compute_deployment_deployments_compute_put(self) -> None:
         """Test case for update_compute_deployment_deployments_compute_put
 
@@ -366,13 +380,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_user_vault_item_endpoint_user_vault_put
 
         Update User Vault Item Endpoint
-        """
-        pass
-
-    def test_upload_url_file_url_upload_post(self) -> None:
-        """Test case for upload_url_file_url_upload_post
-
-        Upload Url
         """
         pass
 

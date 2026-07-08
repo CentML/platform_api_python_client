@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
@@ -52,7 +53,8 @@ class GetJobDeploymentResponse(BaseModel):
     active_deadline_seconds: Optional[StrictInt] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging"]
+    config_file: Optional[ConfigFileMount] = None
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +98,9 @@ class GetJobDeploymentResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:
             _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of config_file
+        if self.config_file:
+            _dict['config_file'] = self.config_file.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -136,6 +141,11 @@ class GetJobDeploymentResponse(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
+        # set to None if config_file (nullable) is None
+        # and model_fields_set contains the field
+        if self.config_file is None and "config_file" in self.model_fields_set:
+            _dict['config_file'] = None
+
         return _dict
 
     @classmethod
@@ -169,7 +179,8 @@ class GetJobDeploymentResponse(BaseModel):
             "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
             "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
+            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
         })
         return _obj
 

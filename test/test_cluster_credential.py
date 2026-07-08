@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_url_response import CreateUrlResponse
+from platform_api_python_client.models.cluster_credential import ClusterCredential
 
-class TestCreateUrlResponse(unittest.TestCase):
-    """CreateUrlResponse unit test stubs"""
+class TestClusterCredential(unittest.TestCase):
+    """ClusterCredential unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,30 @@ class TestCreateUrlResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateUrlResponse:
-        """Test CreateUrlResponse
+    def make_instance(self, include_optional) -> ClusterCredential:
+        """Test ClusterCredential
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateUrlResponse`
+        # uncomment below to create an instance of `ClusterCredential`
         """
-        model = CreateUrlResponse()
+        model = ClusterCredential()
         if include_optional:
-            return CreateUrlResponse(
-                url = '0'
+            return ClusterCredential(
+                server = '',
+                bearer_token = '',
+                ca_cert = ''
             )
         else:
-            return CreateUrlResponse(
-                url = '0',
+            return ClusterCredential(
+                server = '',
+                bearer_token = '',
+                ca_cert = '',
         )
         """
 
-    def testCreateUrlResponse(self):
-        """Test CreateUrlResponse"""
+    def testClusterCredential(self):
+        """Test ClusterCredential"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

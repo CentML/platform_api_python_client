@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **backoff_limit** | **int** |  | [optional] [default to 3]
 **active_deadline_seconds** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
+**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 
 ## Example
 

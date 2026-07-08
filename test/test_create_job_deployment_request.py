@@ -54,7 +54,11 @@ class TestCreateJobDeploymentRequest(unittest.TestCase):
                 parallelism = 56,
                 backoff_limit = 56,
                 active_deadline_seconds = 56,
-                enable_logging = True
+                enable_logging = True,
+                config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
+                    filename = '20', 
+                    mount_path = '0', 
+                    content = '0', )
             )
         else:
             return CreateJobDeploymentRequest(

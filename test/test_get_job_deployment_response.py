@@ -66,7 +66,11 @@ class TestGetJobDeploymentResponse(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                enable_logging = True
+                enable_logging = True,
+                config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
+                    filename = '20', 
+                    mount_path = '0', 
+                    content = '0', )
             )
         else:
             return GetJobDeploymentResponse(

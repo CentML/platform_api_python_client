@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.create_url_request import CreateUrlRequest
+from platform_api_python_client.models.opentelemetry_collector import OpentelemetryCollector
 
-class TestCreateUrlRequest(unittest.TestCase):
-    """CreateUrlRequest unit test stubs"""
+class TestOpentelemetryCollector(unittest.TestCase):
+    """OpentelemetryCollector unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,26 @@ class TestCreateUrlRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateUrlRequest:
-        """Test CreateUrlRequest
+    def make_instance(self, include_optional) -> OpentelemetryCollector:
+        """Test OpentelemetryCollector
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CreateUrlRequest`
+        # uncomment below to create an instance of `OpentelemetryCollector`
         """
-        model = CreateUrlRequest()
+        model = OpentelemetryCollector()
         if include_optional:
-            return CreateUrlRequest(
-                filename = '',
-                extension = ''
+            return OpentelemetryCollector(
+                enabled = True,
+                values = platform_api_python_client.models.opentelemetry_collector_overrides.OpentelemetryCollectorOverrides()
             )
         else:
-            return CreateUrlRequest(
-                filename = '',
-                extension = '',
+            return OpentelemetryCollector(
         )
         """
 
-    def testCreateUrlRequest(self):
-        """Test CreateUrlRequest"""
+    def testOpentelemetryCollector(self):
+        """Test OpentelemetryCollector"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

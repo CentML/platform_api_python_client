@@ -17,18 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
+from pydantic import BaseModel, ConfigDict, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateUrlResponse(BaseModel):
+class Keda(BaseModel):
     """
-    CreateUrlResponse
+    Keda
     """ # noqa: E501
-    url: Annotated[str, Field(min_length=1, strict=True)]
-    __properties: ClassVar[List[str]] = ["url"]
+    enabled: Optional[StrictBool] = True
+    values: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["enabled", "values"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class CreateUrlResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateUrlResponse from a JSON string"""
+        """Create an instance of Keda from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +73,7 @@ class CreateUrlResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateUrlResponse from a dict"""
+        """Create an instance of Keda from a dict"""
         if obj is None:
             return None
 
@@ -81,7 +81,8 @@ class CreateUrlResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "url": obj.get("url")
+            "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
+            "values": obj.get("values")
         })
         return _obj
 

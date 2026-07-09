@@ -14,12 +14,15 @@ Method | HTTP request | Description
 [**create_job_deployment_deployments_job_post**](EXTERNALApi.md#create_job_deployment_deployments_job_post) | **POST** /deployments/job | Create Job Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
 [**create_service_account_service_accounts_post**](EXTERNALApi.md#create_service_account_service_accounts_post) | **POST** /service-accounts | Create Service Account
+[**create_volume_endpoint_volumes_post**](EXTERNALApi.md#create_volume_endpoint_volumes_post) | **POST** /volumes | Create Volume Endpoint
 [**delete_cluster_clusters_cluster_id_delete**](EXTERNALApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
 [**delete_service_account_service_accounts_workos_id_delete**](EXTERNALApi.md#delete_service_account_service_accounts_workos_id_delete) | **DELETE** /service-accounts/{workos_id} | Delete Service Account
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
+[**delete_volume_endpoint_volumes_volume_id_delete**](EXTERNALApi.md#delete_volume_endpoint_volumes_volume_id_delete) | **DELETE** /volumes/{volume_id} | Delete Volume Endpoint
 [**generate_service_account_secret_service_accounts_workos_id_secrets_post**](EXTERNALApi.md#generate_service_account_secret_service_accounts_workos_id_secrets_post) | **POST** /service-accounts/{workos_id}/secrets | Generate Service Account Secret
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
+[**get_all_volumes_endpoint_volumes_get**](EXTERNALApi.md#get_all_volumes_endpoint_volumes_get) | **GET** /volumes | Get All Volumes Endpoint
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
@@ -40,6 +43,7 @@ Method | HTTP request | Description
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
+[**get_volume_endpoint_volumes_volume_id_get**](EXTERNALApi.md#get_volume_endpoint_volumes_volume_id_get) | **GET** /volumes/{volume_id} | Get Volume Endpoint
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
 [**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
 [**list_service_accounts_service_accounts_get**](EXTERNALApi.md#list_service_accounts_service_accounts_get) | **GET** /service-accounts | List Service Accounts
@@ -789,6 +793,86 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_volume_endpoint_volumes_post**
+> GetVolumeResponse create_volume_endpoint_volumes_post(create_volume_request)
+
+Create Volume Endpoint
+
+Create a volume. The backend field selects block (RWO) or object (RWX) storage.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_volume_request import CreateVolumeRequest
+from platform_api_python_client.models.get_volume_response import GetVolumeResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_volume_request = platform_api_python_client.CreateVolumeRequest() # CreateVolumeRequest | 
+
+    try:
+        # Create Volume Endpoint
+        api_response = api_instance.create_volume_endpoint_volumes_post(create_volume_request)
+        print("The response of EXTERNALApi->create_volume_endpoint_volumes_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_volume_endpoint_volumes_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_volume_request** | [**CreateVolumeRequest**](CreateVolumeRequest.md)|  | 
+
+### Return type
+
+[**GetVolumeResponse**](GetVolumeResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_cluster_clusters_cluster_id_delete**
 > object delete_cluster_clusters_cluster_id_delete(cluster_id)
 
@@ -1092,6 +1176,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_volume_endpoint_volumes_volume_id_delete**
+> object delete_volume_endpoint_volumes_volume_id_delete(volume_id)
+
+Delete Volume Endpoint
+
+Delete a volume. Only the owner or an admin with admin:manage_volumes may delete.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    volume_id = 56 # int | 
+
+    try:
+        # Delete Volume Endpoint
+        api_response = api_instance.delete_volume_endpoint_volumes_volume_id_delete(volume_id)
+        print("The response of EXTERNALApi->delete_volume_endpoint_volumes_volume_id_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_volume_endpoint_volumes_volume_id_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **volume_id** | **int**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **generate_service_account_secret_service_accounts_workos_id_secrets_post**
 > GenerateServiceAccountSecretResponse generate_service_account_secret_service_accounts_workos_id_secrets_post(workos_id)
 
@@ -1248,6 +1410,80 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_all_volumes_endpoint_volumes_get**
+> ListVolumesResponse get_all_volumes_endpoint_volumes_get()
+
+Get All Volumes Endpoint
+
+Retrieve all of the organization's volumes.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_volumes_response import ListVolumesResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Get All Volumes Endpoint
+        api_response = api_instance.get_all_volumes_endpoint_volumes_get()
+        print("The response of EXTERNALApi->get_all_volumes_endpoint_volumes_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_all_volumes_endpoint_volumes_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListVolumesResponse**](ListVolumesResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2811,6 +3047,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDeploymentUsageResponse**](GetDeploymentUsageResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_volume_endpoint_volumes_volume_id_get**
+> GetVolumeResponse get_volume_endpoint_volumes_volume_id_get(volume_id)
+
+Get Volume Endpoint
+
+Retrieve a single volume by id.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_volume_response import GetVolumeResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    volume_id = 56 # int | 
+
+    try:
+        # Get Volume Endpoint
+        api_response = api_instance.get_volume_endpoint_volumes_volume_id_get(volume_id)
+        print("The response of EXTERNALApi->get_volume_endpoint_volumes_volume_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_volume_endpoint_volumes_volume_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **volume_id** | **int**|  | 
+
+### Return type
+
+[**GetVolumeResponse**](GetVolumeResponse.md)
 
 ### Authorization
 

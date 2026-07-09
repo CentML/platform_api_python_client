@@ -96,6 +96,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_volume_endpoint_volumes_post(self) -> None:
+        """Test case for create_volume_endpoint_volumes_post
+
+        Create Volume Endpoint
+        """
+        pass
+
     def test_delete_cluster_clusters_cluster_id_delete(self) -> None:
         """Test case for delete_cluster_clusters_cluster_id_delete
 
@@ -124,6 +131,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_volume_endpoint_volumes_volume_id_delete(self) -> None:
+        """Test case for delete_volume_endpoint_volumes_volume_id_delete
+
+        Delete Volume Endpoint
+        """
+        pass
+
     def test_generate_service_account_secret_service_accounts_workos_id_secrets_post(self) -> None:
         """Test case for generate_service_account_secret_service_accounts_workos_id_secrets_post
 
@@ -135,6 +149,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_all_user_vault_items_endpoint_user_vault_get
 
         Get All User Vault Items Endpoint
+        """
+        pass
+
+    def test_get_all_volumes_endpoint_volumes_get(self) -> None:
+        """Test case for get_all_volumes_endpoint_volumes_get
+
+        Get All Volumes Endpoint
         """
         pass
 
@@ -275,6 +296,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_usage_deployments_usage_deployment_id_get
 
         Get Usage
+        """
+        pass
+
+    def test_get_volume_endpoint_volumes_volume_id_get(self) -> None:
+        """Test case for get_volume_endpoint_volumes_volume_id_get
+
+        Get Volume Endpoint
         """
         pass
 

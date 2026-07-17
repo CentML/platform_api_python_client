@@ -54,6 +54,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_dynamo_deployment_deployments_dynamo_post(self) -> None:
+        """Test case for create_dynamo_deployment_deployments_dynamo_post
+
+        Create Dynamo Deployment
+        """
+        pass
+
     def test_create_hardware_instance_hardware_instances_post(self) -> None:
         """Test case for create_hardware_instance_hardware_instances_post
 
@@ -250,6 +257,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_dynamo_deployment_deployments_dynamo_deployment_id_get(self) -> None:
+        """Test case for get_dynamo_deployment_deployments_dynamo_deployment_id_get
+
+        Get Dynamo Deployment
+        """
+        pass
+
     def test_get_hardware_instances_hardware_instances_get(self) -> None:
         """Test case for get_hardware_instances_hardware_instances_get
 
@@ -380,6 +394,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_deployment_status_v3_deployments_status_v3_deployment_id_put
 
         Update Deployment Status V3
+        """
+        pass
+
+    def test_update_dynamo_deployment_deployments_dynamo_put(self) -> None:
+        """Test case for update_dynamo_deployment_deployments_dynamo_put
+
+        Update Dynamo Deployment
         """
         pass
 

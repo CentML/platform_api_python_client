@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
 [**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
 [**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Create Cserve V3 Deployment
+[**create_dynamo_deployment_deployments_dynamo_post**](EXTERNALApi.md#create_dynamo_deployment_deployments_dynamo_post) | **POST** /deployments/dynamo | Create Dynamo Deployment
 [**create_hardware_instance_hardware_instances_post**](EXTERNALApi.md#create_hardware_instance_hardware_instances_post) | **POST** /hardware-instances | Create Hardware Instance
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
 [**create_inference_v3_deployment_deployments_inference_v3_post**](EXTERNALApi.md#create_inference_v3_deployment_deployments_inference_v3_post) | **POST** /deployments/inference_v3 | Create Inference V3 Deployment
@@ -36,6 +37,7 @@ Method | HTTP request | Description
 [**get_deployment_status_deployments_status_deployment_id_get**](EXTERNALApi.md#get_deployment_status_deployments_status_deployment_id_get) | **GET** /deployments/status/{deployment_id} | Get Deployment Status
 [**get_deployment_status_v3_deployments_status_v3_deployment_id_get**](EXTERNALApi.md#get_deployment_status_v3_deployments_status_v3_deployment_id_get) | **GET** /deployments/status_v3/{deployment_id} | Get Deployment Status V3
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
+[**get_dynamo_deployment_deployments_dynamo_deployment_id_get**](EXTERNALApi.md#get_dynamo_deployment_deployments_dynamo_deployment_id_get) | **GET** /deployments/dynamo/{deployment_id} | Get Dynamo Deployment
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
@@ -55,6 +57,7 @@ Method | HTTP request | Description
 [**update_cserve_v3_deployment_deployments_cserve_v3_put**](EXTERNALApi.md#update_cserve_v3_deployment_deployments_cserve_v3_put) | **PUT** /deployments/cserve_v3 | Update Cserve V3 Deployment
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
 [**update_deployment_status_v3_deployments_status_v3_deployment_id_put**](EXTERNALApi.md#update_deployment_status_v3_deployments_status_v3_deployment_id_put) | **PUT** /deployments/status_v3/{deployment_id} | Update Deployment Status V3
+[**update_dynamo_deployment_deployments_dynamo_put**](EXTERNALApi.md#update_dynamo_deployment_deployments_dynamo_put) | **PUT** /deployments/dynamo | Update Dynamo Deployment
 [**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
 [**update_inference_v3_deployment_deployments_inference_v3_put**](EXTERNALApi.md#update_inference_v3_deployment_deployments_inference_v3_put) | **PUT** /deployments/inference_v3 | Update Inference V3 Deployment
 [**update_service_account_service_accounts_workos_id_put**](EXTERNALApi.md#update_service_account_service_accounts_workos_id_put) | **PUT** /service-accounts/{workos_id} | Update Service Account
@@ -280,15 +283,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_cserve_v3_deployment_deployments_cserve_v3_post**
-> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post()
+> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
 
 Create Cserve V3 Deployment
 
 ### Example
 
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
+from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
 from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -299,15 +304,25 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
 
     try:
         # Create Cserve V3 Deployment
-        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post()
+        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
         print("The response of EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -318,7 +333,10 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
 
 ### Return type
 
@@ -326,11 +344,11 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -338,6 +356,85 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_dynamo_deployment_deployments_dynamo_post**
+> CreateDynamoDeploymentResponse create_dynamo_deployment_deployments_dynamo_post(create_dynamo_deployment_request)
+
+Create Dynamo Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_dynamo_deployment_request import CreateDynamoDeploymentRequest
+from platform_api_python_client.models.create_dynamo_deployment_response import CreateDynamoDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    create_dynamo_deployment_request = platform_api_python_client.CreateDynamoDeploymentRequest() # CreateDynamoDeploymentRequest | 
+
+    try:
+        # Create Dynamo Deployment
+        api_response = api_instance.create_dynamo_deployment_deployments_dynamo_post(create_dynamo_deployment_request)
+        print("The response of EXTERNALApi->create_dynamo_deployment_deployments_dynamo_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_dynamo_deployment_deployments_dynamo_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_dynamo_deployment_request** | [**CreateDynamoDeploymentRequest**](CreateDynamoDeploymentRequest.md)|  | 
+
+### Return type
+
+[**CreateDynamoDeploymentResponse**](CreateDynamoDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2515,6 +2612,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_dynamo_deployment_deployments_dynamo_deployment_id_get**
+> GetDynamoDeploymentResponse get_dynamo_deployment_deployments_dynamo_deployment_id_get(deployment_id)
+
+Get Dynamo Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_dynamo_deployment_response import GetDynamoDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Dynamo Deployment
+        api_response = api_instance.get_dynamo_deployment_deployments_dynamo_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_dynamo_deployment_deployments_dynamo_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_dynamo_deployment_deployments_dynamo_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**GetDynamoDeploymentResponse**](GetDynamoDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_hardware_instances_hardware_instances_get**
 > ListHardwareInstanceResponse get_hardware_instances_hardware_instances_get(cluster_id=cluster_id)
 
@@ -3970,6 +4144,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeploymentStatusV3Response**](DeploymentStatusV3Response.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_dynamo_deployment_deployments_dynamo_put**
+> UpdateDeploymentResponse update_dynamo_deployment_deployments_dynamo_put(deployment_id, create_dynamo_deployment_request)
+
+Update Dynamo Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.create_dynamo_deployment_request import CreateDynamoDeploymentRequest
+from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    create_dynamo_deployment_request = platform_api_python_client.CreateDynamoDeploymentRequest() # CreateDynamoDeploymentRequest | 
+
+    try:
+        # Update Dynamo Deployment
+        api_response = api_instance.update_dynamo_deployment_deployments_dynamo_put(deployment_id, create_dynamo_deployment_request)
+        print("The response of EXTERNALApi->update_dynamo_deployment_deployments_dynamo_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_dynamo_deployment_deployments_dynamo_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **create_dynamo_deployment_request** | [**CreateDynamoDeploymentRequest**](CreateDynamoDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
 
 ### Authorization
 

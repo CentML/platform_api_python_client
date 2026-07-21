@@ -83,7 +83,11 @@ class TestDeploymentResponse(unittest.TestCase):
                     content = '0', ),
                 metrics = platform_api_python_client.models.metrics_config.MetricsConfig(
                     port = 1.0, 
-                    path = '/W(,j>6>eow3jCO&}nl`:&~', )
+                    path = '/W(,j>6>eow3jCO&}nl`:&~', ),
+                model = '',
+                served_model_name = '',
+                gpus_per_worker = 56,
+                extra_args = ''
             )
         else:
             return DeploymentResponse(
@@ -100,7 +104,10 @@ class TestDeploymentResponse(unittest.TestCase):
                 recipe = { },
                 min_replicas = 56,
                 max_replicas = 56,
+                initial_replicas = 56,
                 container_port = 56,
+                model = '',
+                gpus_per_worker = 56,
         )
         """
 

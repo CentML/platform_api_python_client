@@ -39,6 +39,7 @@ class DeploymentType(str, Enum):
     DEPLOYMENT = 'deployment'
     RAG = 'rag'
     JOB = 'job'
+    DYNAMO = 'dynamo'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

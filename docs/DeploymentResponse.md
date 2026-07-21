@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **cserve_version** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | [optional] 
+**initial_replicas** | **int** |  | 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
@@ -39,6 +39,10 @@ Name | Type | Description | Notes
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
+**model** | **str** |  | 
+**served_model_name** | **str** |  | [optional] 
+**gpus_per_worker** | **int** |  | 
+**extra_args** | **str** |  | [optional] 
 
 ## Example
 

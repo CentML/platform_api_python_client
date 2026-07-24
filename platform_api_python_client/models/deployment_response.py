@@ -33,12 +33,12 @@ class DeploymentResponse(BaseModel):
     DeploymentResponse
     """
 
-    # data type: GetCServeV3DeploymentResponse
-    anyof_schema_1_validator: Optional[GetCServeV3DeploymentResponse] = None
-    # data type: GetInferenceV3DeploymentResponse
-    anyof_schema_2_validator: Optional[GetInferenceV3DeploymentResponse] = None
     # data type: GetDynamoDeploymentResponse
-    anyof_schema_3_validator: Optional[GetDynamoDeploymentResponse] = None
+    anyof_schema_1_validator: Optional[GetDynamoDeploymentResponse] = None
+    # data type: GetCServeV3DeploymentResponse
+    anyof_schema_2_validator: Optional[GetCServeV3DeploymentResponse] = None
+    # data type: GetInferenceV3DeploymentResponse
+    anyof_schema_3_validator: Optional[GetInferenceV3DeploymentResponse] = None
     if TYPE_CHECKING:
         actual_instance: Optional[Union[GetCServeV3DeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse]] = None
     else:
@@ -64,6 +64,12 @@ class DeploymentResponse(BaseModel):
     def actual_instance_must_validate_anyof(cls, v):
         instance = DeploymentResponse.model_construct()
         error_messages = []
+        # validate data type: GetDynamoDeploymentResponse
+        if not isinstance(v, GetDynamoDeploymentResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetDynamoDeploymentResponse`")
+        else:
+            return v
+
         # validate data type: GetCServeV3DeploymentResponse
         if not isinstance(v, GetCServeV3DeploymentResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `GetCServeV3DeploymentResponse`")
@@ -73,12 +79,6 @@ class DeploymentResponse(BaseModel):
         # validate data type: GetInferenceV3DeploymentResponse
         if not isinstance(v, GetInferenceV3DeploymentResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `GetInferenceV3DeploymentResponse`")
-        else:
-            return v
-
-        # validate data type: GetDynamoDeploymentResponse
-        if not isinstance(v, GetDynamoDeploymentResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `GetDynamoDeploymentResponse`")
         else:
             return v
 
@@ -97,21 +97,21 @@ class DeploymentResponse(BaseModel):
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[GetCServeV3DeploymentResponse] = None
+        # anyof_schema_1_validator: Optional[GetDynamoDeploymentResponse] = None
+        try:
+            instance.actual_instance = GetDynamoDeploymentResponse.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+             error_messages.append(str(e))
+        # anyof_schema_2_validator: Optional[GetCServeV3DeploymentResponse] = None
         try:
             instance.actual_instance = GetCServeV3DeploymentResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[GetInferenceV3DeploymentResponse] = None
+        # anyof_schema_3_validator: Optional[GetInferenceV3DeploymentResponse] = None
         try:
             instance.actual_instance = GetInferenceV3DeploymentResponse.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[GetDynamoDeploymentResponse] = None
-        try:
-            instance.actual_instance = GetDynamoDeploymentResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))

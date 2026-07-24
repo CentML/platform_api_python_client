@@ -44,18 +44,14 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 chart_revision = '',
-                image_url = '',
-                image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
-                    username = '', 
-                    password = '', ),
                 model = '',
                 served_model_name = '',
-                container_port = 1024.0,
-                initial_replicas = 56,
-                gpus_per_worker = 56,
+                min_replicas = 56,
+                max_replicas = 56,
+                concurrency = 56,
+                cooldown_period = 56,
                 extra_args = '',
                 hf_token = '',
-                hf_token_secret_name = '',
                 env_vars = {
                     'key' : ''
                     },
@@ -70,7 +66,6 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
-                image_url = '',
                 model = '',
         )
         """

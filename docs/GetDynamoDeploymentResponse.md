@@ -19,9 +19,10 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**container_port** | **int** |  | 
-**initial_replicas** | **int** |  | 
-**gpus_per_worker** | **int** |  | 
+**min_replicas** | **int** |  | 
+**max_replicas** | **int** |  | 
+**concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] 
 **extra_args** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 

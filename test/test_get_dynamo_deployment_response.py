@@ -51,9 +51,10 @@ class TestGetDynamoDeploymentResponse(unittest.TestCase):
                     },
                 model = '',
                 served_model_name = '',
-                container_port = 56,
-                initial_replicas = 56,
-                gpus_per_worker = 56,
+                min_replicas = 56,
+                max_replicas = 56,
+                concurrency = 56,
+                cooldown_period = 56,
                 extra_args = '',
                 env_vars = {
                     'key' : ''
@@ -77,9 +78,8 @@ class TestGetDynamoDeploymentResponse(unittest.TestCase):
                 hardware_instance_id = 56,
                 revision_number = 56,
                 model = '',
-                container_port = 56,
-                initial_replicas = 56,
-                gpus_per_worker = 56,
+                min_replicas = 56,
+                max_replicas = 56,
         )
         """
 

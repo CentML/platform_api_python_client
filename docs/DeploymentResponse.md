@@ -17,18 +17,22 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
-**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
-**cserve_version** | **str** |  | [optional] 
+**model** | **str** |  | 
+**served_model_name** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | 
-**endpoint_certificate_authority** | **str** |  | [optional] 
-**endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] [default to 1800]
+**extra_args** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**endpoint_certificate_authority** | **str** |  | [optional] 
+**endpoint_bearer_token** | **str** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
+**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
+**cserve_version** | **str** |  | [optional] 
+**initial_replicas** | **int** |  | [optional] 
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
@@ -36,13 +40,8 @@ Name | Type | Description | Notes
 **command_args** | **List[str]** |  | [optional] 
 **original_command** | **str** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
-**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
-**model** | **str** |  | 
-**served_model_name** | **str** |  | [optional] 
-**gpus_per_worker** | **int** |  | 
-**extra_args** | **str** |  | [optional] 
 
 ## Example
 

@@ -49,20 +49,24 @@ class TestDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
-                recipe = { },
-                cserve_version = '',
+                model = '',
+                served_model_name = '',
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
-                endpoint_certificate_authority = '',
-                endpoint_bearer_token = '',
                 concurrency = 56,
                 cooldown_period = 56,
+                extra_args = '',
                 env_vars = {
                     'key' : ''
                     },
+                endpoint_certificate_authority = '',
+                endpoint_bearer_token = '',
                 enable_logging = True,
                 enable_node_model_cache = True,
+                backend_protocol = 'HTTP',
+                recipe = { },
+                cserve_version = '',
+                initial_replicas = 56,
                 session_affinity = True,
                 container_port = 56,
                 healthcheck = '',
@@ -76,18 +80,13 @@ class TestDeploymentResponse(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
-                backend_protocol = 'HTTP',
                 config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
                     filename = '20', 
                     mount_path = '0', 
                     content = '0', ),
                 metrics = platform_api_python_client.models.metrics_config.MetricsConfig(
                     port = 1.0, 
-                    path = '/W(,j>6>eow3jCO&}nl`:&~', ),
-                model = '',
-                served_model_name = '',
-                gpus_per_worker = 56,
-                extra_args = ''
+                    path = '/W(,j>6>eow3jCO&}nl`:&~', )
             )
         else:
             return DeploymentResponse(
@@ -101,13 +100,11 @@ class TestDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                recipe = { },
+                model = '',
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
+                recipe = { },
                 container_port = 56,
-                model = '',
-                gpus_per_worker = 56,
         )
         """
 

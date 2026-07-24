@@ -17,8 +17,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import date
-from pydantic import StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import Any, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.cluster_config import ClusterConfig
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest
 from platform_api_python_client.models.cluster_registration_response import ClusterRegistrationResponse
@@ -8767,8 +8768,8 @@ class EXTERNALApi:
     @validate_call
     def get_deployments_deployments_get(
         self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         type: Optional[DeploymentType] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -8846,8 +8847,8 @@ class EXTERNALApi:
     @validate_call
     def get_deployments_deployments_get_with_http_info(
         self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         type: Optional[DeploymentType] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -8925,8 +8926,8 @@ class EXTERNALApi:
     @validate_call
     def get_deployments_deployments_get_without_preload_content(
         self,
-        offset: Optional[StrictInt] = None,
-        limit: Optional[StrictInt] = None,
+        offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
+        limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         type: Optional[DeploymentType] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[

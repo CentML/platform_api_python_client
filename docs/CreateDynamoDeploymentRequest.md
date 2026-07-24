@@ -13,16 +13,14 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
-**image_url** | **str** |  | 
-**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**container_port** | **int** | Internal Dynamo Frontend listener port for the non-root runtime. The public endpoint remains on HTTPS; port 8788 is unavailable when backend_protocol is GRPC. | [optional] [default to 8000]
-**initial_replicas** | **int** |  | [optional] [default to 1]
-**gpus_per_worker** | **int** |  | [optional] [default to 1]
+**min_replicas** | **int** |  | [optional] [default to 1]
+**max_replicas** | **int** |  | [optional] [default to 1]
+**concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] 
 **extra_args** | **str** |  | [optional] 
 **hf_token** | **str** |  | [optional] 
-**hf_token_secret_name** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 

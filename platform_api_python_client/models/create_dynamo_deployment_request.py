@@ -21,7 +21,6 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
-from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,23 +35,21 @@ class CreateDynamoDeploymentRequest(BaseModel):
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
-    image_url: StrictStr
-    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
-    container_port: Optional[Annotated[int, Field(le=65535, strict=True, ge=1024)]] = Field(default=8000, description="Internal Dynamo Frontend listener port for the non-root runtime. The public endpoint remains on HTTPS; port 8788 is unavailable when backend_protocol is GRPC.")
-    initial_replicas: Optional[StrictInt] = 1
-    gpus_per_worker: Optional[StrictInt] = 1
+    min_replicas: Optional[StrictInt] = 1
+    max_replicas: Optional[StrictInt] = 1
+    concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
     hf_token: Optional[StrictStr] = None
-    hf_token_secret_name: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "model", "served_model_name", "container_port", "initial_replicas", "gpus_per_worker", "extra_args", "hf_token", "hf_token_secret_name", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -100,9 +97,6 @@ class CreateDynamoDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
-        if self.image_pull_secret_credentials:
-            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
         # set to None if max_surge (nullable) is None
         # and model_fields_set contains the field
         if self.max_surge is None and "max_surge" in self.model_fields_set:
@@ -118,15 +112,20 @@ class CreateDynamoDeploymentRequest(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
-        # set to None if image_pull_secret_credentials (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
-            _dict['image_pull_secret_credentials'] = None
-
         # set to None if served_model_name (nullable) is None
         # and model_fields_set contains the field
         if self.served_model_name is None and "served_model_name" in self.model_fields_set:
             _dict['served_model_name'] = None
+
+        # set to None if concurrency (nullable) is None
+        # and model_fields_set contains the field
+        if self.concurrency is None and "concurrency" in self.model_fields_set:
+            _dict['concurrency'] = None
+
+        # set to None if cooldown_period (nullable) is None
+        # and model_fields_set contains the field
+        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
+            _dict['cooldown_period'] = None
 
         # set to None if extra_args (nullable) is None
         # and model_fields_set contains the field
@@ -137,11 +136,6 @@ class CreateDynamoDeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.hf_token is None and "hf_token" in self.model_fields_set:
             _dict['hf_token'] = None
-
-        # set to None if hf_token_secret_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.hf_token_secret_name is None and "hf_token_secret_name" in self.model_fields_set:
-            _dict['hf_token_secret_name'] = None
 
         # set to None if endpoint_bearer_token (nullable) is None
         # and model_fields_set contains the field
@@ -172,16 +166,14 @@ class CreateDynamoDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
-            "image_url": obj.get("image_url"),
-            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
-            "container_port": obj.get("container_port") if obj.get("container_port") is not None else 8000,
-            "initial_replicas": obj.get("initial_replicas") if obj.get("initial_replicas") is not None else 1,
-            "gpus_per_worker": obj.get("gpus_per_worker") if obj.get("gpus_per_worker") is not None else 1,
+            "min_replicas": obj.get("min_replicas") if obj.get("min_replicas") is not None else 1,
+            "max_replicas": obj.get("max_replicas") if obj.get("max_replicas") is not None else 1,
+            "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period"),
             "extra_args": obj.get("extra_args"),
             "hf_token": obj.get("hf_token"),
-            "hf_token_secret_name": obj.get("hf_token_secret_name"),
             "env_vars": obj.get("env_vars"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),

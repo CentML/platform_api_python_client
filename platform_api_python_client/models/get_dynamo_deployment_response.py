@@ -44,9 +44,10 @@ class GetDynamoDeploymentResponse(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
-    container_port: StrictInt
-    initial_replicas: StrictInt
-    gpus_per_worker: StrictInt
+    min_replicas: StrictInt
+    max_replicas: StrictInt
+    concurrency: Optional[StrictInt] = None
+    cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
@@ -54,7 +55,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "model", "served_model_name", "container_port", "initial_replicas", "gpus_per_worker", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +111,16 @@ class GetDynamoDeploymentResponse(BaseModel):
         if self.served_model_name is None and "served_model_name" in self.model_fields_set:
             _dict['served_model_name'] = None
 
+        # set to None if concurrency (nullable) is None
+        # and model_fields_set contains the field
+        if self.concurrency is None and "concurrency" in self.model_fields_set:
+            _dict['concurrency'] = None
+
+        # set to None if cooldown_period (nullable) is None
+        # and model_fields_set contains the field
+        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
+            _dict['cooldown_period'] = None
+
         # set to None if extra_args (nullable) is None
         # and model_fields_set contains the field
         if self.extra_args is None and "extra_args" in self.model_fields_set:
@@ -151,9 +162,10 @@ class GetDynamoDeploymentResponse(BaseModel):
             "user_annotations": obj.get("user_annotations"),
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
-            "container_port": obj.get("container_port"),
-            "initial_replicas": obj.get("initial_replicas"),
-            "gpus_per_worker": obj.get("gpus_per_worker"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
+            "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period"),
             "extra_args": obj.get("extra_args"),
             "env_vars": obj.get("env_vars"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),

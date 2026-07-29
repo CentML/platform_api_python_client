@@ -17,36 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
-from platform_api_python_client.models.volume_access_mode import VolumeAccessMode
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.service_status import ServiceStatus
+from platform_api_python_client.models.volume_backend import VolumeBackend
 from platform_api_python_client.models.volume_status import VolumeStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetBlockVolumeResponse(BaseModel):
+class VolumeStatusResponse(BaseModel):
     """
-    GetBlockVolumeResponse
+    VolumeStatusResponse
     """ # noqa: E501
     id: StrictInt
-    name: StrictStr
-    cluster_id: StrictInt
-    backend: StrictStr
-    access_mode: VolumeAccessMode
+    backend: VolumeBackend
     status: VolumeStatus
-    pvc_name: StrictStr
-    created_at: datetime
-    size_gb: StrictInt
-    storage_class: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "name", "cluster_id", "backend", "access_mode", "status", "pvc_name", "created_at", "size_gb", "storage_class"]
-
-    @field_validator('backend')
-    def backend_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['block']):
-            raise ValueError("must be one of enum values ('block')")
-        return value
+    service_status: Optional[ServiceStatus] = None
+    error_message: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "backend", "status", "service_status", "error_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,7 +54,7 @@ class GetBlockVolumeResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetBlockVolumeResponse from a JSON string"""
+        """Create an instance of VolumeStatusResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -87,11 +75,21 @@ class GetBlockVolumeResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if service_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.service_status is None and "service_status" in self.model_fields_set:
+            _dict['service_status'] = None
+
+        # set to None if error_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_message is None and "error_message" in self.model_fields_set:
+            _dict['error_message'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetBlockVolumeResponse from a dict"""
+        """Create an instance of VolumeStatusResponse from a dict"""
         if obj is None:
             return None
 
@@ -100,15 +98,10 @@ class GetBlockVolumeResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "name": obj.get("name"),
-            "cluster_id": obj.get("cluster_id"),
             "backend": obj.get("backend"),
-            "access_mode": obj.get("access_mode"),
             "status": obj.get("status"),
-            "pvc_name": obj.get("pvc_name"),
-            "created_at": obj.get("created_at"),
-            "size_gb": obj.get("size_gb"),
-            "storage_class": obj.get("storage_class")
+            "service_status": obj.get("service_status"),
+            "error_message": obj.get("error_message")
         })
         return _obj
 

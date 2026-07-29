@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.22.1"
+__version__ = "4.23.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -145,4 +145,6 @@ from platform_api_python_client.models.validation_error import ValidationError
 from platform_api_python_client.models.validation_error_loc_inner import ValidationErrorLocInner
 from platform_api_python_client.models.vault_scope import VaultScope
 from platform_api_python_client.models.volume_access_mode import VolumeAccessMode
+from platform_api_python_client.models.volume_backend import VolumeBackend
 from platform_api_python_client.models.volume_status import VolumeStatus
+from platform_api_python_client.models.volume_status_response import VolumeStatusResponse

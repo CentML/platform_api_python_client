@@ -320,6 +320,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_volume_status_endpoint_volumes_status_volume_id_get(self) -> None:
+        """Test case for get_volume_status_endpoint_volumes_status_volume_id_get
+
+        Get Volume Status Endpoint
+        """
+        pass
+
     def test_invite_user_organizations_invite_post(self) -> None:
         """Test case for invite_user_organizations_invite_post
 

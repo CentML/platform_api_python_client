@@ -31,7 +31,8 @@ class CreateBlockVolumeRequest(BaseModel):
     cluster_id: StrictInt
     backend: StrictStr
     size_gb: Optional[Annotated[int, Field(le=65536, strict=True, ge=1)]] = 100
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "size_gb"]
+    storage_class: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = None
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "size_gb", "storage_class"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -45,6 +46,16 @@ class CreateBlockVolumeRequest(BaseModel):
         """Validates the enum"""
         if value not in set(['block']):
             raise ValueError("must be one of enum values ('block')")
+        return value
+
+    @field_validator('storage_class')
+    def storage_class_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
@@ -86,6 +97,11 @@ class CreateBlockVolumeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if storage_class (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_class is None and "storage_class" in self.model_fields_set:
+            _dict['storage_class'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +117,8 @@ class CreateBlockVolumeRequest(BaseModel):
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
             "backend": obj.get("backend"),
-            "size_gb": obj.get("size_gb") if obj.get("size_gb") is not None else 100
+            "size_gb": obj.get("size_gb") if obj.get("size_gb") is not None else 100,
+            "storage_class": obj.get("storage_class")
         })
         return _obj
 

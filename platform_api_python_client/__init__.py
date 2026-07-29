@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.23.0"
+__version__ = "4.23.1"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -66,6 +66,7 @@ from platform_api_python_client.models.create_service_account_response import Cr
 from platform_api_python_client.models.create_volume_request import CreateVolumeRequest
 from platform_api_python_client.models.credits_response import CreditsResponse
 from platform_api_python_client.models.daily_bill_response import DailyBillResponse
+from platform_api_python_client.models.deployment_component_type import DeploymentComponentType
 from platform_api_python_client.models.deployment_response import DeploymentResponse
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.deployment_component_type import DeploymentComponentType
 from platform_api_python_client.models.pod_status import PodStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +30,7 @@ class PodDetails(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = None
     revision_number: Optional[StrictInt] = None
-    component_type: Optional[StrictStr] = None
+    component_type: Optional[DeploymentComponentType] = None
     status: PodStatus
     error_message: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["name", "revision_number", "component_type", "status", "error_message"]

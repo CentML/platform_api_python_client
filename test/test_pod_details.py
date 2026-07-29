@@ -37,7 +37,7 @@ class TestPodDetails(unittest.TestCase):
             return PodDetails(
                 name = '',
                 revision_number = 56,
-                component_type = '',
+                component_type = 'user-container',
                 status = 'ScalingUp',
                 error_message = ''
             )

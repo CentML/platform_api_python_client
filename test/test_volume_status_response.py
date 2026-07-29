@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.pod_details import PodDetails
+from platform_api_python_client.models.volume_status_response import VolumeStatusResponse
 
-class TestPodDetails(unittest.TestCase):
-    """PodDetails unit test stubs"""
+class TestVolumeStatusResponse(unittest.TestCase):
+    """VolumeStatusResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,30 +25,32 @@ class TestPodDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> PodDetails:
-        """Test PodDetails
+    def make_instance(self, include_optional) -> VolumeStatusResponse:
+        """Test VolumeStatusResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PodDetails`
+        # uncomment below to create an instance of `VolumeStatusResponse`
         """
-        model = PodDetails()
+        model = VolumeStatusResponse()
         if include_optional:
-            return PodDetails(
-                name = '',
-                revision_number = 56,
-                component_type = '',
-                status = 'ScalingUp',
+            return VolumeStatusResponse(
+                id = 56,
+                backend = 'block',
+                status = 'active',
+                service_status = 'Healthy',
                 error_message = ''
             )
         else:
-            return PodDetails(
-                status = 'ScalingUp',
+            return VolumeStatusResponse(
+                id = 56,
+                backend = 'block',
+                status = 'active',
         )
         """
 
-    def testPodDetails(self):
-        """Test PodDetails"""
+    def testVolumeStatusResponse(self):
+        """Test VolumeStatusResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -43,7 +43,8 @@ class TestGetBlockVolumeResponse(unittest.TestCase):
                 status = 'active',
                 pvc_name = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                size_gb = 56
+                size_gb = 56,
+                storage_class = ''
             )
         else:
             return GetBlockVolumeResponse(
@@ -56,6 +57,7 @@ class TestGetBlockVolumeResponse(unittest.TestCase):
                 pvc_name = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 size_gb = 56,
+                storage_class = '',
         )
         """
 

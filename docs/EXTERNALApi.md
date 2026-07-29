@@ -46,6 +46,7 @@ Method | HTTP request | Description
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**get_volume_endpoint_volumes_volume_id_get**](EXTERNALApi.md#get_volume_endpoint_volumes_volume_id_get) | **GET** /volumes/{volume_id} | Get Volume Endpoint
+[**get_volume_status_endpoint_volumes_status_volume_id_get**](EXTERNALApi.md#get_volume_status_endpoint_volumes_status_volume_id_get) | **GET** /volumes/status/{volume_id} | Get Volume Status Endpoint
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
 [**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
 [**list_service_accounts_service_accounts_get**](EXTERNALApi.md#list_service_accounts_service_accounts_get) | **GET** /service-accounts | List Service Accounts
@@ -895,7 +896,7 @@ Name | Type | Description  | Notes
 
 Create Volume Endpoint
 
-Create a volume. The backend field selects block (RWO) or object (RWX) storage.
+Create a volume. Only the block backend is provisioned; object lands in CCL-147.
 
 ### Example
 
@@ -1278,7 +1279,7 @@ Name | Type | Description  | Notes
 
 Delete Volume Endpoint
 
-Delete a volume. Only the owner or an admin with admin:manage_volumes may delete.
+Delete a volume: tear down its ArgoCD app (and PVC) if reachable, then soft-delete the row. Only the owner or an admin with admin:manage_volumes may delete.
 
 ### Example
 
@@ -3300,6 +3301,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetVolumeResponse**](GetVolumeResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_volume_status_endpoint_volumes_status_volume_id_get**
+> VolumeStatusResponse get_volume_status_endpoint_volumes_status_volume_id_get(volume_id)
+
+Get Volume Status Endpoint
+
+Live volume status: status is the stored intent, service_status is computed from the volume app's health and PVC phase.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.volume_status_response import VolumeStatusResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    volume_id = 56 # int | 
+
+    try:
+        # Get Volume Status Endpoint
+        api_response = api_instance.get_volume_status_endpoint_volumes_status_volume_id_get(volume_id)
+        print("The response of EXTERNALApi->get_volume_status_endpoint_volumes_status_volume_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_volume_status_endpoint_volumes_status_volume_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **volume_id** | **int**|  | 
+
+### Return type
+
+[**VolumeStatusResponse**](VolumeStatusResponse.md)
 
 ### Authorization
 

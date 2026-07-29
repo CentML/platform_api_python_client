@@ -29,9 +29,10 @@ class PodDetails(BaseModel):
     """ # noqa: E501
     name: Optional[StrictStr] = None
     revision_number: Optional[StrictInt] = None
+    component_type: Optional[StrictStr] = None
     status: PodStatus
     error_message: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "revision_number", "status", "error_message"]
+    __properties: ClassVar[List[str]] = ["name", "revision_number", "component_type", "status", "error_message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +83,11 @@ class PodDetails(BaseModel):
         if self.revision_number is None and "revision_number" in self.model_fields_set:
             _dict['revision_number'] = None
 
+        # set to None if component_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.component_type is None and "component_type" in self.model_fields_set:
+            _dict['component_type'] = None
+
         # set to None if error_message (nullable) is None
         # and model_fields_set contains the field
         if self.error_message is None and "error_message" in self.model_fields_set:
@@ -101,6 +107,7 @@ class PodDetails(BaseModel):
         _obj = cls.model_validate({
             "name": obj.get("name"),
             "revision_number": obj.get("revision_number"),
+            "component_type": obj.get("component_type"),
             "status": obj.get("status"),
             "error_message": obj.get("error_message")
         })

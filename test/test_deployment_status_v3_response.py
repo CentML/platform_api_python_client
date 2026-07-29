@@ -48,6 +48,7 @@ class TestDeploymentStatusV3Response(unittest.TestCase):
                             platform_api_python_client.models.pod_details.PodDetails(
                                 name = '', 
                                 revision_number = 56, 
+                                component_type = '',
                                 status = 'ScalingUp', 
                                 error_message = '', )
                             ], 

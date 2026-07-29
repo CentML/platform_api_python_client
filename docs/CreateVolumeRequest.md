@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **int** |  | 
 **backend** | **str** |  | 
 **size_gb** | **int** |  | [optional] [default to 100]
+**storage_class** | **str** |  | [optional] 
 **provider** | [**ObjectStorageProvider**](ObjectStorageProvider.md) |  | [optional] 
 **bucket** | **str** |  | 
 **region** | **str** |  | 

@@ -26,7 +26,6 @@ class VolumeAccessMode(str, Enum):
     """
     allowed enum values
     """
-    READWRITEONCE = 'ReadWriteOnce'
     READWRITEMANY = 'ReadWriteMany'
 
     @classmethod

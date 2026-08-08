@@ -3073,7 +3073,7 @@ class EXTERNALApi:
     ) -> GetVolumeResponse:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -3141,7 +3141,7 @@ class EXTERNALApi:
     ) -> ApiResponse[GetVolumeResponse]:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -3209,7 +3209,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -5965,7 +5965,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CreditsResponse:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -5989,6 +5989,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -6027,7 +6028,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CreditsResponse]:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -6051,6 +6052,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -6089,7 +6091,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -6113,6 +6115,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -10668,7 +10671,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ListDailyBillResponse:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10696,6 +10699,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,
@@ -10739,7 +10743,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ListDailyBillResponse]:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10767,6 +10771,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,
@@ -10810,7 +10815,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10838,6 +10843,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,

@@ -17,24 +17,24 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from platform_api_python_client.models.create_block_volume_request import CreateBlockVolumeRequest
+from platform_api_python_client.models.create_filesystem_volume_request import CreateFilesystemVolumeRequest
 from platform_api_python_client.models.create_object_volume_request import CreateObjectVolumeRequest
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-CREATEVOLUMEREQUEST_ONE_OF_SCHEMAS = ["CreateBlockVolumeRequest", "CreateObjectVolumeRequest"]
+CREATEVOLUMEREQUEST_ONE_OF_SCHEMAS = ["CreateFilesystemVolumeRequest", "CreateObjectVolumeRequest"]
 
 class CreateVolumeRequest(BaseModel):
     """
     CreateVolumeRequest
     """
-    # data type: CreateBlockVolumeRequest
-    oneof_schema_1_validator: Optional[CreateBlockVolumeRequest] = None
+    # data type: CreateFilesystemVolumeRequest
+    oneof_schema_1_validator: Optional[CreateFilesystemVolumeRequest] = None
     # data type: CreateObjectVolumeRequest
     oneof_schema_2_validator: Optional[CreateObjectVolumeRequest] = None
-    actual_instance: Optional[Union[CreateBlockVolumeRequest, CreateObjectVolumeRequest]] = None
-    one_of_schemas: Set[str] = { "CreateBlockVolumeRequest", "CreateObjectVolumeRequest" }
+    actual_instance: Optional[Union[CreateFilesystemVolumeRequest, CreateObjectVolumeRequest]] = None
+    one_of_schemas: Set[str] = { "CreateFilesystemVolumeRequest", "CreateObjectVolumeRequest" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,9 +60,9 @@ class CreateVolumeRequest(BaseModel):
         instance = CreateVolumeRequest.model_construct()
         error_messages = []
         match = 0
-        # validate data type: CreateBlockVolumeRequest
-        if not isinstance(v, CreateBlockVolumeRequest):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateBlockVolumeRequest`")
+        # validate data type: CreateFilesystemVolumeRequest
+        if not isinstance(v, CreateFilesystemVolumeRequest):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateFilesystemVolumeRequest`")
         else:
             match += 1
         # validate data type: CreateObjectVolumeRequest
@@ -72,10 +72,10 @@ class CreateVolumeRequest(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in CreateVolumeRequest with oneOf schemas: CreateBlockVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in CreateVolumeRequest with oneOf schemas: CreateFilesystemVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in CreateVolumeRequest with oneOf schemas: CreateBlockVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in CreateVolumeRequest with oneOf schemas: CreateFilesystemVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -90,9 +90,9 @@ class CreateVolumeRequest(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into CreateBlockVolumeRequest
+        # deserialize data into CreateFilesystemVolumeRequest
         try:
-            instance.actual_instance = CreateBlockVolumeRequest.from_json(json_str)
+            instance.actual_instance = CreateFilesystemVolumeRequest.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -105,10 +105,10 @@ class CreateVolumeRequest(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into CreateVolumeRequest with oneOf schemas: CreateBlockVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into CreateVolumeRequest with oneOf schemas: CreateFilesystemVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into CreateVolumeRequest with oneOf schemas: CreateBlockVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into CreateVolumeRequest with oneOf schemas: CreateFilesystemVolumeRequest, CreateObjectVolumeRequest. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -122,7 +122,7 @@ class CreateVolumeRequest(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], CreateBlockVolumeRequest, CreateObjectVolumeRequest]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CreateFilesystemVolumeRequest, CreateObjectVolumeRequest]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

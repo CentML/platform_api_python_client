@@ -17,24 +17,24 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from platform_api_python_client.models.get_block_volume_response import GetBlockVolumeResponse
+from platform_api_python_client.models.get_filesystem_volume_response import GetFilesystemVolumeResponse
 from platform_api_python_client.models.get_object_volume_response import GetObjectVolumeResponse
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-GETVOLUMERESPONSE_ONE_OF_SCHEMAS = ["GetBlockVolumeResponse", "GetObjectVolumeResponse"]
+GETVOLUMERESPONSE_ONE_OF_SCHEMAS = ["GetFilesystemVolumeResponse", "GetObjectVolumeResponse"]
 
 class GetVolumeResponse(BaseModel):
     """
     GetVolumeResponse
     """
-    # data type: GetBlockVolumeResponse
-    oneof_schema_1_validator: Optional[GetBlockVolumeResponse] = None
+    # data type: GetFilesystemVolumeResponse
+    oneof_schema_1_validator: Optional[GetFilesystemVolumeResponse] = None
     # data type: GetObjectVolumeResponse
     oneof_schema_2_validator: Optional[GetObjectVolumeResponse] = None
-    actual_instance: Optional[Union[GetBlockVolumeResponse, GetObjectVolumeResponse]] = None
-    one_of_schemas: Set[str] = { "GetBlockVolumeResponse", "GetObjectVolumeResponse" }
+    actual_instance: Optional[Union[GetFilesystemVolumeResponse, GetObjectVolumeResponse]] = None
+    one_of_schemas: Set[str] = { "GetFilesystemVolumeResponse", "GetObjectVolumeResponse" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -60,9 +60,9 @@ class GetVolumeResponse(BaseModel):
         instance = GetVolumeResponse.model_construct()
         error_messages = []
         match = 0
-        # validate data type: GetBlockVolumeResponse
-        if not isinstance(v, GetBlockVolumeResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `GetBlockVolumeResponse`")
+        # validate data type: GetFilesystemVolumeResponse
+        if not isinstance(v, GetFilesystemVolumeResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `GetFilesystemVolumeResponse`")
         else:
             match += 1
         # validate data type: GetObjectVolumeResponse
@@ -72,10 +72,10 @@ class GetVolumeResponse(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in GetVolumeResponse with oneOf schemas: GetBlockVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in GetVolumeResponse with oneOf schemas: GetFilesystemVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in GetVolumeResponse with oneOf schemas: GetBlockVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in GetVolumeResponse with oneOf schemas: GetFilesystemVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -90,9 +90,9 @@ class GetVolumeResponse(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into GetBlockVolumeResponse
+        # deserialize data into GetFilesystemVolumeResponse
         try:
-            instance.actual_instance = GetBlockVolumeResponse.from_json(json_str)
+            instance.actual_instance = GetFilesystemVolumeResponse.from_json(json_str)
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -105,10 +105,10 @@ class GetVolumeResponse(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into GetVolumeResponse with oneOf schemas: GetBlockVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into GetVolumeResponse with oneOf schemas: GetFilesystemVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into GetVolumeResponse with oneOf schemas: GetBlockVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into GetVolumeResponse with oneOf schemas: GetFilesystemVolumeResponse, GetObjectVolumeResponse. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -122,7 +122,7 @@ class GetVolumeResponse(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], GetBlockVolumeResponse, GetObjectVolumeResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], GetFilesystemVolumeResponse, GetObjectVolumeResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

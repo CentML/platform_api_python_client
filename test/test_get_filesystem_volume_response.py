@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.get_block_volume_response import GetBlockVolumeResponse
+from platform_api_python_client.models.get_filesystem_volume_response import GetFilesystemVolumeResponse
 
-class TestGetBlockVolumeResponse(unittest.TestCase):
-    """GetBlockVolumeResponse unit test stubs"""
+class TestGetFilesystemVolumeResponse(unittest.TestCase):
+    """GetFilesystemVolumeResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,21 +25,21 @@ class TestGetBlockVolumeResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetBlockVolumeResponse:
-        """Test GetBlockVolumeResponse
+    def make_instance(self, include_optional) -> GetFilesystemVolumeResponse:
+        """Test GetFilesystemVolumeResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `GetBlockVolumeResponse`
+        # uncomment below to create an instance of `GetFilesystemVolumeResponse`
         """
-        model = GetBlockVolumeResponse()
+        model = GetFilesystemVolumeResponse()
         if include_optional:
-            return GetBlockVolumeResponse(
+            return GetFilesystemVolumeResponse(
                 id = 56,
                 name = '',
                 cluster_id = 56,
-                backend = 'block',
-                access_mode = 'ReadWriteOnce',
+                backend = 'filesystem',
+                access_mode = 'ReadWriteMany',
                 status = 'active',
                 pvc_name = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -47,12 +47,12 @@ class TestGetBlockVolumeResponse(unittest.TestCase):
                 storage_class = ''
             )
         else:
-            return GetBlockVolumeResponse(
+            return GetFilesystemVolumeResponse(
                 id = 56,
                 name = '',
                 cluster_id = 56,
-                backend = 'block',
-                access_mode = 'ReadWriteOnce',
+                backend = 'filesystem',
+                access_mode = 'ReadWriteMany',
                 status = 'active',
                 pvc_name = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -61,8 +61,8 @@ class TestGetBlockVolumeResponse(unittest.TestCase):
         )
         """
 
-    def testGetBlockVolumeResponse(self):
-        """Test GetBlockVolumeResponse"""
+    def testGetFilesystemVolumeResponse(self):
+        """Test GetFilesystemVolumeResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -23,9 +23,9 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateBlockVolumeRequest(BaseModel):
+class CreateFilesystemVolumeRequest(BaseModel):
     """
-    CreateBlockVolumeRequest
+    CreateFilesystemVolumeRequest
     """ # noqa: E501
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
@@ -44,8 +44,8 @@ class CreateBlockVolumeRequest(BaseModel):
     @field_validator('backend')
     def backend_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['block']):
-            raise ValueError("must be one of enum values ('block')")
+        if value not in set(['filesystem']):
+            raise ValueError("must be one of enum values ('filesystem')")
         return value
 
     @field_validator('storage_class')
@@ -76,7 +76,7 @@ class CreateBlockVolumeRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBlockVolumeRequest from a JSON string"""
+        """Create an instance of CreateFilesystemVolumeRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -106,7 +106,7 @@ class CreateBlockVolumeRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBlockVolumeRequest from a dict"""
+        """Create an instance of CreateFilesystemVolumeRequest from a dict"""
         if obj is None:
             return None
 

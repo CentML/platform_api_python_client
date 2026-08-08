@@ -26,7 +26,7 @@ class VolumeBackend(str, Enum):
     """
     allowed enum values
     """
-    BLOCK = 'block'
+    FILESYSTEM = 'filesystem'
     OBJECT = 'object'
 
     @classmethod

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
 **revision_number** | **int** |  | [optional] 
-**component_type** | [**DeploymentComponentType**](DeploymentComponentType.md) |  | [optional]
+**component_type** | [**DeploymentComponentType**](DeploymentComponentType.md) |  | [optional] 
 **status** | [**PodStatus**](PodStatus.md) |  | 
 **error_message** | **str** |  | [optional] 
 
@@ -29,3 +29,5 @@ pod_details_dict = pod_details_instance.to_dict()
 pod_details_from_dict = PodDetails.from_dict(pod_details_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

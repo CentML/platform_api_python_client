@@ -896,7 +896,7 @@ Name | Type | Description  | Notes
 
 Create Volume Endpoint
 
-Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
 ### Example
 

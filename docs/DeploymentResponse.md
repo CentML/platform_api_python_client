@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
+**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
@@ -42,6 +44,9 @@ Name | Type | Description | Notes
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
+**exposed_port** | **int** |  | 
+**ssh_public_key** | **str** |  | [optional] 
+**ssh_password** | **str** |  | [optional] 
 
 ## Example
 

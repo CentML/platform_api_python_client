@@ -44,6 +44,8 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 chart_revision = '',
+                serving_mode = 'aggregated',
+                worker_pools = { },
                 model = '',
                 served_model_name = '',
                 min_replicas = 56,
@@ -65,7 +67,6 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
             return CreateDynamoDeploymentRequest(
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
-                hardware_instance_id = 56,
                 model = '',
         )
         """

@@ -131,6 +131,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete(self) -> None:
+        """Test case for delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete
+
+        Delete User Vault Item By Id Endpoint
+        """
+        pass
+
     def test_delete_user_vault_item_endpoint_user_vault_delete(self) -> None:
         """Test case for delete_user_vault_item_endpoint_user_vault_delete
 
@@ -219,6 +226,20 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get
 
         Get Deployment Logs V3
+        """
+        pass
+
+    def test_get_deployment_logs_v4_logs_deployment_id_revision_number_get(self) -> None:
+        """Test case for get_deployment_logs_v4_logs_deployment_id_revision_number_get
+
+        Get Deployment Logs V4
+        """
+        pass
+
+    def test_get_deployment_pods_deployments_pods_deployment_id_revision_number_get(self) -> None:
+        """Test case for get_deployment_pods_deployments_pods_deployment_id_revision_number_get
+
+        Get Deployment Pods
         """
         pass
 
@@ -313,6 +334,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_user_vault_item_by_id_endpoint_user_vault_secret_id_get(self) -> None:
+        """Test case for get_user_vault_item_by_id_endpoint_user_vault_secret_id_get
+
+        Get User Vault Item By Id Endpoint
+        """
+        pass
+
     def test_get_volume_endpoint_volumes_volume_id_get(self) -> None:
         """Test case for get_volume_endpoint_volumes_volume_id_get
 
@@ -366,6 +394,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_cluster_clusters_cluster_id_put
 
         Update Cluster
+        """
+        pass
+
+    def test_update_cluster_metadata_clusters_cluster_id_metadata_put(self) -> None:
+        """Test case for update_cluster_metadata_clusters_cluster_id_metadata_put
+
+        Update Cluster Metadata
         """
         pass
 

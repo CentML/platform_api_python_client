@@ -36,7 +36,7 @@ class TestVolumeStatusResponse(unittest.TestCase):
         if include_optional:
             return VolumeStatusResponse(
                 id = 56,
-                backend = 'block',
+                backend = 'filesystem',
                 status = 'active',
                 service_status = 'Healthy',
                 error_message = ''
@@ -44,7 +44,7 @@ class TestVolumeStatusResponse(unittest.TestCase):
         else:
             return VolumeStatusResponse(
                 id = 56,
-                backend = 'block',
+                backend = 'filesystem',
                 status = 'active',
         )
         """

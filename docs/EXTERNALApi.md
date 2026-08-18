@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**delete_cluster_clusters_cluster_id_delete**](EXTERNALApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
 [**delete_service_account_service_accounts_workos_id_delete**](EXTERNALApi.md#delete_service_account_service_accounts_workos_id_delete) | **DELETE** /service-accounts/{workos_id} | Delete Service Account
+[**delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete**](EXTERNALApi.md#delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete) | **DELETE** /user_vault/{secret_id} | Delete User Vault Item By Id Endpoint
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
 [**delete_volume_endpoint_volumes_volume_id_delete**](EXTERNALApi.md#delete_volume_endpoint_volumes_volume_id_delete) | **DELETE** /volumes/{volume_id} | Delete Volume Endpoint
 [**generate_service_account_secret_service_accounts_workos_id_secrets_post**](EXTERNALApi.md#generate_service_account_secret_service_accounts_workos_id_secrets_post) | **POST** /service-accounts/{workos_id}/secrets | Generate Service Account Secret
@@ -32,6 +33,8 @@ Method | HTTP request | Description
 [**get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**](EXTERNALApi.md#get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get) | **GET** /deployments/cserve_v3/{deployment_id} | Get Cserve V3 Deployment
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
 [**get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get) | **GET** /deployments/logs_v3/{deployment_id}/{revision_number} | Get Deployment Logs V3
+[**get_deployment_logs_v4_logs_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_logs_v4_logs_deployment_id_revision_number_get) | **GET** /logs/{deployment_id}/{revision_number} | Get Deployment Logs V4
+[**get_deployment_pods_deployments_pods_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_pods_deployments_pods_deployment_id_revision_number_get) | **GET** /deployments/pods/{deployment_id}/{revision_number} | Get Deployment Pods
 [**get_deployment_revision_deployments_revisions_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_revision_deployments_revisions_deployment_id_revision_number_get) | **GET** /deployments/revisions/{deployment_id}/{revision_number} | Get Deployment Revision
 [**get_deployment_revisions_deployments_revisions_deployment_id_get**](EXTERNALApi.md#get_deployment_revisions_deployments_revisions_deployment_id_get) | **GET** /deployments/revisions/{deployment_id} | Get Deployment Revisions
 [**get_deployment_status_deployments_status_deployment_id_get**](EXTERNALApi.md#get_deployment_status_deployments_status_deployment_id_get) | **GET** /deployments/status/{deployment_id} | Get Deployment Status
@@ -45,6 +48,7 @@ Method | HTTP request | Description
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
+[**get_user_vault_item_by_id_endpoint_user_vault_secret_id_get**](EXTERNALApi.md#get_user_vault_item_by_id_endpoint_user_vault_secret_id_get) | **GET** /user_vault/{secret_id} | Get User Vault Item By Id Endpoint
 [**get_volume_endpoint_volumes_volume_id_get**](EXTERNALApi.md#get_volume_endpoint_volumes_volume_id_get) | **GET** /volumes/{volume_id} | Get Volume Endpoint
 [**get_volume_status_endpoint_volumes_status_volume_id_get**](EXTERNALApi.md#get_volume_status_endpoint_volumes_status_volume_id_get) | **GET** /volumes/status/{volume_id} | Get Volume Status Endpoint
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
@@ -53,6 +57,7 @@ Method | HTTP request | Description
 [**rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**](EXTERNALApi.md#rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put) | **PUT** /deployments/revisions/{deployment_id}/{revision_number} | Rollout Existing Revision
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_cluster_clusters_cluster_id_put**](EXTERNALApi.md#update_cluster_clusters_cluster_id_put) | **PUT** /clusters/{cluster_id} | Update Cluster
+[**update_cluster_metadata_clusters_cluster_id_metadata_put**](EXTERNALApi.md#update_cluster_metadata_clusters_cluster_id_metadata_put) | **PUT** /clusters/{cluster_id}/metadata | Update Cluster Metadata
 [**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
 [**update_cserve_v2_deployment_deployments_cserve_v2_put**](EXTERNALApi.md#update_cserve_v2_deployment_deployments_cserve_v2_put) | **PUT** /deployments/cserve_v2 | Update Cserve V2 Deployment
 [**update_cserve_v3_deployment_deployments_cserve_v3_put**](EXTERNALApi.md#update_cserve_v3_deployment_deployments_cserve_v3_put) | **PUT** /deployments/cserve_v3 | Update Cserve V3 Deployment
@@ -896,7 +901,7 @@ Name | Type | Description  | Notes
 
 Create Volume Endpoint
 
-Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
 ### Example
 
@@ -1195,12 +1200,12 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_user_vault_item_endpoint_user_vault_delete**
-> object delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
+# **delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete**
+> object delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete(secret_id)
 
-Delete User Vault Item Endpoint
+Delete User Vault Item By Id Endpoint
 
-Delete an item of a specific type for the user.
+Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
 
 ### Example
 
@@ -1208,7 +1213,6 @@ Delete an item of a specific type for the user.
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1232,11 +1236,90 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    user_vault_item = platform_api_python_client.UserVaultItem() # UserVaultItem | 
+    secret_id = 56 # int | 
+
+    try:
+        # Delete User Vault Item By Id Endpoint
+        api_response = api_instance.delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete(secret_id)
+        print("The response of EXTERNALApi->delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **secret_id** | **int**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_user_vault_item_endpoint_user_vault_delete**
+> object delete_user_vault_item_endpoint_user_vault_delete(delete_user_vault_item_request)
+
+Delete User Vault Item Endpoint
+
+Compatibility shim for the legacy type/key/visibility delete body.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.delete_user_vault_item_request import DeleteUserVaultItemRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    delete_user_vault_item_request = platform_api_python_client.DeleteUserVaultItemRequest() # DeleteUserVaultItemRequest | 
 
     try:
         # Delete User Vault Item Endpoint
-        api_response = api_instance.delete_user_vault_item_endpoint_user_vault_delete(user_vault_item)
+        api_response = api_instance.delete_user_vault_item_endpoint_user_vault_delete(delete_user_vault_item_request)
         print("The response of EXTERNALApi->delete_user_vault_item_endpoint_user_vault_delete:\n")
         pprint(api_response)
     except Exception as e:
@@ -1250,7 +1333,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_vault_item** | [**UserVaultItem**](UserVaultItem.md)|  | 
+ **delete_user_vault_item_request** | [**DeleteUserVaultItemRequest**](DeleteUserVaultItemRequest.md)|  | 
 
 ### Return type
 
@@ -1434,7 +1517,7 @@ Name | Type | Description  | Notes
 
 Get All User Vault Items Endpoint
 
-Retrieve all items the user has access to (both USER and ORG scoped).
+List metadata for every item the user can read, without any secret values.  Values are deliberately omitted so browsing the vault never bulk-exposes secrets. Callers that need one value fetch it from the by-id endpoint below.
 
 ### Example
 
@@ -2196,6 +2279,176 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDeploymentLogResponse**](GetDeploymentLogResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_deployment_logs_v4_logs_deployment_id_revision_number_get**
+> GetDeploymentLogV4Response get_deployment_logs_v4_logs_deployment_id_revision_number_get(deployment_id, revision_number, pod, fetch_newer=fetch_newer, timestamp=timestamp, max_lines=max_lines)
+
+Get Deployment Logs V4
+
+Retrieve one page of a single pod's logs from Loki, oldest line first.  - `pod`: which pod's logs to read; pick a name reported by   `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store   simply yields empty pages. - `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the   newest page; `true` fetches newer logs (for follow-polling). - `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both   directions: `fetch_newer=false` returns lines strictly older than that millisecond,   `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log   window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at   the head (the oldest page) — to follow live logs, take the tail page first and pass its   newest `timestamp`. There is no server-issued page token — mint the boundary from the   events themselves (pages never split a millisecond, so a delivered boundary millisecond   is always complete): pass the oldest event's `timestamp` to keep paging older, and the   newest event `timestamp` seen on any page — history pages included — to fetch newer. An   empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`   page means nothing new yet — poll again with the same `timestamp`. - `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on   every poll (late-arriving lines land there), so callers must deduplicate by event `id`;   re-delivered lines do not count toward `max_lines`. A span holding more than the log   store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is   dropped and logged server-side). - `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's   per-query ceiling); a page may exceed it when many lines share one millisecond (such a   group is never split across pages, unless it exceeds that same 5000-entry ceiling — the   excess is then dropped and logged server-side) or through the re-delivered span.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_deployment_log_v4_response import GetDeploymentLogV4Response
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+    pod = 'pod_example' # str | 
+    fetch_newer = False # bool |  (optional) (default to False)
+    timestamp = 56 # int |  (optional)
+    max_lines = 100 # int |  (optional) (default to 100)
+
+    try:
+        # Get Deployment Logs V4
+        api_response = api_instance.get_deployment_logs_v4_logs_deployment_id_revision_number_get(deployment_id, revision_number, pod, fetch_newer=fetch_newer, timestamp=timestamp, max_lines=max_lines)
+        print("The response of EXTERNALApi->get_deployment_logs_v4_logs_deployment_id_revision_number_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_deployment_logs_v4_logs_deployment_id_revision_number_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+ **pod** | **str**|  | 
+ **fetch_newer** | **bool**|  | [optional] [default to False]
+ **timestamp** | **int**|  | [optional] 
+ **max_lines** | **int**|  | [optional] [default to 100]
+
+### Return type
+
+[**GetDeploymentLogV4Response**](GetDeploymentLogV4Response.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_deployment_pods_deployments_pods_deployment_id_revision_number_get**
+> GetDeploymentPodsResponse get_deployment_pods_deployments_pods_deployment_id_revision_number_get(deployment_id, revision_number)
+
+Get Deployment Pods
+
+List the pod names recorded for this revision, recently terminated pods included; the history is bounded to a retention window, so the list can differ from the live pods in status_v3.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_deployment_pods_response import GetDeploymentPodsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+
+    try:
+        # Get Deployment Pods
+        api_response = api_instance.get_deployment_pods_deployments_pods_deployment_id_revision_number_get(deployment_id, revision_number)
+        print("The response of EXTERNALApi->get_deployment_pods_deployments_pods_deployment_id_revision_number_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_deployment_pods_deployments_pods_deployment_id_revision_number_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+
+### Return type
+
+[**GetDeploymentPodsResponse**](GetDeploymentPodsResponse.md)
 
 ### Authorization
 
@@ -3241,6 +3494,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_user_vault_item_by_id_endpoint_user_vault_secret_id_get**
+> UserVaultItem get_user_vault_item_by_id_endpoint_user_vault_secret_id_get(secret_id)
+
+Get User Vault Item By Id Endpoint
+
+Resolve a single secret's value.  This is the only endpoint that returns a vault value, so it is the single place where read access to secret material is authorized and auditable.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.user_vault_item import UserVaultItem
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    secret_id = 56 # int | 
+
+    try:
+        # Get User Vault Item By Id Endpoint
+        api_response = api_instance.get_user_vault_item_by_id_endpoint_user_vault_secret_id_get(secret_id)
+        print("The response of EXTERNALApi->get_user_vault_item_by_id_endpoint_user_vault_secret_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_user_vault_item_by_id_endpoint_user_vault_secret_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **secret_id** | **int**|  | 
+
+### Return type
+
+[**UserVaultItem**](UserVaultItem.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_volume_endpoint_volumes_volume_id_get**
 > GetVolumeResponse get_volume_endpoint_volumes_volume_id_get(volume_id)
 
@@ -3842,6 +4174,88 @@ Name | Type | Description  | Notes
 ### Return type
 
 **object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_cluster_metadata_clusters_cluster_id_metadata_put**
+> GetClusterResponse update_cluster_metadata_clusters_cluster_id_metadata_put(cluster_id, update_cluster_metadata_request)
+
+Update Cluster Metadata
+
+Update DB metadata for an org-owned cluster.  Does not drive infra stack updates. Global clusters (parent_id IS NULL) are not mutable here.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_cluster_response import GetClusterResponse
+from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+    update_cluster_metadata_request = platform_api_python_client.UpdateClusterMetadataRequest() # UpdateClusterMetadataRequest | 
+
+    try:
+        # Update Cluster Metadata
+        api_response = api_instance.update_cluster_metadata_clusters_cluster_id_metadata_put(cluster_id, update_cluster_metadata_request)
+        print("The response of EXTERNALApi->update_cluster_metadata_clusters_cluster_id_metadata_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_cluster_metadata_clusters_cluster_id_metadata_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+ **update_cluster_metadata_request** | [**UpdateClusterMetadataRequest**](UpdateClusterMetadataRequest.md)|  | 
+
+### Return type
+
+[**GetClusterResponse**](GetClusterResponse.md)
 
 ### Authorization
 
@@ -4546,11 +4960,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_vault_item_endpoint_user_vault_put**
-> object update_user_vault_item_endpoint_user_vault_put(user_vault_item)
+> UserVaultItem update_user_vault_item_endpoint_user_vault_put(upsert_user_vault_item_request)
 
 Update User Vault Item Endpoint
 
-Update or add an item of a specific type for the user.
+Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
 
 ### Example
 
@@ -4558,6 +4972,7 @@ Update or add an item of a specific type for the user.
 
 ```python
 import platform_api_python_client
+from platform_api_python_client.models.upsert_user_vault_item_request import UpsertUserVaultItemRequest
 from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -4582,11 +4997,11 @@ configuration = platform_api_python_client.Configuration(
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    user_vault_item = platform_api_python_client.UserVaultItem() # UserVaultItem | 
+    upsert_user_vault_item_request = platform_api_python_client.UpsertUserVaultItemRequest() # UpsertUserVaultItemRequest | 
 
     try:
         # Update User Vault Item Endpoint
-        api_response = api_instance.update_user_vault_item_endpoint_user_vault_put(user_vault_item)
+        api_response = api_instance.update_user_vault_item_endpoint_user_vault_put(upsert_user_vault_item_request)
         print("The response of EXTERNALApi->update_user_vault_item_endpoint_user_vault_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -4600,11 +5015,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_vault_item** | [**UserVaultItem**](UserVaultItem.md)|  | 
+ **upsert_user_vault_item_request** | [**UpsertUserVaultItemRequest**](UpsertUserVaultItemRequest.md)|  | 
 
 ### Return type
 
-**object**
+[**UserVaultItem**](UserVaultItem.md)
 
 ### Authorization
 

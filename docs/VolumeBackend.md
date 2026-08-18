@@ -3,7 +3,7 @@
 
 ## Enum
 
-* `BLOCK` (value: `'block'`)
+* `FILESYSTEM` (value: `'filesystem'`)
 
 * `OBJECT` (value: `'object'`)
 

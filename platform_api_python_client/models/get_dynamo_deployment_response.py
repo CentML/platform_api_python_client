@@ -23,6 +23,8 @@ from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
+from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,6 +44,8 @@ class GetDynamoDeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    serving_mode: Optional[DynamoServingMode] = None
+    worker_pools: Optional[DynamoWorkerPools] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
     min_replicas: StrictInt
@@ -55,7 +59,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "serving_mode", "worker_pools", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +100,9 @@ class GetDynamoDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of worker_pools
+        if self.worker_pools:
+            _dict['worker_pools'] = self.worker_pools.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -105,6 +112,11 @@ class GetDynamoDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
+
+        # set to None if worker_pools (nullable) is None
+        # and model_fields_set contains the field
+        if self.worker_pools is None and "worker_pools" in self.model_fields_set:
+            _dict['worker_pools'] = None
 
         # set to None if served_model_name (nullable) is None
         # and model_fields_set contains the field
@@ -160,6 +172,8 @@ class GetDynamoDeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
+            "serving_mode": obj.get("serving_mode"),
+            "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
             "min_replicas": obj.get("min_replicas"),

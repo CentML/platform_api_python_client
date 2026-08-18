@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,8 @@ class GetClusterResponse(BaseModel):
     cluster_name: StrictStr
     display_name: StrictStr
     region: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "cluster_name", "display_name", "region"]
+    deployment_creation_disabled: Optional[StrictBool] = False
+    __properties: ClassVar[List[str]] = ["id", "cluster_name", "display_name", "region", "deployment_creation_disabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +92,8 @@ class GetClusterResponse(BaseModel):
             "id": obj.get("id"),
             "cluster_name": obj.get("cluster_name"),
             "display_name": obj.get("display_name"),
-            "region": obj.get("region")
+            "region": obj.get("region"),
+            "deployment_creation_disabled": obj.get("deployment_creation_disabled") if obj.get("deployment_creation_disabled") is not None else False
         })
         return _obj
 

@@ -35,6 +35,7 @@ class TestUserVaultItem(unittest.TestCase):
         model = UserVaultItem()
         if include_optional:
             return UserVaultItem(
+                id = 1.0,
                 type = 'env_vars',
                 key = '',
                 value = '',
@@ -42,6 +43,7 @@ class TestUserVaultItem(unittest.TestCase):
             )
         else:
             return UserVaultItem(
+                id = 1.0,
                 type = 'env_vars',
                 key = '',
         )

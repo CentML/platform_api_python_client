@@ -21,20 +21,24 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
+from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
+from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateDynamoDeploymentRequest(BaseModel):
     """
-    Create a NVIDIA Dynamo (DynamoGraphDeployment) inference deployment.  Aggregated + KV-router pattern with a vLLM backend. The Frontend pod enables KV-aware routing across worker replicas.
+    Create a Dynamo deployment.  Aggregated mode requires ``hardware_instance_id``; disaggregated mode requires fixed-size ``worker_pools``.
     """ # noqa: E501
     max_surge: Optional[StrictInt] = None
     max_unavailable: Optional[StrictInt] = None
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    hardware_instance_id: StrictInt
+    hardware_instance_id: Optional[StrictInt] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
+    serving_mode: Optional[DynamoServingMode] = None
+    worker_pools: Optional[DynamoWorkerPools] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
     min_replicas: Optional[StrictInt] = 1
@@ -49,7 +53,7 @@ class CreateDynamoDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "serving_mode", "worker_pools", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -97,6 +101,9 @@ class CreateDynamoDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of worker_pools
+        if self.worker_pools:
+            _dict['worker_pools'] = self.worker_pools.to_dict()
         # set to None if max_surge (nullable) is None
         # and model_fields_set contains the field
         if self.max_surge is None and "max_surge" in self.model_fields_set:
@@ -107,10 +114,20 @@ class CreateDynamoDeploymentRequest(BaseModel):
         if self.max_unavailable is None and "max_unavailable" in self.model_fields_set:
             _dict['max_unavailable'] = None
 
+        # set to None if hardware_instance_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.hardware_instance_id is None and "hardware_instance_id" in self.model_fields_set:
+            _dict['hardware_instance_id'] = None
+
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
+
+        # set to None if worker_pools (nullable) is None
+        # and model_fields_set contains the field
+        if self.worker_pools is None and "worker_pools" in self.model_fields_set:
+            _dict['worker_pools'] = None
 
         # set to None if served_model_name (nullable) is None
         # and model_fields_set contains the field
@@ -166,6 +183,8 @@ class CreateDynamoDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
+            "serving_mode": obj.get("serving_mode"),
+            "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
             "min_replicas": obj.get("min_replicas") if obj.get("min_replicas") is not None else 1,

@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import date
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.cluster_config import ClusterConfig
@@ -41,6 +41,7 @@ from platform_api_python_client.models.create_service_account_request import Cre
 from platform_api_python_client.models.create_service_account_response import CreateServiceAccountResponse
 from platform_api_python_client.models.create_volume_request import CreateVolumeRequest
 from platform_api_python_client.models.credits_response import CreditsResponse
+from platform_api_python_client.models.delete_user_vault_item_request import DeleteUserVaultItemRequest
 from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
 from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
 from platform_api_python_client.models.deployment_status_v3_response import DeploymentStatusV3Response
@@ -48,8 +49,11 @@ from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse
 from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
 from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
+from platform_api_python_client.models.get_cluster_response import GetClusterResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
 from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
+from platform_api_python_client.models.get_deployment_log_v4_response import GetDeploymentLogV4Response
+from platform_api_python_client.models.get_deployment_pods_response import GetDeploymentPodsResponse
 from platform_api_python_client.models.get_deployment_revision_response import GetDeploymentRevisionResponse
 from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 from platform_api_python_client.models.get_dynamo_deployment_response import GetDynamoDeploymentResponse
@@ -73,9 +77,11 @@ from platform_api_python_client.models.list_volumes_response import ListVolumesR
 from platform_api_python_client.models.metric import Metric
 from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.service_account_response import ServiceAccountResponse
+from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
 from platform_api_python_client.models.update_service_account_request import UpdateServiceAccountRequest
+from platform_api_python_client.models.upsert_user_vault_item_request import UpsertUserVaultItemRequest
 from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.volume_status_response import VolumeStatusResponse
@@ -3073,7 +3079,7 @@ class EXTERNALApi:
     ) -> GetVolumeResponse:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -3141,7 +3147,7 @@ class EXTERNALApi:
     ) -> ApiResponse[GetVolumeResponse]:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -3209,7 +3215,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Create Volume Endpoint
 
-        Create a volume. Only the block backend is provisioned; object lands in CCL-147.
+        Create a volume. Only the filesystem backend is provisioned; object lands in CCL-147.
 
         :param create_volume_request: (required)
         :type create_volume_request: CreateVolumeRequest
@@ -4115,9 +4121,9 @@ class EXTERNALApi:
 
 
     @validate_call
-    def delete_user_vault_item_endpoint_user_vault_delete(
+    def delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete(
         self,
-        user_vault_item: UserVaultItem,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4131,12 +4137,12 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """Delete User Vault Item Endpoint
+        """Delete User Vault Item By Id Endpoint
 
-        Delete an item of a specific type for the user.
+        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param secret_id: (required)
+        :type secret_id: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4159,8 +4165,273 @@ class EXTERNALApi:
         :return: Returns the result object.
         """ # noqa: E501
 
+        _param = self._delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_with_http_info(
+        self,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Delete User Vault Item By Id Endpoint
+
+        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+
+        :param secret_id: (required)
+        :type secret_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_without_preload_content(
+        self,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete User Vault Item By Id Endpoint
+
+        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+
+        :param secret_id: (required)
+        :type secret_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete_serialize(
+        self,
+        secret_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if secret_id is not None:
+            _path_params['secret_id'] = secret_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/user_vault/{secret_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_user_vault_item_endpoint_user_vault_delete(
+        self,
+        delete_user_vault_item_request: DeleteUserVaultItemRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """(Deprecated) Delete User Vault Item Endpoint
+
+        Compatibility shim for the legacy type/key/visibility delete body.
+
+        :param delete_user_vault_item_request: (required)
+        :type delete_user_vault_item_request: DeleteUserVaultItemRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("DELETE /user_vault is deprecated.", DeprecationWarning)
+
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item=user_vault_item,
+            delete_user_vault_item_request=delete_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4185,7 +4456,7 @@ class EXTERNALApi:
     @validate_call
     def delete_user_vault_item_endpoint_user_vault_delete_with_http_info(
         self,
-        user_vault_item: UserVaultItem,
+        delete_user_vault_item_request: DeleteUserVaultItemRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4199,12 +4470,12 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """Delete User Vault Item Endpoint
+        """(Deprecated) Delete User Vault Item Endpoint
 
-        Delete an item of a specific type for the user.
+        Compatibility shim for the legacy type/key/visibility delete body.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param delete_user_vault_item_request: (required)
+        :type delete_user_vault_item_request: DeleteUserVaultItemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4226,9 +4497,10 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /user_vault is deprecated.", DeprecationWarning)
 
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item=user_vault_item,
+            delete_user_vault_item_request=delete_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4253,7 +4525,7 @@ class EXTERNALApi:
     @validate_call
     def delete_user_vault_item_endpoint_user_vault_delete_without_preload_content(
         self,
-        user_vault_item: UserVaultItem,
+        delete_user_vault_item_request: DeleteUserVaultItemRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4267,12 +4539,12 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Delete User Vault Item Endpoint
+        """(Deprecated) Delete User Vault Item Endpoint
 
-        Delete an item of a specific type for the user.
+        Compatibility shim for the legacy type/key/visibility delete body.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param delete_user_vault_item_request: (required)
+        :type delete_user_vault_item_request: DeleteUserVaultItemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4294,9 +4566,10 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("DELETE /user_vault is deprecated.", DeprecationWarning)
 
         _param = self._delete_user_vault_item_endpoint_user_vault_delete_serialize(
-            user_vault_item=user_vault_item,
+            delete_user_vault_item_request=delete_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4316,7 +4589,7 @@ class EXTERNALApi:
 
     def _delete_user_vault_item_endpoint_user_vault_delete_serialize(
         self,
-        user_vault_item,
+        delete_user_vault_item_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4342,8 +4615,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if user_vault_item is not None:
-            _body_params = user_vault_item
+        if delete_user_vault_item_request is not None:
+            _body_params = delete_user_vault_item_request
 
 
         # set the HTTP header `Accept`
@@ -4936,7 +5209,7 @@ class EXTERNALApi:
     ) -> ListUserVaultItemsResponse:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items the user has access to (both USER and ORG scoped).
+        List metadata for every item the user can read, without any secret values.  Values are deliberately omitted so browsing the vault never bulk-exposes secrets. Callers that need one value fetch it from the by-id endpoint below.
 
         :param type:
         :type type: UserVaultType
@@ -5008,7 +5281,7 @@ class EXTERNALApi:
     ) -> ApiResponse[ListUserVaultItemsResponse]:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items the user has access to (both USER and ORG scoped).
+        List metadata for every item the user can read, without any secret values.  Values are deliberately omitted so browsing the vault never bulk-exposes secrets. Callers that need one value fetch it from the by-id endpoint below.
 
         :param type:
         :type type: UserVaultType
@@ -5080,7 +5353,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Get All User Vault Items Endpoint
 
-        Retrieve all items the user has access to (both USER and ORG scoped).
+        List metadata for every item the user can read, without any secret values.  Values are deliberately omitted so browsing the vault never bulk-exposes secrets. Callers that need one value fetch it from the by-id endpoint below.
 
         :param type:
         :type type: UserVaultType
@@ -5965,7 +6238,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CreditsResponse:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -5989,6 +6262,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -6027,7 +6301,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CreditsResponse]:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -6051,6 +6325,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -6089,7 +6364,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Credits
+        """(Deprecated) Get Credits
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -6113,6 +6388,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /credits is deprecated.", DeprecationWarning)
 
         _param = self._get_credits_credits_get_serialize(
             _request_auth=_request_auth,
@@ -7686,6 +7962,632 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/deployments/logs_v3/{deployment_id}/{revision_number}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_deployment_logs_v4_logs_deployment_id_revision_number_get(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDeploymentLogV4Response:
+        """Get Deployment Logs V4
+
+        Retrieve one page of a single pod's logs from Loki, oldest line first.  - `pod`: which pod's logs to read; pick a name reported by   `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store   simply yields empty pages. - `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the   newest page; `true` fetches newer logs (for follow-polling). - `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both   directions: `fetch_newer=false` returns lines strictly older than that millisecond,   `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log   window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at   the head (the oldest page) — to follow live logs, take the tail page first and pass its   newest `timestamp`. There is no server-issued page token — mint the boundary from the   events themselves (pages never split a millisecond, so a delivered boundary millisecond   is always complete): pass the oldest event's `timestamp` to keep paging older, and the   newest event `timestamp` seen on any page — history pages included — to fetch newer. An   empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`   page means nothing new yet — poll again with the same `timestamp`. - `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on   every poll (late-arriving lines land there), so callers must deduplicate by event `id`;   re-delivered lines do not count toward `max_lines`. A span holding more than the log   store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is   dropped and logged server-side). - `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's   per-query ceiling); a page may exceed it when many lines share one millisecond (such a   group is never split across pages, unless it exceeds that same 5000-entry ceiling — the   excess is then dropped and logged server-side) or through the re-delivered span.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_logs_v4_logs_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentLogV4Response",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_deployment_logs_v4_logs_deployment_id_revision_number_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDeploymentLogV4Response]:
+        """Get Deployment Logs V4
+
+        Retrieve one page of a single pod's logs from Loki, oldest line first.  - `pod`: which pod's logs to read; pick a name reported by   `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store   simply yields empty pages. - `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the   newest page; `true` fetches newer logs (for follow-polling). - `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both   directions: `fetch_newer=false` returns lines strictly older than that millisecond,   `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log   window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at   the head (the oldest page) — to follow live logs, take the tail page first and pass its   newest `timestamp`. There is no server-issued page token — mint the boundary from the   events themselves (pages never split a millisecond, so a delivered boundary millisecond   is always complete): pass the oldest event's `timestamp` to keep paging older, and the   newest event `timestamp` seen on any page — history pages included — to fetch newer. An   empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`   page means nothing new yet — poll again with the same `timestamp`. - `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on   every poll (late-arriving lines land there), so callers must deduplicate by event `id`;   re-delivered lines do not count toward `max_lines`. A span holding more than the log   store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is   dropped and logged server-side). - `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's   per-query ceiling); a page may exceed it when many lines share one millisecond (such a   group is never split across pages, unless it exceeds that same 5000-entry ceiling — the   excess is then dropped and logged server-side) or through the re-delivered span.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_logs_v4_logs_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentLogV4Response",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_deployment_logs_v4_logs_deployment_id_revision_number_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Deployment Logs V4
+
+        Retrieve one page of a single pod's logs from Loki, oldest line first.  - `pod`: which pod's logs to read; pick a name reported by   `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store   simply yields empty pages. - `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the   newest page; `true` fetches newer logs (for follow-polling). - `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both   directions: `fetch_newer=false` returns lines strictly older than that millisecond,   `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log   window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at   the head (the oldest page) — to follow live logs, take the tail page first and pass its   newest `timestamp`. There is no server-issued page token — mint the boundary from the   events themselves (pages never split a millisecond, so a delivered boundary millisecond   is always complete): pass the oldest event's `timestamp` to keep paging older, and the   newest event `timestamp` seen on any page — history pages included — to fetch newer. An   empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`   page means nothing new yet — poll again with the same `timestamp`. - `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on   every poll (late-arriving lines land there), so callers must deduplicate by event `id`;   re-delivered lines do not count toward `max_lines`. A span holding more than the log   store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is   dropped and logged server-side). - `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's   per-query ceiling); a page may exceed it when many lines share one millisecond (such a   group is never split across pages, unless it exceeds that same 5000-entry ceiling — the   excess is then dropped and logged server-side) or through the re-delivered span.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_logs_v4_logs_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentLogV4Response",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_deployment_logs_v4_logs_deployment_id_revision_number_get_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        pod,
+        fetch_newer,
+        timestamp,
+        max_lines,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        if pod is not None:
+            
+            _query_params.append(('pod', pod))
+            
+        if fetch_newer is not None:
+            
+            _query_params.append(('fetch_newer', fetch_newer))
+            
+        if timestamp is not None:
+            
+            _query_params.append(('timestamp', timestamp))
+            
+        if max_lines is not None:
+            
+            _query_params.append(('max_lines', max_lines))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/logs/{deployment_id}/{revision_number}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_deployment_pods_deployments_pods_deployment_id_revision_number_get(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDeploymentPodsResponse:
+        """Get Deployment Pods
+
+        List the pod names recorded for this revision, recently terminated pods included; the history is bounded to a retention window, so the list can differ from the live pods in status_v3.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_pods_deployments_pods_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_deployment_pods_deployments_pods_deployment_id_revision_number_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDeploymentPodsResponse]:
+        """Get Deployment Pods
+
+        List the pod names recorded for this revision, recently terminated pods included; the history is bounded to a retention window, so the list can differ from the live pods in status_v3.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_pods_deployments_pods_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_deployment_pods_deployments_pods_deployment_id_revision_number_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Deployment Pods
+
+        List the pod names recorded for this revision, recently terminated pods included; the history is bounded to a retention window, so the list can differ from the live pods in status_v3.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_deployment_pods_deployments_pods_deployment_id_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_deployment_pods_deployments_pods_deployment_id_revision_number_get_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/pods/{deployment_id}/{revision_number}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10668,7 +11570,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ListDailyBillResponse:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10696,6 +11598,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,
@@ -10739,7 +11642,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ListDailyBillResponse]:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10767,6 +11670,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,
@@ -10810,7 +11714,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Usage
+        """(Deprecated) Get Usage
 
 
         :param start_date: (required)
@@ -10838,6 +11742,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
             start_date=start_date,
@@ -11262,6 +12167,270 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/deployments/usage/{deployment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_user_vault_item_by_id_endpoint_user_vault_secret_id_get(
+        self,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserVaultItem:
+        """Get User Vault Item By Id Endpoint
+
+        Resolve a single secret's value.  This is the only endpoint that returns a vault value, so it is the single place where read access to secret material is authorized and auditable.
+
+        :param secret_id: (required)
+        :type secret_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UserVaultItem",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_with_http_info(
+        self,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UserVaultItem]:
+        """Get User Vault Item By Id Endpoint
+
+        Resolve a single secret's value.  This is the only endpoint that returns a vault value, so it is the single place where read access to secret material is authorized and auditable.
+
+        :param secret_id: (required)
+        :type secret_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UserVaultItem",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_without_preload_content(
+        self,
+        secret_id: Annotated[int, Field(strict=True, ge=1)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get User Vault Item By Id Endpoint
+
+        Resolve a single secret's value.  This is the only endpoint that returns a vault value, so it is the single place where read access to secret material is authorized and auditable.
+
+        :param secret_id: (required)
+        :type secret_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_serialize(
+            secret_id=secret_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UserVaultItem",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_user_vault_item_by_id_endpoint_user_vault_secret_id_get_serialize(
+        self,
+        secret_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if secret_id is not None:
+            _path_params['secret_id'] = secret_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/user_vault/{secret_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13412,6 +14581,298 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/clusters/{cluster_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_cluster_metadata_clusters_cluster_id_metadata_put(
+        self,
+        cluster_id: StrictInt,
+        update_cluster_metadata_request: UpdateClusterMetadataRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetClusterResponse:
+        """Update Cluster Metadata
+
+        Update DB metadata for an org-owned cluster.  Does not drive infra stack updates. Global clusters (parent_id IS NULL) are not mutable here.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param update_cluster_metadata_request: (required)
+        :type update_cluster_metadata_request: UpdateClusterMetadataRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_cluster_metadata_clusters_cluster_id_metadata_put_serialize(
+            cluster_id=cluster_id,
+            update_cluster_metadata_request=update_cluster_metadata_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_cluster_metadata_clusters_cluster_id_metadata_put_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        update_cluster_metadata_request: UpdateClusterMetadataRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetClusterResponse]:
+        """Update Cluster Metadata
+
+        Update DB metadata for an org-owned cluster.  Does not drive infra stack updates. Global clusters (parent_id IS NULL) are not mutable here.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param update_cluster_metadata_request: (required)
+        :type update_cluster_metadata_request: UpdateClusterMetadataRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_cluster_metadata_clusters_cluster_id_metadata_put_serialize(
+            cluster_id=cluster_id,
+            update_cluster_metadata_request=update_cluster_metadata_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_cluster_metadata_clusters_cluster_id_metadata_put_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        update_cluster_metadata_request: UpdateClusterMetadataRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Cluster Metadata
+
+        Update DB metadata for an org-owned cluster.  Does not drive infra stack updates. Global clusters (parent_id IS NULL) are not mutable here.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param update_cluster_metadata_request: (required)
+        :type update_cluster_metadata_request: UpdateClusterMetadataRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_cluster_metadata_clusters_cluster_id_metadata_put_serialize(
+            cluster_id=cluster_id,
+            update_cluster_metadata_request=update_cluster_metadata_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_cluster_metadata_clusters_cluster_id_metadata_put_serialize(
+        self,
+        cluster_id,
+        update_cluster_metadata_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_cluster_metadata_request is not None:
+            _body_params = update_cluster_metadata_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/clusters/{cluster_id}/metadata',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15951,7 +17412,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put(
         self,
-        user_vault_item: UserVaultItem,
+        upsert_user_vault_item_request: UpsertUserVaultItemRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -15964,13 +17425,13 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> UserVaultItem:
         """Update User Vault Item Endpoint
 
-        Update or add an item of a specific type for the user.
+        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param upsert_user_vault_item_request: (required)
+        :type upsert_user_vault_item_request: UpsertUserVaultItemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -15994,7 +17455,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item=user_vault_item,
+            upsert_user_vault_item_request=upsert_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16002,7 +17463,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "UserVaultItem",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -16019,7 +17480,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put_with_http_info(
         self,
-        user_vault_item: UserVaultItem,
+        upsert_user_vault_item_request: UpsertUserVaultItemRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -16032,13 +17493,13 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[UserVaultItem]:
         """Update User Vault Item Endpoint
 
-        Update or add an item of a specific type for the user.
+        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param upsert_user_vault_item_request: (required)
+        :type upsert_user_vault_item_request: UpsertUserVaultItemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16062,7 +17523,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item=user_vault_item,
+            upsert_user_vault_item_request=upsert_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16070,7 +17531,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "UserVaultItem",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -16087,7 +17548,7 @@ class EXTERNALApi:
     @validate_call
     def update_user_vault_item_endpoint_user_vault_put_without_preload_content(
         self,
-        user_vault_item: UserVaultItem,
+        upsert_user_vault_item_request: UpsertUserVaultItemRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -16103,10 +17564,10 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update User Vault Item Endpoint
 
-        Update or add an item of a specific type for the user.
+        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
 
-        :param user_vault_item: (required)
-        :type user_vault_item: UserVaultItem
+        :param upsert_user_vault_item_request: (required)
+        :type upsert_user_vault_item_request: UpsertUserVaultItemRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -16130,7 +17591,7 @@ class EXTERNALApi:
         """ # noqa: E501
 
         _param = self._update_user_vault_item_endpoint_user_vault_put_serialize(
-            user_vault_item=user_vault_item,
+            upsert_user_vault_item_request=upsert_user_vault_item_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -16138,7 +17599,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
+            '200': "UserVaultItem",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -16150,7 +17611,7 @@ class EXTERNALApi:
 
     def _update_user_vault_item_endpoint_user_vault_put_serialize(
         self,
-        user_vault_item,
+        upsert_user_vault_item_request,
         _request_auth,
         _content_type,
         _headers,
@@ -16176,8 +17637,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if user_vault_item is not None:
-            _body_params = user_vault_item
+        if upsert_user_vault_item_request is not None:
+            _body_params = upsert_user_vault_item_request
 
 
         # set the HTTP header `Accept`

@@ -25,9 +25,9 @@ from platform_api_python_client.models.volume_status import VolumeStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class GetBlockVolumeResponse(BaseModel):
+class GetFilesystemVolumeResponse(BaseModel):
     """
-    GetBlockVolumeResponse
+    GetFilesystemVolumeResponse
     """ # noqa: E501
     id: StrictInt
     name: StrictStr
@@ -44,8 +44,8 @@ class GetBlockVolumeResponse(BaseModel):
     @field_validator('backend')
     def backend_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['block']):
-            raise ValueError("must be one of enum values ('block')")
+        if value not in set(['filesystem']):
+            raise ValueError("must be one of enum values ('filesystem')")
         return value
 
     model_config = ConfigDict(
@@ -66,7 +66,7 @@ class GetBlockVolumeResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetBlockVolumeResponse from a JSON string"""
+        """Create an instance of GetFilesystemVolumeResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,7 +91,7 @@ class GetBlockVolumeResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetBlockVolumeResponse from a dict"""
+        """Create an instance of GetFilesystemVolumeResponse from a dict"""
         if obj is None:
             return None
 

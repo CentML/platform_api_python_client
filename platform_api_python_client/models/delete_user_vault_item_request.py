@@ -17,46 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from platform_api_python_client.models.user_vault_type import UserVaultType
+from platform_api_python_client.models.vault_scope import VaultScope
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateBlockVolumeRequest(BaseModel):
+class DeleteUserVaultItemRequest(BaseModel):
     """
-    CreateBlockVolumeRequest
+    Body for the legacy delete, deliberately permissive.  Kept separate from UserVaultItem so that model can require `id`. Here `id` stays optional because resolving by (type, key, visibility) is the only way to delete a row for which the client was never handed an id, and `value` is accepted and ignored because old clients send back a whole vault item.
     """ # noqa: E501
-    name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
-    cluster_id: StrictInt
-    backend: StrictStr
-    size_gb: Optional[Annotated[int, Field(le=65536, strict=True, ge=1)]] = 100
-    storage_class: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "size_gb", "storage_class"]
-
-    @field_validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
-        return value
-
-    @field_validator('backend')
-    def backend_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['block']):
-            raise ValueError("must be one of enum values ('block')")
-        return value
-
-    @field_validator('storage_class')
-    def storage_class_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
-        return value
+    id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    type: UserVaultType
+    key: StrictStr
+    value: Optional[StrictStr] = None
+    visibility: Optional[VaultScope] = None
+    __properties: ClassVar[List[str]] = ["id", "type", "key", "value", "visibility"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,7 +54,7 @@ class CreateBlockVolumeRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBlockVolumeRequest from a JSON string"""
+        """Create an instance of DeleteUserVaultItemRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -97,16 +75,21 @@ class CreateBlockVolumeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if storage_class (nullable) is None
+        # set to None if id (nullable) is None
         # and model_fields_set contains the field
-        if self.storage_class is None and "storage_class" in self.model_fields_set:
-            _dict['storage_class'] = None
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if value (nullable) is None
+        # and model_fields_set contains the field
+        if self.value is None and "value" in self.model_fields_set:
+            _dict['value'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBlockVolumeRequest from a dict"""
+        """Create an instance of DeleteUserVaultItemRequest from a dict"""
         if obj is None:
             return None
 
@@ -114,11 +97,11 @@ class CreateBlockVolumeRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "name": obj.get("name"),
-            "cluster_id": obj.get("cluster_id"),
-            "backend": obj.get("backend"),
-            "size_gb": obj.get("size_gb") if obj.get("size_gb") is not None else 100,
-            "storage_class": obj.get("storage_class")
+            "id": obj.get("id"),
+            "type": obj.get("type"),
+            "key": obj.get("key"),
+            "value": obj.get("value"),
+            "visibility": obj.get("visibility")
         })
         return _obj
 

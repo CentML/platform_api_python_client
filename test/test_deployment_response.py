@@ -49,6 +49,8 @@ class TestDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                serving_mode = 'aggregated',
+                worker_pools = { },
                 model = '',
                 served_model_name = '',
                 min_replicas = 56,
@@ -86,7 +88,10 @@ class TestDeploymentResponse(unittest.TestCase):
                     content = '0', ),
                 metrics = platform_api_python_client.models.metrics_config.MetricsConfig(
                     port = 1.0, 
-                    path = '/W(,j>6>eow3jCO&}nl`:&~', )
+                    path = '/W(,j>6>eow3jCO&}nl`:&~', ),
+                exposed_port = 56,
+                ssh_public_key = '',
+                ssh_password = ''
             )
         else:
             return DeploymentResponse(
@@ -105,6 +110,7 @@ class TestDeploymentResponse(unittest.TestCase):
                 max_replicas = 56,
                 recipe = { },
                 container_port = 56,
+                exposed_port = 56,
         )
         """
 

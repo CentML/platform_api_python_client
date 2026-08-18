@@ -49,6 +49,8 @@ class TestGetDynamoDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                serving_mode = 'aggregated',
+                worker_pools = { },
                 model = '',
                 served_model_name = '',
                 min_replicas = 56,

@@ -1,10 +1,12 @@
 # UserVaultItem
 
+Response model for vault reads and writes.  Every row has a primary key, so `id` is always present and clients can always address a secret by it. `key` stays an unconstrained str and `value` stays optional so secrets stored before the SSM migration remain listable and readable: enforcing the write rules here would turn one such row into a 500 for the whole listing. Write validation lives in UpsertUserVaultItemRequest.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **int** |  | 
 **type** | [**UserVaultType**](UserVaultType.md) |  | 
 **key** | **str** |  | 
 **value** | **str** |  | [optional] 

@@ -1,6 +1,6 @@
 # CreateDynamoDeploymentRequest
 
-Create a NVIDIA Dynamo (DynamoGraphDeployment) inference deployment.  Aggregated + KV-router pattern with a vLLM backend. The Frontend pod enables KV-aware routing across worker replicas.
+Create a Dynamo deployment.  Aggregated mode requires ``hardware_instance_id``; disaggregated mode requires fixed-size ``worker_pools``.
 
 ## Properties
 
@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **max_unavailable** | **int** |  | [optional] 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | 
+**hardware_instance_id** | **int** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
+**serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
+**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
 **min_replicas** | **int** |  | [optional] [default to 1]

@@ -40,7 +40,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                         id = 56, 
                         cluster_name = '', 
                         display_name = '', 
-                        region = '', )
+                        region = '', 
+                        deployment_creation_disabled = True, )
                     ]
             )
         else:
@@ -50,7 +51,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                         id = 56, 
                         cluster_name = '', 
                         display_name = '', 
-                        region = '', )
+                        region = '', 
+                        deployment_creation_disabled = True, )
                     ],
         )
         """

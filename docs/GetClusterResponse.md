@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **cluster_name** | **str** |  | 
 **display_name** | **str** |  | 
 **region** | **str** |  | [optional] 
+**deployment_creation_disabled** | **bool** |  | [optional] [default to False]
 
 ## Example
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **pvc_name** | **str** |  | 
 **created_at** | **datetime** |  | 
 **size_gb** | **int** |  | 
-**storage_class** | **str** |  |
+**storage_class** | **str** |  | 
 **provider** | [**ObjectStorageProvider**](ObjectStorageProvider.md) |  | 
 **bucket** | **str** |  | 
 **region** | **str** |  | 
@@ -41,4 +41,5 @@ get_volume_response_dict = get_volume_response_instance.to_dict()
 get_volume_response_from_dict = GetVolumeResponse.from_dict(get_volume_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

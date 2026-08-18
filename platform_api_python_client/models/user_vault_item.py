@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.vault_scope import VaultScope
 from typing import Optional, Set
@@ -26,13 +27,14 @@ from typing_extensions import Self
 
 class UserVaultItem(BaseModel):
     """
-    UserVaultItem
+    Response model for vault reads and writes.  Every row has a primary key, so `id` is always present and clients can always address a secret by it. `key` stays an unconstrained str and `value` stays optional so secrets stored before the SSM migration remain listable and readable: enforcing the write rules here would turn one such row into a 500 for the whole listing. Write validation lives in UpsertUserVaultItemRequest.
     """ # noqa: E501
+    id: Annotated[int, Field(strict=True, ge=1)]
     type: UserVaultType
     key: StrictStr
     value: Optional[StrictStr] = None
     visibility: Optional[VaultScope] = None
-    __properties: ClassVar[List[str]] = ["type", "key", "value", "visibility"]
+    __properties: ClassVar[List[str]] = ["id", "type", "key", "value", "visibility"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,7 @@ class UserVaultItem(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "type": obj.get("type"),
             "key": obj.get("key"),
             "value": obj.get("value"),

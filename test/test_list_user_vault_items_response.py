@@ -37,6 +37,7 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
             return ListUserVaultItemsResponse(
                 results = [
                     platform_api_python_client.models.user_vault_item.UserVaultItem(
+                        id = 1.0, 
                         type = 'env_vars', 
                         key = '', 
                         value = '', 
@@ -47,6 +48,7 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
             return ListUserVaultItemsResponse(
                 results = [
                     platform_api_python_client.models.user_vault_item.UserVaultItem(
+                        id = 1.0, 
                         type = 'env_vars', 
                         key = '', 
                         value = '', 

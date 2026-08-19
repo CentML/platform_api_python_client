@@ -50,6 +50,12 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                     'key' : ''
                     },
                 exposed_port = 56,
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ],
                 ssh_public_key = '',
                 ssh_password = '',
                 env_vars = {

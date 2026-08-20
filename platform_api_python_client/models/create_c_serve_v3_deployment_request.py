@@ -42,14 +42,13 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     endpoint_certificate_authority: Optional[StrictStr] = None
     min_replicas: StrictInt
     max_replicas: StrictInt
-    initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     cooldown_period: Optional[StrictInt] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -135,11 +134,6 @@ class CreateCServeV3DeploymentRequest(BaseModel):
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
             _dict['endpoint_certificate_authority'] = None
 
-        # set to None if initial_replicas (nullable) is None
-        # and model_fields_set contains the field
-        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
-            _dict['initial_replicas'] = None
-
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -176,7 +170,6 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
-            "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period"),
             "env_vars": obj.get("env_vars"),

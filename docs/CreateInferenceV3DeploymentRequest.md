@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **port** | **int** |  | 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 

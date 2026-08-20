@@ -52,7 +52,6 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                 container_port = 56,
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
                 concurrency = 56,
                 cooldown_period = 56,
                 healthcheck = '',

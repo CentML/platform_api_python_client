@@ -68,7 +68,6 @@ class TestDeploymentResponse(unittest.TestCase):
                 backend_protocol = 'HTTP',
                 recipe = { },
                 cserve_version = '',
-                initial_replicas = 56,
                 session_affinity = True,
                 container_port = 56,
                 healthcheck = '',

@@ -19,7 +19,6 @@ Name | Type | Description | Notes
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 

@@ -53,7 +53,6 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 cserve_version = '',
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
                 endpoint_certificate_authority = '',
                 endpoint_bearer_token = '',
                 concurrency = 56,

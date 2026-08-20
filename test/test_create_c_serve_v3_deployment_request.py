@@ -51,7 +51,6 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                 endpoint_certificate_authority = '',
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
                 concurrency = 56,
                 cooldown_period = 56,
                 env_vars = {

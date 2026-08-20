@@ -45,6 +45,7 @@ Name | Type | Description | Notes
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 **exposed_port** | **int** |  | 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 

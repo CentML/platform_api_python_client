@@ -42,6 +42,7 @@ Method | HTTP request | Description
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
 [**get_dynamo_deployment_deployments_dynamo_deployment_id_get**](EXTERNALApi.md#get_dynamo_deployment_deployments_dynamo_deployment_id_get) | **GET** /deployments/dynamo/{deployment_id} | Get Dynamo Deployment
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
+[**get_hardware_presets_hardware_presets_get**](EXTERNALApi.md#get_hardware_presets_hardware_presets_get) | **GET** /hardware-presets | Get Hardware Presets
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
 [**get_job_deployment_deployments_job_deployment_id_get**](EXTERNALApi.md#get_job_deployment_deployments_job_deployment_id_get) | **GET** /deployments/job/{deployment_id} | Get Job Deployment
@@ -3017,6 +3018,78 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_hardware_presets_hardware_presets_get**
+> ListHardwarePresetResponse get_hardware_presets_hardware_presets_get()
+
+Get Hardware Presets
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_hardware_preset_response import ListHardwarePresetResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Get Hardware Presets
+        api_response = api_instance.get_hardware_presets_hardware_presets_get()
+        print("The response of EXTERNALApi->get_hardware_presets_hardware_presets_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_hardware_presets_hardware_presets_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ListHardwarePresetResponse**](ListHardwarePresetResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

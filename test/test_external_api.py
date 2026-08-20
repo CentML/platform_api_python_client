@@ -292,6 +292,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_hardware_presets_hardware_presets_get(self) -> None:
+        """Test case for get_hardware_presets_hardware_presets_get
+
+        Get Hardware Presets
+        """
+        pass
+
     def test_get_inference_deployment_deployments_inference_deployment_id_get(self) -> None:
         """Test case for get_inference_deployment_deployments_inference_deployment_id_get
 

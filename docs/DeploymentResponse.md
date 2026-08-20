@@ -34,7 +34,6 @@ Name | Type | Description | Notes
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
-**initial_replicas** | **int** |  | [optional] 
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
@@ -45,6 +44,7 @@ Name | Type | Description | Notes
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 **exposed_port** | **int** |  | 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 

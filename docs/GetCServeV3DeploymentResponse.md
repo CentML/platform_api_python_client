@@ -21,7 +21,6 @@ Name | Type | Description | Notes
 **cserve_version** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
 **concurrency** | **int** |  | [optional] 

@@ -68,7 +68,6 @@ class TestDeploymentResponse(unittest.TestCase):
                 backend_protocol = 'HTTP',
                 recipe = { },
                 cserve_version = '',
-                initial_replicas = 56,
                 session_affinity = True,
                 container_port = 56,
                 healthcheck = '',
@@ -90,6 +89,12 @@ class TestDeploymentResponse(unittest.TestCase):
                     port = 1.0, 
                     path = '/W(,j>6>eow3jCO&}nl`:&~', ),
                 exposed_port = 56,
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ],
                 ssh_public_key = '',
                 ssh_password = ''
             )

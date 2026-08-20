@@ -46,7 +46,6 @@ class GetCServeV3DeploymentResponse(BaseModel):
     cserve_version: Optional[StrictStr] = None
     min_replicas: StrictInt
     max_replicas: StrictInt
-    initial_replicas: Optional[StrictInt] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
     concurrency: Optional[StrictInt] = None
@@ -55,7 +54,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "initial_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,11 +113,6 @@ class GetCServeV3DeploymentResponse(BaseModel):
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
             _dict['cserve_version'] = None
 
-        # set to None if initial_replicas (nullable) is None
-        # and model_fields_set contains the field
-        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
-            _dict['initial_replicas'] = None
-
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
@@ -162,7 +156,6 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "cserve_version": obj.get("cserve_version"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
-            "initial_replicas": obj.get("initial_replicas"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
             "concurrency": obj.get("concurrency"),

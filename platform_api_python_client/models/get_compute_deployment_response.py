@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
+from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,12 +44,13 @@ class GetComputeDeploymentResponse(BaseModel):
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     exposed_port: StrictInt
+    volume_mounts: Optional[List[VolumeMount]] = None
     ssh_public_key: Optional[StrictStr] = None
     ssh_password: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "exposed_port", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "exposed_port", "volume_mounts", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,6 +91,13 @@ class GetComputeDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
+        _items = []
+        if self.volume_mounts:
+            for _item_volume_mounts in self.volume_mounts:
+                if _item_volume_mounts:
+                    _items.append(_item_volume_mounts.to_dict())
+            _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:
             _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
@@ -147,6 +156,7 @@ class GetComputeDeploymentResponse(BaseModel):
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
             "exposed_port": obj.get("exposed_port"),
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "ssh_public_key": obj.get("ssh_public_key"),
             "ssh_password": obj.get("ssh_password"),
             "env_vars": obj.get("env_vars"),

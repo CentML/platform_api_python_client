@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
+from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,7 +38,8 @@ class CreateComputeDeploymentRequest(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging"]
+    volume_mounts: Optional[List[VolumeMount]] = None
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging", "volume_mounts"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -88,6 +90,13 @@ class CreateComputeDeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:
             _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
+        _items = []
+        if self.volume_mounts:
+            for _item_volume_mounts in self.volume_mounts:
+                if _item_volume_mounts:
+                    _items.append(_item_volume_mounts.to_dict())
+            _dict['volume_mounts'] = _items
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
@@ -118,7 +127,8 @@ class CreateComputeDeploymentRequest(BaseModel):
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "ssh_public_key": obj.get("ssh_public_key"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None
         })
         return _obj
 

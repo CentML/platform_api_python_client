@@ -51,7 +51,6 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 port = 1.0,
                 min_replicas = 56,
                 max_replicas = 56,
-                initial_replicas = 56,
                 concurrency = 56,
                 cooldown_period = 56,
                 healthcheck = '',

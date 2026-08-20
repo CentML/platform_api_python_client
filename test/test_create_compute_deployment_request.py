@@ -47,7 +47,13 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                     username = '', 
                     password = '', ),
                 ssh_public_key = '',
-                enable_logging = True
+                enable_logging = True,
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ]
             )
         else:
             return CreateComputeDeploymentRequest(

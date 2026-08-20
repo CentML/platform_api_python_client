@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **ssh_public_key** | **str** |  | 
 **enable_logging** | **bool** |  | [optional] [default to False]
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 
 ## Example
 

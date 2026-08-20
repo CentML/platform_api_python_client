@@ -43,7 +43,6 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     port: Annotated[int, Field(le=65535, strict=True, ge=1)]
     min_replicas: StrictInt
     max_replicas: StrictInt
-    initial_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     cooldown_period: Optional[StrictInt] = None
     healthcheck: Optional[StrictStr] = None
@@ -58,7 +57,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "initial_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -135,11 +134,6 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
-        # set to None if initial_replicas (nullable) is None
-        # and model_fields_set contains the field
-        if self.initial_replicas is None and "initial_replicas" in self.model_fields_set:
-            _dict['initial_replicas'] = None
-
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -214,7 +208,6 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
-            "initial_replicas": obj.get("initial_replicas"),
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period"),
             "healthcheck": obj.get("healthcheck"),

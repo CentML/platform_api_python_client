@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **container_port** | **int** |  | 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
-**initial_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] [default to 1800]
 **healthcheck** | **str** |  | [optional] 

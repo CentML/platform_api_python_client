@@ -16,7 +16,6 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from datetime import date
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, Optional
 from typing_extensions import Annotated
@@ -71,11 +70,14 @@ from platform_api_python_client.models.list_get_cluster_response import ListGetC
 from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
 from platform_api_python_client.models.list_hardware_preset_response import ListHardwarePresetResponse
+from platform_api_python_client.models.list_organization_gpu_quota_response import ListOrganizationGpuQuotaResponse
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_service_accounts_response import ListServiceAccountsResponse
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
 from platform_api_python_client.models.list_volumes_response import ListVolumesResponse
 from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.organization_gpu_quota_request import OrganizationGpuQuotaRequest
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
 from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.service_account_response import ServiceAccountResponse
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
@@ -3861,6 +3863,285 @@ class EXTERNALApi:
 
 
     @validate_call
+    def delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OrganizationGpuQuotaResponse:
+        """Delete Org Gpu Quota On Cluster
+
+        Set persisted quota to unlimited (-1).  Creates a row if none exists. Does not remove the row or the KAI Queue CR.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OrganizationGpuQuotaResponse]:
+        """Delete Org Gpu Quota On Cluster
+
+        Set persisted quota to unlimited (-1).  Creates a row if none exists. Does not remove the row or the KAI Queue CR.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete Org Gpu Quota On Cluster
+
+        Set persisted quota to unlimited (-1).  Creates a row if none exists. Does not remove the row or the KAI Queue CR.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete_serialize(
+        self,
+        cluster_id,
+        organization_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        if organization_id is not None:
+            _path_params['organization_id'] = organization_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/clusters/{cluster_id}/organizations/{organization_id}/gpu-quota',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def delete_service_account_service_accounts_workos_id_delete(
         self,
         workos_id: StrictStr,
@@ -6448,7 +6729,6 @@ class EXTERNALApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -7256,6 +7536,272 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/deployments/cserve_v3/{deployment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_current_org_gpu_quota_organizations_gpu_quota_get(
+        self,
+        cluster_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListOrganizationGpuQuotaResponse:
+        """Get Current Org Gpu Quota
+
+        Return persisted GPU quotas for the caller's organization. Usage fields come later.  ``cluster_id`` filters to that cluster when it is visible. Unknown or invisible cluster IDs return an empty list rather than 404 so this member endpoint does not leak whether a cluster exists.
+
+        :param cluster_id:
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_current_org_gpu_quota_organizations_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_current_org_gpu_quota_organizations_gpu_quota_get_with_http_info(
+        self,
+        cluster_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListOrganizationGpuQuotaResponse]:
+        """Get Current Org Gpu Quota
+
+        Return persisted GPU quotas for the caller's organization. Usage fields come later.  ``cluster_id`` filters to that cluster when it is visible. Unknown or invisible cluster IDs return an empty list rather than 404 so this member endpoint does not leak whether a cluster exists.
+
+        :param cluster_id:
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_current_org_gpu_quota_organizations_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_current_org_gpu_quota_organizations_gpu_quota_get_without_preload_content(
+        self,
+        cluster_id: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Current Org Gpu Quota
+
+        Return persisted GPU quotas for the caller's organization. Usage fields come later.  ``cluster_id`` filters to that cluster when it is visible. Unknown or invisible cluster IDs return an empty list rather than 404 so this member endpoint does not leak whether a cluster exists.
+
+        :param cluster_id:
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_current_org_gpu_quota_organizations_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_current_org_gpu_quota_organizations_gpu_quota_get_serialize(
+        self,
+        cluster_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if cluster_id is not None:
+            
+            _query_params.append(('cluster_id', cluster_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/organizations/gpu-quota',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10508,7 +11054,7 @@ class EXTERNALApi:
 
 
     @validate_call
-    def get_hardware_presets_hardware_presets_get(
+    def get_hardware_presets_hardware_instances_presets_get(
         self,
         _request_timeout: Union[
             None,
@@ -10548,7 +11094,7 @@ class EXTERNALApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_hardware_presets_hardware_presets_get_serialize(
+        _param = self._get_hardware_presets_hardware_instances_presets_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10570,7 +11116,7 @@ class EXTERNALApi:
 
 
     @validate_call
-    def get_hardware_presets_hardware_presets_get_with_http_info(
+    def get_hardware_presets_hardware_instances_presets_get_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -10610,7 +11156,7 @@ class EXTERNALApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_hardware_presets_hardware_presets_get_serialize(
+        _param = self._get_hardware_presets_hardware_instances_presets_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10632,7 +11178,7 @@ class EXTERNALApi:
 
 
     @validate_call
-    def get_hardware_presets_hardware_presets_get_without_preload_content(
+    def get_hardware_presets_hardware_instances_presets_get_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -10672,7 +11218,7 @@ class EXTERNALApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_hardware_presets_hardware_presets_get_serialize(
+        _param = self._get_hardware_presets_hardware_instances_presets_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10689,7 +11235,7 @@ class EXTERNALApi:
         return response_data.response
 
 
-    def _get_hardware_presets_hardware_presets_get_serialize(
+    def _get_hardware_presets_hardware_instances_presets_get_serialize(
         self,
         _request_auth,
         _content_type,
@@ -10734,7 +11280,7 @@ class EXTERNALApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/hardware-presets',
+            resource_path='/hardware-instances/presets',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11534,6 +12080,282 @@ class EXTERNALApi:
 
 
     @validate_call
+    def get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OrganizationGpuQuotaResponse:
+        """Get Org Gpu Quota On Cluster
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OrganizationGpuQuotaResponse]:
+        """Get Org Gpu Quota On Cluster
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Org Gpu Quota On Cluster
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get_serialize(
+        self,
+        cluster_id,
+        organization_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        if organization_id is not None:
+            _path_params['organization_id'] = organization_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/clusters/{cluster_id}/organizations/{organization_id}/gpu-quota',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_prebuilt_images_prebuilt_images_get(
         self,
         type: Optional[DeploymentType] = None,
@@ -11799,8 +12621,6 @@ class EXTERNALApi:
     @validate_call
     def get_usage_daily_bills_get(
         self,
-        start_date: date,
-        end_date: date,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11817,10 +12637,6 @@ class EXTERNALApi:
         """(Deprecated) Get Usage
 
 
-        :param start_date: (required)
-        :type start_date: date
-        :param end_date: (required)
-        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11845,8 +12661,6 @@ class EXTERNALApi:
         warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
-            start_date=start_date,
-            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11855,7 +12669,6 @@ class EXTERNALApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListDailyBillResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11871,8 +12684,6 @@ class EXTERNALApi:
     @validate_call
     def get_usage_daily_bills_get_with_http_info(
         self,
-        start_date: date,
-        end_date: date,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11889,10 +12700,6 @@ class EXTERNALApi:
         """(Deprecated) Get Usage
 
 
-        :param start_date: (required)
-        :type start_date: date
-        :param end_date: (required)
-        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11917,8 +12724,6 @@ class EXTERNALApi:
         warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
-            start_date=start_date,
-            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11927,7 +12732,6 @@ class EXTERNALApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListDailyBillResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11943,8 +12747,6 @@ class EXTERNALApi:
     @validate_call
     def get_usage_daily_bills_get_without_preload_content(
         self,
-        start_date: date,
-        end_date: date,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11961,10 +12763,6 @@ class EXTERNALApi:
         """(Deprecated) Get Usage
 
 
-        :param start_date: (required)
-        :type start_date: date
-        :param end_date: (required)
-        :type end_date: date
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -11989,8 +12787,6 @@ class EXTERNALApi:
         warnings.warn("GET /daily_bills is deprecated.", DeprecationWarning)
 
         _param = self._get_usage_daily_bills_get_serialize(
-            start_date=start_date,
-            end_date=end_date,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -11999,7 +12795,6 @@ class EXTERNALApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListDailyBillResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -12010,8 +12805,6 @@ class EXTERNALApi:
 
     def _get_usage_daily_bills_get_serialize(
         self,
-        start_date,
-        end_date,
         _request_auth,
         _content_type,
         _headers,
@@ -12034,32 +12827,6 @@ class EXTERNALApi:
 
         # process the path parameters
         # process the query parameters
-        if start_date is not None:
-            if isinstance(start_date, date):
-                _query_params.append(
-                    (
-                        'start_date',
-                        start_date.strftime(
-                            self.api_client.configuration.date_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('start_date', start_date))
-            
-        if end_date is not None:
-            if isinstance(end_date, date):
-                _query_params.append(
-                    (
-                        'end_date',
-                        end_date.strftime(
-                            self.api_client.configuration.date_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('end_date', end_date))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -12076,7 +12843,6 @@ class EXTERNALApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -13759,6 +14525,267 @@ class EXTERNALApi:
 
 
     @validate_call
+    def list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListOrganizationGpuQuotaResponse:
+        """List Cluster Org Gpu Quotas
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListOrganizationGpuQuotaResponse]:
+        """List Cluster Org Gpu Quotas
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List Cluster Org Gpu Quotas
+
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListOrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get_serialize(
+        self,
+        cluster_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/clusters/{cluster_id}/gpu-quota/organizations',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def list_service_accounts_service_accounts_get(
         self,
         _request_timeout: Union[
@@ -13986,6 +15013,313 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/service-accounts',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        organization_gpu_quota_request: OrganizationGpuQuotaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> OrganizationGpuQuotaResponse:
+        """Put Org Gpu Quota On Cluster
+
+        Persist desired organization GPU quota on this cluster. Does not apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited. Rows are never removed.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param organization_gpu_quota_request: (required)
+        :type organization_gpu_quota_request: OrganizationGpuQuotaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            organization_gpu_quota_request=organization_gpu_quota_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        organization_gpu_quota_request: OrganizationGpuQuotaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[OrganizationGpuQuotaResponse]:
+        """Put Org Gpu Quota On Cluster
+
+        Persist desired organization GPU quota on this cluster. Does not apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited. Rows are never removed.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param organization_gpu_quota_request: (required)
+        :type organization_gpu_quota_request: OrganizationGpuQuotaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            organization_gpu_quota_request=organization_gpu_quota_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        organization_id: StrictInt,
+        organization_gpu_quota_request: OrganizationGpuQuotaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Put Org Gpu Quota On Cluster
+
+        Persist desired organization GPU quota on this cluster. Does not apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited. Rows are never removed.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param organization_id: (required)
+        :type organization_id: int
+        :param organization_gpu_quota_request: (required)
+        :type organization_gpu_quota_request: OrganizationGpuQuotaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_serialize(
+            cluster_id=cluster_id,
+            organization_id=organization_id,
+            organization_gpu_quota_request=organization_gpu_quota_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "OrganizationGpuQuotaResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put_serialize(
+        self,
+        cluster_id,
+        organization_id,
+        organization_gpu_quota_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        if organization_id is not None:
+            _path_params['organization_id'] = organization_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if organization_gpu_quota_request is not None:
+            _body_params = organization_gpu_quota_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/clusters/{cluster_id}/organizations/{organization_id}/gpu-quota',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

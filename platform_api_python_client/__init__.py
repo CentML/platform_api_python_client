@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.26.1"
+__version__ = "4.27.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -123,6 +123,7 @@ from platform_api_python_client.models.list_get_cluster_response import ListGetC
 from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
 from platform_api_python_client.models.list_hardware_preset_response import ListHardwarePresetResponse
+from platform_api_python_client.models.list_organization_gpu_quota_response import ListOrganizationGpuQuotaResponse
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_service_accounts_response import ListServiceAccountsResponse
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
@@ -134,6 +135,8 @@ from platform_api_python_client.models.metrics_server import MetricsServer
 from platform_api_python_client.models.network_operator import NetworkOperator
 from platform_api_python_client.models.object_storage_provider import ObjectStorageProvider
 from platform_api_python_client.models.opentelemetry_collector import OpentelemetryCollector
+from platform_api_python_client.models.organization_gpu_quota_request import OrganizationGpuQuotaRequest
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
 from platform_api_python_client.models.pod_details import PodDetails
 from platform_api_python_client.models.pod_status import PodStatus
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse

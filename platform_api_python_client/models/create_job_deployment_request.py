@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
+from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -44,7 +45,8 @@ class CreateJobDeploymentRequest(BaseModel):
     active_deadline_seconds: Optional[StrictInt] = None
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file"]
+    volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "volume_mounts"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -98,6 +100,13 @@ class CreateJobDeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of config_file
         if self.config_file:
             _dict['config_file'] = self.config_file.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
+        _items = []
+        if self.volume_mounts:
+            for _item_volume_mounts in self.volume_mounts:
+                if _item_volume_mounts:
+                    _items.append(_item_volume_mounts.to_dict())
+            _dict['volume_mounts'] = _items
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
@@ -154,7 +163,8 @@ class CreateJobDeploymentRequest(BaseModel):
             "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
             "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
-            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
+            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None,
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None
         })
         return _obj
 

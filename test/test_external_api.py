@@ -124,6 +124,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(self) -> None:
+        """Test case for delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete
+
+        Delete Org Gpu Quota On Cluster
+        """
+        pass
+
     def test_delete_service_account_service_accounts_workos_id_delete(self) -> None:
         """Test case for delete_service_account_service_accounts_workos_id_delete
 
@@ -215,6 +222,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_current_org_gpu_quota_organizations_gpu_quota_get(self) -> None:
+        """Test case for get_current_org_gpu_quota_organizations_gpu_quota_get
+
+        Get Current Org Gpu Quota
+        """
+        pass
+
     def test_get_deployment_logs_deployments_logs_deployment_id_get(self) -> None:
         """Test case for get_deployment_logs_deployments_logs_deployment_id_get
 
@@ -292,8 +306,8 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_get_hardware_presets_hardware_presets_get(self) -> None:
-        """Test case for get_hardware_presets_hardware_presets_get
+    def test_get_hardware_presets_hardware_instances_presets_get(self) -> None:
+        """Test case for get_hardware_presets_hardware_instances_presets_get
 
         Get Hardware Presets
         """
@@ -317,6 +331,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_job_deployment_deployments_job_deployment_id_get
 
         Get Job Deployment
+        """
+        pass
+
+    def test_get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get(self) -> None:
+        """Test case for get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get
+
+        Get Org Gpu Quota On Cluster
         """
         pass
 
@@ -376,10 +397,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get(self) -> None:
+        """Test case for list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get
+
+        List Cluster Org Gpu Quotas
+        """
+        pass
+
     def test_list_service_accounts_service_accounts_get(self) -> None:
         """Test case for list_service_accounts_service_accounts_get
 
         List Service Accounts
+        """
+        pass
+
+    def test_put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put(self) -> None:
+        """Test case for put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put
+
+        Put Org Gpu Quota On Cluster
         """
         pass
 

@@ -38,7 +38,7 @@ class CreateComputeDeploymentRequest(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    volume_mounts: Optional[List[VolumeMount]] = None
+    volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging", "volume_mounts"]
 
     @field_validator('name')

@@ -5,15 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** |  | 
-**name** | **str** |  | 
 **gpu_type** | **str** |  | 
-**num_gpu** | **int** |  | 
-**cpu** | **int** |  | 
-**memory** | **int** |  | 
-**accelerator_resource_key** | **str** |  | 
-**node_affinity_labels** | **Dict[str, str]** |  | 
 **accelerator_memory** | **int** |  | [optional] 
+**is_mig** | **bool** |  | 
 
 ## Example
 

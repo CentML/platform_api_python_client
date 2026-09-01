@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.hardware_preset_response import HardwarePresetResponse
+from platform_api_python_client.models.organization_gpu_quota_request import OrganizationGpuQuotaRequest
 
-class TestHardwarePresetResponse(unittest.TestCase):
-    """HardwarePresetResponse unit test stubs"""
+class TestOrganizationGpuQuotaRequest(unittest.TestCase):
+    """OrganizationGpuQuotaRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,29 +25,26 @@ class TestHardwarePresetResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> HardwarePresetResponse:
-        """Test HardwarePresetResponse
+    def make_instance(self, include_optional) -> OrganizationGpuQuotaRequest:
+        """Test OrganizationGpuQuotaRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `HardwarePresetResponse`
+        # uncomment below to create an instance of `OrganizationGpuQuotaRequest`
         """
-        model = HardwarePresetResponse()
+        model = OrganizationGpuQuotaRequest()
         if include_optional:
-            return HardwarePresetResponse(
-                gpu_type = '',
-                accelerator_memory = 56,
-                is_mig = True
+            return OrganizationGpuQuotaRequest(
+                gpu_quota = -1.0
             )
         else:
-            return HardwarePresetResponse(
-                gpu_type = '',
-                is_mig = True,
+            return OrganizationGpuQuotaRequest(
+                gpu_quota = -1.0,
         )
         """
 
-    def testHardwarePresetResponse(self):
-        """Test HardwarePresetResponse"""
+    def testOrganizationGpuQuotaRequest(self):
+        """Test OrganizationGpuQuotaRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

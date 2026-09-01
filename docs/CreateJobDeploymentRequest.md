@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **active_deadline_seconds** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 
 ## Example
 

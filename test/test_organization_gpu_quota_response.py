@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.hardware_preset_response import HardwarePresetResponse
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
 
-class TestHardwarePresetResponse(unittest.TestCase):
-    """HardwarePresetResponse unit test stubs"""
+class TestOrganizationGpuQuotaResponse(unittest.TestCase):
+    """OrganizationGpuQuotaResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,29 +25,30 @@ class TestHardwarePresetResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> HardwarePresetResponse:
-        """Test HardwarePresetResponse
+    def make_instance(self, include_optional) -> OrganizationGpuQuotaResponse:
+        """Test OrganizationGpuQuotaResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `HardwarePresetResponse`
+        # uncomment below to create an instance of `OrganizationGpuQuotaResponse`
         """
-        model = HardwarePresetResponse()
+        model = OrganizationGpuQuotaResponse()
         if include_optional:
-            return HardwarePresetResponse(
-                gpu_type = '',
-                accelerator_memory = 56,
-                is_mig = True
+            return OrganizationGpuQuotaResponse(
+                organization_id = 56,
+                cluster_id = 56,
+                gpu_quota = 56
             )
         else:
-            return HardwarePresetResponse(
-                gpu_type = '',
-                is_mig = True,
+            return OrganizationGpuQuotaResponse(
+                organization_id = 56,
+                cluster_id = 56,
+                gpu_quota = 56,
         )
         """
 
-    def testHardwarePresetResponse(self):
-        """Test HardwarePresetResponse"""
+    def testOrganizationGpuQuotaResponse(self):
+        """Test OrganizationGpuQuotaResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

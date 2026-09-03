@@ -37,34 +37,18 @@ class TestListHardwarePresetResponse(unittest.TestCase):
             return ListHardwarePresetResponse(
                 results = [
                     platform_api_python_client.models.hardware_preset_response.HardwarePresetResponse(
-                        id = 56, 
-                        name = '', 
                         gpu_type = '', 
-                        num_gpu = 56, 
-                        cpu = 56, 
-                        memory = 56, 
-                        accelerator_resource_key = '', 
-                        node_affinity_labels = {
-                            'key' : ''
-                            }, 
-                        accelerator_memory = 56, )
+                        accelerator_memory = 56, 
+                        is_mig = True, )
                     ]
             )
         else:
             return ListHardwarePresetResponse(
                 results = [
                     platform_api_python_client.models.hardware_preset_response.HardwarePresetResponse(
-                        id = 56, 
-                        name = '', 
                         gpu_type = '', 
-                        num_gpu = 56, 
-                        cpu = 56, 
-                        memory = 56, 
-                        accelerator_resource_key = '', 
-                        node_affinity_labels = {
-                            'key' : ''
-                            }, 
-                        accelerator_memory = 56, )
+                        accelerator_memory = 56, 
+                        is_mig = True, )
                     ],
         )
         """

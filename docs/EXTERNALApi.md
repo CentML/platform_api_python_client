@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**create_volume_endpoint_volumes_post**](EXTERNALApi.md#create_volume_endpoint_volumes_post) | **POST** /volumes | Create Volume Endpoint
 [**delete_cluster_clusters_cluster_id_delete**](EXTERNALApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
+[**delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete**](EXTERNALApi.md#delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete) | **DELETE** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Delete Org Gpu Quota On Cluster
 [**delete_service_account_service_accounts_workos_id_delete**](EXTERNALApi.md#delete_service_account_service_accounts_workos_id_delete) | **DELETE** /service-accounts/{workos_id} | Delete Service Account
 [**delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete**](EXTERNALApi.md#delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete) | **DELETE** /user_vault/{secret_id} | Delete User Vault Item By Id Endpoint
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**get_cserve_recipe_deployments_cserve_recipes_get**](EXTERNALApi.md#get_cserve_recipe_deployments_cserve_recipes_get) | **GET** /deployments/cserve/recipes | Get Cserve Recipe
 [**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Get Cserve V2 Deployment
 [**get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**](EXTERNALApi.md#get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get) | **GET** /deployments/cserve_v3/{deployment_id} | Get Cserve V3 Deployment
+[**get_current_org_gpu_quota_organizations_gpu_quota_get**](EXTERNALApi.md#get_current_org_gpu_quota_organizations_gpu_quota_get) | **GET** /organizations/gpu-quota | Get Current Org Gpu Quota
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
 [**get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get) | **GET** /deployments/logs_v3/{deployment_id}/{revision_number} | Get Deployment Logs V3
 [**get_deployment_logs_v4_logs_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_logs_v4_logs_deployment_id_revision_number_get) | **GET** /logs/{deployment_id}/{revision_number} | Get Deployment Logs V4
@@ -42,10 +44,11 @@ Method | HTTP request | Description
 [**get_deployments_deployments_get**](EXTERNALApi.md#get_deployments_deployments_get) | **GET** /deployments | Get Deployments
 [**get_dynamo_deployment_deployments_dynamo_deployment_id_get**](EXTERNALApi.md#get_dynamo_deployment_deployments_dynamo_deployment_id_get) | **GET** /deployments/dynamo/{deployment_id} | Get Dynamo Deployment
 [**get_hardware_instances_hardware_instances_get**](EXTERNALApi.md#get_hardware_instances_hardware_instances_get) | **GET** /hardware-instances | Get Hardware Instances
-[**get_hardware_presets_hardware_presets_get**](EXTERNALApi.md#get_hardware_presets_hardware_presets_get) | **GET** /hardware-presets | Get Hardware Presets
+[**get_hardware_presets_hardware_instances_presets_get**](EXTERNALApi.md#get_hardware_presets_hardware_instances_presets_get) | **GET** /hardware-instances/presets | Get Hardware Presets
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
 [**get_job_deployment_deployments_job_deployment_id_get**](EXTERNALApi.md#get_job_deployment_deployments_job_deployment_id_get) | **GET** /deployments/job/{deployment_id} | Get Job Deployment
+[**get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get**](EXTERNALApi.md#get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get) | **GET** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Get Org Gpu Quota On Cluster
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
@@ -54,7 +57,9 @@ Method | HTTP request | Description
 [**get_volume_status_endpoint_volumes_status_volume_id_get**](EXTERNALApi.md#get_volume_status_endpoint_volumes_status_volume_id_get) | **GET** /volumes/status/{volume_id} | Get Volume Status Endpoint
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
 [**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
+[**list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get**](EXTERNALApi.md#list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get) | **GET** /clusters/{cluster_id}/gpu-quota/organizations | List Cluster Org Gpu Quotas
 [**list_service_accounts_service_accounts_get**](EXTERNALApi.md#list_service_accounts_service_accounts_get) | **GET** /service-accounts | List Service Accounts
+[**put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put**](EXTERNALApi.md#put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put) | **PUT** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Put Org Gpu Quota On Cluster
 [**rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**](EXTERNALApi.md#rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put) | **PUT** /deployments/revisions/{deployment_id}/{revision_number} | Rollout Existing Revision
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_cluster_clusters_cluster_id_put**](EXTERNALApi.md#update_cluster_clusters_cluster_id_put) | **PUT** /clusters/{cluster_id} | Update Cluster
@@ -1127,6 +1132,87 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete**
+> OrganizationGpuQuotaResponse delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(cluster_id, organization_id)
+
+Delete Org Gpu Quota On Cluster
+
+Set persisted quota to unlimited (-1).  Creates a row if none exists. Does not remove the row or the KAI Queue CR.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+    organization_id = 56 # int | 
+
+    try:
+        # Delete Org Gpu Quota On Cluster
+        api_response = api_instance.delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(cluster_id, organization_id)
+        print("The response of EXTERNALApi->delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+ **organization_id** | **int**|  | 
+
+### Return type
+
+[**OrganizationGpuQuotaResponse**](OrganizationGpuQuotaResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_service_account_service_accounts_workos_id_delete**
 > delete_service_account_service_accounts_workos_id_delete(workos_id)
 
@@ -1825,7 +1911,6 @@ Get Credits
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
@@ -1839,15 +1924,6 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
@@ -1875,7 +1951,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -2104,6 +2180,85 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetCServeV3DeploymentResponse**](GetCServeV3DeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_current_org_gpu_quota_organizations_gpu_quota_get**
+> ListOrganizationGpuQuotaResponse get_current_org_gpu_quota_organizations_gpu_quota_get(cluster_id=cluster_id)
+
+Get Current Org Gpu Quota
+
+Return persisted GPU quotas for the caller's organization. Usage fields come later.  ``cluster_id`` filters to that cluster when it is visible. Unknown or invisible cluster IDs return an empty list rather than 404 so this member endpoint does not leak whether a cluster exists.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_organization_gpu_quota_response import ListOrganizationGpuQuotaResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int |  (optional)
+
+    try:
+        # Get Current Org Gpu Quota
+        api_response = api_instance.get_current_org_gpu_quota_organizations_gpu_quota_get(cluster_id=cluster_id)
+        print("The response of EXTERNALApi->get_current_org_gpu_quota_organizations_gpu_quota_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_current_org_gpu_quota_organizations_gpu_quota_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | [optional] 
+
+### Return type
+
+[**ListOrganizationGpuQuotaResponse**](ListOrganizationGpuQuotaResponse.md)
 
 ### Authorization
 
@@ -3021,8 +3176,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_hardware_presets_hardware_presets_get**
-> ListHardwarePresetResponse get_hardware_presets_hardware_presets_get()
+# **get_hardware_presets_hardware_instances_presets_get**
+> ListHardwarePresetResponse get_hardware_presets_hardware_instances_presets_get()
 
 Get Hardware Presets
 
@@ -3059,11 +3214,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get Hardware Presets
-        api_response = api_instance.get_hardware_presets_hardware_presets_get()
-        print("The response of EXTERNALApi->get_hardware_presets_hardware_presets_get:\n")
+        api_response = api_instance.get_hardware_presets_hardware_instances_presets_get()
+        print("The response of EXTERNALApi->get_hardware_presets_hardware_instances_presets_get:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling EXTERNALApi->get_hardware_presets_hardware_presets_get: %s\n" % e)
+        print("Exception when calling EXTERNALApi->get_hardware_presets_hardware_instances_presets_get: %s\n" % e)
 ```
 
 
@@ -3324,6 +3479,85 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get**
+> OrganizationGpuQuotaResponse get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get(cluster_id, organization_id)
+
+Get Org Gpu Quota On Cluster
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+    organization_id = 56 # int | 
+
+    try:
+        # Get Org Gpu Quota On Cluster
+        api_response = api_instance.get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get(cluster_id, organization_id)
+        print("The response of EXTERNALApi->get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+ **organization_id** | **int**|  | 
+
+### Return type
+
+[**OrganizationGpuQuotaResponse**](OrganizationGpuQuotaResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_prebuilt_images_prebuilt_images_get**
 > ListPrebuiltImageResponse get_prebuilt_images_prebuilt_images_get(type=type)
 
@@ -3403,13 +3637,12 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_daily_bills_get**
-> ListDailyBillResponse get_usage_daily_bills_get(start_date, end_date)
+> ListDailyBillResponse get_usage_daily_bills_get()
 
 Get Usage
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
@@ -3423,26 +3656,15 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    start_date = '2013-10-20' # date | 
-    end_date = '2013-10-20' # date | 
 
     try:
         # Get Usage
-        api_response = api_instance.get_usage_daily_bills_get(start_date, end_date)
+        api_response = api_instance.get_usage_daily_bills_get()
         print("The response of EXTERNALApi->get_usage_daily_bills_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -3453,11 +3675,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **start_date** | **date**|  | 
- **end_date** | **date**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -3465,7 +3683,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -3477,7 +3695,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3960,6 +4177,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get**
+> ListOrganizationGpuQuotaResponse list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get(cluster_id)
+
+List Cluster Org Gpu Quotas
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.list_organization_gpu_quota_response import ListOrganizationGpuQuotaResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+
+    try:
+        # List Cluster Org Gpu Quotas
+        api_response = api_instance.list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get(cluster_id)
+        print("The response of EXTERNALApi->list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+
+### Return type
+
+[**ListOrganizationGpuQuotaResponse**](ListOrganizationGpuQuotaResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_service_accounts_service_accounts_get**
 > ListServiceAccountsResponse list_service_accounts_service_accounts_get()
 
@@ -4029,6 +4323,90 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put**
+> OrganizationGpuQuotaResponse put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put(cluster_id, organization_id, organization_gpu_quota_request)
+
+Put Org Gpu Quota On Cluster
+
+Persist desired organization GPU quota on this cluster. Does not apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited. Rows are never removed.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.organization_gpu_quota_request import OrganizationGpuQuotaRequest
+from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+    organization_id = 56 # int | 
+    organization_gpu_quota_request = platform_api_python_client.OrganizationGpuQuotaRequest() # OrganizationGpuQuotaRequest | 
+
+    try:
+        # Put Org Gpu Quota On Cluster
+        api_response = api_instance.put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put(cluster_id, organization_id, organization_gpu_quota_request)
+        print("The response of EXTERNALApi->put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+ **organization_id** | **int**|  | 
+ **organization_gpu_quota_request** | [**OrganizationGpuQuotaRequest**](OrganizationGpuQuotaRequest.md)|  | 
+
+### Return type
+
+[**OrganizationGpuQuotaResponse**](OrganizationGpuQuotaResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

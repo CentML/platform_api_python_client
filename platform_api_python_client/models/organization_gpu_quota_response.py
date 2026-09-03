@@ -17,19 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictInt
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class HardwarePresetResponse(BaseModel):
+class OrganizationGpuQuotaResponse(BaseModel):
     """
-    HardwarePresetResponse
+    OrganizationGpuQuotaResponse
     """ # noqa: E501
-    gpu_type: StrictStr
-    accelerator_memory: Optional[StrictInt] = None
-    is_mig: StrictBool
-    __properties: ClassVar[List[str]] = ["gpu_type", "accelerator_memory", "is_mig"]
+    organization_id: StrictInt
+    cluster_id: StrictInt
+    gpu_quota: StrictInt
+    __properties: ClassVar[List[str]] = ["organization_id", "cluster_id", "gpu_quota"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +49,7 @@ class HardwarePresetResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of HardwarePresetResponse from a JSON string"""
+        """Create an instance of OrganizationGpuQuotaResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,16 +70,11 @@ class HardwarePresetResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if accelerator_memory (nullable) is None
-        # and model_fields_set contains the field
-        if self.accelerator_memory is None and "accelerator_memory" in self.model_fields_set:
-            _dict['accelerator_memory'] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of HardwarePresetResponse from a dict"""
+        """Create an instance of OrganizationGpuQuotaResponse from a dict"""
         if obj is None:
             return None
 
@@ -87,9 +82,9 @@ class HardwarePresetResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "gpu_type": obj.get("gpu_type"),
-            "accelerator_memory": obj.get("accelerator_memory"),
-            "is_mig": obj.get("is_mig")
+            "organization_id": obj.get("organization_id"),
+            "cluster_id": obj.get("cluster_id"),
+            "gpu_quota": obj.get("gpu_quota")
         })
         return _obj
 

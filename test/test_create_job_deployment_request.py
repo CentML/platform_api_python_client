@@ -58,7 +58,13 @@ class TestCreateJobDeploymentRequest(unittest.TestCase):
                 config_file = platform_api_python_client.models.config_file_mount.ConfigFileMount(
                     filename = '20', 
                     mount_path = '0', 
-                    content = '0', )
+                    content = '0', ),
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ]
             )
         else:
             return CreateJobDeploymentRequest(

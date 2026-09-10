@@ -18,7 +18,6 @@ Method | HTTP request | Description
 [**create_volume_endpoint_volumes_post**](EXTERNALApi.md#create_volume_endpoint_volumes_post) | **POST** /volumes | Create Volume Endpoint
 [**delete_cluster_clusters_cluster_id_delete**](EXTERNALApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
-[**delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete**](EXTERNALApi.md#delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete) | **DELETE** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Delete Org Gpu Quota On Cluster
 [**delete_service_account_service_accounts_workos_id_delete**](EXTERNALApi.md#delete_service_account_service_accounts_workos_id_delete) | **DELETE** /service-accounts/{workos_id} | Delete Service Account
 [**delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete**](EXTERNALApi.md#delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete) | **DELETE** /user_vault/{secret_id} | Delete User Vault Item By Id Endpoint
 [**delete_user_vault_item_endpoint_user_vault_delete**](EXTERNALApi.md#delete_user_vault_item_endpoint_user_vault_delete) | **DELETE** /user_vault | Delete User Vault Item Endpoint
@@ -80,6 +79,8 @@ Method | HTTP request | Description
 > ClusterRegistrationResponse create_cluster_clusters_post(cluster_registration_request)
 
 Create Cluster
+
+Register a cluster row for the caller's parent org.  Infra provisioning is not wired yet; ``request.credential`` is validated but not consumed.
 
 ### Example
 
@@ -1128,87 +1129,6 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete**
-> OrganizationGpuQuotaResponse delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(cluster_id, organization_id)
-
-Delete Org Gpu Quota On Cluster
-
-Set persisted quota to unlimited (-1).  Creates a row if none exists. Does not remove the row or the KAI Queue CR.
-
-### Example
-
-* Bearer Authentication (HTTPBearer):
-
-```python
-import platform_api_python_client
-from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
-from platform_api_python_client.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost
-# See configuration.py for a list of all supported configuration parameters.
-configuration = platform_api_python_client.Configuration(
-    host = "http://localhost"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with platform_api_python_client.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    cluster_id = 56 # int | 
-    organization_id = 56 # int | 
-
-    try:
-        # Delete Org Gpu Quota On Cluster
-        api_response = api_instance.delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(cluster_id, organization_id)
-        print("The response of EXTERNALApi->delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EXTERNALApi->delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cluster_id** | **int**|  | 
- **organization_id** | **int**|  | 
-
-### Return type
-
-[**OrganizationGpuQuotaResponse**](OrganizationGpuQuotaResponse.md)
-
-### Authorization
-
-[HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -4331,7 +4251,7 @@ This endpoint does not need any parameter.
 
 Put Org Gpu Quota On Cluster
 
-Persist desired organization GPU quota on this cluster. Does not apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited. Rows are never removed.
+Persist organization GPU quota on this cluster and apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited; a positive value is a hard cap. Rows are never removed. Requires ``CATALOG_TARGET_REVISION`` to contain ``catalog/src/catalog/kai_gpu_queues``.  A 200 means the quota row was saved and an Argo CD sync was requested (not that Queue CRs are already healthy). A 502 means the row was saved but the Application upsert/sync request failed; re-issue this idempotent PUT to retry.
 
 ### Example
 
@@ -4570,6 +4490,8 @@ This endpoint does not need any parameter.
 
 Update Cluster
 
+Validate a cluster component configuration for an org-owned cluster.  Infra provisioning is not wired yet; ``config.components`` is validated only.
+
 ### Example
 
 * Bearer Authentication (HTTPBearer):
@@ -4649,7 +4571,7 @@ Name | Type | Description  | Notes
 
 Update Cluster Metadata
 
-Update DB metadata for an org-owned cluster.  Does not drive infra stack updates. Global clusters (parent_id IS NULL) are not mutable here.
+Update DB metadata for an org-owned cluster.  Global clusters (parent_id IS NULL) are not mutable here.
 
 ### Example
 

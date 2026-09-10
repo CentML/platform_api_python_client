@@ -35,13 +35,12 @@ class TestDynamoWorkerPools(unittest.TestCase):
         model = DynamoWorkerPools()
         if include_optional:
             return DynamoWorkerPools(
+                worker = { },
                 prefill = { },
                 decode = { }
             )
         else:
             return DynamoWorkerPools(
-                prefill = { },
-                decode = { },
         )
         """
 

@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
+**runtime_version** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
 **concurrency** | **int** |  | [optional] 
@@ -47,6 +48,11 @@ Name | Type | Description | Notes
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
+**args** | **List[str]** |  | [optional] 
+**completions** | **int** |  | [optional] [default to 1]
+**parallelism** | **int** |  | [optional] [default to 1]
+**backoff_limit** | **int** |  | [optional] [default to 3]
+**active_deadline_seconds** | **int** |  | [optional] 
 
 ## Example
 

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.dynamo_worker_pool_config import DynamoWorkerPoolConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,10 +27,11 @@ class DynamoWorkerPools(BaseModel):
     """
     DynamoWorkerPools
     """ # noqa: E501
-    prefill: DynamoWorkerPoolConfig
-    decode: DynamoWorkerPoolConfig
+    worker: Optional[DynamoWorkerPoolConfig] = None
+    prefill: Optional[DynamoWorkerPoolConfig] = None
+    decode: Optional[DynamoWorkerPoolConfig] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["prefill", "decode"]
+    __properties: ClassVar[List[str]] = ["worker", "prefill", "decode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,6 +74,9 @@ class DynamoWorkerPools(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of worker
+        if self.worker:
+            _dict['worker'] = self.worker.to_dict()
         # override the default output from pydantic by calling `to_dict()` of prefill
         if self.prefill:
             _dict['prefill'] = self.prefill.to_dict()
@@ -83,6 +87,21 @@ class DynamoWorkerPools(BaseModel):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if worker (nullable) is None
+        # and model_fields_set contains the field
+        if self.worker is None and "worker" in self.model_fields_set:
+            _dict['worker'] = None
+
+        # set to None if prefill (nullable) is None
+        # and model_fields_set contains the field
+        if self.prefill is None and "prefill" in self.model_fields_set:
+            _dict['prefill'] = None
+
+        # set to None if decode (nullable) is None
+        # and model_fields_set contains the field
+        if self.decode is None and "decode" in self.model_fields_set:
+            _dict['decode'] = None
 
         return _dict
 
@@ -96,6 +115,7 @@ class DynamoWorkerPools(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "worker": DynamoWorkerPoolConfig.from_dict(obj["worker"]) if obj.get("worker") is not None else None,
             "prefill": DynamoWorkerPoolConfig.from_dict(obj["prefill"]) if obj.get("prefill") is not None else None,
             "decode": DynamoWorkerPoolConfig.from_dict(obj["decode"]) if obj.get("decode") is not None else None
         })

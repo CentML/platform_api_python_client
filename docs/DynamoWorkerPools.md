@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prefill** | [**DynamoWorkerPoolConfig**](DynamoWorkerPoolConfig.md) |  | 
-**decode** | [**DynamoWorkerPoolConfig**](DynamoWorkerPoolConfig.md) |  | 
+**worker** | [**DynamoWorkerPoolConfig**](DynamoWorkerPoolConfig.md) |  | [optional] 
+**prefill** | [**DynamoWorkerPoolConfig**](DynamoWorkerPoolConfig.md) |  | [optional] 
+**decode** | [**DynamoWorkerPoolConfig**](DynamoWorkerPoolConfig.md) |  | [optional] 
 
 ## Example
 

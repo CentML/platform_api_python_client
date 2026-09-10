@@ -53,6 +53,7 @@ class TestDeploymentResponse(unittest.TestCase):
                 worker_pools = { },
                 model = '',
                 served_model_name = '',
+                runtime_version = '',
                 min_replicas = 56,
                 max_replicas = 56,
                 concurrency = 56,
@@ -96,7 +97,14 @@ class TestDeploymentResponse(unittest.TestCase):
                         read_only = True, )
                     ],
                 ssh_public_key = '',
-                ssh_password = ''
+                ssh_password = '',
+                args = [
+                    ''
+                    ],
+                completions = 56,
+                parallelism = 56,
+                backoff_limit = 56,
+                active_deadline_seconds = 56
             )
         else:
             return DeploymentResponse(

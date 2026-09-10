@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class GetDynamoDeploymentResponse(BaseModel):
     """
-    GetDynamoDeploymentResponse
+    Dynamo deployment read model.  ``worker_pools`` is the authoritative hardware/scaling view for both serving modes. The inherited ``hardware_instance_id`` is the single-hardware projection (worker for aggregated, decode for disaggregated) and the top-level scaling fields mirror ``worker_pools.worker``; both remain for consumers that predate ``worker_pools``.
     """ # noqa: E501
     creator_email: StrictStr
     cluster_id: StrictInt
@@ -48,8 +48,9 @@ class GetDynamoDeploymentResponse(BaseModel):
     worker_pools: Optional[DynamoWorkerPools] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
-    min_replicas: StrictInt
-    max_replicas: StrictInt
+    runtime_version: Optional[StrictStr] = None
+    min_replicas: StrictInt = Field(description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    max_replicas: StrictInt = Field(description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
     concurrency: Optional[StrictInt] = None
     cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
@@ -59,7 +60,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "serving_mode", "worker_pools", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "serving_mode", "worker_pools", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -123,6 +124,11 @@ class GetDynamoDeploymentResponse(BaseModel):
         if self.served_model_name is None and "served_model_name" in self.model_fields_set:
             _dict['served_model_name'] = None
 
+        # set to None if runtime_version (nullable) is None
+        # and model_fields_set contains the field
+        if self.runtime_version is None and "runtime_version" in self.model_fields_set:
+            _dict['runtime_version'] = None
+
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -176,6 +182,7 @@ class GetDynamoDeploymentResponse(BaseModel):
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
+            "runtime_version": obj.get("runtime_version"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
             "concurrency": obj.get("concurrency"),

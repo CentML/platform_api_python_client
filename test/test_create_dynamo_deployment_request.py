@@ -48,6 +48,7 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                 worker_pools = { },
                 model = '',
                 served_model_name = '',
+                runtime_version = 'e6bUUGjjNSwg0_bs9ZayIMrKdgNvb6gvxmPb9GcsM61ate1RA89q3w1l4eH4XxEz.5awxoFZxHzs6ED.kjUSnTINkYPUndNl8pmPg5K897Fu1JEFj9R1_dz9rEoBi0L',
                 min_replicas = 56,
                 max_replicas = 56,
                 concurrency = 56,

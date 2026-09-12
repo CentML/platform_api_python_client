@@ -38,6 +38,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r test-requirements.txt
+          # install the package itself: the packaging tests read the built distribution's metadata
+          # through importlib.metadata and skip silently when it is absent
+          pip install .
       - name: Test with pytest
         run: |
           pytest --cov=platform_api_python_client

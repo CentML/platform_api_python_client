@@ -32,13 +32,12 @@ class CreateObjectVolumeRequest(BaseModel):
     cluster_id: StrictInt
     backend: StrictStr
     provider: Optional[ObjectStorageProvider] = None
-    bucket: Annotated[str, Field(min_length=3, strict=True, max_length=253)]
-    region: Annotated[str, Field(min_length=1, strict=True)]
-    prefix: Optional[StrictStr] = None
+    bucket: Annotated[str, Field(min_length=3, strict=True, max_length=255)]
+    region: Annotated[str, Field(min_length=1, strict=True, max_length=63)]
+    prefix: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = None
     read_only: Optional[StrictBool] = False
-    volume_attributes: Optional[Dict[str, StrictStr]] = None
-    mount_options: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "provider", "bucket", "region", "prefix", "read_only", "volume_attributes", "mount_options"]
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "provider", "bucket", "region", "prefix", "read_only"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -52,6 +51,20 @@ class CreateObjectVolumeRequest(BaseModel):
         """Validates the enum"""
         if value not in set(['object']):
             raise ValueError("must be one of enum values ('object')")
+        return value
+
+    @field_validator('bucket')
+    def bucket_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^(?:[0-9A-Za-z._-]+|arn:[a-z0-9-]+:s3(?:-outposts|-object-lambda)?:[0-9A-Za-z._:\/+=,@-]+)$", value):
+            raise ValueError(r"must validate the regular expression /^(?:[0-9A-Za-z._-]+|arn:[a-z0-9-]+:s3(?:-outposts|-object-lambda)?:[0-9A-Za-z._:\/+=,@-]+)$/")
+        return value
+
+    @field_validator('region')
+    def region_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/")
         return value
 
     model_config = ConfigDict(
@@ -84,8 +97,10 @@ class CreateObjectVolumeRequest(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -93,20 +108,15 @@ class CreateObjectVolumeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         # set to None if prefix (nullable) is None
         # and model_fields_set contains the field
         if self.prefix is None and "prefix" in self.model_fields_set:
             _dict['prefix'] = None
-
-        # set to None if volume_attributes (nullable) is None
-        # and model_fields_set contains the field
-        if self.volume_attributes is None and "volume_attributes" in self.model_fields_set:
-            _dict['volume_attributes'] = None
-
-        # set to None if mount_options (nullable) is None
-        # and model_fields_set contains the field
-        if self.mount_options is None and "mount_options" in self.model_fields_set:
-            _dict['mount_options'] = None
 
         return _dict
 
@@ -127,10 +137,13 @@ class CreateObjectVolumeRequest(BaseModel):
             "bucket": obj.get("bucket"),
             "region": obj.get("region"),
             "prefix": obj.get("prefix"),
-            "read_only": obj.get("read_only") if obj.get("read_only") is not None else False,
-            "volume_attributes": obj.get("volume_attributes"),
-            "mount_options": obj.get("mount_options")
+            "read_only": obj.get("read_only") if obj.get("read_only") is not None else False
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

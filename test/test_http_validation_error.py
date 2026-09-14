@@ -41,7 +41,9 @@ class TestHTTPValidationError(unittest.TestCase):
                             null
                             ], 
                         msg = '', 
-                        type = '', )
+                        type = '', 
+                        input = null, 
+                        ctx = platform_api_python_client.models.context.Context(), )
                     ]
             )
         else:

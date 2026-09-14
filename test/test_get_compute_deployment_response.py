@@ -49,6 +49,7 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                priority = '',
                 exposed_port = 56,
                 volume_mounts = [
                     platform_api_python_client.models.volume_mount.VolumeMount(

@@ -124,13 +124,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
-    def test_delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete(self) -> None:
-        """Test case for delete_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_delete
-
-        Delete Org Gpu Quota On Cluster
-        """
-        pass
-
     def test_delete_service_account_service_accounts_workos_id_delete(self) -> None:
         """Test case for delete_service_account_service_accounts_workos_id_delete
 

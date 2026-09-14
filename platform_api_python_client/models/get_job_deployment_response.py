@@ -44,6 +44,7 @@ class GetJobDeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    priority: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     args: Optional[List[StrictStr]] = None
@@ -56,7 +57,7 @@ class GetJobDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
     volume_mounts: Optional[List[VolumeMount]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file", "volume_mounts"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file", "volume_mounts"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,6 +121,11 @@ class GetJobDeploymentResponse(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
+
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
         if self.env_vars is None and "env_vars" in self.model_fields_set:
@@ -179,6 +185,7 @@ class GetJobDeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
+            "priority": obj.get("priority"),
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "args": obj.get("args"),

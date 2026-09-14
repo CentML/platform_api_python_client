@@ -43,6 +43,7 @@ class GetComputeDeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    priority: Optional[StrictStr] = None
     exposed_port: StrictInt
     volume_mounts: Optional[List[VolumeMount]] = None
     ssh_public_key: Optional[StrictStr] = None
@@ -50,7 +51,7 @@ class GetComputeDeploymentResponse(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "exposed_port", "volume_mounts", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "exposed_port", "volume_mounts", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +112,11 @@ class GetComputeDeploymentResponse(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
+
         # set to None if ssh_public_key (nullable) is None
         # and model_fields_set contains the field
         if self.ssh_public_key is None and "ssh_public_key" in self.model_fields_set:
@@ -155,6 +161,7 @@ class GetComputeDeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
+            "priority": obj.get("priority"),
             "exposed_port": obj.get("exposed_port"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "ssh_public_key": obj.get("ssh_public_key"),

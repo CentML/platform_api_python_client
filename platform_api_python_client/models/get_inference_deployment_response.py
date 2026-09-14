@@ -41,6 +41,7 @@ class GetInferenceDeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    priority: Optional[StrictStr] = None
     container_port: StrictInt
     min_scale: StrictInt
     max_scale: StrictInt
@@ -52,7 +53,7 @@ class GetInferenceDeploymentResponse(BaseModel):
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     command_args: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "container_port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "container_port", "min_scale", "max_scale", "initial_scale", "concurrency", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,6 +103,11 @@ class GetInferenceDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
+
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
 
         # set to None if initial_scale (nullable) is None
         # and model_fields_set contains the field
@@ -167,6 +173,7 @@ class GetInferenceDeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
+            "priority": obj.get("priority"),
             "container_port": obj.get("container_port"),
             "min_scale": obj.get("min_scale"),
             "max_scale": obj.get("max_scale"),

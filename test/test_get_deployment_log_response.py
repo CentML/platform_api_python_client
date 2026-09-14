@@ -36,14 +36,14 @@ class TestGetDeploymentLogResponse(unittest.TestCase):
         if include_optional:
             return GetDeploymentLogResponse(
                 events = [
-                    None
+                    { }
                     ],
                 next_page_token = ''
             )
         else:
             return GetDeploymentLogResponse(
                 events = [
-                    None
+                    { }
                     ],
         )
         """

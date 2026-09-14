@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**events** | **List[object]** |  | 
+**events** | **List[Dict[str, object]]** |  | 
 **next_page_token** | **str** |  | [optional] 
 
 ## Example

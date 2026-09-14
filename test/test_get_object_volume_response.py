@@ -47,13 +47,7 @@ class TestGetObjectVolumeResponse(unittest.TestCase):
                 bucket = '',
                 region = '',
                 prefix = '',
-                read_only = True,
-                volume_attributes = {
-                    'key' : ''
-                    },
-                mount_options = [
-                    ''
-                    ]
+                read_only = True
             )
         else:
             return GetObjectVolumeResponse(

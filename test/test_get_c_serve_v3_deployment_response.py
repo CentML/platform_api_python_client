@@ -49,6 +49,7 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                priority = '',
                 recipe = { },
                 cserve_version = '',
                 min_replicas = 56,

@@ -39,7 +39,9 @@ class TestValidationError(unittest.TestCase):
                     null
                     ],
                 msg = '',
-                type = ''
+                type = '',
+                input = None,
+                ctx = platform_api_python_client.models.context.Context()
             )
         else:
             return ValidationError(

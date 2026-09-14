@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**priority** | **str** |  | [optional] 
 **exposed_port** | **int** |  | 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **ssh_public_key** | **str** |  | [optional] 

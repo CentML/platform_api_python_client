@@ -44,6 +44,7 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 chart_revision = '',
+                priority = '',
                 recipe = { },
                 cserve_version = '',
                 hf_token = '',

@@ -50,7 +50,8 @@ class TestListGetDeploymentResponse(unittest.TestCase):
                         revision_number = 56, 
                         user_annotations = {
                             'key' : ''
-                            }, )
+                            }, 
+                        priority = '', )
                     ]
             )
         else:
@@ -70,7 +71,8 @@ class TestListGetDeploymentResponse(unittest.TestCase):
                         revision_number = 56, 
                         user_annotations = {
                             'key' : ''
-                            }, )
+                            }, 
+                        priority = '', )
                     ],
         )
         """

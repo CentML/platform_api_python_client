@@ -1,6 +1,6 @@
 # CreateDynamoDeploymentRequest
 
-Create a Dynamo deployment.  Aggregated mode requires ``hardware_instance_id``; disaggregated mode requires fixed-size ``worker_pools``.
+Create a Dynamo deployment.  Hardware and scaling live under ``worker_pools``: aggregated mode uses exactly ``worker_pools.worker``; disaggregated mode uses exactly ``worker_pools.prefill`` and ``worker_pools.decode`` (fixed-size until per-role autoscaling ships). The top-level ``hardware_instance_id`` / ``min_replicas`` / ``max_replicas`` / ``concurrency`` / ``cooldown_period`` fields are the deprecated aggregated-only spelling; they stay accepted and may accompany ``worker_pools`` when they agree with it. ``parse_dynamo_topology`` owns every topology rule for both spellings.
 
 ## Properties
 
@@ -13,12 +13,14 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
+**priority** | **str** |  | [optional] 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**min_replicas** | **int** |  | [optional] [default to 1]
-**max_replicas** | **int** |  | [optional] [default to 1]
+**runtime_version** | **str** | Dynamo runtime image tag (for example 1.4.0). Defaults to the platform&#39;s current release; GET /prebuilt-images?type&#x3D;dynamo lists the versions the platform has validated, but any tag may be requested. Changing it restarts every component of a running deployment. | [optional] 
+**min_replicas** | **int** |  | [optional] 
+**max_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] 
 **extra_args** | **str** |  | [optional] 

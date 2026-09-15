@@ -42,6 +42,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
     hardware_instance_id: StrictInt
     revision_number: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
+    priority: Optional[StrictStr] = None
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
     min_replicas: StrictInt
@@ -54,7 +55,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,6 +109,11 @@ class GetCServeV3DeploymentResponse(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
+
         # set to None if cserve_version (nullable) is None
         # and model_fields_set contains the field
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
@@ -152,6 +158,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
             "user_annotations": obj.get("user_annotations"),
+            "priority": obj.get("priority"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
             "min_replicas": obj.get("min_replicas"),

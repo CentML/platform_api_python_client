@@ -32,6 +32,7 @@ class CreateFilesystemVolumeRequest(BaseModel):
     backend: StrictStr
     size_gb: Optional[Annotated[int, Field(le=65536, strict=True, ge=1)]] = 100
     storage_class: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "size_gb", "storage_class"]
 
     @field_validator('name')
@@ -88,8 +89,10 @@ class CreateFilesystemVolumeRequest(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -97,6 +100,11 @@ class CreateFilesystemVolumeRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         # set to None if storage_class (nullable) is None
         # and model_fields_set contains the field
         if self.storage_class is None and "storage_class" in self.model_fields_set:
@@ -120,6 +128,11 @@ class CreateFilesystemVolumeRequest(BaseModel):
             "size_gb": obj.get("size_gb") if obj.get("size_gb") is not None else 100,
             "storage_class": obj.get("storage_class")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

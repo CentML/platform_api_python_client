@@ -39,24 +39,18 @@ class TestCreateObjectVolumeRequest(unittest.TestCase):
                 cluster_id = 56,
                 backend = 'object',
                 provider = 's3',
-                bucket = '012',
-                region = '0',
+                bucket = 'arn:r1c2v:s3:BY3=qY/UboV+5Ow:qrz/3IL6+fRkNYKgBvuQ_e0:0lPRw1FhCJ:vn1DhEndELjf8pKCdfAU/MKS-aAF012',
+                region = 'w1c2v7s6djuy1zmetozkhdomha1bae37b8ocvx8o53ow2eg7p6qw9qklp6l4y010fogx0',
                 prefix = '',
-                read_only = True,
-                volume_attributes = {
-                    'key' : ''
-                    },
-                mount_options = [
-                    ''
-                    ]
+                read_only = True
             )
         else:
             return CreateObjectVolumeRequest(
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 backend = 'object',
-                bucket = '012',
-                region = '0',
+                bucket = 'arn:r1c2v:s3:BY3=qY/UboV+5Ow:qrz/3IL6+fRkNYKgBvuQ_e0:0lPRw1FhCJ:vn1DhEndELjf8pKCdfAU/MKS-aAF012',
+                region = 'w1c2v7s6djuy1zmetozkhdomha1bae37b8ocvx8o53ow2eg7p6qw9qklp6l4y010fogx0',
         )
         """
 

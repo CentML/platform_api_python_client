@@ -35,6 +35,7 @@ class CreateJobDeploymentRequest(BaseModel):
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
+    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
@@ -46,7 +47,7 @@ class CreateJobDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "volume_mounts"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "priority", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "volume_mounts"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -112,6 +113,11 @@ class CreateJobDeploymentRequest(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
@@ -154,6 +160,7 @@ class CreateJobDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
+            "priority": obj.get("priority"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "env_vars": obj.get("env_vars"),

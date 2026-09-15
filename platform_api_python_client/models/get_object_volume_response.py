@@ -43,9 +43,7 @@ class GetObjectVolumeResponse(BaseModel):
     region: StrictStr
     prefix: Optional[StrictStr] = None
     read_only: StrictBool
-    volume_attributes: Optional[Dict[str, StrictStr]] = None
-    mount_options: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "cluster_id", "backend", "access_mode", "status", "pvc_name", "created_at", "provider", "bucket", "region", "prefix", "read_only", "volume_attributes", "mount_options"]
+    __properties: ClassVar[List[str]] = ["id", "name", "cluster_id", "backend", "access_mode", "status", "pvc_name", "created_at", "provider", "bucket", "region", "prefix", "read_only"]
 
     @field_validator('backend')
     def backend_validate_enum(cls, value):
@@ -98,16 +96,6 @@ class GetObjectVolumeResponse(BaseModel):
         if self.prefix is None and "prefix" in self.model_fields_set:
             _dict['prefix'] = None
 
-        # set to None if volume_attributes (nullable) is None
-        # and model_fields_set contains the field
-        if self.volume_attributes is None and "volume_attributes" in self.model_fields_set:
-            _dict['volume_attributes'] = None
-
-        # set to None if mount_options (nullable) is None
-        # and model_fields_set contains the field
-        if self.mount_options is None and "mount_options" in self.model_fields_set:
-            _dict['mount_options'] = None
-
         return _dict
 
     @classmethod
@@ -132,9 +120,7 @@ class GetObjectVolumeResponse(BaseModel):
             "bucket": obj.get("bucket"),
             "region": obj.get("region"),
             "prefix": obj.get("prefix"),
-            "read_only": obj.get("read_only"),
-            "volume_attributes": obj.get("volume_attributes"),
-            "mount_options": obj.get("mount_options")
+            "read_only": obj.get("read_only")
         })
         return _obj
 

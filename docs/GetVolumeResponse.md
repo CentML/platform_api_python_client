@@ -20,8 +20,6 @@ Name | Type | Description | Notes
 **region** | **str** |  | 
 **prefix** | **str** |  | [optional] 
 **read_only** | **bool** |  | 
-**volume_attributes** | **Dict[str, str]** |  | [optional] 
-**mount_options** | **List[str]** |  | [optional] 
 
 ## Example
 

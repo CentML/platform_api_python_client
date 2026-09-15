@@ -1,12 +1,17 @@
 # DynamoWorkerPoolConfig
 
+Hardware and scaling for one Dynamo worker role.  ``min_replicas``/``max_replicas`` are the canonical size. ``replicas`` is the deprecated fixed-size alias (``min == max``) still accepted on disaggregated pools. ``parse_dynamo_topology`` owns the cross-field rules (bounds ordering, autoscaling target, which roles may autoscale).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hardware_instance_id** | **int** |  | 
-**replicas** | **int** |  | 
+**replicas** | **int** |  | [optional] 
+**min_replicas** | **int** |  | [optional] 
+**max_replicas** | **int** |  | [optional] 
+**concurrency** | **int** |  | [optional] 
+**cooldown_period** | **int** |  | [optional] 
 
 ## Example
 

@@ -1,5 +1,6 @@
 # GetDynamoDeploymentResponse
 
+Dynamo deployment read model.  ``worker_pools`` is the authoritative hardware/scaling view for both serving modes. The inherited ``hardware_instance_id`` is the single-hardware projection (worker for aggregated, decode for disaggregated) and the top-level scaling fields mirror ``worker_pools.worker``; both remain for consumers that predate ``worker_pools``.
 
 ## Properties
 
@@ -17,12 +18,14 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**priority** | **str** |  | [optional] 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**min_replicas** | **int** |  | 
-**max_replicas** | **int** |  | 
+**runtime_version** | **str** |  | [optional] 
+**min_replicas** | **int** | Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree. | 
+**max_replicas** | **int** | Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree. | 
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] 
 **extra_args** | **str** |  | [optional] 

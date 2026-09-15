@@ -48,7 +48,8 @@ class TestGetDeploymentResponse(unittest.TestCase):
                 revision_number = 56,
                 user_annotations = {
                     'key' : ''
-                    }
+                    },
+                priority = ''
             )
         else:
             return GetDeploymentResponse(

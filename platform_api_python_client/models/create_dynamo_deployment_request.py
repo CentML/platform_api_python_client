@@ -28,7 +28,7 @@ from typing_extensions import Self
 
 class CreateDynamoDeploymentRequest(BaseModel):
     """
-    Create a Dynamo deployment.  Aggregated mode requires ``hardware_instance_id``; disaggregated mode requires fixed-size ``worker_pools``.
+    Create a Dynamo deployment.  Hardware and scaling live under ``worker_pools``: aggregated mode uses exactly ``worker_pools.worker``; disaggregated mode uses exactly ``worker_pools.prefill`` and ``worker_pools.decode`` (fixed-size until per-role autoscaling ships). The top-level ``hardware_instance_id`` / ``min_replicas`` / ``max_replicas`` / ``concurrency`` / ``cooldown_period`` fields are the deprecated aggregated-only spelling; they stay accepted and may accompany ``worker_pools`` when they agree with it. ``parse_dynamo_topology`` owns every topology rule for both spellings.
     """ # noqa: E501
     max_surge: Optional[StrictInt] = None
     max_unavailable: Optional[StrictInt] = None
@@ -37,12 +37,14 @@ class CreateDynamoDeploymentRequest(BaseModel):
     hardware_instance_id: Optional[StrictInt] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
+    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
     serving_mode: Optional[DynamoServingMode] = None
     worker_pools: Optional[DynamoWorkerPools] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
-    min_replicas: Optional[StrictInt] = 1
-    max_replicas: Optional[StrictInt] = 1
+    runtime_version: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Dynamo runtime image tag (for example 1.4.0). Defaults to the platform's current release; GET /prebuilt-images?type=dynamo lists the versions the platform has validated, but any tag may be requested. Changing it restarts every component of a running deployment.")
+    min_replicas: Optional[StrictInt] = None
+    max_replicas: Optional[StrictInt] = None
     concurrency: Optional[StrictInt] = None
     cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
@@ -53,13 +55,23 @@ class CreateDynamoDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "serving_mode", "worker_pools", "model", "served_model_name", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "priority", "serving_mode", "worker_pools", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
+
+    @field_validator('runtime_version')
+    def runtime_version_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$/")
         return value
 
     model_config = ConfigDict(
@@ -124,6 +136,11 @@ class CreateDynamoDeploymentRequest(BaseModel):
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
             _dict['user_annotations'] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict['priority'] = None
+
         # set to None if worker_pools (nullable) is None
         # and model_fields_set contains the field
         if self.worker_pools is None and "worker_pools" in self.model_fields_set:
@@ -133,6 +150,16 @@ class CreateDynamoDeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.served_model_name is None and "served_model_name" in self.model_fields_set:
             _dict['served_model_name'] = None
+
+        # set to None if min_replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.min_replicas is None and "min_replicas" in self.model_fields_set:
+            _dict['min_replicas'] = None
+
+        # set to None if max_replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_replicas is None and "max_replicas" in self.model_fields_set:
+            _dict['max_replicas'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -183,12 +210,14 @@ class CreateDynamoDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
+            "priority": obj.get("priority"),
             "serving_mode": obj.get("serving_mode"),
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
-            "min_replicas": obj.get("min_replicas") if obj.get("min_replicas") is not None else 1,
-            "max_replicas": obj.get("max_replicas") if obj.get("max_replicas") is not None else 1,
+            "runtime_version": obj.get("runtime_version"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period"),
             "extra_args": obj.get("extra_args"),

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**priority** | **str** |  | [optional] 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 

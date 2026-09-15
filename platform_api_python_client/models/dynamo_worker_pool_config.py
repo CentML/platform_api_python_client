@@ -18,19 +18,23 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class DynamoWorkerPoolConfig(BaseModel):
     """
-    DynamoWorkerPoolConfig
+    Hardware and scaling for one Dynamo worker role.  ``min_replicas``/``max_replicas`` are the canonical size. ``replicas`` is the deprecated fixed-size alias (``min == max``) still accepted on disaggregated pools. ``parse_dynamo_topology`` owns the cross-field rules (bounds ordering, autoscaling target, which roles may autoscale).
     """ # noqa: E501
     hardware_instance_id: StrictInt
-    replicas: Annotated[int, Field(strict=True, ge=1)]
+    replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    min_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    max_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    concurrency: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["hardware_instance_id", "replicas"]
+    __properties: ClassVar[List[str]] = ["hardware_instance_id", "replicas", "min_replicas", "max_replicas", "concurrency", "cooldown_period"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +82,31 @@ class DynamoWorkerPoolConfig(BaseModel):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.replicas is None and "replicas" in self.model_fields_set:
+            _dict['replicas'] = None
+
+        # set to None if min_replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.min_replicas is None and "min_replicas" in self.model_fields_set:
+            _dict['min_replicas'] = None
+
+        # set to None if max_replicas (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_replicas is None and "max_replicas" in self.model_fields_set:
+            _dict['max_replicas'] = None
+
+        # set to None if concurrency (nullable) is None
+        # and model_fields_set contains the field
+        if self.concurrency is None and "concurrency" in self.model_fields_set:
+            _dict['concurrency'] = None
+
+        # set to None if cooldown_period (nullable) is None
+        # and model_fields_set contains the field
+        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
+            _dict['cooldown_period'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +120,11 @@ class DynamoWorkerPoolConfig(BaseModel):
 
         _obj = cls.model_validate({
             "hardware_instance_id": obj.get("hardware_instance_id"),
-            "replicas": obj.get("replicas")
+            "replicas": obj.get("replicas"),
+            "min_replicas": obj.get("min_replicas"),
+            "max_replicas": obj.get("max_replicas"),
+            "concurrency": obj.get("concurrency"),
+            "cooldown_period": obj.get("cooldown_period")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

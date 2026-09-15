@@ -49,6 +49,7 @@ class TestGetInferenceDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                priority = '',
                 container_port = 56,
                 min_scale = 56,
                 max_scale = 56,

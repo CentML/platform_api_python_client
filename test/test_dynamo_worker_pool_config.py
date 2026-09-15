@@ -36,12 +36,15 @@ class TestDynamoWorkerPoolConfig(unittest.TestCase):
         if include_optional:
             return DynamoWorkerPoolConfig(
                 hardware_instance_id = 56,
-                replicas = 1.0
+                replicas = 1.0,
+                min_replicas = 1.0,
+                max_replicas = 1.0,
+                concurrency = 1.0,
+                cooldown_period = 0.0
             )
         else:
             return DynamoWorkerPoolConfig(
                 hardware_instance_id = 56,
-                replicas = 1.0,
         )
         """
 

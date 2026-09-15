@@ -49,6 +49,7 @@ class TestGetJobDeploymentResponse(unittest.TestCase):
                 user_annotations = {
                     'key' : ''
                     },
+                priority = '',
                 env_vars = {
                     'key' : ''
                     },

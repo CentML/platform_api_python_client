@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
+**priority** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **List[str]** |  | [optional] 
 **args** | **List[str]** |  | [optional] 

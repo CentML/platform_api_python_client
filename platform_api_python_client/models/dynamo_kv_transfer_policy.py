@@ -18,27 +18,20 @@ from enum import Enum
 from typing_extensions import Self
 
 
-class CloudProvider(str, Enum):
+class DynamoKvTransferPolicy(str, Enum):
     """
-    CloudProvider
+    DynamoKvTransferPolicy
     """
 
     """
     allowed enum values
     """
-    GCP = 'gcp'
-    AWS = 'aws'
-    AZURE = 'azure'
-    NEBIUS = 'nebius'
-    LAMBDA = 'lambda'
-    VULTR = 'vultr'
-    INTEL = 'intel'
-    COREWEAVE = 'coreweave'
-    UNKNOWN = 'unknown'
+    ALLOW_TCP = 'allow_tcp'
+    REQUIRE_GPU_DIRECT_RDMA = 'require_gpu_direct_rdma'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of CloudProvider from a JSON string"""
+        """Create an instance of DynamoKvTransferPolicy from a JSON string"""
         return cls(json.loads(json_str))
 
 

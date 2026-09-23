@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**chart_revision** | **str** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **container_port** | **int** |  | 
 **min_scale** | **int** |  | 
 **max_scale** | **int** |  | 

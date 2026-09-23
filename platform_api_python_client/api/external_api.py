@@ -126,7 +126,7 @@ class EXTERNALApi:
     ) -> ClusterRegistrationResponse:
         """Create Cluster
 
-        Register a cluster row for the caller's parent org.  Infra provisioning is not wired yet; ``request.credential`` is validated but not consumed.
+        Register a cluster row for the caller's parent org.
 
         :param cluster_registration_request: (required)
         :type cluster_registration_request: ClusterRegistrationRequest
@@ -194,7 +194,7 @@ class EXTERNALApi:
     ) -> ApiResponse[ClusterRegistrationResponse]:
         """Create Cluster
 
-        Register a cluster row for the caller's parent org.  Infra provisioning is not wired yet; ``request.credential`` is validated but not consumed.
+        Register a cluster row for the caller's parent org.
 
         :param cluster_registration_request: (required)
         :type cluster_registration_request: ClusterRegistrationRequest
@@ -262,7 +262,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Create Cluster
 
-        Register a cluster row for the caller's parent org.  Infra provisioning is not wired yet; ``request.credential`` is validated but not consumed.
+        Register a cluster row for the caller's parent org.
 
         :param cluster_registration_request: (required)
         :type cluster_registration_request: ClusterRegistrationRequest

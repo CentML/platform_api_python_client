@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**chart_revision** | **str** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
 **min_scale** | **int** |  | 

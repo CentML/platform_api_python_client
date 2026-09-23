@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -41,8 +42,10 @@ class GetCServeV3DeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
+    chart_revision: Optional[StrictStr] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
+    volume_mounts: Optional[List[VolumeMount]] = None
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
     min_replicas: StrictInt
@@ -55,7 +58,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,6 +99,13 @@ class GetCServeV3DeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
+        _items = []
+        if self.volume_mounts:
+            for _item_volume_mounts in self.volume_mounts:
+                if _item_volume_mounts:
+                    _items.append(_item_volume_mounts.to_dict())
+            _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of recipe
         if self.recipe:
             _dict['recipe'] = self.recipe.to_dict()
@@ -103,6 +113,11 @@ class GetCServeV3DeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
+
+        # set to None if chart_revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.chart_revision is None and "chart_revision" in self.model_fields_set:
+            _dict['chart_revision'] = None
 
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
@@ -157,8 +172,10 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
+            "chart_revision": obj.get("chart_revision"),
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
             "min_replicas": obj.get("min_replicas"),

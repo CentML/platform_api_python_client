@@ -29,7 +29,7 @@ class VolumeMount(BaseModel):
     """ # noqa: E501
     volume_id: StrictInt
     mount_path: Annotated[str, Field(min_length=1, strict=True)]
-    read_only: Optional[StrictBool] = False
+    read_only: Optional[StrictBool] = Field(default=False, description="Mount this attachment read-only. False does not override a read-only volume.")
     __properties: ClassVar[List[str]] = ["volume_id", "mount_path", "read_only"]
 
     model_config = ConfigDict(

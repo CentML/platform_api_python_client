@@ -23,8 +23,10 @@ from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
+from platform_api_python_client.models.dynamo_communications_output import DynamoCommunicationsOutput
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
+from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,10 +45,13 @@ class GetDynamoDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
+    chart_revision: Optional[StrictStr] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
+    volume_mounts: Optional[List[VolumeMount]] = None
     serving_mode: Optional[DynamoServingMode] = None
     worker_pools: Optional[DynamoWorkerPools] = None
+    communications: Optional[DynamoCommunicationsOutput] = None
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
     runtime_version: Optional[StrictStr] = None
@@ -61,7 +66,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "serving_mode", "worker_pools", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -102,13 +107,28 @@ class GetDynamoDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
+        _items = []
+        if self.volume_mounts:
+            for _item_volume_mounts in self.volume_mounts:
+                if _item_volume_mounts:
+                    _items.append(_item_volume_mounts.to_dict())
+            _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of worker_pools
         if self.worker_pools:
             _dict['worker_pools'] = self.worker_pools.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of communications
+        if self.communications:
+            _dict['communications'] = self.communications.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
+
+        # set to None if chart_revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.chart_revision is None and "chart_revision" in self.model_fields_set:
+            _dict['chart_revision'] = None
 
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
@@ -124,6 +144,11 @@ class GetDynamoDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.worker_pools is None and "worker_pools" in self.model_fields_set:
             _dict['worker_pools'] = None
+
+        # set to None if communications (nullable) is None
+        # and model_fields_set contains the field
+        if self.communications is None and "communications" in self.model_fields_set:
+            _dict['communications'] = None
 
         # set to None if served_model_name (nullable) is None
         # and model_fields_set contains the field
@@ -183,10 +208,13 @@ class GetDynamoDeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
+            "chart_revision": obj.get("chart_revision"),
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "serving_mode": obj.get("serving_mode"),
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
+            "communications": DynamoCommunicationsOutput.from_dict(obj["communications"]) if obj.get("communications") is not None else None,
             "model": obj.get("model"),
             "served_model_name": obj.get("served_model_name"),
             "runtime_version": obj.get("runtime_version"),

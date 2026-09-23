@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
 **image_url** | **str** |  | 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
@@ -21,7 +22,6 @@ Name | Type | Description | Notes
 **active_deadline_seconds** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 
 ## Example
 

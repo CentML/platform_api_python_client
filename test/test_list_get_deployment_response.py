@@ -48,10 +48,17 @@ class TestListGetDeploymentResponse(unittest.TestCase):
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         hardware_instance_id = 56, 
                         revision_number = 56, 
+                        chart_revision = '', 
                         user_annotations = {
                             'key' : ''
                             }, 
-                        priority = '', )
+                        priority = '', 
+                        volume_mounts = [
+                            platform_api_python_client.models.volume_mount.VolumeMount(
+                                volume_id = 56, 
+                                mount_path = '0', 
+                                read_only = True, )
+                            ], )
                     ]
             )
         else:
@@ -69,10 +76,17 @@ class TestListGetDeploymentResponse(unittest.TestCase):
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         hardware_instance_id = 56, 
                         revision_number = 56, 
+                        chart_revision = '', 
                         user_annotations = {
                             'key' : ''
                             }, 
-                        priority = '', )
+                        priority = '', 
+                        volume_mounts = [
+                            platform_api_python_client.models.volume_mount.VolumeMount(
+                                volume_id = 56, 
+                                mount_path = '0', 
+                                read_only = True, )
+                            ], )
                     ],
         )
         """

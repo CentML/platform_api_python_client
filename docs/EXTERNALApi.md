@@ -80,7 +80,7 @@ Method | HTTP request | Description
 
 Create Cluster
 
-Register a cluster row for the caller's parent org.  Infra provisioning is not wired yet; ``request.credential`` is validated but not consumed.
+Register a cluster row for the caller's parent org.
 
 ### Example
 

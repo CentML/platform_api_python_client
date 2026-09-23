@@ -42,16 +42,17 @@ class GetComputeDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
+    chart_revision: Optional[StrictStr] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
-    exposed_port: StrictInt
     volume_mounts: Optional[List[VolumeMount]] = None
+    exposed_port: StrictInt
     ssh_public_key: Optional[StrictStr] = None
     ssh_password: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "exposed_port", "volume_mounts", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "exposed_port", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "enable_logging"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,6 +108,11 @@ class GetComputeDeploymentResponse(BaseModel):
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
 
+        # set to None if chart_revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.chart_revision is None and "chart_revision" in self.model_fields_set:
+            _dict['chart_revision'] = None
+
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
@@ -160,10 +166,11 @@ class GetComputeDeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
+            "chart_revision": obj.get("chart_revision"),
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
-            "exposed_port": obj.get("exposed_port"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
+            "exposed_port": obj.get("exposed_port"),
             "ssh_public_key": obj.get("ssh_public_key"),
             "ssh_password": obj.get("ssh_password"),
             "env_vars": obj.get("env_vars"),

@@ -43,8 +43,10 @@ class GetJobDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
+    chart_revision: Optional[StrictStr] = None
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
+    volume_mounts: Optional[List[VolumeMount]] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[List[StrictStr]] = None
     args: Optional[List[StrictStr]] = None
@@ -56,8 +58,7 @@ class GetJobDeploymentResponse(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
-    volume_mounts: Optional[List[VolumeMount]] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "user_annotations", "priority", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file", "volume_mounts"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,12 +99,6 @@ class GetJobDeploymentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
-        if self.image_pull_secret_credentials:
-            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of config_file
-        if self.config_file:
-            _dict['config_file'] = self.config_file.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
         _items = []
         if self.volume_mounts:
@@ -111,10 +106,21 @@ class GetJobDeploymentResponse(BaseModel):
                 if _item_volume_mounts:
                     _items.append(_item_volume_mounts.to_dict())
             _dict['volume_mounts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
+        if self.image_pull_secret_credentials:
+            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of config_file
+        if self.config_file:
+            _dict['config_file'] = self.config_file.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
             _dict['image_url'] = None
+
+        # set to None if chart_revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.chart_revision is None and "chart_revision" in self.model_fields_set:
+            _dict['chart_revision'] = None
 
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
@@ -184,8 +190,10 @@ class GetJobDeploymentResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "revision_number": obj.get("revision_number"),
+            "chart_revision": obj.get("chart_revision"),
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "args": obj.get("args"),
@@ -196,8 +204,7 @@ class GetJobDeploymentResponse(BaseModel):
             "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
-            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None,
-            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None
+            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
         })
         return _obj
 

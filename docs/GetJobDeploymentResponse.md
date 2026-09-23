@@ -16,8 +16,10 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**chart_revision** | **str** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **List[str]** |  | [optional] 
 **args** | **List[str]** |  | [optional] 
@@ -29,7 +31,6 @@ Name | Type | Description | Notes
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 
 ## Example
 

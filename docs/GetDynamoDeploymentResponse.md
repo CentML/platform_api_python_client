@@ -17,10 +17,13 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**chart_revision** | **str** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
+**volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
+**communications** | [**DynamoCommunicationsOutput**](DynamoCommunicationsOutput.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
 **runtime_version** | **str** |  | [optional] 

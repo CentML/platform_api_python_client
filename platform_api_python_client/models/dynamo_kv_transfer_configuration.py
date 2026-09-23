@@ -17,24 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from platform_api_python_client.models.dynamo_kv_transfer_policy import DynamoKvTransferPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
-class HardwareInstanceResponse(BaseModel):
+class DynamoKvTransferConfiguration(BaseModel):
     """
-    HardwareInstanceResponse
+    DynamoKvTransferConfiguration
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    gpu_type: StrictStr
-    num_gpu: StrictInt
-    cpu: StrictInt
-    memory: StrictInt
-    cluster_id: StrictInt
-    accelerator_memory: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cluster_id", "accelerator_memory"]
+    policy: DynamoKvTransferPolicy = Field(description="allow_tcp uses platform-managed NIXL/UCX and permits TCP; it does not force TCP or guarantee RDMA. require_gpu_direct_rdma selects EKS EFA device requirements and GPU-buffer transfer over LIBFABRIC without TCP fallback. A compatible EFA chart and runtime image are prerequisites; the API does not validate their capabilities. Device availability is resolved during scheduling.")
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["policy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class HardwareInstanceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of HardwareInstanceResponse from a JSON string"""
+        """Create an instance of DynamoKvTransferConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,8 +61,10 @@ class HardwareInstanceResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -75,16 +72,16 @@ class HardwareInstanceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if accelerator_memory (nullable) is None
-        # and model_fields_set contains the field
-        if self.accelerator_memory is None and "accelerator_memory" in self.model_fields_set:
-            _dict['accelerator_memory'] = None
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of HardwareInstanceResponse from a dict"""
+        """Create an instance of DynamoKvTransferConfiguration from a dict"""
         if obj is None:
             return None
 
@@ -92,15 +89,13 @@ class HardwareInstanceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "gpu_type": obj.get("gpu_type"),
-            "num_gpu": obj.get("num_gpu"),
-            "cpu": obj.get("cpu"),
-            "memory": obj.get("memory"),
-            "cluster_id": obj.get("cluster_id"),
-            "accelerator_memory": obj.get("accelerator_memory")
+            "policy": obj.get("policy")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -16,10 +16,11 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
+**chart_revision** | **str** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
-**exposed_port** | **int** |  | 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
+**exposed_port** | **int** |  | 
 **ssh_public_key** | **str** |  | [optional] 
 **ssh_password** | **str** |  | [optional] 
 **env_vars** | **Dict[str, str]** |  | [optional] 

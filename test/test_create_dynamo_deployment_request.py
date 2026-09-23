@@ -44,9 +44,16 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 chart_revision = '',
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ],
                 priority = '',
                 serving_mode = 'aggregated',
                 worker_pools = { },
+                communications = { },
                 model = '',
                 served_model_name = '',
                 runtime_version = 'e6bUUGjjNSwg0_bs9ZayIMrKdgNvb6gvxmPb9GcsM61ate1RA89q3w1l4eH4XxEz.5awxoFZxHzs6ED.kjUSnTINkYPUndNl8pmPg5K897Fu1JEFj9R1_dz9rEoBi0L',

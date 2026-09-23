@@ -17,24 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from platform_api_python_client.models.dynamo_kv_transfer_configuration import DynamoKvTransferConfiguration
 from typing import Optional, Set
 from typing_extensions import Self
 
-class HardwareInstanceResponse(BaseModel):
+class DynamoCommunicationsOutput(BaseModel):
     """
-    HardwareInstanceResponse
+    DynamoCommunicationsOutput
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    gpu_type: StrictStr
-    num_gpu: StrictInt
-    cpu: StrictInt
-    memory: StrictInt
-    cluster_id: StrictInt
-    accelerator_memory: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cluster_id", "accelerator_memory"]
+    kv_transfer: DynamoKvTransferConfiguration
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["kv_transfer"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -54,7 +49,7 @@ class HardwareInstanceResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of HardwareInstanceResponse from a JSON string"""
+        """Create an instance of DynamoCommunicationsOutput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -66,8 +61,10 @@ class HardwareInstanceResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -75,16 +72,19 @@ class HardwareInstanceResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if accelerator_memory (nullable) is None
-        # and model_fields_set contains the field
-        if self.accelerator_memory is None and "accelerator_memory" in self.model_fields_set:
-            _dict['accelerator_memory'] = None
+        # override the default output from pydantic by calling `to_dict()` of kv_transfer
+        if self.kv_transfer:
+            _dict['kv_transfer'] = self.kv_transfer.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of HardwareInstanceResponse from a dict"""
+        """Create an instance of DynamoCommunicationsOutput from a dict"""
         if obj is None:
             return None
 
@@ -92,15 +92,13 @@ class HardwareInstanceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "gpu_type": obj.get("gpu_type"),
-            "num_gpu": obj.get("num_gpu"),
-            "cpu": obj.get("cpu"),
-            "memory": obj.get("memory"),
-            "cluster_id": obj.get("cluster_id"),
-            "accelerator_memory": obj.get("accelerator_memory")
+            "kv_transfer": DynamoKvTransferConfiguration.from_dict(obj["kv_transfer"]) if obj.get("kv_transfer") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

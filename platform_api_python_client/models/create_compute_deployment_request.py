@@ -34,13 +34,13 @@ class CreateComputeDeploymentRequest(BaseModel):
     hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
+    volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "priority", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging", "volume_mounts"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -88,9 +88,6 @@ class CreateComputeDeploymentRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
-        if self.image_pull_secret_credentials:
-            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in volume_mounts (list)
         _items = []
         if self.volume_mounts:
@@ -98,6 +95,9 @@ class CreateComputeDeploymentRequest(BaseModel):
                 if _item_volume_mounts:
                     _items.append(_item_volume_mounts.to_dict())
             _dict['volume_mounts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
+        if self.image_pull_secret_credentials:
+            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
@@ -130,12 +130,12 @@ class CreateComputeDeploymentRequest(BaseModel):
             "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
+            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "priority": obj.get("priority"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "ssh_public_key": obj.get("ssh_public_key"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
-            "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
         })
         return _obj
 

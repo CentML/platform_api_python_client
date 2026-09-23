@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **num_gpu** | **int** |  | 
 **cpu** | **int** |  | 
 **memory** | **int** |  | 
-**cost_per_hr** | **int** |  | 
 **cluster_id** | **int** |  | 
 **accelerator_memory** | **int** |  | [optional] 
 

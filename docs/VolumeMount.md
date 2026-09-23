@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **volume_id** | **int** |  | 
 **mount_path** | **str** |  | 
-**read_only** | **bool** |  | [optional] [default to False]
+**read_only** | **bool** | Mount this attachment read-only. False does not override a read-only volume. | [optional] [default to False]
 
 ## Example
 

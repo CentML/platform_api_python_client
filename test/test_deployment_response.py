@@ -46,12 +46,20 @@ class TestDeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
+                chart_revision = '',
                 user_annotations = {
                     'key' : ''
                     },
                 priority = '',
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ],
                 serving_mode = 'aggregated',
                 worker_pools = { },
+                communications = { },
                 model = '',
                 served_model_name = '',
                 runtime_version = '',
@@ -91,12 +99,6 @@ class TestDeploymentResponse(unittest.TestCase):
                     port = 1.0, 
                     path = '/W(,j>6>eow3jCO&}nl`:&~', ),
                 exposed_port = 56,
-                volume_mounts = [
-                    platform_api_python_client.models.volume_mount.VolumeMount(
-                        volume_id = 56, 
-                        mount_path = '0', 
-                        read_only = True, )
-                    ],
                 ssh_public_key = '',
                 ssh_password = '',
                 args = [

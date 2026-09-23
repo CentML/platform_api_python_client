@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.30.0"
+__version__ = "4.31.0"
 
 # import apis into sdk package
 from platform_api_python_client.api.external_api import EXTERNALApi
@@ -77,6 +77,10 @@ from platform_api_python_client.models.deployment_status_v3_response import Depl
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.deployment_usage import DeploymentUsage
 from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue
+from platform_api_python_client.models.dynamo_communications_input import DynamoCommunicationsInput
+from platform_api_python_client.models.dynamo_communications_output import DynamoCommunicationsOutput
+from platform_api_python_client.models.dynamo_kv_transfer_configuration import DynamoKvTransferConfiguration
+from platform_api_python_client.models.dynamo_kv_transfer_policy import DynamoKvTransferPolicy
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
 from platform_api_python_client.models.dynamo_worker_pool_config import DynamoWorkerPoolConfig
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools

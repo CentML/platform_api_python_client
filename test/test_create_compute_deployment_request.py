@@ -42,19 +42,19 @@ class TestCreateComputeDeploymentRequest(unittest.TestCase):
                     'key' : ''
                     },
                 chart_revision = '',
+                volume_mounts = [
+                    platform_api_python_client.models.volume_mount.VolumeMount(
+                        volume_id = 56, 
+                        mount_path = '0', 
+                        read_only = True, )
+                    ],
                 priority = '',
                 image_url = '',
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
                 ssh_public_key = '',
-                enable_logging = True,
-                volume_mounts = [
-                    platform_api_python_client.models.volume_mount.VolumeMount(
-                        volume_id = 56, 
-                        mount_path = '0', 
-                        read_only = True, )
-                    ]
+                enable_logging = True
             )
         else:
             return CreateComputeDeploymentRequest(

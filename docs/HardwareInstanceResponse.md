@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **memory** | **int** |  | 
 **cluster_id** | **int** |  | 
 **accelerator_memory** | **int** |  | [optional] 
+**cost_per_hr** | **int** |  | [readonly] 
 
 ## Example
 

@@ -34,7 +34,8 @@ class HardwareInstanceResponse(BaseModel):
     memory: StrictInt
     cluster_id: StrictInt
     accelerator_memory: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cluster_id", "accelerator_memory"]
+    cost_per_hr: StrictInt
+    __properties: ClassVar[List[str]] = ["id", "name", "gpu_type", "num_gpu", "cpu", "memory", "cluster_id", "accelerator_memory", "cost_per_hr"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,8 +67,10 @@ class HardwareInstanceResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
+            "cost_per_hr",
         ])
 
         _dict = self.model_dump(
@@ -99,7 +102,8 @@ class HardwareInstanceResponse(BaseModel):
             "cpu": obj.get("cpu"),
             "memory": obj.get("memory"),
             "cluster_id": obj.get("cluster_id"),
-            "accelerator_memory": obj.get("accelerator_memory")
+            "accelerator_memory": obj.get("accelerator_memory"),
+            "cost_per_hr": obj.get("cost_per_hr")
         })
         return _obj
 

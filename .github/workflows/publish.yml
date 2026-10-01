@@ -1,35 +1,80 @@
+# NOTE: This file is HAND-MAINTAINED in this repository and has no upstream
+# counterpart in CentML/platform. Keep the file name `publish.yml`: PyPI trusted
+# publishing (OIDC) is bound to the workflow file name, so renaming it breaks
+# publishing. See CCL-467.
+
 name: publish
 
+# Trigger on tag push rather than on `release: published`, so the tag itself is
+# what selects the code being published.
+#
+# Under the old trigger the published artifact came from whatever tag the GitHub
+# Release happened to target, which is decoupled from the release's name and can
+# be edited afterwards. That is how 4.21.1 was lost: run 29043124220 fired from
+# the release now titled "v4.21.11"/tagged v4.21.1, but ran against ref v4.20.0
+# and published 4.20.0. Seven tags never reached PyPI in total.
+#
+# Both tag spellings are matched on purpose: 4 of the 31 existing tags (3.2.5 -
+# 3.2.8) carry no `v` prefix, and a tag that matches no pattern here would fail
+# silently, which is the exact failure mode this workflow exists to remove.
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*"
+      - "[0-9]*"
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Scopes the OIDC token and allows a manual approval gate to be configured
+    # via required reviewers in the repository's environment settings.
+    environment:
+      name: pypi
+      url: https://pypi.org/project/platform-api-python-client/
     permissions:
       id-token: write
+      contents: read
     steps:
-      - uses: actions/checkout@v3
-      - name: setup-python
-        uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          architecture: "x64"
-      - name: install pypa/build
-        run: >-
-          python -m
-          pip install
-          build
-          --user
-      - name: build sdist(tarball) and bdist(wheel) to dist/
-        run: >- # = python -m build . works the same way by default
-          python -m
-          build
-          --sdist
-          --wheel
-          --outdir dist/
-      - name: publish to PyPI
+
+      - name: Install build tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Build sdist and wheel
+        run: python -m build --sdist --wheel --outdir dist/
+
+      - name: Verify tag matches package version
+        # Read the version from the built distribution rather than from
+        # pyproject.toml. The project currently declares its version under
+        # [tool.poetry] while building with the setuptools backend (which reads
+        # setup.py), and CCL-470 will move it to a PEP 621 [project] table. The
+        # built artifact is the single source of truth in all of those layouts.
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION="$(python -c '
+          import pathlib
+          sdists = sorted(pathlib.Path("dist").glob("*.tar.gz"))
+          if len(sdists) != 1:
+              raise SystemExit(f"expected exactly one sdist, found {[p.name for p in sdists]}")
+          print(sdists[0].name.removesuffix(".tar.gz").rsplit("-", 1)[1])
+          ')"
+          echo "tag=$TAG built version=$VERSION"
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error::tag $TAG does not match built package version $VERSION"
+            exit 1
+          fi
+
+      - name: Check distribution metadata
+        run: python -m twine check --strict dist/*
+
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://upload.pypi.org/legacy/

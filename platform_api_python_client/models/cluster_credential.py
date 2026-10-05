@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,7 @@ class ClusterCredential(BaseModel):
     """ # noqa: E501
     server: StrictStr
     bearer_token: StrictStr
-    ca_cert: StrictStr
+    ca_cert: StrictStr = Field(description="Base64-encoded PEM CA certificate of the cluster's API server, as in a kubeconfig's `certificate-authority-data` or the `ca.crt` key of a service-account token Secret's `data`.")
     __properties: ClassVar[List[str]] = ["server", "bearer_token", "ca_cert"]
 
     model_config = ConfigDict(

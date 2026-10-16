@@ -14,8 +14,10 @@ Name | Type | Description | Notes
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
+**hf_token_ref** | **int** |  | [optional] 
 **image_url** | **str** |  | 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
+**image_pull_ref** | **int** |  | [optional] 
 **port** | **int** |  | 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
@@ -25,8 +27,10 @@ Name | Type | Description | Notes
 **env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **str** |  | [optional] 
 **endpoint_bearer_token** | **str** |  | [optional] 
+**bearer_token_ref** | **int** |  | [optional] 
 **endpoint_certificate_authority** | **str** |  | [optional] 
 **hf_token** | **str** |  | [optional] 
+**env_vars_refs** | **object** |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to False]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]

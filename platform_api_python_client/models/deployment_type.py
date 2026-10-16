@@ -40,10 +40,24 @@ class DeploymentType(str, Enum):
     RAG = 'rag'
     JOB = 'job'
     DYNAMO = 'dynamo'
+    CCL_COMPUTE = 'ccl_compute'
+    CCL_INFERENCE = 'ccl_inference'
+    CCL_JOB = 'ccl_job'
+    CCL_DYNAMO = 'ccl_dynamo'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of DeploymentType from a JSON string"""
         return cls(json.loads(json_str))
+
+    @classmethod
+    def _missing_(cls, value):
+        """Accept a value the server added after this client was generated; it keeps the raw value."""
+        if not isinstance(value, str):
+            return None
+        member = str.__new__(cls, value)
+        member._name_ = None
+        member._value_ = value
+        return member
 
 

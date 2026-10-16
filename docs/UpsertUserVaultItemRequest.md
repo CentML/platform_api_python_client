@@ -1,6 +1,6 @@
 # UpsertUserVaultItemRequest
 
-Write model for PUT /user_vault, where the key and value rules are enforced.
+Create an immutable secret via PUT /user_vault; existing keys return 409.  The schema name is retained for SDK compatibility. Secrets cannot be updated.
 
 ## Properties
 

@@ -80,11 +80,14 @@ from platform_api_python_client.models.organization_gpu_quota_request import Org
 from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
 from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.service_account_response import ServiceAccountResponse
+from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest
+from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
 from platform_api_python_client.models.update_service_account_request import UpdateServiceAccountRequest
 from platform_api_python_client.models.upsert_user_vault_item_request import UpsertUserVaultItemRequest
+from platform_api_python_client.models.usage_component import UsageComponent
 from platform_api_python_client.models.user_vault_item import UserVaultItem
 from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.volume_status_response import VolumeStatusResponse
@@ -3067,6 +3070,280 @@ class EXTERNALApi:
 
 
     @validate_call
+    def create_unified_deployment_deployments_post(
+        self,
+        unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedWriteDeploymentResponse:
+        """Create Unified Deployment
+
+
+        :param unified_write_deployment_request: (required)
+        :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_unified_deployment_deployments_post_serialize(
+            unified_write_deployment_request=unified_write_deployment_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def create_unified_deployment_deployments_post_with_http_info(
+        self,
+        unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedWriteDeploymentResponse]:
+        """Create Unified Deployment
+
+
+        :param unified_write_deployment_request: (required)
+        :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_unified_deployment_deployments_post_serialize(
+            unified_write_deployment_request=unified_write_deployment_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def create_unified_deployment_deployments_post_without_preload_content(
+        self,
+        unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create Unified Deployment
+
+
+        :param unified_write_deployment_request: (required)
+        :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_unified_deployment_deployments_post_serialize(
+            unified_write_deployment_request=unified_write_deployment_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_unified_deployment_deployments_post_serialize(
+        self,
+        unified_write_deployment_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if unified_write_deployment_request is not None:
+            _body_params = unified_write_deployment_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/deployments',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def create_volume_endpoint_volumes_post(
         self,
         create_volume_request: CreateVolumeRequest,
@@ -4145,7 +4422,7 @@ class EXTERNALApi:
     ) -> object:
         """Delete User Vault Item By Id Endpoint
 
-        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+        Delete a vault item by ID. Returns 409 while a non-deleted deployment's selected revision references it.
 
         :param secret_id: (required)
         :type secret_id: int
@@ -4213,7 +4490,7 @@ class EXTERNALApi:
     ) -> ApiResponse[object]:
         """Delete User Vault Item By Id Endpoint
 
-        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+        Delete a vault item by ID. Returns 409 while a non-deleted deployment's selected revision references it.
 
         :param secret_id: (required)
         :type secret_id: int
@@ -4281,7 +4558,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Delete User Vault Item By Id Endpoint
 
-        Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+        Delete a vault item by ID. Returns 409 while a non-deleted deployment's selected revision references it.
 
         :param secret_id: (required)
         :type secret_id: int
@@ -12595,6 +12872,9 @@ class EXTERNALApi:
         start_time_in_seconds: StrictInt,
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12621,6 +12901,12 @@ class EXTERNALApi:
         :type end_time_in_seconds: int
         :param step:
         :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12649,6 +12935,9 @@ class EXTERNALApi:
             start_time_in_seconds=start_time_in_seconds,
             end_time_in_seconds=end_time_in_seconds,
             step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12678,6 +12967,9 @@ class EXTERNALApi:
         start_time_in_seconds: StrictInt,
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12704,6 +12996,12 @@ class EXTERNALApi:
         :type end_time_in_seconds: int
         :param step:
         :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12732,6 +13030,9 @@ class EXTERNALApi:
             start_time_in_seconds=start_time_in_seconds,
             end_time_in_seconds=end_time_in_seconds,
             step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12761,6 +13062,9 @@ class EXTERNALApi:
         start_time_in_seconds: StrictInt,
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12787,6 +13091,12 @@ class EXTERNALApi:
         :type end_time_in_seconds: int
         :param step:
         :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12815,6 +13125,9 @@ class EXTERNALApi:
             start_time_in_seconds=start_time_in_seconds,
             end_time_in_seconds=end_time_in_seconds,
             step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12839,6 +13152,9 @@ class EXTERNALApi:
         start_time_in_seconds,
         end_time_in_seconds,
         step,
+        revision_number,
+        component,
+        pod,
         _request_auth,
         _content_type,
         _headers,
@@ -12878,6 +13194,18 @@ class EXTERNALApi:
         if step is not None:
             
             _query_params.append(('step', step))
+            
+        if revision_number is not None:
+            
+            _query_params.append(('revision_number', revision_number))
+            
+        if component is not None:
+            
+            _query_params.append(('component', component.value))
+            
+        if pod is not None:
+            
+            _query_params.append(('pod', pod))
             
         # process the header parameters
         # process the form parameters
@@ -18733,7 +19061,7 @@ class EXTERNALApi:
     ) -> UserVaultItem:
         """Update User Vault Item Endpoint
 
-        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
+        Create an immutable vault item. Existing secrets cannot be updated.  Reusing an active type, key, and visibility returns 409, even for the same value. To replace a secret, create one with a new key and update its consumers before deleting the old secret. Recreating a deleted key allocates a new secret ID. The PUT route and request name are retained for existing clients.
 
         :param upsert_user_vault_item_request: (required)
         :type upsert_user_vault_item_request: UpsertUserVaultItemRequest
@@ -18801,7 +19129,7 @@ class EXTERNALApi:
     ) -> ApiResponse[UserVaultItem]:
         """Update User Vault Item Endpoint
 
-        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
+        Create an immutable vault item. Existing secrets cannot be updated.  Reusing an active type, key, and visibility returns 409, even for the same value. To replace a secret, create one with a new key and update its consumers before deleting the old secret. Recreating a deleted key allocates a new secret ID. The PUT route and request name are retained for existing clients.
 
         :param upsert_user_vault_item_request: (required)
         :type upsert_user_vault_item_request: UpsertUserVaultItemRequest
@@ -18869,7 +19197,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update User Vault Item Endpoint
 
-        Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
+        Create an immutable vault item. Existing secrets cannot be updated.  Reusing an active type, key, and visibility returns 409, even for the same value. To replace a secret, create one with a new key and update its consumers before deleting the old secret. Recreating a deleted key allocates a new secret ID. The PUT route and request name are retained for existing clients.
 
         :param upsert_user_vault_item_request: (required)
         :type upsert_user_vault_item_request: UpsertUserVaultItemRequest

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** |  | 
 **region** | **str** |  | [optional] 
 **deployment_creation_disabled** | **bool** |  | [optional] [default to False]
+**managed_by_ccluster** | **bool** |  | 
 
 ## Example
 

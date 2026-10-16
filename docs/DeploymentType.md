@@ -31,6 +31,14 @@
 
 * `DYNAMO` (value: `'dynamo'`)
 
+* `CCL_COMPUTE` (value: `'ccl_compute'`)
+
+* `CCL_INFERENCE` (value: `'ccl_inference'`)
+
+* `CCL_JOB` (value: `'ccl_job'`)
+
+* `CCL_DYNAMO` (value: `'ccl_dynamo'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

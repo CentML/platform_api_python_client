@@ -33,7 +33,6 @@ class DynamoWorkerPoolConfig(BaseModel):
     max_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     concurrency: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None
-    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hardware_instance_id", "replicas", "min_replicas", "max_replicas", "concurrency", "cooldown_period"]
 
     model_config = ConfigDict(
@@ -66,10 +65,8 @@ class DynamoWorkerPoolConfig(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -77,11 +74,6 @@ class DynamoWorkerPoolConfig(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
         # set to None if replicas (nullable) is None
         # and model_fields_set contains the field
         if self.replicas is None and "replicas" in self.model_fields_set:
@@ -126,11 +118,6 @@ class DynamoWorkerPoolConfig(BaseModel):
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period")
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

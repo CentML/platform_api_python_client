@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
@@ -49,6 +50,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
     volume_mounts: Optional[List[VolumeMount]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     serving_mode: Optional[DynamoServingMode] = None
     worker_pools: Optional[DynamoWorkerPools] = None
     communications: Optional[DynamoCommunicationsOutput] = None
@@ -61,12 +63,15 @@ class GetDynamoDeploymentResponse(BaseModel):
     cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "endpoint_certificate_authority", "endpoint_bearer_token", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -140,6 +145,11 @@ class GetDynamoDeploymentResponse(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if worker_pools (nullable) is None
         # and model_fields_set contains the field
         if self.worker_pools is None and "worker_pools" in self.model_fields_set:
@@ -185,6 +195,16 @@ class GetDynamoDeploymentResponse(BaseModel):
         if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
             _dict['endpoint_bearer_token'] = None
 
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
+
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
+
         return _dict
 
     @classmethod
@@ -212,6 +232,7 @@ class GetDynamoDeploymentResponse(BaseModel):
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
+            "hf_token_ref": obj.get("hf_token_ref"),
             "serving_mode": obj.get("serving_mode"),
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "communications": DynamoCommunicationsOutput.from_dict(obj["communications"]) if obj.get("communications") is not None else None,
@@ -224,8 +245,11 @@ class GetDynamoDeploymentResponse(BaseModel):
             "cooldown_period": obj.get("cooldown_period"),
             "extra_args": obj.get("extra_args"),
             "env_vars": obj.get("env_vars"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
+            "image_pull_ref": obj.get("image_pull_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "backend_protocol": obj.get("backend_protocol")

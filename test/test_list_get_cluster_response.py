@@ -41,7 +41,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                         cluster_name = '', 
                         display_name = '', 
                         region = '', 
-                        deployment_creation_disabled = True, )
+                        deployment_creation_disabled = True, 
+                        managed_by_ccluster = True, )
                     ]
             )
         else:
@@ -52,7 +53,8 @@ class TestListGetClusterResponse(unittest.TestCase):
                         cluster_name = '', 
                         display_name = '', 
                         region = '', 
-                        deployment_creation_disabled = True, )
+                        deployment_creation_disabled = True, 
+                        managed_by_ccluster = True, )
                     ],
         )
         """

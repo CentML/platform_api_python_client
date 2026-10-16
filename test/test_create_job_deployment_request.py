@@ -53,9 +53,11 @@ class TestCreateJobDeploymentRequest(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
+                image_pull_ref = 1.0,
                 env_vars = {
                     'key' : ''
                     },
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
                 command = '',
                 completions = 56,
                 parallelism = 56,

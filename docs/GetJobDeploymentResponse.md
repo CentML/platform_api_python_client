@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **backoff_limit** | **int** |  | [optional] [default to 3]
 **active_deadline_seconds** | **int** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
+**env_vars_refs** | **object** |  | [optional] 
+**image_pull_ref** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 

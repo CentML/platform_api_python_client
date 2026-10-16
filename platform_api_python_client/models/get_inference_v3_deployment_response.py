@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -49,6 +50,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
     volume_mounts: Optional[List[VolumeMount]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     container_port: StrictInt
     min_replicas: StrictInt
     max_replicas: StrictInt
@@ -62,13 +64,16 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     command_args: Optional[List[StrictStr]] = None
     original_command: Optional[StrictStr] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -145,6 +150,11 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -190,6 +200,16 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
+
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
+
         # set to None if config_file (nullable) is None
         # and model_fields_set contains the field
         if self.config_file is None and "config_file" in self.model_fields_set:
@@ -227,6 +247,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
+            "hf_token_ref": obj.get("hf_token_ref"),
             "container_port": obj.get("container_port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
@@ -240,6 +261,9 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "command_args": obj.get("command_args"),
             "original_command": obj.get("original_command"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "env_vars_refs": obj.get("env_vars_refs"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
+            "image_pull_ref": obj.get("image_pull_ref"),
             "backend_protocol": obj.get("backend_protocol"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,

@@ -57,7 +57,9 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                         mount_path = '0', 
                         read_only = True, )
                     ],
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 cserve_version = '',
                 min_scale = 56,
                 max_scale = 56,
@@ -81,7 +83,9 @@ class TestGetCServeV2DeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 min_scale = 56,
                 max_scale = 56,
         )

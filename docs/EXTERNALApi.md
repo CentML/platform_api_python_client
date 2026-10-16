@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**create_job_deployment_deployments_job_post**](EXTERNALApi.md#create_job_deployment_deployments_job_post) | **POST** /deployments/job | Create Job Deployment
 [**create_new_organization_organizations_post**](EXTERNALApi.md#create_new_organization_organizations_post) | **POST** /organizations | Create New Organization
 [**create_service_account_service_accounts_post**](EXTERNALApi.md#create_service_account_service_accounts_post) | **POST** /service-accounts | Create Service Account
+[**create_unified_deployment_deployments_post**](EXTERNALApi.md#create_unified_deployment_deployments_post) | **POST** /deployments | Create Unified Deployment
 [**create_volume_endpoint_volumes_post**](EXTERNALApi.md#create_volume_endpoint_volumes_post) | **POST** /volumes | Create Volume Endpoint
 [**delete_cluster_clusters_cluster_id_delete**](EXTERNALApi.md#delete_cluster_clusters_cluster_id_delete) | **DELETE** /clusters/{cluster_id} | Delete Cluster
 [**delete_hardware_instance_hardware_instances_hardware_instance_id_delete**](EXTERNALApi.md#delete_hardware_instance_hardware_instances_hardware_instance_id_delete) | **DELETE** /hardware-instances/{hardware_instance_id} | Delete Hardware Instance
@@ -903,6 +904,84 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_unified_deployment_deployments_post**
+> UnifiedWriteDeploymentResponse create_unified_deployment_deployments_post(unified_write_deployment_request)
+
+Create Unified Deployment
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest
+from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    unified_write_deployment_request = platform_api_python_client.UnifiedWriteDeploymentRequest() # UnifiedWriteDeploymentRequest | 
+
+    try:
+        # Create Unified Deployment
+        api_response = api_instance.create_unified_deployment_deployments_post(unified_write_deployment_request)
+        print("The response of EXTERNALApi->create_unified_deployment_deployments_post:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_unified_deployment_deployments_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **unified_write_deployment_request** | [**UnifiedWriteDeploymentRequest**](UnifiedWriteDeploymentRequest.md)|  | 
+
+### Return type
+
+[**UnifiedWriteDeploymentResponse**](UnifiedWriteDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_volume_endpoint_volumes_post**
 > GetVolumeResponse create_volume_endpoint_volumes_post(create_volume_request)
 
@@ -1212,7 +1291,7 @@ void (empty response body)
 
 Delete User Vault Item By Id Endpoint
 
-Delete a vault item by ID.  TODO(vault-migration): reject the delete when a selected deployment revision references the secret. Revision-reference tracking lands in a follow-up migration, so nothing is checked yet.
+Delete a vault item by ID. Returns 409 while a non-deleted deployment's selected revision references it.
 
 ### Example
 
@@ -3619,7 +3698,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_deployments_usage_deployment_id_get**
-> GetDeploymentUsageResponse get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step)
+> GetDeploymentUsageResponse get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step, revision_number=revision_number, component=component, pod=pod)
 
 Get Usage
 
@@ -3631,6 +3710,7 @@ Get Usage
 import platform_api_python_client
 from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.usage_component import UsageComponent
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3659,10 +3739,13 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     start_time_in_seconds = 56 # int | 
     end_time_in_seconds = 56 # int | 
     step = 15 # int |  (optional) (default to 15)
+    revision_number = 56 # int |  (optional)
+    component = platform_api_python_client.UsageComponent() # UsageComponent |  (optional)
+    pod = 'pod_example' # str |  (optional)
 
     try:
         # Get Usage
-        api_response = api_instance.get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step)
+        api_response = api_instance.get_usage_deployments_usage_deployment_id_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step, revision_number=revision_number, component=component, pod=pod)
         print("The response of EXTERNALApi->get_usage_deployments_usage_deployment_id_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -3681,6 +3764,9 @@ Name | Type | Description  | Notes
  **start_time_in_seconds** | **int**|  | 
  **end_time_in_seconds** | **int**|  | 
  **step** | **int**|  | [optional] [default to 15]
+ **revision_number** | **int**|  | [optional] 
+ **component** | [**UsageComponent**](.md)|  | [optional] 
+ **pod** | **str**|  | [optional] 
 
 ### Return type
 
@@ -5337,7 +5423,7 @@ Name | Type | Description  | Notes
 
 Update User Vault Item Endpoint
 
-Create or update a vault item, writing its value to both SSM and PostgreSQL.  The key and value rules are declared on UpsertUserVaultItemRequest, so a malformed write is rejected with a 422 before this handler runs.
+Create an immutable vault item. Existing secrets cannot be updated.  Reusing an active type, key, and visibility returns 409, even for the same value. To replace a secret, create one with a new key and update its consumers before deleting the old secret. Recreating a deleted key allocates a new secret ID. The PUT route and request name are retained for existing clients.
 
 ### Example
 

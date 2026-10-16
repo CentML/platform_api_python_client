@@ -57,6 +57,7 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                         mount_path = '0', 
                         read_only = True, )
                     ],
+                hf_token_ref = 1.0,
                 container_port = 56,
                 min_replicas = 56,
                 max_replicas = 56,
@@ -78,6 +79,9 @@ class TestGetInferenceV3DeploymentResponse(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
+                bearer_token_ref = 1.0,
+                image_pull_ref = 1.0,
                 backend_protocol = 'HTTP',
                 enable_logging = True,
                 enable_node_model_cache = True,

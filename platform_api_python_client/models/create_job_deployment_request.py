@@ -39,7 +39,9 @@ class CreateJobDeploymentRequest(BaseModel):
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     command: Optional[StrictStr] = None
     completions: Optional[StrictInt] = 1
     parallelism: Optional[StrictInt] = 1
@@ -47,7 +49,7 @@ class CreateJobDeploymentRequest(BaseModel):
     active_deadline_seconds: Optional[StrictInt] = None
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "env_vars", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "image_pull_ref", "env_vars", "env_vars_refs", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -123,6 +125,11 @@ class CreateJobDeploymentRequest(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
+
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
         if self.env_vars is None and "env_vars" in self.model_fields_set:
@@ -164,7 +171,9 @@ class CreateJobDeploymentRequest(BaseModel):
             "priority": obj.get("priority"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "image_pull_ref": obj.get("image_pull_ref"),
             "env_vars": obj.get("env_vars"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "command": obj.get("command"),
             "completions": obj.get("completions") if obj.get("completions") is not None else 1,
             "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,

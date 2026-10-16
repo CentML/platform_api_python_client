@@ -38,20 +38,23 @@ class CreateCServeV3DeploymentRequest(BaseModel):
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
     hf_token: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     min_replicas: StrictInt
     max_replicas: StrictInt
     concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[StrictInt] = None
+    cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "endpoint_certificate_authority", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "recipe", "cserve_version", "hf_token", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "env_vars", "env_vars_refs", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -129,6 +132,11 @@ class CreateCServeV3DeploymentRequest(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if cserve_version (nullable) is None
         # and model_fields_set contains the field
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
@@ -143,6 +151,11 @@ class CreateCServeV3DeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
             _dict['endpoint_bearer_token'] = None
+
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
 
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
@@ -180,16 +193,19 @@ class CreateCServeV3DeploymentRequest(BaseModel):
             "chart_revision": obj.get("chart_revision"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "priority": obj.get("priority"),
+            "hf_token_ref": obj.get("hf_token_ref"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
             "hf_token": obj.get("hf_token"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period"),
             "env_vars": obj.get("env_vars"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False

@@ -28,7 +28,6 @@ class DynamoCommunicationsOutput(BaseModel):
     DynamoCommunicationsOutput
     """ # noqa: E501
     kv_transfer: DynamoKvTransferConfiguration
-    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["kv_transfer"]
 
     model_config = ConfigDict(
@@ -61,10 +60,8 @@ class DynamoCommunicationsOutput(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -75,11 +72,6 @@ class DynamoCommunicationsOutput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of kv_transfer
         if self.kv_transfer:
             _dict['kv_transfer'] = self.kv_transfer.to_dict()
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
         return _dict
 
     @classmethod
@@ -94,11 +86,6 @@ class DynamoCommunicationsOutput(BaseModel):
         _obj = cls.model_validate({
             "kv_transfer": DynamoKvTransferConfiguration.from_dict(obj["kv_transfer"]) if obj.get("kv_transfer") is not None else None
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

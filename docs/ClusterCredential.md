@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **server** | **str** |  | 
 **bearer_token** | **str** |  | 
-**ca_cert** | **str** |  | 
+**ca_cert** | **str** | Base64-encoded PEM CA certificate of the cluster&#39;s API server, as in a kubeconfig&#39;s &#x60;certificate-authority-data&#x60; or the &#x60;ca.crt&#x60; key of a service-account token Secret&#39;s &#x60;data&#x60;. | 
 
 ## Example
 

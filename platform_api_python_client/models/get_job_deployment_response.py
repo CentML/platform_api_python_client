@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.config_file_mount import ConfigFileMount
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
@@ -56,9 +57,11 @@ class GetJobDeploymentResponse(BaseModel):
     backoff_limit: Optional[StrictInt] = 3
     active_deadline_seconds: Optional[StrictInt] = None
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "enable_logging", "config_file"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "env_vars", "command", "args", "original_command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "image_pull_secret_credentials", "env_vars_refs", "image_pull_ref", "enable_logging", "config_file"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -162,6 +165,11 @@ class GetJobDeploymentResponse(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
+
         # set to None if config_file (nullable) is None
         # and model_fields_set contains the field
         if self.config_file is None and "config_file" in self.model_fields_set:
@@ -203,6 +211,8 @@ class GetJobDeploymentResponse(BaseModel):
             "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
             "active_deadline_seconds": obj.get("active_deadline_seconds"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "env_vars_refs": obj.get("env_vars_refs"),
+            "image_pull_ref": obj.get("image_pull_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None
         })

@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
@@ -46,6 +47,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
     volume_mounts: Optional[List[VolumeMount]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     recipe: CServeV2Recipe
     cserve_version: Optional[StrictStr] = None
     min_replicas: StrictInt
@@ -55,10 +57,12 @@ class GetCServeV3DeploymentResponse(BaseModel):
     concurrency: Optional[StrictInt] = None
     cooldown_period: Optional[StrictInt] = 1800
     env_vars: Optional[Dict[str, StrictStr]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "enable_logging", "enable_node_model_cache", "session_affinity"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "recipe", "cserve_version", "min_replicas", "max_replicas", "endpoint_certificate_authority", "endpoint_bearer_token", "concurrency", "cooldown_period", "env_vars", "env_vars_refs", "bearer_token_ref", "enable_logging", "enable_node_model_cache", "session_affinity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,6 +133,11 @@ class GetCServeV3DeploymentResponse(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if cserve_version (nullable) is None
         # and model_fields_set contains the field
         if self.cserve_version is None and "cserve_version" in self.model_fields_set:
@@ -148,6 +157,11 @@ class GetCServeV3DeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
             _dict['concurrency'] = None
+
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
 
         return _dict
 
@@ -176,6 +190,7 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "user_annotations": obj.get("user_annotations"),
             "priority": obj.get("priority"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
+            "hf_token_ref": obj.get("hf_token_ref"),
             "recipe": CServeV2Recipe.from_dict(obj["recipe"]) if obj.get("recipe") is not None else None,
             "cserve_version": obj.get("cserve_version"),
             "min_replicas": obj.get("min_replicas"),
@@ -185,6 +200,8 @@ class GetCServeV3DeploymentResponse(BaseModel):
             "concurrency": obj.get("concurrency"),
             "cooldown_period": obj.get("cooldown_period") if obj.get("cooldown_period") is not None else 1800,
             "env_vars": obj.get("env_vars"),
+            "env_vars_refs": obj.get("env_vars_refs"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False

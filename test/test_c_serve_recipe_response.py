@@ -37,7 +37,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
             return CServeRecipeResponse(
                 model = '',
                 fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [
@@ -50,7 +52,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             ]
                         ], ),
                 cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [
@@ -63,7 +67,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             ]
                         ], ),
                 best_value = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [
@@ -80,7 +86,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
             return CServeRecipeResponse(
                 model = '',
                 fastest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [
@@ -93,7 +101,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             ]
                         ], ),
                 cheapest = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [
@@ -106,7 +116,9 @@ class TestCServeRecipeResponse(unittest.TestCase):
                             ]
                         ], ),
                 best_value = platform_api_python_client.models.c_serve_recipe_perf.CServeRecipePerf(
-                    recipe = { }, 
+                    recipe = {
+                        'key' : null
+                        }, 
                     hardware_instance_id = 56, 
                     output_tp = [
                         [

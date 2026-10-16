@@ -52,8 +52,25 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                     ],
                 priority = '',
                 serving_mode = 'aggregated',
-                worker_pools = { },
-                communications = { },
+                worker_pools = platform_api_python_client.models.dynamo_worker_pools.DynamoWorkerPools(
+                    worker = platform_api_python_client.models.dynamo_worker_pool_config.DynamoWorkerPoolConfig(
+                        hardware_instance_id = 56, 
+                        replicas = 1.0, 
+                        min_replicas = 1.0, 
+                        max_replicas = 1.0, 
+                        concurrency = 1.0, 
+                        cooldown_period = 0.0, ), 
+                    prefill = platform_api_python_client.models.dynamo_worker_pool_config.DynamoWorkerPoolConfig(
+                        hardware_instance_id = 56, 
+                        replicas = 1.0, 
+                        min_replicas = 1.0, 
+                        max_replicas = 1.0, 
+                        concurrency = 1.0, 
+                        cooldown_period = 0.0, ), 
+                    decode = , ),
+                communications = platform_api_python_client.models.dynamo_communications.DynamoCommunications(
+                    kv_transfer = platform_api_python_client.models.dynamo_kv_transfer_configuration.DynamoKvTransferConfiguration(
+                        policy = 'allow_tcp', ), ),
                 model = '',
                 served_model_name = '',
                 runtime_version = 'e6bUUGjjNSwg0_bs9ZayIMrKdgNvb6gvxmPb9GcsM61ate1RA89q3w1l4eH4XxEz.5awxoFZxHzs6ED.kjUSnTINkYPUndNl8pmPg5K897Fu1JEFj9R1_dz9rEoBi0L',
@@ -63,11 +80,15 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                 cooldown_period = 56,
                 extra_args = '',
                 hf_token = '',
+                hf_token_ref = 1.0,
                 env_vars = {
                     'key' : ''
                     },
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
                 endpoint_bearer_token = '',
+                bearer_token_ref = 1.0,
                 endpoint_certificate_authority = '',
+                image_pull_ref = 1.0,
                 enable_logging = True,
                 enable_node_model_cache = True,
                 backend_protocol = 'HTTP'

@@ -66,6 +66,8 @@ class TestGetComputeDeploymentResponse(unittest.TestCase):
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
+                image_pull_ref = 1.0,
                 enable_logging = True
             )
         else:

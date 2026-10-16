@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **priority** | **str** |  | [optional] 
 **image_url** | **str** |  | 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
+**image_pull_ref** | **int** |  | [optional] 
+**env_vars_refs** | **object** |  | [optional] 
 **ssh_public_key** | **str** |  | 
 **enable_logging** | **bool** |  | [optional] [default to False]
 

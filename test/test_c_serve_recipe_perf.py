@@ -35,7 +35,9 @@ class TestCServeRecipePerf(unittest.TestCase):
         model = CServeRecipePerf()
         if include_optional:
             return CServeRecipePerf(
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 hardware_instance_id = 56,
                 output_tp = [
                     [
@@ -50,7 +52,9 @@ class TestCServeRecipePerf(unittest.TestCase):
             )
         else:
             return CServeRecipePerf(
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 hardware_instance_id = 56,
                 output_tp = [
                     [

@@ -31,7 +31,8 @@ class GetClusterResponse(BaseModel):
     display_name: StrictStr
     region: Optional[StrictStr] = None
     deployment_creation_disabled: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["id", "cluster_name", "display_name", "region", "deployment_creation_disabled"]
+    managed_by_ccluster: StrictBool
+    __properties: ClassVar[List[str]] = ["id", "cluster_name", "display_name", "region", "deployment_creation_disabled", "managed_by_ccluster"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +94,8 @@ class GetClusterResponse(BaseModel):
             "cluster_name": obj.get("cluster_name"),
             "display_name": obj.get("display_name"),
             "region": obj.get("region"),
-            "deployment_creation_disabled": obj.get("deployment_creation_disabled") if obj.get("deployment_creation_disabled") is not None else False
+            "deployment_creation_disabled": obj.get("deployment_creation_disabled") if obj.get("deployment_creation_disabled") is not None else False,
+            "managed_by_ccluster": obj.get("managed_by_ccluster")
         })
         return _obj
 

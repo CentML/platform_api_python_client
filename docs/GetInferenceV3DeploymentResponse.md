@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
+**hf_token_ref** | **int** |  | [optional] 
 **container_port** | **int** |  | 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
@@ -33,6 +34,9 @@ Name | Type | Description | Notes
 **command_args** | **List[str]** |  | [optional] 
 **original_command** | **str** |  | [optional] 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
+**env_vars_refs** | **object** |  | [optional] 
+**bearer_token_ref** | **int** |  | [optional] 
+**image_pull_ref** | **int** |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]

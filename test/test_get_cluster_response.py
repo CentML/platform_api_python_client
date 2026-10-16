@@ -39,13 +39,15 @@ class TestGetClusterResponse(unittest.TestCase):
                 cluster_name = '',
                 display_name = '',
                 region = '',
-                deployment_creation_disabled = True
+                deployment_creation_disabled = True,
+                managed_by_ccluster = True
             )
         else:
             return GetClusterResponse(
                 id = 56,
                 cluster_name = '',
                 display_name = '',
+                managed_by_ccluster = True,
         )
         """
 

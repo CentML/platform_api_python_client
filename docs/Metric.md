@@ -29,6 +29,32 @@
 
 * `PREFIX_CACHE_HIT_RATE` (value: `'prefix_cache_hit_rate'`)
 
+* `DYNAMO_TTFT` (value: `'dynamo_ttft'`)
+
+* `DYNAMO_TPOT` (value: `'dynamo_tpot'`)
+
+* `DYNAMO_REQUEST_LATENCY` (value: `'dynamo_request_latency'`)
+
+* `DYNAMO_OUTPUT_THROUGHPUT` (value: `'dynamo_output_throughput'`)
+
+* `DYNAMO_REQUESTS` (value: `'dynamo_requests'`)
+
+* `DYNAMO_QUEUE_DEPTH` (value: `'dynamo_queue_depth'`)
+
+* `DYNAMO_RUNNING_REQUESTS` (value: `'dynamo_running_requests'`)
+
+* `DYNAMO_KV_CACHE` (value: `'dynamo_kv_cache'`)
+
+* `DYNAMO_KV_THROUGHPUT` (value: `'dynamo_kv_throughput'`)
+
+* `DYNAMO_KV_TRANSFER_LATENCY` (value: `'dynamo_kv_transfer_latency'`)
+
+* `DYNAMO_KV_TRANSFERS` (value: `'dynamo_kv_transfers'`)
+
+* `DYNAMO_KV_FAILURES` (value: `'dynamo_kv_failures'`)
+
+* `DYNAMO_TARGETS` (value: `'dynamo_targets'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

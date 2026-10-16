@@ -41,26 +41,30 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     port: Annotated[int, Field(le=65535, strict=True, ge=1)]
     min_replicas: StrictInt
     max_replicas: StrictInt
     concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[StrictInt] = None
+    cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None
     healthcheck: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[StrictStr] = None
     endpoint_bearer_token: Optional[StrictStr] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
     hf_token: Optional[StrictStr] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = False
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "endpoint_certificate_authority", "hf_token", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -144,10 +148,20 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if image_pull_secret_credentials (nullable) is None
         # and model_fields_set contains the field
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
+
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
 
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
@@ -178,6 +192,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         # and model_fields_set contains the field
         if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
             _dict['endpoint_bearer_token'] = None
+
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
 
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
@@ -220,8 +239,10 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "chart_revision": obj.get("chart_revision"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "priority": obj.get("priority"),
+            "hf_token_ref": obj.get("hf_token_ref"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "image_pull_ref": obj.get("image_pull_ref"),
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),
@@ -231,8 +252,10 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
             "hf_token": obj.get("hf_token"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "backend_protocol": obj.get("backend_protocol"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,

@@ -57,7 +57,10 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                         mount_path = '0', 
                         read_only = True, )
                     ],
-                recipe = { },
+                hf_token_ref = 1.0,
+                recipe = {
+                    'key' : null
+                    },
                 cserve_version = '',
                 min_replicas = 56,
                 max_replicas = 56,
@@ -68,6 +71,8 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 env_vars = {
                     'key' : ''
                     },
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
+                bearer_token_ref = 1.0,
                 enable_logging = True,
                 enable_node_model_cache = True,
                 session_affinity = True
@@ -84,7 +89,9 @@ class TestGetCServeV3DeploymentResponse(unittest.TestCase):
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 hardware_instance_id = 56,
                 revision_number = 56,
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 min_replicas = 56,
                 max_replicas = 56,
         )

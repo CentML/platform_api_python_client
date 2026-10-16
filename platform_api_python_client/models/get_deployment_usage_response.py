@@ -17,9 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.deployment_usage import DeploymentUsage
+from platform_api_python_client.models.usage_availability import UsageAvailability
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,9 @@ class GetDeploymentUsageResponse(BaseModel):
     GetDeploymentUsageResponse
     """ # noqa: E501
     values: List[DeploymentUsage]
-    __properties: ClassVar[List[str]] = ["values"]
+    availability: Optional[UsageAvailability] = None
+    last_sample_at: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["values", "availability", "last_sample_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +79,16 @@ class GetDeploymentUsageResponse(BaseModel):
                 if _item_values:
                     _items.append(_item_values.to_dict())
             _dict['values'] = _items
+        # set to None if availability (nullable) is None
+        # and model_fields_set contains the field
+        if self.availability is None and "availability" in self.model_fields_set:
+            _dict['availability'] = None
+
+        # set to None if last_sample_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_sample_at is None and "last_sample_at" in self.model_fields_set:
+            _dict['last_sample_at'] = None
+
         return _dict
 
     @classmethod
@@ -88,7 +101,9 @@ class GetDeploymentUsageResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "values": [DeploymentUsage.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None
+            "values": [DeploymentUsage.from_dict(_item) for _item in obj["values"]] if obj.get("values") is not None else None,
+            "availability": obj.get("availability"),
+            "last_sample_at": obj.get("last_sample_at")
         })
         return _obj
 

@@ -35,11 +35,13 @@ class TestDynamoCommunicationsOutput(unittest.TestCase):
         model = DynamoCommunicationsOutput()
         if include_optional:
             return DynamoCommunicationsOutput(
-                kv_transfer = { }
+                kv_transfer = platform_api_python_client.models.dynamo_kv_transfer_configuration.DynamoKvTransferConfiguration(
+                    policy = 'allow_tcp', )
             )
         else:
             return DynamoCommunicationsOutput(
-                kv_transfer = { },
+                kv_transfer = platform_api_python_client.models.dynamo_kv_transfer_configuration.DynamoKvTransferConfiguration(
+                    policy = 'allow_tcp', ),
         )
         """
 

@@ -38,9 +38,11 @@ class CreateComputeDeploymentRequest(BaseModel):
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     ssh_public_key: StrictStr
     enable_logging: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "ssh_public_key", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "image_pull_ref", "env_vars_refs", "ssh_public_key", "enable_logging"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -113,6 +115,11 @@ class CreateComputeDeploymentRequest(BaseModel):
         if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
             _dict['image_pull_secret_credentials'] = None
 
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
+
         return _dict
 
     @classmethod
@@ -134,6 +141,8 @@ class CreateComputeDeploymentRequest(BaseModel):
             "priority": obj.get("priority"),
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
+            "image_pull_ref": obj.get("image_pull_ref"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "ssh_public_key": obj.get("ssh_public_key"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False
         })

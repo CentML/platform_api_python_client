@@ -53,13 +53,17 @@ class CreateDynamoDeploymentRequest(BaseModel):
     cooldown_period: Optional[StrictInt] = None
     extra_args: Optional[StrictStr] = None
     hf_token: Optional[StrictStr] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
+    env_vars_refs: Optional[Dict[str, Any]] = None
     endpoint_bearer_token: Optional[StrictStr] = None
+    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     endpoint_certificate_authority: Optional[StrictStr] = None
+    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "env_vars", "endpoint_bearer_token", "endpoint_certificate_authority", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "hf_token_ref", "env_vars", "env_vars_refs", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -200,15 +204,30 @@ class CreateDynamoDeploymentRequest(BaseModel):
         if self.hf_token is None and "hf_token" in self.model_fields_set:
             _dict['hf_token'] = None
 
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
+
         # set to None if endpoint_bearer_token (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
             _dict['endpoint_bearer_token'] = None
 
+        # set to None if bearer_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
+            _dict['bearer_token_ref'] = None
+
         # set to None if endpoint_certificate_authority (nullable) is None
         # and model_fields_set contains the field
         if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
             _dict['endpoint_certificate_authority'] = None
+
+        # set to None if image_pull_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
+            _dict['image_pull_ref'] = None
 
         return _dict
 
@@ -243,9 +262,13 @@ class CreateDynamoDeploymentRequest(BaseModel):
             "cooldown_period": obj.get("cooldown_period"),
             "extra_args": obj.get("extra_args"),
             "hf_token": obj.get("hf_token"),
+            "hf_token_ref": obj.get("hf_token_ref"),
             "env_vars": obj.get("env_vars"),
+            "env_vars_refs": obj.get("env_vars_refs"),
             "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
+            "bearer_token_ref": obj.get("bearer_token_ref"),
             "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
+            "image_pull_ref": obj.get("image_pull_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "backend_protocol": obj.get("backend_protocol")

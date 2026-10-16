@@ -51,18 +51,23 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                         read_only = True, )
                     ],
                 priority = '',
-                recipe = { },
+                hf_token_ref = 1.0,
+                recipe = {
+                    'key' : null
+                    },
                 cserve_version = '',
                 hf_token = '',
                 endpoint_bearer_token = '',
+                bearer_token_ref = 1.0,
                 endpoint_certificate_authority = '',
                 min_replicas = 56,
                 max_replicas = 56,
                 concurrency = 56,
-                cooldown_period = 56,
+                cooldown_period = 0.0,
                 env_vars = {
                     'key' : ''
                     },
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
                 enable_logging = True,
                 enable_node_model_cache = True,
                 session_affinity = True
@@ -72,7 +77,9 @@ class TestCreateCServeV3DeploymentRequest(unittest.TestCase):
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
                 hardware_instance_id = 56,
-                recipe = { },
+                recipe = {
+                    'key' : null
+                    },
                 min_replicas = 56,
                 max_replicas = 56,
         )

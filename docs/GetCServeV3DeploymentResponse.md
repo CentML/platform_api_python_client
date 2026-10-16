@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
+**hf_token_ref** | **int** |  | [optional] 
 **recipe** | [**CServeV2Recipe**](CServeV2Recipe.md) |  | 
 **cserve_version** | **str** |  | [optional] 
 **min_replicas** | **int** |  | 
@@ -29,6 +30,8 @@ Name | Type | Description | Notes
 **concurrency** | **int** |  | [optional] 
 **cooldown_period** | **int** |  | [optional] [default to 1800]
 **env_vars** | **Dict[str, str]** |  | [optional] 
+**env_vars_refs** | **object** |  | [optional] 
+**bearer_token_ref** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]

@@ -39,6 +39,19 @@ class Metric(str, Enum):
     TOKENS_PER_SECOND = 'tokens_per_second'
     TIME_TO_FIRST_TOKEN = 'time_to_first_token'
     PREFIX_CACHE_HIT_RATE = 'prefix_cache_hit_rate'
+    DYNAMO_TTFT = 'dynamo_ttft'
+    DYNAMO_TPOT = 'dynamo_tpot'
+    DYNAMO_REQUEST_LATENCY = 'dynamo_request_latency'
+    DYNAMO_OUTPUT_THROUGHPUT = 'dynamo_output_throughput'
+    DYNAMO_REQUESTS = 'dynamo_requests'
+    DYNAMO_QUEUE_DEPTH = 'dynamo_queue_depth'
+    DYNAMO_RUNNING_REQUESTS = 'dynamo_running_requests'
+    DYNAMO_KV_CACHE = 'dynamo_kv_cache'
+    DYNAMO_KV_THROUGHPUT = 'dynamo_kv_throughput'
+    DYNAMO_KV_TRANSFER_LATENCY = 'dynamo_kv_transfer_latency'
+    DYNAMO_KV_TRANSFERS = 'dynamo_kv_transfers'
+    DYNAMO_KV_FAILURES = 'dynamo_kv_failures'
+    DYNAMO_TARGETS = 'dynamo_targets'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

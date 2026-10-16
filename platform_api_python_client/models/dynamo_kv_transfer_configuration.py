@@ -28,7 +28,6 @@ class DynamoKvTransferConfiguration(BaseModel):
     DynamoKvTransferConfiguration
     """ # noqa: E501
     policy: DynamoKvTransferPolicy = Field(description="allow_tcp uses platform-managed NIXL/UCX and permits TCP; it does not force TCP or guarantee RDMA. require_gpu_direct_rdma selects EKS EFA device requirements and GPU-buffer transfer over LIBFABRIC without TCP fallback. A compatible EFA chart and runtime image are prerequisites; the API does not validate their capabilities. Device availability is resolved during scheduling.")
-    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["policy"]
 
     model_config = ConfigDict(
@@ -61,10 +60,8 @@ class DynamoKvTransferConfiguration(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
-            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -72,11 +69,6 @@ class DynamoKvTransferConfiguration(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
         return _dict
 
     @classmethod
@@ -91,11 +83,6 @@ class DynamoKvTransferConfiguration(BaseModel):
         _obj = cls.model_validate({
             "policy": obj.get("policy")
         })
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj
 
 

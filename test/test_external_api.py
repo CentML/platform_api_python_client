@@ -103,6 +103,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_unified_deployment_deployments_post(self) -> None:
+        """Test case for create_unified_deployment_deployments_post
+
+        Create Unified Deployment
+        """
+        pass
+
     def test_create_volume_endpoint_volumes_post(self) -> None:
         """Test case for create_volume_endpoint_volumes_post
 

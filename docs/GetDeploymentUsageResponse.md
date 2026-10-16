@@ -6,6 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **values** | [**List[DeploymentUsage]**](DeploymentUsage.md) |  | 
+**availability** | [**UsageAvailability**](UsageAvailability.md) |  | [optional] 
+**last_sample_at** | **int** |  | [optional] 
 
 ## Example
 

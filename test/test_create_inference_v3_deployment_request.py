@@ -51,23 +51,27 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                         read_only = True, )
                     ],
                 priority = '',
+                hf_token_ref = 1.0,
                 image_url = '',
                 image_pull_secret_credentials = platform_api_python_client.models.image_pull_secret_credentials.ImagePullSecretCredentials(
                     username = '', 
                     password = '', ),
+                image_pull_ref = 1.0,
                 port = 1.0,
                 min_replicas = 56,
                 max_replicas = 56,
                 concurrency = 56,
-                cooldown_period = 56,
+                cooldown_period = 0.0,
                 healthcheck = '',
                 env_vars = {
                     'key' : ''
                     },
                 command = '',
                 endpoint_bearer_token = '',
+                bearer_token_ref = 1.0,
                 endpoint_certificate_authority = '',
                 hf_token = '',
+                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
                 backend_protocol = 'HTTP',
                 enable_logging = True,
                 enable_node_model_cache = True,

@@ -45,7 +45,9 @@ class TestGetDeploymentUsageResponse(unittest.TestCase):
                                 timestamp = 56, 
                                 value = 1.337, )
                             ], )
-                    ]
+                    ],
+                availability = 'available',
+                last_sample_at = 56
             )
         else:
             return GetDeploymentUsageResponse(

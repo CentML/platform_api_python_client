@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.deployment_status import DeploymentStatus
@@ -54,8 +54,19 @@ class GetComputeDeploymentResponse(BaseModel):
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     env_vars_refs: Optional[Dict[str, Any]] = None
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     enable_logging: Optional[StrictBool] = True
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "exposed_port", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "env_vars_refs", "image_pull_ref", "enable_logging"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "exposed_port", "ssh_public_key", "ssh_password", "env_vars", "image_pull_secret_credentials", "env_vars_refs", "image_pull_ref", "image_pull_secret_name", "enable_logging"]
+
+    @field_validator('image_pull_secret_name')
+    def image_pull_secret_name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -151,6 +162,11 @@ class GetComputeDeploymentResponse(BaseModel):
         if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
             _dict['image_pull_ref'] = None
 
+        # set to None if image_pull_secret_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
+            _dict['image_pull_secret_name'] = None
+
         return _dict
 
     @classmethod
@@ -185,6 +201,7 @@ class GetComputeDeploymentResponse(BaseModel):
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "env_vars_refs": obj.get("env_vars_refs"),
             "image_pull_ref": obj.get("image_pull_ref"),
+            "image_pull_secret_name": obj.get("image_pull_secret_name"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj

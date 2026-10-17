@@ -45,6 +45,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     port: Annotated[int, Field(le=65535, strict=True, ge=1)]
     min_replicas: StrictInt
     max_replicas: StrictInt
@@ -64,13 +65,23 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
+
+    @field_validator('image_pull_secret_name')
+    def image_pull_secret_name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
@@ -163,6 +174,11 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
             _dict['image_pull_ref'] = None
 
+        # set to None if image_pull_secret_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
+            _dict['image_pull_secret_name'] = None
+
         # set to None if concurrency (nullable) is None
         # and model_fields_set contains the field
         if self.concurrency is None and "concurrency" in self.model_fields_set:
@@ -243,6 +259,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "image_pull_ref": obj.get("image_pull_ref"),
+            "image_pull_secret_name": obj.get("image_pull_secret_name"),
             "port": obj.get("port"),
             "min_replicas": obj.get("min_replicas"),
             "max_replicas": obj.get("max_replicas"),

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
@@ -67,13 +67,24 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     env_vars_refs: Optional[Dict[str, Any]] = None
     bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     backend_protocol: Optional[BackendProtocol] = None
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "image_pull_secret_name", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+
+    @field_validator('image_pull_secret_name')
+    def image_pull_secret_name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -210,6 +221,11 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
             _dict['image_pull_ref'] = None
 
+        # set to None if image_pull_secret_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
+            _dict['image_pull_secret_name'] = None
+
         # set to None if config_file (nullable) is None
         # and model_fields_set contains the field
         if self.config_file is None and "config_file" in self.model_fields_set:
@@ -264,6 +280,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "env_vars_refs": obj.get("env_vars_refs"),
             "bearer_token_ref": obj.get("bearer_token_ref"),
             "image_pull_ref": obj.get("image_pull_ref"),
+            "image_pull_secret_name": obj.get("image_pull_secret_name"),
             "backend_protocol": obj.get("backend_protocol"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,

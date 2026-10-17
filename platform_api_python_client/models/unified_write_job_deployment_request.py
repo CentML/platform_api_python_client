@@ -40,6 +40,7 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     env_vars: Optional[Dict[str, StrictStr]] = None
     env_vars_refs: Optional[Dict[str, Any]] = None
     command: Optional[StrictStr] = None
@@ -50,13 +51,23 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
     type: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "image_pull_ref", "env_vars", "env_vars_refs", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "type"]
+    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "env_vars", "env_vars_refs", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "type"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
+        return value
+
+    @field_validator('image_pull_secret_name')
+    def image_pull_secret_name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     @field_validator('type')
@@ -138,6 +149,11 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
         if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
             _dict['image_pull_ref'] = None
 
+        # set to None if image_pull_secret_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
+            _dict['image_pull_secret_name'] = None
+
         # set to None if env_vars (nullable) is None
         # and model_fields_set contains the field
         if self.env_vars is None and "env_vars" in self.model_fields_set:
@@ -180,6 +196,7 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
             "image_url": obj.get("image_url"),
             "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
             "image_pull_ref": obj.get("image_pull_ref"),
+            "image_pull_secret_name": obj.get("image_pull_secret_name"),
             "env_vars": obj.get("env_vars"),
             "env_vars_refs": obj.get("env_vars_refs"),
             "command": obj.get("command"),

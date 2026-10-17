@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **env_vars_refs** | **object** |  | [optional] 
 **bearer_token_ref** | **int** |  | [optional] 
 **image_pull_ref** | **int** |  | [optional] 
+**image_pull_secret_name** | **str** | Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it. | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]

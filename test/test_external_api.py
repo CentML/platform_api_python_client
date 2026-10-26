@@ -138,6 +138,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_delete_unified_deployment_deployments_deployment_id_delete(self) -> None:
+        """Test case for delete_unified_deployment_deployments_deployment_id_delete
+
+        Delete Unified Deployment
+        """
+        pass
+
     def test_delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete(self) -> None:
         """Test case for delete_user_vault_item_by_id_endpoint_user_vault_secret_id_delete
 
@@ -198,13 +205,6 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_credits_credits_get
 
         Get Credits
-        """
-        pass
-
-    def test_get_cserve_recipe_deployments_cserve_recipes_get(self) -> None:
-        """Test case for get_cserve_recipe_deployments_cserve_recipes_get
-
-        Get Cserve Recipe
         """
         pass
 
@@ -506,6 +506,20 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_service_account_service_accounts_workos_id_put
 
         Update Service Account
+        """
+        pass
+
+    def test_update_unified_deployment_deployments_deployment_id_put(self) -> None:
+        """Test case for update_unified_deployment_deployments_deployment_id_put
+
+        Update Unified Deployment
+        """
+        pass
+
+    def test_update_unified_deployment_status_deployments_deployment_id_status_put(self) -> None:
+        """Test case for update_unified_deployment_status_deployments_deployment_id_status_put
+
+        Update Unified Deployment Status
         """
         pass
 

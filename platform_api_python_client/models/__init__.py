@@ -16,8 +16,6 @@
 # import models into model package
 from platform_api_python_client.models.argo_rollouts import ArgoRollouts
 from platform_api_python_client.models.backend_protocol import BackendProtocol
-from platform_api_python_client.models.c_serve_recipe_perf import CServeRecipePerf
-from platform_api_python_client.models.c_serve_recipe_response import CServeRecipeResponse
 from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
 from platform_api_python_client.models.cert_manager import CertManager
 from platform_api_python_client.models.cloud_provider import CloudProvider
@@ -102,7 +100,6 @@ from platform_api_python_client.models.istio_cni_subchart_overrides import Istio
 from platform_api_python_client.models.istio_overrides import IstioOverrides
 from platform_api_python_client.models.keda import Keda
 from platform_api_python_client.models.kube_prometheus_stack import KubePrometheusStack
-from platform_api_python_client.models.list_c_serve_recipe_response import ListCServeRecipeResponse
 from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse
 from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
 from platform_api_python_client.models.list_deployment_revisions_response import ListDeploymentRevisionsResponse

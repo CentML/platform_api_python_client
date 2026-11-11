@@ -20,8 +20,10 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from platform_api_python_client.models.ccl_main_pools import CclMainPools
 from platform_api_python_client.models.config_file_mount import ConfigFileMount
-from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
+from platform_api_python_client.models.env import Env
+from platform_api_python_client.models.image import Image
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,51 +32,37 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
     """
     UnifiedWriteJobDeploymentRequest
     """ # noqa: E501
+    type: StrictStr
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
-    image_url: StrictStr
-    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
-    env_vars: Optional[Dict[str, StrictStr]] = None
-    env_vars_refs: Optional[Dict[str, Any]] = None
+    pools: CclMainPools
+    env: Optional[Env] = None
+    image: Image
     command: Optional[StrictStr] = None
-    completions: Optional[StrictInt] = 1
-    parallelism: Optional[StrictInt] = 1
-    backoff_limit: Optional[StrictInt] = 3
-    active_deadline_seconds: Optional[StrictInt] = None
-    enable_logging: Optional[StrictBool] = True
     config_file: Optional[ConfigFileMount] = None
-    type: StrictStr
-    __properties: ClassVar[List[str]] = ["name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "env_vars", "env_vars_refs", "command", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging", "config_file", "type"]
-
-    @field_validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
-        return value
-
-    @field_validator('image_pull_secret_name')
-    def image_pull_secret_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
-        return value
+    completions: Optional[Annotated[int, Field(strict=True, ge=1)]] = 1
+    parallelism: Optional[Annotated[int, Field(strict=True, ge=1)]] = 1
+    backoff_limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = 3
+    active_deadline_seconds: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    enable_logging: Optional[StrictBool] = True
+    __properties: ClassVar[List[str]] = ["type", "name", "cluster_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "pools", "env", "image", "command", "config_file", "completions", "parallelism", "backoff_limit", "active_deadline_seconds", "enable_logging"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['ccl_job']):
             raise ValueError("must be one of enum values ('ccl_job')")
+        return value
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
     model_config = ConfigDict(
@@ -123,9 +111,15 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
                 if _item_volume_mounts:
                     _items.append(_item_volume_mounts.to_dict())
             _dict['volume_mounts'] = _items
-        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
-        if self.image_pull_secret_credentials:
-            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pools
+        if self.pools:
+            _dict['pools'] = self.pools.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of env
+        if self.env:
+            _dict['env'] = self.env.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of image
+        if self.image:
+            _dict['image'] = self.image.to_dict()
         # override the default output from pydantic by calling `to_dict()` of config_file
         if self.config_file:
             _dict['config_file'] = self.config_file.to_dict()
@@ -139,40 +133,20 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
-        # set to None if image_pull_secret_credentials (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
-            _dict['image_pull_secret_credentials'] = None
-
-        # set to None if image_pull_ref (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
-            _dict['image_pull_ref'] = None
-
-        # set to None if image_pull_secret_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
-            _dict['image_pull_secret_name'] = None
-
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
-
         # set to None if command (nullable) is None
         # and model_fields_set contains the field
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
-        # set to None if active_deadline_seconds (nullable) is None
-        # and model_fields_set contains the field
-        if self.active_deadline_seconds is None and "active_deadline_seconds" in self.model_fields_set:
-            _dict['active_deadline_seconds'] = None
-
         # set to None if config_file (nullable) is None
         # and model_fields_set contains the field
         if self.config_file is None and "config_file" in self.model_fields_set:
             _dict['config_file'] = None
+
+        # set to None if active_deadline_seconds (nullable) is None
+        # and model_fields_set contains the field
+        if self.active_deadline_seconds is None and "active_deadline_seconds" in self.model_fields_set:
+            _dict['active_deadline_seconds'] = None
 
         return _dict
 
@@ -186,27 +160,23 @@ class UnifiedWriteJobDeploymentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "type": obj.get("type"),
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
-            "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "priority": obj.get("priority"),
-            "image_url": obj.get("image_url"),
-            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
-            "image_pull_ref": obj.get("image_pull_ref"),
-            "image_pull_secret_name": obj.get("image_pull_secret_name"),
-            "env_vars": obj.get("env_vars"),
-            "env_vars_refs": obj.get("env_vars_refs"),
+            "pools": CclMainPools.from_dict(obj["pools"]) if obj.get("pools") is not None else None,
+            "env": Env.from_dict(obj["env"]) if obj.get("env") is not None else None,
+            "image": Image.from_dict(obj["image"]) if obj.get("image") is not None else None,
             "command": obj.get("command"),
+            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None,
             "completions": obj.get("completions") if obj.get("completions") is not None else 1,
             "parallelism": obj.get("parallelism") if obj.get("parallelism") is not None else 1,
             "backoff_limit": obj.get("backoff_limit") if obj.get("backoff_limit") is not None else 3,
             "active_deadline_seconds": obj.get("active_deadline_seconds"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
-            "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None,
-            "type": obj.get("type")
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True
         })
         return _obj
 

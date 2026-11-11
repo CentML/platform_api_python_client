@@ -5,27 +5,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** |  | 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
-**image_url** | **str** |  | 
-**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
-**image_pull_ref** | **int** |  | [optional] 
-**image_pull_secret_name** | **str** | Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it. | [optional] 
-**env_vars** | **Dict[str, str]** |  | [optional] 
-**env_vars_refs** | **object** |  | [optional] 
+**pools** | [**CclMainPools**](CclMainPools.md) |  | 
+**env** | [**Env**](Env.md) |  | [optional] 
+**image** | [**Image**](Image.md) |  | 
 **command** | **str** |  | [optional] 
+**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
 **completions** | **int** |  | [optional] [default to 1]
 **parallelism** | **int** |  | [optional] [default to 1]
 **backoff_limit** | **int** |  | [optional] [default to 3]
 **active_deadline_seconds** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
-**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**type** | **str** |  | 
 
 ## Example
 

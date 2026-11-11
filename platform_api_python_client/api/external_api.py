@@ -16,8 +16,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, Optional
+from typing import Any, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.cluster_config import ClusterConfig
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest
@@ -61,6 +62,10 @@ from platform_api_python_client.models.get_inference_v3_deployment_response impo
 from platform_api_python_client.models.get_job_deployment_response import GetJobDeploymentResponse
 from platform_api_python_client.models.get_volume_response import GetVolumeResponse
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
+from platform_api_python_client.models.insight_resource_type import InsightResourceType
+from platform_api_python_client.models.insight_response import InsightResponse
+from platform_api_python_client.models.insight_severity import InsightSeverity
+from platform_api_python_client.models.insight_status import InsightStatus
 from platform_api_python_client.models.invite_user_request import InviteUserRequest
 from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse
 from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse
@@ -69,6 +74,7 @@ from platform_api_python_client.models.list_get_cluster_response import ListGetC
 from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 from platform_api_python_client.models.list_hardware_instance_response import ListHardwareInstanceResponse
 from platform_api_python_client.models.list_hardware_preset_response import ListHardwarePresetResponse
+from platform_api_python_client.models.list_insights_response import ListInsightsResponse
 from platform_api_python_client.models.list_organization_gpu_quota_response import ListOrganizationGpuQuotaResponse
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.models.list_service_accounts_response import ListServiceAccountsResponse
@@ -79,11 +85,20 @@ from platform_api_python_client.models.organization_gpu_quota_request import Org
 from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse
 from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams
 from platform_api_python_client.models.service_account_response import ServiceAccountResponse
+from platform_api_python_client.models.unified_get_deployment_logs_response import UnifiedGetDeploymentLogsResponse
+from platform_api_python_client.models.unified_get_deployment_pods_response import UnifiedGetDeploymentPodsResponse
+from platform_api_python_client.models.unified_get_deployment_response import UnifiedGetDeploymentResponse
+from platform_api_python_client.models.unified_get_deployment_revision_response import UnifiedGetDeploymentRevisionResponse
+from platform_api_python_client.models.unified_get_deployment_rollout_response import UnifiedGetDeploymentRolloutResponse
+from platform_api_python_client.models.unified_get_deployment_usage_response import UnifiedGetDeploymentUsageResponse
+from platform_api_python_client.models.unified_list_deployment_revisions_response import UnifiedListDeploymentRevisionsResponse
+from platform_api_python_client.models.unified_update_deployment_rollout_request import UnifiedUpdateDeploymentRolloutRequest
 from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest
 from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
+from platform_api_python_client.models.update_insight_status_request import UpdateInsightStatusRequest
 from platform_api_python_client.models.update_service_account_request import UpdateServiceAccountRequest
 from platform_api_python_client.models.upsert_user_vault_item_request import UpsertUserVaultItemRequest
 from platform_api_python_client.models.usage_component import UsageComponent
@@ -3090,6 +3105,7 @@ class EXTERNALApi:
     ) -> UnifiedWriteDeploymentResponse:
         """Create Unified Deployment
 
+        Create a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment through ccluster.
 
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
@@ -3157,6 +3173,7 @@ class EXTERNALApi:
     ) -> ApiResponse[UnifiedWriteDeploymentResponse]:
         """Create Unified Deployment
 
+        Create a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment through ccluster.
 
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
@@ -3224,6 +3241,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Create Unified Deployment
 
+        Create a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment through ccluster.
 
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
@@ -7826,7 +7844,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeploymentLogResponse:
-        """Get Deployment Logs
+        """(Deprecated) Get Deployment Logs
 
 
         :param deployment_id: (required)
@@ -7862,6 +7880,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_deployments_logs_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7913,7 +7932,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeploymentLogResponse]:
-        """Get Deployment Logs
+        """(Deprecated) Get Deployment Logs
 
 
         :param deployment_id: (required)
@@ -7949,6 +7968,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_deployments_logs_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -8000,7 +8020,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Deployment Logs
+        """(Deprecated) Get Deployment Logs
 
 
         :param deployment_id: (required)
@@ -8036,6 +8056,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_deployments_logs_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -8173,7 +8194,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeploymentLogResponse:
-        """Get Deployment Logs V3
+        """(Deprecated) Get Deployment Logs V3
 
 
         :param deployment_id: (required)
@@ -8211,6 +8232,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs_v3/{deployment_id}/{revision_number} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get_serialize(
             deployment_id=deployment_id,
@@ -8264,7 +8286,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeploymentLogResponse]:
-        """Get Deployment Logs V3
+        """(Deprecated) Get Deployment Logs V3
 
 
         :param deployment_id: (required)
@@ -8302,6 +8324,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs_v3/{deployment_id}/{revision_number} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get_serialize(
             deployment_id=deployment_id,
@@ -8355,7 +8378,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Deployment Logs V3
+        """(Deprecated) Get Deployment Logs V3
 
 
         :param deployment_id: (required)
@@ -8393,6 +8416,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/logs_v3/{deployment_id}/{revision_number} is deprecated.", DeprecationWarning)
 
         _param = self._get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get_serialize(
             deployment_id=deployment_id,
@@ -11806,6 +11830,267 @@ class EXTERNALApi:
 
 
     @validate_call
+    def get_insight_insights_insight_id_get(
+        self,
+        insight_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InsightResponse:
+        """Get Insight
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_insight_insights_insight_id_get_serialize(
+            insight_id=insight_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_insight_insights_insight_id_get_with_http_info(
+        self,
+        insight_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InsightResponse]:
+        """Get Insight
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_insight_insights_insight_id_get_serialize(
+            insight_id=insight_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_insight_insights_insight_id_get_without_preload_content(
+        self,
+        insight_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Insight
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_insight_insights_insight_id_get_serialize(
+            insight_id=insight_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_insight_insights_insight_id_get_serialize(
+        self,
+        insight_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if insight_id is not None:
+            _path_params['insight_id'] = insight_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/insights/{insight_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_job_deployment_deployments_job_deployment_id_get(
         self,
         deployment_id: StrictInt,
@@ -12590,6 +12875,1822 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/prebuilt-images',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_deployments_deployment_id_get(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentResponse:
+        """Get Unified Deployment
+
+        Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.  env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_deployments_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_deployments_deployment_id_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentResponse]:
+        """Get Unified Deployment
+
+        Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.  env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_deployments_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_deployments_deployment_id_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment
+
+        Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.  env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_deployments_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_deployments_deployment_id_get_serialize(
+        self,
+        deployment_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentLogsResponse:
+        """Get Unified Deployment Logs
+
+        Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.  Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentLogsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentLogsResponse]:
+        """Get Unified Deployment Logs
+
+        Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.  Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentLogsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        pod: Annotated[str, Field(strict=True, max_length=253)],
+        fetch_newer: Optional[StrictBool] = None,
+        timestamp: Optional[Annotated[int, Field(le=9223372036853, strict=True, ge=0)]] = None,
+        max_lines: Optional[Annotated[int, Field(le=5000, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Logs
+
+        Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.  Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param pod: (required)
+        :type pod: str
+        :param fetch_newer:
+        :type fetch_newer: bool
+        :param timestamp:
+        :type timestamp: int
+        :param max_lines:
+        :type max_lines: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            pod=pod,
+            fetch_newer=fetch_newer,
+            timestamp=timestamp,
+            max_lines=max_lines,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentLogsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        pod,
+        fetch_newer,
+        timestamp,
+        max_lines,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        if pod is not None:
+            
+            _query_params.append(('pod', pod))
+            
+        if fetch_newer is not None:
+            
+            _query_params.append(('fetch_newer', fetch_newer))
+            
+        if timestamp is not None:
+            
+            _query_params.append(('timestamp', timestamp))
+            
+        if max_lines is not None:
+            
+            _query_params.append(('max_lines', max_lines))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/revisions/{revision_number}/logs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentPodsResponse:
+        """Get Unified Deployment Pods
+
+        List the pods that logged under one revision, recently terminated pods included. The log store's retention bounds the history, so the list can differ from the running pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentPodsResponse]:
+        """Get Unified Deployment Pods
+
+        List the pods that logged under one revision, recently terminated pods included. The log store's retention bounds the history, so the list can differ from the running pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Pods
+
+        List the pods that logged under one revision, recently terminated pods included. The log store's retention bounds the history, so the list can differ from the running pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentPodsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/revisions/{revision_number}/pods',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentRevisionResponse:
+        """Get Unified Deployment Revision
+
+        Get one revision of a deployment, read as GET /deployments/{deployment_id} reads the selected one.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRevisionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentRevisionResponse]:
+        """Get Unified Deployment Revision
+
+        Get one revision of a deployment, read as GET /deployments/{deployment_id} reads the selected one.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRevisionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Revision
+
+        Get one revision of a deployment, read as GET /deployments/{deployment_id} reads the selected one.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRevisionResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/revisions/{revision_number}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_rollout_deployments_deployment_id_rollout_get(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentRolloutResponse:
+        """Get Unified Deployment Rollout
+
+        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_rollout_deployments_deployment_id_rollout_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_rollout_deployments_deployment_id_rollout_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentRolloutResponse]:
+        """Get Unified Deployment Rollout
+
+        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_rollout_deployments_deployment_id_rollout_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_rollout_deployments_deployment_id_rollout_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Rollout
+
+        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_rollout_deployments_deployment_id_rollout_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_rollout_deployments_deployment_id_rollout_get_serialize(
+        self,
+        deployment_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/rollout',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_usage_deployments_deployment_id_usage_get(
+        self,
+        deployment_id: StrictInt,
+        metric: Metric,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentUsageResponse:
+        """Get Unified Deployment Usage
+
+        Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.  ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo does; its dynamo_* metrics are not supported yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param metric: (required)
+        :type metric: Metric
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_usage_deployments_deployment_id_usage_get_serialize(
+            deployment_id=deployment_id,
+            metric=metric,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentUsageResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_usage_deployments_deployment_id_usage_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        metric: Metric,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentUsageResponse]:
+        """Get Unified Deployment Usage
+
+        Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.  ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo does; its dynamo_* metrics are not supported yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param metric: (required)
+        :type metric: Metric
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_usage_deployments_deployment_id_usage_get_serialize(
+            deployment_id=deployment_id,
+            metric=metric,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentUsageResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_usage_deployments_deployment_id_usage_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        metric: Metric,
+        start_time_in_seconds: StrictInt,
+        end_time_in_seconds: StrictInt,
+        step: Optional[StrictInt] = None,
+        revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        component: Optional[UsageComponent] = None,
+        pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Usage
+
+        Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.  ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo does; its dynamo_* metrics are not supported yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param metric: (required)
+        :type metric: Metric
+        :param start_time_in_seconds: (required)
+        :type start_time_in_seconds: int
+        :param end_time_in_seconds: (required)
+        :type end_time_in_seconds: int
+        :param step:
+        :type step: int
+        :param revision_number:
+        :type revision_number: int
+        :param component:
+        :type component: UsageComponent
+        :param pod:
+        :type pod: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_usage_deployments_deployment_id_usage_get_serialize(
+            deployment_id=deployment_id,
+            metric=metric,
+            start_time_in_seconds=start_time_in_seconds,
+            end_time_in_seconds=end_time_in_seconds,
+            step=step,
+            revision_number=revision_number,
+            component=component,
+            pod=pod,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentUsageResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_usage_deployments_deployment_id_usage_get_serialize(
+        self,
+        deployment_id,
+        metric,
+        start_time_in_seconds,
+        end_time_in_seconds,
+        step,
+        revision_number,
+        component,
+        pod,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        if metric is not None:
+            
+            _query_params.append(('metric', metric.value))
+            
+        if start_time_in_seconds is not None:
+            
+            _query_params.append(('start_time_in_seconds', start_time_in_seconds))
+            
+        if end_time_in_seconds is not None:
+            
+            _query_params.append(('end_time_in_seconds', end_time_in_seconds))
+            
+        if step is not None:
+            
+            _query_params.append(('step', step))
+            
+        if revision_number is not None:
+            
+            _query_params.append(('revision_number', revision_number))
+            
+        if component is not None:
+            
+            _query_params.append(('component', component.value))
+            
+        if pod is not None:
+            
+            _query_params.append(('pod', pod))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/usage',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14824,6 +16925,398 @@ class EXTERNALApi:
 
 
     @validate_call
+    def list_insights_insights_get(
+        self,
+        status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
+        severity: Optional[InsightSeverity] = None,
+        cluster_id: Optional[StrictInt] = None,
+        deployment_id: Optional[StrictInt] = None,
+        resource_type: Optional[InsightResourceType] = None,
+        observed_after: Optional[datetime] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListInsightsResponse:
+        """List Insights
+
+
+        :param status: Repeat to list several statuses
+        :type status: List[InsightStatus]
+        :param severity:
+        :type severity: InsightSeverity
+        :param cluster_id:
+        :type cluster_id: int
+        :param deployment_id:
+        :type deployment_id: int
+        :param resource_type:
+        :type resource_type: InsightResourceType
+        :param observed_after:
+        :type observed_after: datetime
+        :param limit:
+        :type limit: int
+        :param before_id:
+        :type before_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_insights_insights_get_serialize(
+            status=status,
+            severity=severity,
+            cluster_id=cluster_id,
+            deployment_id=deployment_id,
+            resource_type=resource_type,
+            observed_after=observed_after,
+            limit=limit,
+            before_id=before_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListInsightsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_insights_insights_get_with_http_info(
+        self,
+        status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
+        severity: Optional[InsightSeverity] = None,
+        cluster_id: Optional[StrictInt] = None,
+        deployment_id: Optional[StrictInt] = None,
+        resource_type: Optional[InsightResourceType] = None,
+        observed_after: Optional[datetime] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListInsightsResponse]:
+        """List Insights
+
+
+        :param status: Repeat to list several statuses
+        :type status: List[InsightStatus]
+        :param severity:
+        :type severity: InsightSeverity
+        :param cluster_id:
+        :type cluster_id: int
+        :param deployment_id:
+        :type deployment_id: int
+        :param resource_type:
+        :type resource_type: InsightResourceType
+        :param observed_after:
+        :type observed_after: datetime
+        :param limit:
+        :type limit: int
+        :param before_id:
+        :type before_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_insights_insights_get_serialize(
+            status=status,
+            severity=severity,
+            cluster_id=cluster_id,
+            deployment_id=deployment_id,
+            resource_type=resource_type,
+            observed_after=observed_after,
+            limit=limit,
+            before_id=before_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListInsightsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_insights_insights_get_without_preload_content(
+        self,
+        status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
+        severity: Optional[InsightSeverity] = None,
+        cluster_id: Optional[StrictInt] = None,
+        deployment_id: Optional[StrictInt] = None,
+        resource_type: Optional[InsightResourceType] = None,
+        observed_after: Optional[datetime] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List Insights
+
+
+        :param status: Repeat to list several statuses
+        :type status: List[InsightStatus]
+        :param severity:
+        :type severity: InsightSeverity
+        :param cluster_id:
+        :type cluster_id: int
+        :param deployment_id:
+        :type deployment_id: int
+        :param resource_type:
+        :type resource_type: InsightResourceType
+        :param observed_after:
+        :type observed_after: datetime
+        :param limit:
+        :type limit: int
+        :param before_id:
+        :type before_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_insights_insights_get_serialize(
+            status=status,
+            severity=severity,
+            cluster_id=cluster_id,
+            deployment_id=deployment_id,
+            resource_type=resource_type,
+            observed_after=observed_after,
+            limit=limit,
+            before_id=before_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListInsightsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_insights_insights_get_serialize(
+        self,
+        status,
+        severity,
+        cluster_id,
+        deployment_id,
+        resource_type,
+        observed_after,
+        limit,
+        before_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'status': 'multi',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if status is not None:
+            
+            _query_params.append(('status', status))
+            
+        if severity is not None:
+            
+            _query_params.append(('severity', severity.value))
+            
+        if cluster_id is not None:
+            
+            _query_params.append(('cluster_id', cluster_id))
+            
+        if deployment_id is not None:
+            
+            _query_params.append(('deployment_id', deployment_id))
+            
+        if resource_type is not None:
+            
+            _query_params.append(('resource_type', resource_type.value))
+            
+        if observed_after is not None:
+            if isinstance(observed_after, datetime):
+                _query_params.append(
+                    (
+                        'observed_after',
+                        observed_after.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('observed_after', observed_after))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if before_id is not None:
+            
+            _query_params.append(('before_id', before_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/insights',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def list_service_accounts_service_accounts_get(
         self,
         _request_timeout: Union[
@@ -15051,6 +17544,270 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/service-accounts',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def list_unified_deployment_revisions_deployments_deployment_id_revisions_get(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedListDeploymentRevisionsResponse:
+        """List Unified Deployment Revisions
+
+        List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_unified_deployment_revisions_deployments_deployment_id_revisions_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedListDeploymentRevisionsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_unified_deployment_revisions_deployments_deployment_id_revisions_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedListDeploymentRevisionsResponse]:
+        """List Unified Deployment Revisions
+
+        List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_unified_deployment_revisions_deployments_deployment_id_revisions_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedListDeploymentRevisionsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_unified_deployment_revisions_deployments_deployment_id_revisions_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List Unified Deployment Revisions
+
+        List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_unified_deployment_revisions_deployments_deployment_id_revisions_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedListDeploymentRevisionsResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_unified_deployment_revisions_deployments_deployment_id_revisions_get_serialize(
+        self,
+        deployment_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/revisions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15665,6 +18422,319 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/deployments/revisions/{deployment_id}/{revision_number}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedWriteDeploymentResponse:
+        """Rollout Unified Deployment Revision
+
+        Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.  An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedWriteDeploymentResponse]:
+        """Rollout Unified Deployment Revision
+
+        Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.  An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        revision_number: StrictInt,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Rollout Unified Deployment Revision
+
+        Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.  An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param revision_number: (required)
+        :type revision_number: int
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_serialize(
+            deployment_id=deployment_id,
+            revision_number=revision_number,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedWriteDeploymentResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put_serialize(
+        self,
+        deployment_id,
+        revision_number,
+        max_surge,
+        max_unavailable,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        if revision_number is not None:
+            _path_params['revision_number'] = revision_number
+        # process the query parameters
+        if max_surge is not None:
+            
+            _query_params.append(('max_surge', max_surge))
+            
+        if max_unavailable is not None:
+            
+            _query_params.append(('max_unavailable', max_unavailable))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/deployments/{deployment_id}/revisions/{revision_number}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18740,6 +21810,295 @@ class EXTERNALApi:
 
 
     @validate_call
+    def update_insight_status_insights_insight_id_status_patch(
+        self,
+        insight_id: StrictInt,
+        update_insight_status_request: UpdateInsightStatusRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> InsightResponse:
+        """Update Insight Status
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param update_insight_status_request: (required)
+        :type update_insight_status_request: UpdateInsightStatusRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_insight_status_insights_insight_id_status_patch_serialize(
+            insight_id=insight_id,
+            update_insight_status_request=update_insight_status_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_insight_status_insights_insight_id_status_patch_with_http_info(
+        self,
+        insight_id: StrictInt,
+        update_insight_status_request: UpdateInsightStatusRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[InsightResponse]:
+        """Update Insight Status
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param update_insight_status_request: (required)
+        :type update_insight_status_request: UpdateInsightStatusRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_insight_status_insights_insight_id_status_patch_serialize(
+            insight_id=insight_id,
+            update_insight_status_request=update_insight_status_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_insight_status_insights_insight_id_status_patch_without_preload_content(
+        self,
+        insight_id: StrictInt,
+        update_insight_status_request: UpdateInsightStatusRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Insight Status
+
+
+        :param insight_id: (required)
+        :type insight_id: int
+        :param update_insight_status_request: (required)
+        :type update_insight_status_request: UpdateInsightStatusRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_insight_status_insights_insight_id_status_patch_serialize(
+            insight_id=insight_id,
+            update_insight_status_request=update_insight_status_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "InsightResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_insight_status_insights_insight_id_status_patch_serialize(
+        self,
+        insight_id,
+        update_insight_status_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if insight_id is not None:
+            _path_params['insight_id'] = insight_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_insight_status_request is not None:
+            _body_params = update_insight_status_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/insights/{insight_id}/status',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def update_service_account_service_accounts_workos_id_put(
         self,
         workos_id: StrictStr,
@@ -19033,6 +22392,8 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19048,12 +22409,16 @@ class EXTERNALApi:
     ) -> UnifiedWriteDeploymentResponse:
         """Update Unified Deployment
 
-        Replace a deployment's request, as the per-type PUT routes do.  Updates ACTIVE ccl_compute, ccl_inference and ccl_dynamo deployments through ccluster. Every refusal comes before any write.
+        Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.  A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
         :param deployment_id: (required)
         :type deployment_id: int
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19079,6 +22444,8 @@ class EXTERNALApi:
         _param = self._update_unified_deployment_deployments_deployment_id_put_serialize(
             deployment_id=deployment_id,
             unified_write_deployment_request=unified_write_deployment_request,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19105,6 +22472,8 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19120,12 +22489,16 @@ class EXTERNALApi:
     ) -> ApiResponse[UnifiedWriteDeploymentResponse]:
         """Update Unified Deployment
 
-        Replace a deployment's request, as the per-type PUT routes do.  Updates ACTIVE ccl_compute, ccl_inference and ccl_dynamo deployments through ccluster. Every refusal comes before any write.
+        Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.  A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
         :param deployment_id: (required)
         :type deployment_id: int
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19151,6 +22524,8 @@ class EXTERNALApi:
         _param = self._update_unified_deployment_deployments_deployment_id_put_serialize(
             deployment_id=deployment_id,
             unified_write_deployment_request=unified_write_deployment_request,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19177,6 +22552,8 @@ class EXTERNALApi:
         self,
         deployment_id: StrictInt,
         unified_write_deployment_request: UnifiedWriteDeploymentRequest,
+        max_surge: Optional[StrictInt] = None,
+        max_unavailable: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19192,12 +22569,16 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update Unified Deployment
 
-        Replace a deployment's request, as the per-type PUT routes do.  Updates ACTIVE ccl_compute, ccl_inference and ccl_dynamo deployments through ccluster. Every refusal comes before any write.
+        Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.  A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
         :param deployment_id: (required)
         :type deployment_id: int
         :param unified_write_deployment_request: (required)
         :type unified_write_deployment_request: UnifiedWriteDeploymentRequest
+        :param max_surge:
+        :type max_surge: int
+        :param max_unavailable:
+        :type max_unavailable: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19223,6 +22604,8 @@ class EXTERNALApi:
         _param = self._update_unified_deployment_deployments_deployment_id_put_serialize(
             deployment_id=deployment_id,
             unified_write_deployment_request=unified_write_deployment_request,
+            max_surge=max_surge,
+            max_unavailable=max_unavailable,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19244,6 +22627,8 @@ class EXTERNALApi:
         self,
         deployment_id,
         unified_write_deployment_request,
+        max_surge,
+        max_unavailable,
         _request_auth,
         _content_type,
         _headers,
@@ -19268,6 +22653,14 @@ class EXTERNALApi:
         if deployment_id is not None:
             _path_params['deployment_id'] = deployment_id
         # process the query parameters
+        if max_surge is not None:
+            
+            _query_params.append(('max_surge', max_surge))
+            
+        if max_unavailable is not None:
+            
+            _query_params.append(('max_unavailable', max_unavailable))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -19305,6 +22698,298 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/deployments/{deployment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_unified_deployment_rollout_deployments_deployment_id_rollout_put(
+        self,
+        deployment_id: StrictInt,
+        unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentRolloutResponse:
+        """Update Unified Deployment Rollout
+
+        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param unified_update_deployment_rollout_request: (required)
+        :type unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_unified_deployment_rollout_deployments_deployment_id_rollout_put_serialize(
+            deployment_id=deployment_id,
+            unified_update_deployment_rollout_request=unified_update_deployment_rollout_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_unified_deployment_rollout_deployments_deployment_id_rollout_put_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentRolloutResponse]:
+        """Update Unified Deployment Rollout
+
+        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param unified_update_deployment_rollout_request: (required)
+        :type unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_unified_deployment_rollout_deployments_deployment_id_rollout_put_serialize(
+            deployment_id=deployment_id,
+            unified_update_deployment_rollout_request=unified_update_deployment_rollout_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_unified_deployment_rollout_deployments_deployment_id_rollout_put_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update Unified Deployment Rollout
+
+        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param unified_update_deployment_rollout_request: (required)
+        :type unified_update_deployment_rollout_request: UnifiedUpdateDeploymentRolloutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_unified_deployment_rollout_deployments_deployment_id_rollout_put_serialize(
+            deployment_id=deployment_id,
+            unified_update_deployment_rollout_request=unified_update_deployment_rollout_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentRolloutResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_unified_deployment_rollout_deployments_deployment_id_rollout_put_serialize(
+        self,
+        deployment_id,
+        unified_update_deployment_rollout_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if unified_update_deployment_rollout_request is not None:
+            _body_params = unified_update_deployment_rollout_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/deployments/{deployment_id}/rollout',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

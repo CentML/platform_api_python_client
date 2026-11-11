@@ -35,11 +35,9 @@ class TestUnifiedWriteDynamoDeploymentRequest(unittest.TestCase):
         model = UnifiedWriteDynamoDeploymentRequest()
         if include_optional:
             return UnifiedWriteDynamoDeploymentRequest(
-                max_surge = 56,
-                max_unavailable = 56,
+                type = 'ccl_dynamo',
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
-                hardware_instance_id = 56,
                 user_annotations = {
                     'key' : ''
                     },
@@ -51,55 +49,67 @@ class TestUnifiedWriteDynamoDeploymentRequest(unittest.TestCase):
                         read_only = True, )
                     ],
                 priority = '',
-                serving_mode = 'aggregated',
-                worker_pools = platform_api_python_client.models.dynamo_worker_pools.DynamoWorkerPools(
-                    worker = platform_api_python_client.models.dynamo_worker_pool_config.DynamoWorkerPoolConfig(
+                pools = platform_api_python_client.models.ccl_dynamo_pools.CclDynamoPools(
+                    worker = platform_api_python_client.models.pool.Pool(
                         hardware_instance_id = 56, 
-                        replicas = 1.0, 
-                        min_replicas = 1.0, 
-                        max_replicas = 1.0, 
-                        concurrency = 1.0, 
+                        min_replicas = 56, 
+                        max_replicas = 56, 
+                        concurrency = 56, 
                         cooldown_period = 0.0, ), 
-                    prefill = platform_api_python_client.models.dynamo_worker_pool_config.DynamoWorkerPoolConfig(
+                    prefill = platform_api_python_client.models.pool.Pool(
                         hardware_instance_id = 56, 
-                        replicas = 1.0, 
-                        min_replicas = 1.0, 
-                        max_replicas = 1.0, 
-                        concurrency = 1.0, 
+                        min_replicas = 56, 
+                        max_replicas = 56, 
+                        concurrency = 56, 
                         cooldown_period = 0.0, ), 
                     decode = , ),
+                env = platform_api_python_client.models.env.Env(
+                    vars = {
+                        'key' : ''
+                        }, 
+                    refs = platform_api_python_client.models.refs.Refs(), ),
+                image = platform_api_python_client.models.dynamo_image.DynamoImage(
+                    runtime_version = 'e6bUUGjjNSwg0_bs9ZayIMrKdgNvb6gvxmPb9GcsM61ate1RA89q3w1l4eH4XxEz.5awxoFZxHzs6ED.kjUSnTINkYPUndNl8pmPg5K897Fu1JEFj9R1_dz9rEoBi0L', 
+                    pull_ref = 1.0, ),
+                ingress = platform_api_python_client.models.ingress.Ingress(
+                    backend_protocol = 'HTTP', 
+                    bearer_token_ref = 1.0, 
+                    certificate_authority = '', ),
+                serving_mode = 'aggregated',
                 communications = platform_api_python_client.models.dynamo_communications.DynamoCommunications(
                     kv_transfer = platform_api_python_client.models.dynamo_kv_transfer_configuration.DynamoKvTransferConfiguration(
                         policy = 'allow_tcp', ), ),
                 model = '',
                 served_model_name = '',
-                runtime_version = 'e6bUUGjjNSwg0_bs9ZayIMrKdgNvb6gvxmPb9GcsM61ate1RA89q3w1l4eH4XxEz.5awxoFZxHzs6ED.kjUSnTINkYPUndNl8pmPg5K897Fu1JEFj9R1_dz9rEoBi0L',
-                min_replicas = 56,
-                max_replicas = 56,
-                concurrency = 56,
-                cooldown_period = 56,
                 extra_args = '',
-                hf_token = '',
                 hf_token_ref = 1.0,
-                env_vars = {
-                    'key' : ''
-                    },
-                env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
-                endpoint_bearer_token = '',
-                bearer_token_ref = 1.0,
-                endpoint_certificate_authority = '',
-                image_pull_ref = 1.0,
                 enable_logging = True,
-                enable_node_model_cache = True,
-                backend_protocol = 'HTTP',
-                type = 'ccl_dynamo'
+                enable_node_model_cache = True
             )
         else:
             return UnifiedWriteDynamoDeploymentRequest(
+                type = 'ccl_dynamo',
                 name = 'ar1c2v7s6djuy1zmetozkhdomha1b0',
                 cluster_id = 56,
+                pools = platform_api_python_client.models.ccl_dynamo_pools.CclDynamoPools(
+                    worker = platform_api_python_client.models.pool.Pool(
+                        hardware_instance_id = 56, 
+                        min_replicas = 56, 
+                        max_replicas = 56, 
+                        concurrency = 56, 
+                        cooldown_period = 0.0, ), 
+                    prefill = platform_api_python_client.models.pool.Pool(
+                        hardware_instance_id = 56, 
+                        min_replicas = 56, 
+                        max_replicas = 56, 
+                        concurrency = 56, 
+                        cooldown_period = 0.0, ), 
+                    decode = , ),
+                ingress = platform_api_python_client.models.ingress.Ingress(
+                    backend_protocol = 'HTTP', 
+                    bearer_token_ref = 1.0, 
+                    certificate_authority = '', ),
                 model = '',
-                type = 'ccl_dynamo',
         )
         """
 

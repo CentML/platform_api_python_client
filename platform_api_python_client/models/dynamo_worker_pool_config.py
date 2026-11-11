@@ -29,7 +29,7 @@ class DynamoWorkerPoolConfig(BaseModel):
     """ # noqa: E501
     hardware_instance_id: StrictInt
     replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    min_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    min_replicas: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
     max_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     concurrency: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None

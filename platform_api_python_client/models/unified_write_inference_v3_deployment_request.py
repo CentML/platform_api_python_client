@@ -20,9 +20,11 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from platform_api_python_client.models.backend_protocol import BackendProtocol
+from platform_api_python_client.models.ccl_main_pools import CclMainPools
 from platform_api_python_client.models.config_file_mount import ConfigFileMount
-from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials
+from platform_api_python_client.models.env import Env
+from platform_api_python_client.models.image import Image
+from platform_api_python_client.models.ingress import Ingress
 from platform_api_python_client.models.metrics_config import MetricsConfig
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
@@ -32,64 +34,40 @@ class UnifiedWriteInferenceV3DeploymentRequest(BaseModel):
     """
     UnifiedWriteInferenceV3DeploymentRequest
     """ # noqa: E501
-    max_surge: Optional[StrictInt] = None
-    max_unavailable: Optional[StrictInt] = None
+    type: StrictStr
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    hardware_instance_id: StrictInt
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
     priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
-    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    image_url: StrictStr
-    image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
-    image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
+    pools: CclMainPools
+    env: Optional[Env] = None
+    image: Image
+    ingress: Ingress
     port: Annotated[int, Field(le=65535, strict=True, ge=1)]
-    min_replicas: StrictInt
-    max_replicas: StrictInt
-    concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[Annotated[int, Field(le=3600, strict=True, ge=0)]] = None
     healthcheck: Optional[StrictStr] = None
-    env_vars: Optional[Dict[str, StrictStr]] = None
     command: Optional[StrictStr] = None
-    endpoint_bearer_token: Optional[StrictStr] = None
-    bearer_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
-    endpoint_certificate_authority: Optional[StrictStr] = None
-    hf_token: Optional[StrictStr] = None
-    env_vars_refs: Optional[Dict[str, Any]] = None
-    backend_protocol: Optional[BackendProtocol] = None
+    config_file: Optional[ConfigFileMount] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
+    metrics: Optional[MetricsConfig] = None
     enable_logging: Optional[StrictBool] = False
     enable_node_model_cache: Optional[StrictBool] = False
-    session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
-    config_file: Optional[ConfigFileMount] = None
-    metrics: Optional[MetricsConfig] = None
-    type: StrictStr
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics", "type"]
-
-    @field_validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
-        return value
-
-    @field_validator('image_pull_secret_name')
-    def image_pull_secret_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
-        return value
+    __properties: ClassVar[List[str]] = ["type", "name", "cluster_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "pools", "env", "image", "ingress", "port", "healthcheck", "command", "config_file", "hf_token_ref", "session_affinity", "metrics", "enable_logging", "enable_node_model_cache"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['ccl_inference']):
             raise ValueError("must be one of enum values ('ccl_inference')")
+        return value
+
+    @field_validator('name')
+    def name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
     model_config = ConfigDict(
@@ -138,25 +116,24 @@ class UnifiedWriteInferenceV3DeploymentRequest(BaseModel):
                 if _item_volume_mounts:
                     _items.append(_item_volume_mounts.to_dict())
             _dict['volume_mounts'] = _items
-        # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
-        if self.image_pull_secret_credentials:
-            _dict['image_pull_secret_credentials'] = self.image_pull_secret_credentials.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pools
+        if self.pools:
+            _dict['pools'] = self.pools.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of env
+        if self.env:
+            _dict['env'] = self.env.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of image
+        if self.image:
+            _dict['image'] = self.image.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of ingress
+        if self.ingress:
+            _dict['ingress'] = self.ingress.to_dict()
         # override the default output from pydantic by calling `to_dict()` of config_file
         if self.config_file:
             _dict['config_file'] = self.config_file.to_dict()
         # override the default output from pydantic by calling `to_dict()` of metrics
         if self.metrics:
             _dict['metrics'] = self.metrics.to_dict()
-        # set to None if max_surge (nullable) is None
-        # and model_fields_set contains the field
-        if self.max_surge is None and "max_surge" in self.model_fields_set:
-            _dict['max_surge'] = None
-
-        # set to None if max_unavailable (nullable) is None
-        # and model_fields_set contains the field
-        if self.max_unavailable is None and "max_unavailable" in self.model_fields_set:
-            _dict['max_unavailable'] = None
-
         # set to None if user_annotations (nullable) is None
         # and model_fields_set contains the field
         if self.user_annotations is None and "user_annotations" in self.model_fields_set:
@@ -167,75 +144,25 @@ class UnifiedWriteInferenceV3DeploymentRequest(BaseModel):
         if self.priority is None and "priority" in self.model_fields_set:
             _dict['priority'] = None
 
-        # set to None if hf_token_ref (nullable) is None
-        # and model_fields_set contains the field
-        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
-            _dict['hf_token_ref'] = None
-
-        # set to None if image_pull_secret_credentials (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_secret_credentials is None and "image_pull_secret_credentials" in self.model_fields_set:
-            _dict['image_pull_secret_credentials'] = None
-
-        # set to None if image_pull_ref (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_ref is None and "image_pull_ref" in self.model_fields_set:
-            _dict['image_pull_ref'] = None
-
-        # set to None if image_pull_secret_name (nullable) is None
-        # and model_fields_set contains the field
-        if self.image_pull_secret_name is None and "image_pull_secret_name" in self.model_fields_set:
-            _dict['image_pull_secret_name'] = None
-
-        # set to None if concurrency (nullable) is None
-        # and model_fields_set contains the field
-        if self.concurrency is None and "concurrency" in self.model_fields_set:
-            _dict['concurrency'] = None
-
-        # set to None if cooldown_period (nullable) is None
-        # and model_fields_set contains the field
-        if self.cooldown_period is None and "cooldown_period" in self.model_fields_set:
-            _dict['cooldown_period'] = None
-
         # set to None if healthcheck (nullable) is None
         # and model_fields_set contains the field
         if self.healthcheck is None and "healthcheck" in self.model_fields_set:
             _dict['healthcheck'] = None
-
-        # set to None if env_vars (nullable) is None
-        # and model_fields_set contains the field
-        if self.env_vars is None and "env_vars" in self.model_fields_set:
-            _dict['env_vars'] = None
 
         # set to None if command (nullable) is None
         # and model_fields_set contains the field
         if self.command is None and "command" in self.model_fields_set:
             _dict['command'] = None
 
-        # set to None if endpoint_bearer_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_bearer_token is None and "endpoint_bearer_token" in self.model_fields_set:
-            _dict['endpoint_bearer_token'] = None
-
-        # set to None if bearer_token_ref (nullable) is None
-        # and model_fields_set contains the field
-        if self.bearer_token_ref is None and "bearer_token_ref" in self.model_fields_set:
-            _dict['bearer_token_ref'] = None
-
-        # set to None if endpoint_certificate_authority (nullable) is None
-        # and model_fields_set contains the field
-        if self.endpoint_certificate_authority is None and "endpoint_certificate_authority" in self.model_fields_set:
-            _dict['endpoint_certificate_authority'] = None
-
-        # set to None if hf_token (nullable) is None
-        # and model_fields_set contains the field
-        if self.hf_token is None and "hf_token" in self.model_fields_set:
-            _dict['hf_token'] = None
-
         # set to None if config_file (nullable) is None
         # and model_fields_set contains the field
         if self.config_file is None and "config_file" in self.model_fields_set:
             _dict['config_file'] = None
+
+        # set to None if hf_token_ref (nullable) is None
+        # and model_fields_set contains the field
+        if self.hf_token_ref is None and "hf_token_ref" in self.model_fields_set:
+            _dict['hf_token_ref'] = None
 
         # set to None if metrics (nullable) is None
         # and model_fields_set contains the field
@@ -254,40 +181,26 @@ class UnifiedWriteInferenceV3DeploymentRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "max_surge": obj.get("max_surge"),
-            "max_unavailable": obj.get("max_unavailable"),
+            "type": obj.get("type"),
             "name": obj.get("name"),
             "cluster_id": obj.get("cluster_id"),
-            "hardware_instance_id": obj.get("hardware_instance_id"),
             "user_annotations": obj.get("user_annotations"),
             "chart_revision": obj.get("chart_revision"),
             "volume_mounts": [VolumeMount.from_dict(_item) for _item in obj["volume_mounts"]] if obj.get("volume_mounts") is not None else None,
             "priority": obj.get("priority"),
-            "hf_token_ref": obj.get("hf_token_ref"),
-            "image_url": obj.get("image_url"),
-            "image_pull_secret_credentials": ImagePullSecretCredentials.from_dict(obj["image_pull_secret_credentials"]) if obj.get("image_pull_secret_credentials") is not None else None,
-            "image_pull_ref": obj.get("image_pull_ref"),
-            "image_pull_secret_name": obj.get("image_pull_secret_name"),
+            "pools": CclMainPools.from_dict(obj["pools"]) if obj.get("pools") is not None else None,
+            "env": Env.from_dict(obj["env"]) if obj.get("env") is not None else None,
+            "image": Image.from_dict(obj["image"]) if obj.get("image") is not None else None,
+            "ingress": Ingress.from_dict(obj["ingress"]) if obj.get("ingress") is not None else None,
             "port": obj.get("port"),
-            "min_replicas": obj.get("min_replicas"),
-            "max_replicas": obj.get("max_replicas"),
-            "concurrency": obj.get("concurrency"),
-            "cooldown_period": obj.get("cooldown_period"),
             "healthcheck": obj.get("healthcheck"),
-            "env_vars": obj.get("env_vars"),
             "command": obj.get("command"),
-            "endpoint_bearer_token": obj.get("endpoint_bearer_token"),
-            "bearer_token_ref": obj.get("bearer_token_ref"),
-            "endpoint_certificate_authority": obj.get("endpoint_certificate_authority"),
-            "hf_token": obj.get("hf_token"),
-            "env_vars_refs": obj.get("env_vars_refs"),
-            "backend_protocol": obj.get("backend_protocol"),
-            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
-            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
-            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,
             "config_file": ConfigFileMount.from_dict(obj["config_file"]) if obj.get("config_file") is not None else None,
+            "hf_token_ref": obj.get("hf_token_ref"),
+            "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,
             "metrics": MetricsConfig.from_dict(obj["metrics"]) if obj.get("metrics") is not None else None,
-            "type": obj.get("type")
+            "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
+            "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False
         })
         return _obj
 

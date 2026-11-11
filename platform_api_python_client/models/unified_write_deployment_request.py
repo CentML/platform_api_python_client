@@ -38,10 +38,10 @@ class UnifiedWriteDeploymentRequest(BaseModel):
     anyof_schema_1_validator: Optional[UnifiedWriteComputeDeploymentRequest] = None
     # data type: UnifiedWriteInferenceV3DeploymentRequest
     anyof_schema_2_validator: Optional[UnifiedWriteInferenceV3DeploymentRequest] = None
-    # data type: UnifiedWriteDynamoDeploymentRequest
-    anyof_schema_3_validator: Optional[UnifiedWriteDynamoDeploymentRequest] = None
     # data type: UnifiedWriteJobDeploymentRequest
-    anyof_schema_4_validator: Optional[UnifiedWriteJobDeploymentRequest] = None
+    anyof_schema_3_validator: Optional[UnifiedWriteJobDeploymentRequest] = None
+    # data type: UnifiedWriteDynamoDeploymentRequest
+    anyof_schema_4_validator: Optional[UnifiedWriteDynamoDeploymentRequest] = None
     if TYPE_CHECKING:
         actual_instance: Optional[Union[UnifiedWriteComputeDeploymentRequest, UnifiedWriteDynamoDeploymentRequest, UnifiedWriteInferenceV3DeploymentRequest, UnifiedWriteJobDeploymentRequest]] = None
     else:
@@ -79,15 +79,15 @@ class UnifiedWriteDeploymentRequest(BaseModel):
         else:
             return v
 
-        # validate data type: UnifiedWriteDynamoDeploymentRequest
-        if not isinstance(v, UnifiedWriteDynamoDeploymentRequest):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `UnifiedWriteDynamoDeploymentRequest`")
-        else:
-            return v
-
         # validate data type: UnifiedWriteJobDeploymentRequest
         if not isinstance(v, UnifiedWriteJobDeploymentRequest):
             error_messages.append(f"Error! Input type `{type(v)}` is not `UnifiedWriteJobDeploymentRequest`")
+        else:
+            return v
+
+        # validate data type: UnifiedWriteDynamoDeploymentRequest
+        if not isinstance(v, UnifiedWriteDynamoDeploymentRequest):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `UnifiedWriteDynamoDeploymentRequest`")
         else:
             return v
 
@@ -118,15 +118,15 @@ class UnifiedWriteDeploymentRequest(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[UnifiedWriteDynamoDeploymentRequest] = None
+        # anyof_schema_3_validator: Optional[UnifiedWriteJobDeploymentRequest] = None
         try:
-            instance.actual_instance = UnifiedWriteDynamoDeploymentRequest.from_json(json_str)
+            instance.actual_instance = UnifiedWriteJobDeploymentRequest.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_4_validator: Optional[UnifiedWriteJobDeploymentRequest] = None
+        # anyof_schema_4_validator: Optional[UnifiedWriteDynamoDeploymentRequest] = None
         try:
-            instance.actual_instance = UnifiedWriteJobDeploymentRequest.from_json(json_str)
+            instance.actual_instance = UnifiedWriteDynamoDeploymentRequest.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))

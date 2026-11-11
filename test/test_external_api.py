@@ -327,6 +327,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_insight_insights_insight_id_get(self) -> None:
+        """Test case for get_insight_insights_insight_id_get
+
+        Get Insight
+        """
+        pass
+
     def test_get_job_deployment_deployments_job_deployment_id_get(self) -> None:
         """Test case for get_job_deployment_deployments_job_deployment_id_get
 
@@ -345,6 +352,48 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_prebuilt_images_prebuilt_images_get
 
         Get Prebuilt Images
+        """
+        pass
+
+    def test_get_unified_deployment_deployments_deployment_id_get(self) -> None:
+        """Test case for get_unified_deployment_deployments_deployment_id_get
+
+        Get Unified Deployment
+        """
+        pass
+
+    def test_get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get(self) -> None:
+        """Test case for get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get
+
+        Get Unified Deployment Logs
+        """
+        pass
+
+    def test_get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get(self) -> None:
+        """Test case for get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get
+
+        Get Unified Deployment Pods
+        """
+        pass
+
+    def test_get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get(self) -> None:
+        """Test case for get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get
+
+        Get Unified Deployment Revision
+        """
+        pass
+
+    def test_get_unified_deployment_rollout_deployments_deployment_id_rollout_get(self) -> None:
+        """Test case for get_unified_deployment_rollout_deployments_deployment_id_rollout_get
+
+        Get Unified Deployment Rollout
+        """
+        pass
+
+    def test_get_unified_deployment_usage_deployments_deployment_id_usage_get(self) -> None:
+        """Test case for get_unified_deployment_usage_deployments_deployment_id_usage_get
+
+        Get Unified Deployment Usage
         """
         pass
 
@@ -404,10 +453,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_list_insights_insights_get(self) -> None:
+        """Test case for list_insights_insights_get
+
+        List Insights
+        """
+        pass
+
     def test_list_service_accounts_service_accounts_get(self) -> None:
         """Test case for list_service_accounts_service_accounts_get
 
         List Service Accounts
+        """
+        pass
+
+    def test_list_unified_deployment_revisions_deployments_deployment_id_revisions_get(self) -> None:
+        """Test case for list_unified_deployment_revisions_deployments_deployment_id_revisions_get
+
+        List Unified Deployment Revisions
         """
         pass
 
@@ -422,6 +485,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put
 
         Rollout Existing Revision
+        """
+        pass
+
+    def test_rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put(self) -> None:
+        """Test case for rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put
+
+        Rollout Unified Deployment Revision
         """
         pass
 
@@ -502,6 +572,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_update_insight_status_insights_insight_id_status_patch(self) -> None:
+        """Test case for update_insight_status_insights_insight_id_status_patch
+
+        Update Insight Status
+        """
+        pass
+
     def test_update_service_account_service_accounts_workos_id_put(self) -> None:
         """Test case for update_service_account_service_accounts_workos_id_put
 
@@ -513,6 +590,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for update_unified_deployment_deployments_deployment_id_put
 
         Update Unified Deployment
+        """
+        pass
+
+    def test_update_unified_deployment_rollout_deployments_deployment_id_rollout_put(self) -> None:
+        """Test case for update_unified_deployment_rollout_deployments_deployment_id_rollout_put
+
+        Update Unified Deployment Rollout
         """
         pass
 

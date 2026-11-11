@@ -5,21 +5,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** |  | 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
-**image_url** | **str** |  | 
-**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
-**image_pull_ref** | **int** |  | [optional] 
-**image_pull_secret_name** | **str** | Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it. | [optional] 
-**env_vars_refs** | **object** |  | [optional] 
+**pools** | [**CclMainPools**](CclMainPools.md) |  | 
+**env** | [**Env**](Env.md) |  | [optional] 
+**image** | [**Image**](Image.md) |  | 
 **ssh_public_key** | **str** |  | 
 **enable_logging** | **bool** |  | [optional] [default to False]
-**type** | **str** |  | 
 
 ## Example
 

@@ -5,52 +5,36 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** |  | 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
-**image_url** | **str** |  | 
-**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
-**image_pull_ref** | **int** |  | [optional] 
-**image_pull_secret_name** | **str** | Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it. | [optional] 
-**env_vars_refs** | **object** |  | [optional] 
+**pools** | [**CclDynamoPools**](CclDynamoPools.md) |  | 
+**env** | [**Env**](Env.md) |  | [optional] 
+**image** | [**DynamoImage**](DynamoImage.md) |  | 
 **ssh_public_key** | **str** |  | 
 **enable_logging** | **bool** |  | [optional] [default to True]
-**type** | **str** |  | 
-**max_surge** | **int** |  | [optional] 
-**max_unavailable** | **int** |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
+**ingress** | [**Ingress**](Ingress.md) |  | 
 **port** | **int** |  | 
-**min_replicas** | **int** |  | 
-**max_replicas** | **int** |  | 
-**concurrency** | **int** |  | [optional] 
-**cooldown_period** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 
-**env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **str** |  | [optional] 
-**endpoint_bearer_token** | **str** |  | [optional] 
-**bearer_token_ref** | **int** |  | [optional] 
-**endpoint_certificate_authority** | **str** |  | [optional] 
-**hf_token** | **str** |  | [optional] 
-**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
-**enable_node_model_cache** | **bool** |  | [optional] [default to False]
-**session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
+**hf_token_ref** | **int** |  | [optional] 
+**session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
-**serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
-**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
-**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
-**model** | **str** |  | 
-**served_model_name** | **str** |  | [optional] 
-**runtime_version** | **str** | Dynamo runtime image tag (for example 1.4.0). Defaults to the platform&#39;s current release; GET /prebuilt-images?type&#x3D;dynamo lists the versions the platform has validated, but any tag may be requested. require_gpu_direct_rdma needs an EFA-capable image. Changing it restarts every component of a running deployment. | [optional] 
-**extra_args** | **str** |  | [optional] 
+**enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **completions** | **int** |  | [optional] [default to 1]
 **parallelism** | **int** |  | [optional] [default to 1]
 **backoff_limit** | **int** |  | [optional] [default to 3]
 **active_deadline_seconds** | **int** |  | [optional] 
+**serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
+**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
+**model** | **str** |  | 
+**served_model_name** | **str** |  | [optional] 
+**extra_args** | **str** |  | [optional] 
 
 ## Example
 

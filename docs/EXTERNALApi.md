@@ -47,9 +47,16 @@ Method | HTTP request | Description
 [**get_hardware_presets_hardware_instances_presets_get**](EXTERNALApi.md#get_hardware_presets_hardware_instances_presets_get) | **GET** /hardware-instances/presets | Get Hardware Presets
 [**get_inference_deployment_deployments_inference_deployment_id_get**](EXTERNALApi.md#get_inference_deployment_deployments_inference_deployment_id_get) | **GET** /deployments/inference/{deployment_id} | Get Inference Deployment
 [**get_inference_v3_deployment_deployments_inference_v3_deployment_id_get**](EXTERNALApi.md#get_inference_v3_deployment_deployments_inference_v3_deployment_id_get) | **GET** /deployments/inference_v3/{deployment_id} | Get Inference V3 Deployment
+[**get_insight_insights_insight_id_get**](EXTERNALApi.md#get_insight_insights_insight_id_get) | **GET** /insights/{insight_id} | Get Insight
 [**get_job_deployment_deployments_job_deployment_id_get**](EXTERNALApi.md#get_job_deployment_deployments_job_deployment_id_get) | **GET** /deployments/job/{deployment_id} | Get Job Deployment
 [**get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get**](EXTERNALApi.md#get_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_get) | **GET** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Get Org Gpu Quota On Cluster
 [**get_prebuilt_images_prebuilt_images_get**](EXTERNALApi.md#get_prebuilt_images_prebuilt_images_get) | **GET** /prebuilt-images | Get Prebuilt Images
+[**get_unified_deployment_deployments_deployment_id_get**](EXTERNALApi.md#get_unified_deployment_deployments_deployment_id_get) | **GET** /deployments/{deployment_id} | Get Unified Deployment
+[**get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get**](EXTERNALApi.md#get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get) | **GET** /deployments/{deployment_id}/revisions/{revision_number}/logs | Get Unified Deployment Logs
+[**get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get**](EXTERNALApi.md#get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get) | **GET** /deployments/{deployment_id}/revisions/{revision_number}/pods | Get Unified Deployment Pods
+[**get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get**](EXTERNALApi.md#get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get) | **GET** /deployments/{deployment_id}/revisions/{revision_number} | Get Unified Deployment Revision
+[**get_unified_deployment_rollout_deployments_deployment_id_rollout_get**](EXTERNALApi.md#get_unified_deployment_rollout_deployments_deployment_id_rollout_get) | **GET** /deployments/{deployment_id}/rollout | Get Unified Deployment Rollout
+[**get_unified_deployment_usage_deployments_deployment_id_usage_get**](EXTERNALApi.md#get_unified_deployment_usage_deployments_deployment_id_usage_get) | **GET** /deployments/{deployment_id}/usage | Get Unified Deployment Usage
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
 [**get_user_vault_item_by_id_endpoint_user_vault_secret_id_get**](EXTERNALApi.md#get_user_vault_item_by_id_endpoint_user_vault_secret_id_get) | **GET** /user_vault/{secret_id} | Get User Vault Item By Id Endpoint
@@ -58,9 +65,12 @@ Method | HTTP request | Description
 [**invite_user_organizations_invite_post**](EXTERNALApi.md#invite_user_organizations_invite_post) | **POST** /organizations/invite | Invite User
 [**list_cluster_capacity_capacity_get**](EXTERNALApi.md#list_cluster_capacity_capacity_get) | **GET** /capacity | List Cluster Capacity
 [**list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get**](EXTERNALApi.md#list_cluster_org_gpu_quotas_clusters_cluster_id_gpu_quota_organizations_get) | **GET** /clusters/{cluster_id}/gpu-quota/organizations | List Cluster Org Gpu Quotas
+[**list_insights_insights_get**](EXTERNALApi.md#list_insights_insights_get) | **GET** /insights | List Insights
 [**list_service_accounts_service_accounts_get**](EXTERNALApi.md#list_service_accounts_service_accounts_get) | **GET** /service-accounts | List Service Accounts
+[**list_unified_deployment_revisions_deployments_deployment_id_revisions_get**](EXTERNALApi.md#list_unified_deployment_revisions_deployments_deployment_id_revisions_get) | **GET** /deployments/{deployment_id}/revisions | List Unified Deployment Revisions
 [**put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put**](EXTERNALApi.md#put_org_gpu_quota_on_cluster_clusters_cluster_id_organizations_organization_id_gpu_quota_put) | **PUT** /clusters/{cluster_id}/organizations/{organization_id}/gpu-quota | Put Org Gpu Quota On Cluster
 [**rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put**](EXTERNALApi.md#rollout_existing_revision_deployments_revisions_deployment_id_revision_number_put) | **PUT** /deployments/revisions/{deployment_id}/{revision_number} | Rollout Existing Revision
+[**rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put**](EXTERNALApi.md#rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put) | **PUT** /deployments/{deployment_id}/revisions/{revision_number} | Rollout Unified Deployment Revision
 [**setup_stripe_customer_payments_setup_post**](EXTERNALApi.md#setup_stripe_customer_payments_setup_post) | **POST** /payments/setup | Setup Stripe Customer
 [**update_cluster_clusters_cluster_id_put**](EXTERNALApi.md#update_cluster_clusters_cluster_id_put) | **PUT** /clusters/{cluster_id} | Update Cluster
 [**update_cluster_metadata_clusters_cluster_id_metadata_put**](EXTERNALApi.md#update_cluster_metadata_clusters_cluster_id_metadata_put) | **PUT** /clusters/{cluster_id}/metadata | Update Cluster Metadata
@@ -72,8 +82,10 @@ Method | HTTP request | Description
 [**update_dynamo_deployment_deployments_dynamo_put**](EXTERNALApi.md#update_dynamo_deployment_deployments_dynamo_put) | **PUT** /deployments/dynamo | Update Dynamo Deployment
 [**update_inference_deployment_deployments_inference_put**](EXTERNALApi.md#update_inference_deployment_deployments_inference_put) | **PUT** /deployments/inference | Update Inference Deployment
 [**update_inference_v3_deployment_deployments_inference_v3_put**](EXTERNALApi.md#update_inference_v3_deployment_deployments_inference_v3_put) | **PUT** /deployments/inference_v3 | Update Inference V3 Deployment
+[**update_insight_status_insights_insight_id_status_patch**](EXTERNALApi.md#update_insight_status_insights_insight_id_status_patch) | **PATCH** /insights/{insight_id}/status | Update Insight Status
 [**update_service_account_service_accounts_workos_id_put**](EXTERNALApi.md#update_service_account_service_accounts_workos_id_put) | **PUT** /service-accounts/{workos_id} | Update Service Account
 [**update_unified_deployment_deployments_deployment_id_put**](EXTERNALApi.md#update_unified_deployment_deployments_deployment_id_put) | **PUT** /deployments/{deployment_id} | Update Unified Deployment
+[**update_unified_deployment_rollout_deployments_deployment_id_rollout_put**](EXTERNALApi.md#update_unified_deployment_rollout_deployments_deployment_id_rollout_put) | **PUT** /deployments/{deployment_id}/rollout | Update Unified Deployment Rollout
 [**update_unified_deployment_status_deployments_deployment_id_status_put**](EXTERNALApi.md#update_unified_deployment_status_deployments_deployment_id_status_put) | **PUT** /deployments/{deployment_id}/status | Update Unified Deployment Status
 [**update_user_vault_item_endpoint_user_vault_put**](EXTERNALApi.md#update_user_vault_item_endpoint_user_vault_put) | **PUT** /user_vault | Update User Vault Item Endpoint
 
@@ -910,6 +922,8 @@ Name | Type | Description  | Notes
 > UnifiedWriteDeploymentResponse create_unified_deployment_deployments_post(unified_write_deployment_request)
 
 Create Unified Deployment
+
+Create a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment through ccluster.
 
 ### Example
 
@@ -3400,6 +3414,83 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_insight_insights_insight_id_get**
+> InsightResponse get_insight_insights_insight_id_get(insight_id)
+
+Get Insight
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.insight_response import InsightResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    insight_id = 56 # int | 
+
+    try:
+        # Get Insight
+        api_response = api_instance.get_insight_insights_insight_id_get(insight_id)
+        print("The response of EXTERNALApi->get_insight_insights_insight_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_insight_insights_insight_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **insight_id** | **int**|  | 
+
+### Return type
+
+[**InsightResponse**](InsightResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_job_deployment_deployments_job_deployment_id_get**
 > GetJobDeploymentResponse get_job_deployment_deployments_job_deployment_id_get(deployment_id)
 
@@ -3615,6 +3706,510 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ListPrebuiltImageResponse**](ListPrebuiltImageResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_deployments_deployment_id_get**
+> UnifiedGetDeploymentResponse get_unified_deployment_deployments_deployment_id_get(deployment_id)
+
+Get Unified Deployment
+
+Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.  env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_response import UnifiedGetDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Unified Deployment
+        api_response = api_instance.get_unified_deployment_deployments_deployment_id_get(deployment_id)
+        print("The response of EXTERNALApi->get_unified_deployment_deployments_deployment_id_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_deployments_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentResponse**](UnifiedGetDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get**
+> UnifiedGetDeploymentLogsResponse get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get(deployment_id, revision_number, pod, fetch_newer=fetch_newer, timestamp=timestamp, max_lines=max_lines)
+
+Get Unified Deployment Logs
+
+Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.  Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_logs_response import UnifiedGetDeploymentLogsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+    pod = 'pod_example' # str | 
+    fetch_newer = False # bool |  (optional) (default to False)
+    timestamp = 56 # int |  (optional)
+    max_lines = 100 # int |  (optional) (default to 100)
+
+    try:
+        # Get Unified Deployment Logs
+        api_response = api_instance.get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get(deployment_id, revision_number, pod, fetch_newer=fetch_newer, timestamp=timestamp, max_lines=max_lines)
+        print("The response of EXTERNALApi->get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_logs_deployments_deployment_id_revisions_revision_number_logs_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+ **pod** | **str**|  | 
+ **fetch_newer** | **bool**|  | [optional] [default to False]
+ **timestamp** | **int**|  | [optional] 
+ **max_lines** | **int**|  | [optional] [default to 100]
+
+### Return type
+
+[**UnifiedGetDeploymentLogsResponse**](UnifiedGetDeploymentLogsResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get**
+> UnifiedGetDeploymentPodsResponse get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get(deployment_id, revision_number)
+
+Get Unified Deployment Pods
+
+List the pods that logged under one revision, recently terminated pods included. The log store's retention bounds the history, so the list can differ from the running pods.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_pods_response import UnifiedGetDeploymentPodsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+
+    try:
+        # Get Unified Deployment Pods
+        api_response = api_instance.get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get(deployment_id, revision_number)
+        print("The response of EXTERNALApi->get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentPodsResponse**](UnifiedGetDeploymentPodsResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get**
+> UnifiedGetDeploymentRevisionResponse get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get(deployment_id, revision_number)
+
+Get Unified Deployment Revision
+
+Get one revision of a deployment, read as GET /deployments/{deployment_id} reads the selected one.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_revision_response import UnifiedGetDeploymentRevisionResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+
+    try:
+        # Get Unified Deployment Revision
+        api_response = api_instance.get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get(deployment_id, revision_number)
+        print("The response of EXTERNALApi->get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentRevisionResponse**](UnifiedGetDeploymentRevisionResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_rollout_deployments_deployment_id_rollout_get**
+> UnifiedGetDeploymentRolloutResponse get_unified_deployment_rollout_deployments_deployment_id_rollout_get(deployment_id)
+
+Get Unified Deployment Rollout
+
+Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_rollout_response import UnifiedGetDeploymentRolloutResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Unified Deployment Rollout
+        api_response = api_instance.get_unified_deployment_rollout_deployments_deployment_id_rollout_get(deployment_id)
+        print("The response of EXTERNALApi->get_unified_deployment_rollout_deployments_deployment_id_rollout_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_rollout_deployments_deployment_id_rollout_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentRolloutResponse**](UnifiedGetDeploymentRolloutResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_usage_deployments_deployment_id_usage_get**
+> UnifiedGetDeploymentUsageResponse get_unified_deployment_usage_deployments_deployment_id_usage_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step, revision_number=revision_number, component=component, pod=pod)
+
+Get Unified Deployment Usage
+
+Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.  ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo does; its dynamo_* metrics are not supported yet.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.metric import Metric
+from platform_api_python_client.models.unified_get_deployment_usage_response import UnifiedGetDeploymentUsageResponse
+from platform_api_python_client.models.usage_component import UsageComponent
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    metric = platform_api_python_client.Metric() # Metric | 
+    start_time_in_seconds = 56 # int | 
+    end_time_in_seconds = 56 # int | 
+    step = 15 # int |  (optional) (default to 15)
+    revision_number = 56 # int |  (optional)
+    component = platform_api_python_client.UsageComponent() # UsageComponent |  (optional)
+    pod = 'pod_example' # str |  (optional)
+
+    try:
+        # Get Unified Deployment Usage
+        api_response = api_instance.get_unified_deployment_usage_deployments_deployment_id_usage_get(deployment_id, metric, start_time_in_seconds, end_time_in_seconds, step=step, revision_number=revision_number, component=component, pod=pod)
+        print("The response of EXTERNALApi->get_unified_deployment_usage_deployments_deployment_id_usage_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_usage_deployments_deployment_id_usage_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **metric** | [**Metric**](.md)|  | 
+ **start_time_in_seconds** | **int**|  | 
+ **end_time_in_seconds** | **int**|  | 
+ **step** | **int**|  | [optional] [default to 15]
+ **revision_number** | **int**|  | [optional] 
+ **component** | [**UsageComponent**](.md)|  | [optional] 
+ **pod** | **str**|  | [optional] 
+
+### Return type
+
+[**UnifiedGetDeploymentUsageResponse**](UnifiedGetDeploymentUsageResponse.md)
 
 ### Authorization
 
@@ -4259,6 +4854,100 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **list_insights_insights_get**
+> ListInsightsResponse list_insights_insights_get(status=status, severity=severity, cluster_id=cluster_id, deployment_id=deployment_id, resource_type=resource_type, observed_after=observed_after, limit=limit, before_id=before_id)
+
+List Insights
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.insight_resource_type import InsightResourceType
+from platform_api_python_client.models.insight_severity import InsightSeverity
+from platform_api_python_client.models.insight_status import InsightStatus
+from platform_api_python_client.models.list_insights_response import ListInsightsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    status = ["new"] # List[InsightStatus] | Repeat to list several statuses (optional) (default to ["new"])
+    severity = platform_api_python_client.InsightSeverity() # InsightSeverity |  (optional)
+    cluster_id = 56 # int |  (optional)
+    deployment_id = 56 # int |  (optional)
+    resource_type = platform_api_python_client.InsightResourceType() # InsightResourceType |  (optional)
+    observed_after = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
+    limit = 50 # int |  (optional) (default to 50)
+    before_id = 56 # int |  (optional)
+
+    try:
+        # List Insights
+        api_response = api_instance.list_insights_insights_get(status=status, severity=severity, cluster_id=cluster_id, deployment_id=deployment_id, resource_type=resource_type, observed_after=observed_after, limit=limit, before_id=before_id)
+        print("The response of EXTERNALApi->list_insights_insights_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->list_insights_insights_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | [**List[InsightStatus]**](InsightStatus.md)| Repeat to list several statuses | [optional] [default to [&quot;new&quot;]]
+ **severity** | [**InsightSeverity**](.md)|  | [optional] 
+ **cluster_id** | **int**|  | [optional] 
+ **deployment_id** | **int**|  | [optional] 
+ **resource_type** | [**InsightResourceType**](.md)|  | [optional] 
+ **observed_after** | **datetime**|  | [optional] 
+ **limit** | **int**|  | [optional] [default to 50]
+ **before_id** | **int**|  | [optional] 
+
+### Return type
+
+[**ListInsightsResponse**](ListInsightsResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_service_accounts_service_accounts_get**
 > ListServiceAccountsResponse list_service_accounts_service_accounts_get()
 
@@ -4328,6 +5017,85 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_unified_deployment_revisions_deployments_deployment_id_revisions_get**
+> UnifiedListDeploymentRevisionsResponse list_unified_deployment_revisions_deployments_deployment_id_revisions_get(deployment_id)
+
+List Unified Deployment Revisions
+
+List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_list_deployment_revisions_response import UnifiedListDeploymentRevisionsResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # List Unified Deployment Revisions
+        api_response = api_instance.list_unified_deployment_revisions_deployments_deployment_id_revisions_get(deployment_id)
+        print("The response of EXTERNALApi->list_unified_deployment_revisions_deployments_deployment_id_revisions_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->list_unified_deployment_revisions_deployments_deployment_id_revisions_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**UnifiedListDeploymentRevisionsResponse**](UnifiedListDeploymentRevisionsResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4488,6 +5256,91 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put**
+> UnifiedWriteDeploymentResponse rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put(deployment_id, revision_number, max_surge=max_surge, max_unavailable=max_unavailable)
+
+Rollout Unified Deployment Revision
+
+Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.  An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    revision_number = 56 # int | 
+    max_surge = 56 # int |  (optional)
+    max_unavailable = 56 # int |  (optional)
+
+    try:
+        # Rollout Unified Deployment Revision
+        api_response = api_instance.rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put(deployment_id, revision_number, max_surge=max_surge, max_unavailable=max_unavailable)
+        print("The response of EXTERNALApi->rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->rollout_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **revision_number** | **int**|  | 
+ **max_surge** | **int**|  | [optional] 
+ **max_unavailable** | **int**|  | [optional] 
+
+### Return type
+
+[**UnifiedWriteDeploymentResponse**](UnifiedWriteDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -5337,6 +6190,86 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **update_insight_status_insights_insight_id_status_patch**
+> InsightResponse update_insight_status_insights_insight_id_status_patch(insight_id, update_insight_status_request)
+
+Update Insight Status
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.insight_response import InsightResponse
+from platform_api_python_client.models.update_insight_status_request import UpdateInsightStatusRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    insight_id = 56 # int | 
+    update_insight_status_request = platform_api_python_client.UpdateInsightStatusRequest() # UpdateInsightStatusRequest | 
+
+    try:
+        # Update Insight Status
+        api_response = api_instance.update_insight_status_insights_insight_id_status_patch(insight_id, update_insight_status_request)
+        print("The response of EXTERNALApi->update_insight_status_insights_insight_id_status_patch:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_insight_status_insights_insight_id_status_patch: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **insight_id** | **int**|  | 
+ **update_insight_status_request** | [**UpdateInsightStatusRequest**](UpdateInsightStatusRequest.md)|  | 
+
+### Return type
+
+[**InsightResponse**](InsightResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_service_account_service_accounts_workos_id_put**
 > ServiceAccountResponse update_service_account_service_accounts_workos_id_put(workos_id, update_service_account_request)
 
@@ -5418,11 +6351,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_unified_deployment_deployments_deployment_id_put**
-> UnifiedWriteDeploymentResponse update_unified_deployment_deployments_deployment_id_put(deployment_id, unified_write_deployment_request)
+> UnifiedWriteDeploymentResponse update_unified_deployment_deployments_deployment_id_put(deployment_id, unified_write_deployment_request, max_surge=max_surge, max_unavailable=max_unavailable)
 
 Update Unified Deployment
 
-Replace a deployment's request, as the per-type PUT routes do.  Updates ACTIVE ccl_compute, ccl_inference and ccl_dynamo deployments through ccluster. Every refusal comes before any write.
+Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.  A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
 ### Example
 
@@ -5457,10 +6390,12 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
     unified_write_deployment_request = platform_api_python_client.UnifiedWriteDeploymentRequest() # UnifiedWriteDeploymentRequest | 
+    max_surge = 56 # int |  (optional)
+    max_unavailable = 56 # int |  (optional)
 
     try:
         # Update Unified Deployment
-        api_response = api_instance.update_unified_deployment_deployments_deployment_id_put(deployment_id, unified_write_deployment_request)
+        api_response = api_instance.update_unified_deployment_deployments_deployment_id_put(deployment_id, unified_write_deployment_request, max_surge=max_surge, max_unavailable=max_unavailable)
         print("The response of EXTERNALApi->update_unified_deployment_deployments_deployment_id_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -5476,10 +6411,94 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
  **unified_write_deployment_request** | [**UnifiedWriteDeploymentRequest**](UnifiedWriteDeploymentRequest.md)|  | 
+ **max_surge** | **int**|  | [optional] 
+ **max_unavailable** | **int**|  | [optional] 
 
 ### Return type
 
 [**UnifiedWriteDeploymentResponse**](UnifiedWriteDeploymentResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_unified_deployment_rollout_deployments_deployment_id_rollout_put**
+> UnifiedGetDeploymentRolloutResponse update_unified_deployment_rollout_deployments_deployment_id_rollout_put(deployment_id, unified_update_deployment_rollout_request)
+
+Update Unified Deployment Rollout
+
+Pause or resume the in-flight rollout; not stored. Not implemented yet.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_rollout_response import UnifiedGetDeploymentRolloutResponse
+from platform_api_python_client.models.unified_update_deployment_rollout_request import UnifiedUpdateDeploymentRolloutRequest
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+    unified_update_deployment_rollout_request = platform_api_python_client.UnifiedUpdateDeploymentRolloutRequest() # UnifiedUpdateDeploymentRolloutRequest | 
+
+    try:
+        # Update Unified Deployment Rollout
+        api_response = api_instance.update_unified_deployment_rollout_deployments_deployment_id_rollout_put(deployment_id, unified_update_deployment_rollout_request)
+        print("The response of EXTERNALApi->update_unified_deployment_rollout_deployments_deployment_id_rollout_put:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_unified_deployment_rollout_deployments_deployment_id_rollout_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+ **unified_update_deployment_rollout_request** | [**UnifiedUpdateDeploymentRolloutRequest**](UnifiedUpdateDeploymentRolloutRequest.md)|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentRolloutResponse**](UnifiedGetDeploymentRolloutResponse.md)
 
 ### Authorization
 

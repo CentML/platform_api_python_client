@@ -5,38 +5,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**max_surge** | **int** |  | [optional] 
-**max_unavailable** | **int** |  | [optional] 
+**type** | **str** |  | 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
+**pools** | [**CclDynamoPools**](CclDynamoPools.md) |  | 
+**env** | [**Env**](Env.md) |  | [optional] 
+**image** | [**DynamoImage**](DynamoImage.md) |  | [optional] 
+**ingress** | [**Ingress**](Ingress.md) |  | 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
-**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**runtime_version** | **str** | Dynamo runtime image tag (for example 1.4.0). Defaults to the platform&#39;s current release; GET /prebuilt-images?type&#x3D;dynamo lists the versions the platform has validated, but any tag may be requested. require_gpu_direct_rdma needs an EFA-capable image. Changing it restarts every component of a running deployment. | [optional] 
-**min_replicas** | **int** |  | [optional] 
-**max_replicas** | **int** |  | [optional] 
-**concurrency** | **int** |  | [optional] 
-**cooldown_period** | **int** |  | [optional] 
 **extra_args** | **str** |  | [optional] 
-**hf_token** | **str** |  | [optional] 
 **hf_token_ref** | **int** |  | [optional] 
-**env_vars** | **Dict[str, str]** |  | [optional] 
-**env_vars_refs** | **object** |  | [optional] 
-**endpoint_bearer_token** | **str** |  | [optional] 
-**bearer_token_ref** | **int** |  | [optional] 
-**endpoint_certificate_authority** | **str** |  | [optional] 
-**image_pull_ref** | **int** |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
-**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
-**type** | **str** |  | 
 
 ## Example
 

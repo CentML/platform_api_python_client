@@ -5,40 +5,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**max_surge** | **int** |  | [optional] 
-**max_unavailable** | **int** |  | [optional] 
+**type** | **str** |  | 
 **name** | **str** |  | 
 **cluster_id** | **int** |  | 
-**hardware_instance_id** | **int** |  | 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **priority** | **str** |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
-**image_url** | **str** |  | 
-**image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
-**image_pull_ref** | **int** |  | [optional] 
-**image_pull_secret_name** | **str** | Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it. | [optional] 
+**pools** | [**CclMainPools**](CclMainPools.md) |  | 
+**env** | [**Env**](Env.md) |  | [optional] 
+**image** | [**Image**](Image.md) |  | 
+**ingress** | [**Ingress**](Ingress.md) |  | 
 **port** | **int** |  | 
-**min_replicas** | **int** |  | 
-**max_replicas** | **int** |  | 
-**concurrency** | **int** |  | [optional] 
-**cooldown_period** | **int** |  | [optional] 
 **healthcheck** | **str** |  | [optional] 
-**env_vars** | **Dict[str, str]** |  | [optional] 
 **command** | **str** |  | [optional] 
-**endpoint_bearer_token** | **str** |  | [optional] 
-**bearer_token_ref** | **int** |  | [optional] 
-**endpoint_certificate_authority** | **str** |  | [optional] 
-**hf_token** | **str** |  | [optional] 
-**env_vars_refs** | **object** |  | [optional] 
-**backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
+**hf_token_ref** | **int** |  | [optional] 
+**session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
+**metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to False]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
-**session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
-**config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
-**type** | **str** |  | 
 
 ## Example
 

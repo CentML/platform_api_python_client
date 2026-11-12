@@ -78,7 +78,10 @@ class TestGetDynamoDeploymentResponse(unittest.TestCase):
                 communications = platform_api_python_client.models.dynamo_communications.DynamoCommunications(
                     kv_transfer = platform_api_python_client.models.dynamo_kv_transfer_configuration.DynamoKvTransferConfiguration(
                         policy = 'allow_tcp', ), ),
+                weight_transfer = platform_api_python_client.models.dynamo_weight_transfer_configuration.DynamoWeightTransferConfiguration(
+                    policy = 'require_gpu_direct_rdma', ),
                 model = '',
+                model_revision = '',
                 served_model_name = '',
                 runtime_version = '',
                 min_replicas = 56,

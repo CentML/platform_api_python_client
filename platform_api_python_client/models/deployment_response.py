@@ -19,7 +19,6 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
 from platform_api_python_client.models.get_dynamo_deployment_response import GetDynamoDeploymentResponse
 from platform_api_python_client.models.get_inference_v3_deployment_response import GetInferenceV3DeploymentResponse
@@ -28,7 +27,7 @@ from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-DEPLOYMENTRESPONSE_ANY_OF_SCHEMAS = ["GetCServeV3DeploymentResponse", "GetComputeDeploymentResponse", "GetDynamoDeploymentResponse", "GetInferenceV3DeploymentResponse", "GetJobDeploymentResponse"]
+DEPLOYMENTRESPONSE_ANY_OF_SCHEMAS = ["GetComputeDeploymentResponse", "GetDynamoDeploymentResponse", "GetInferenceV3DeploymentResponse", "GetJobDeploymentResponse"]
 
 class DeploymentResponse(BaseModel):
     """
@@ -37,19 +36,17 @@ class DeploymentResponse(BaseModel):
 
     # data type: GetDynamoDeploymentResponse
     anyof_schema_1_validator: Optional[GetDynamoDeploymentResponse] = None
-    # data type: GetCServeV3DeploymentResponse
-    anyof_schema_2_validator: Optional[GetCServeV3DeploymentResponse] = None
     # data type: GetInferenceV3DeploymentResponse
-    anyof_schema_3_validator: Optional[GetInferenceV3DeploymentResponse] = None
+    anyof_schema_2_validator: Optional[GetInferenceV3DeploymentResponse] = None
     # data type: GetComputeDeploymentResponse
-    anyof_schema_4_validator: Optional[GetComputeDeploymentResponse] = None
+    anyof_schema_3_validator: Optional[GetComputeDeploymentResponse] = None
     # data type: GetJobDeploymentResponse
-    anyof_schema_5_validator: Optional[GetJobDeploymentResponse] = None
+    anyof_schema_4_validator: Optional[GetJobDeploymentResponse] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[GetCServeV3DeploymentResponse, GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse]] = None
+        actual_instance: Optional[Union[GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "GetCServeV3DeploymentResponse", "GetComputeDeploymentResponse", "GetDynamoDeploymentResponse", "GetInferenceV3DeploymentResponse", "GetJobDeploymentResponse" }
+    any_of_schemas: Set[str] = { "GetComputeDeploymentResponse", "GetDynamoDeploymentResponse", "GetInferenceV3DeploymentResponse", "GetJobDeploymentResponse" }
 
     model_config = {
         "validate_assignment": True,
@@ -76,12 +73,6 @@ class DeploymentResponse(BaseModel):
         else:
             return v
 
-        # validate data type: GetCServeV3DeploymentResponse
-        if not isinstance(v, GetCServeV3DeploymentResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `GetCServeV3DeploymentResponse`")
-        else:
-            return v
-
         # validate data type: GetInferenceV3DeploymentResponse
         if not isinstance(v, GetInferenceV3DeploymentResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `GetInferenceV3DeploymentResponse`")
@@ -102,7 +93,7 @@ class DeploymentResponse(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in DeploymentResponse with anyOf schemas: GetCServeV3DeploymentResponse, GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in DeploymentResponse with anyOf schemas: GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -121,25 +112,19 @@ class DeploymentResponse(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[GetCServeV3DeploymentResponse] = None
-        try:
-            instance.actual_instance = GetCServeV3DeploymentResponse.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_3_validator: Optional[GetInferenceV3DeploymentResponse] = None
+        # anyof_schema_2_validator: Optional[GetInferenceV3DeploymentResponse] = None
         try:
             instance.actual_instance = GetInferenceV3DeploymentResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_4_validator: Optional[GetComputeDeploymentResponse] = None
+        # anyof_schema_3_validator: Optional[GetComputeDeploymentResponse] = None
         try:
             instance.actual_instance = GetComputeDeploymentResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_5_validator: Optional[GetJobDeploymentResponse] = None
+        # anyof_schema_4_validator: Optional[GetJobDeploymentResponse] = None
         try:
             instance.actual_instance = GetJobDeploymentResponse.from_json(json_str)
             return instance
@@ -148,7 +133,7 @@ class DeploymentResponse(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into DeploymentResponse with anyOf schemas: GetCServeV3DeploymentResponse, GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into DeploymentResponse with anyOf schemas: GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -162,7 +147,7 @@ class DeploymentResponse(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], GetCServeV3DeploymentResponse, GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], GetComputeDeploymentResponse, GetDynamoDeploymentResponse, GetInferenceV3DeploymentResponse, GetJobDeploymentResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

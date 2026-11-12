@@ -40,17 +40,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_create_cserve_deployment_deployments_cserve_post(self) -> None:
+        """Test case for create_cserve_deployment_deployments_cserve_post
+
+        Retired Cserve Deployment
+        """
+        pass
+
     def test_create_cserve_v2_deployment_deployments_cserve_v2_post(self) -> None:
         """Test case for create_cserve_v2_deployment_deployments_cserve_v2_post
 
-        Create Cserve V2 Deployment
+        Retired Cserve Deployment
         """
         pass
 
     def test_create_cserve_v3_deployment_deployments_cserve_v3_post(self) -> None:
         """Test case for create_cserve_v3_deployment_deployments_cserve_v3_post
 
-        Create Cserve V3 Deployment
+        Retired Cserve Deployment
         """
         pass
 
@@ -208,17 +215,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_cserve_deployment_deployments_cserve_deployment_id_get(self) -> None:
+        """Test case for get_cserve_deployment_deployments_cserve_deployment_id_get
+
+        Retired Cserve Deployment Detail
+        """
+        pass
+
     def test_get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(self) -> None:
         """Test case for get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get
 
-        Get Cserve V2 Deployment
+        Retired Cserve Deployment Detail
         """
         pass
 
     def test_get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(self) -> None:
         """Test case for get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get
 
-        Get Cserve V3 Deployment
+        Retired Cserve Deployment Detail
         """
         pass
 
@@ -523,17 +537,24 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_update_cserve_deployment_deployments_cserve_put(self) -> None:
+        """Test case for update_cserve_deployment_deployments_cserve_put
+
+        Retired Cserve Deployment
+        """
+        pass
+
     def test_update_cserve_v2_deployment_deployments_cserve_v2_put(self) -> None:
         """Test case for update_cserve_v2_deployment_deployments_cserve_v2_put
 
-        Update Cserve V2 Deployment
+        Retired Cserve Deployment
         """
         pass
 
     def test_update_cserve_v3_deployment_deployments_cserve_v3_put(self) -> None:
         """Test case for update_cserve_v3_deployment_deployments_cserve_v3_put
 
-        Update Cserve V3 Deployment
+        Retired Cserve Deployment
         """
         pass
 

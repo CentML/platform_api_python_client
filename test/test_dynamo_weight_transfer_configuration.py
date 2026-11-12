@@ -14,10 +14,10 @@
 
 import unittest
 
-from platform_api_python_client.models.c_serve_v2_recipe import CServeV2Recipe
+from platform_api_python_client.models.dynamo_weight_transfer_configuration import DynamoWeightTransferConfiguration
 
-class TestCServeV2Recipe(unittest.TestCase):
-    """CServeV2Recipe unit test stubs"""
+class TestDynamoWeightTransferConfiguration(unittest.TestCase):
+    """DynamoWeightTransferConfiguration unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,25 @@ class TestCServeV2Recipe(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CServeV2Recipe:
-        """Test CServeV2Recipe
+    def make_instance(self, include_optional) -> DynamoWeightTransferConfiguration:
+        """Test DynamoWeightTransferConfiguration
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CServeV2Recipe`
+        # uncomment below to create an instance of `DynamoWeightTransferConfiguration`
         """
-        model = CServeV2Recipe()
+        model = DynamoWeightTransferConfiguration()
         if include_optional:
-            return CServeV2Recipe(
-                model = '',
-                revision = '',
-                is_embedding_model = True
+            return DynamoWeightTransferConfiguration(
+                policy = 'require_gpu_direct_rdma'
             )
         else:
-            return CServeV2Recipe(
-                model = '',
+            return DynamoWeightTransferConfiguration(
         )
         """
 
-    def testCServeV2Recipe(self):
-        """Test CServeV2Recipe"""
+    def testDynamoWeightTransferConfiguration(self):
+        """Test DynamoWeightTransferConfiguration"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

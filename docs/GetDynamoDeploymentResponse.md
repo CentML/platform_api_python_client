@@ -25,7 +25,9 @@ Name | Type | Description | Notes
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **communications** | [**DynamoCommunicationsOutput**](DynamoCommunicationsOutput.md) |  | [optional] 
+**weight_transfer** | [**DynamoWeightTransferConfiguration**](DynamoWeightTransferConfiguration.md) |  | [optional] 
 **model** | **str** |  | 
+**model_revision** | **str** |  | [optional] 
 **served_model_name** | **str** |  | [optional] 
 **runtime_version** | **str** |  | [optional] 
 **min_replicas** | **int** | Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree. | 

@@ -6,8 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_cluster_clusters_post**](EXTERNALApi.md#create_cluster_clusters_post) | **POST** /clusters | Create Cluster
 [**create_compute_deployment_deployments_compute_post**](EXTERNALApi.md#create_compute_deployment_deployments_compute_post) | **POST** /deployments/compute | Create Compute Deployment
-[**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Create Cserve V2 Deployment
-[**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Create Cserve V3 Deployment
+[**create_cserve_deployment_deployments_cserve_post**](EXTERNALApi.md#create_cserve_deployment_deployments_cserve_post) | **POST** /deployments/cserve | Retired Cserve Deployment
+[**create_cserve_v2_deployment_deployments_cserve_v2_post**](EXTERNALApi.md#create_cserve_v2_deployment_deployments_cserve_v2_post) | **POST** /deployments/cserve_v2 | Retired Cserve Deployment
+[**create_cserve_v3_deployment_deployments_cserve_v3_post**](EXTERNALApi.md#create_cserve_v3_deployment_deployments_cserve_v3_post) | **POST** /deployments/cserve_v3 | Retired Cserve Deployment
 [**create_dynamo_deployment_deployments_dynamo_post**](EXTERNALApi.md#create_dynamo_deployment_deployments_dynamo_post) | **POST** /deployments/dynamo | Create Dynamo Deployment
 [**create_hardware_instance_hardware_instances_post**](EXTERNALApi.md#create_hardware_instance_hardware_instances_post) | **POST** /hardware-instances | Create Hardware Instance
 [**create_inference_deployment_deployments_inference_post**](EXTERNALApi.md#create_inference_deployment_deployments_inference_post) | **POST** /deployments/inference | Create Inference Deployment
@@ -30,8 +31,9 @@ Method | HTTP request | Description
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
-[**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Get Cserve V2 Deployment
-[**get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**](EXTERNALApi.md#get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get) | **GET** /deployments/cserve_v3/{deployment_id} | Get Cserve V3 Deployment
+[**get_cserve_deployment_deployments_cserve_deployment_id_get**](EXTERNALApi.md#get_cserve_deployment_deployments_cserve_deployment_id_get) | **GET** /deployments/cserve/{deployment_id} | Retired Cserve Deployment Detail
+[**get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**](EXTERNALApi.md#get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get) | **GET** /deployments/cserve_v2/{deployment_id} | Retired Cserve Deployment Detail
+[**get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**](EXTERNALApi.md#get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get) | **GET** /deployments/cserve_v3/{deployment_id} | Retired Cserve Deployment Detail
 [**get_current_org_gpu_quota_organizations_gpu_quota_get**](EXTERNALApi.md#get_current_org_gpu_quota_organizations_gpu_quota_get) | **GET** /organizations/gpu-quota | Get Current Org Gpu Quota
 [**get_deployment_logs_deployments_logs_deployment_id_get**](EXTERNALApi.md#get_deployment_logs_deployments_logs_deployment_id_get) | **GET** /deployments/logs/{deployment_id} | Get Deployment Logs
 [**get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get**](EXTERNALApi.md#get_deployment_logs_v3_deployments_logs_v3_deployment_id_revision_number_get) | **GET** /deployments/logs_v3/{deployment_id}/{revision_number} | Get Deployment Logs V3
@@ -75,8 +77,9 @@ Method | HTTP request | Description
 [**update_cluster_clusters_cluster_id_put**](EXTERNALApi.md#update_cluster_clusters_cluster_id_put) | **PUT** /clusters/{cluster_id} | Update Cluster
 [**update_cluster_metadata_clusters_cluster_id_metadata_put**](EXTERNALApi.md#update_cluster_metadata_clusters_cluster_id_metadata_put) | **PUT** /clusters/{cluster_id}/metadata | Update Cluster Metadata
 [**update_compute_deployment_deployments_compute_put**](EXTERNALApi.md#update_compute_deployment_deployments_compute_put) | **PUT** /deployments/compute | Update Compute Deployment
-[**update_cserve_v2_deployment_deployments_cserve_v2_put**](EXTERNALApi.md#update_cserve_v2_deployment_deployments_cserve_v2_put) | **PUT** /deployments/cserve_v2 | Update Cserve V2 Deployment
-[**update_cserve_v3_deployment_deployments_cserve_v3_put**](EXTERNALApi.md#update_cserve_v3_deployment_deployments_cserve_v3_put) | **PUT** /deployments/cserve_v3 | Update Cserve V3 Deployment
+[**update_cserve_deployment_deployments_cserve_put**](EXTERNALApi.md#update_cserve_deployment_deployments_cserve_put) | **PUT** /deployments/cserve | Retired Cserve Deployment
+[**update_cserve_v2_deployment_deployments_cserve_v2_put**](EXTERNALApi.md#update_cserve_v2_deployment_deployments_cserve_v2_put) | **PUT** /deployments/cserve_v2 | Retired Cserve Deployment
+[**update_cserve_v3_deployment_deployments_cserve_v3_put**](EXTERNALApi.md#update_cserve_v3_deployment_deployments_cserve_v3_put) | **PUT** /deployments/cserve_v3 | Retired Cserve Deployment
 [**update_deployment_status_deployments_status_deployment_id_put**](EXTERNALApi.md#update_deployment_status_deployments_status_deployment_id_put) | **PUT** /deployments/status/{deployment_id} | Update Deployment Status
 [**update_deployment_status_v3_deployments_status_v3_deployment_id_put**](EXTERNALApi.md#update_deployment_status_v3_deployments_status_v3_deployment_id_put) | **PUT** /deployments/status_v3/{deployment_id} | Update Deployment Status V3
 [**update_dynamo_deployment_deployments_dynamo_put**](EXTERNALApi.md#update_dynamo_deployment_deployments_dynamo_put) | **PUT** /deployments/dynamo | Update Dynamo Deployment
@@ -248,17 +251,16 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_cserve_v2_deployment_deployments_cserve_v2_post**
-> CreateCServeV2DeploymentResponse create_cserve_v2_deployment_deployments_cserve_v2_post()
+# **create_cserve_deployment_deployments_cserve_post**
+> create_cserve_deployment_deployments_cserve_post()
 
-Create Cserve V2 Deployment
+Retired Cserve Deployment
 
 ### Example
 
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.create_c_serve_v2_deployment_response import CreateCServeV2DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -275,12 +277,10 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
-        # Create Cserve V2 Deployment
-        api_response = api_instance.create_cserve_v2_deployment_deployments_cserve_v2_post()
-        print("The response of EXTERNALApi->create_cserve_v2_deployment_deployments_cserve_v2_post:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment
+        api_instance.create_cserve_deployment_deployments_cserve_post()
     except Exception as e:
-        print("Exception when calling EXTERNALApi->create_cserve_v2_deployment_deployments_cserve_v2_post: %s\n" % e)
+        print("Exception when calling EXTERNALApi->create_cserve_deployment_deployments_cserve_post: %s\n" % e)
 ```
 
 
@@ -291,7 +291,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**CreateCServeV2DeploymentResponse**](CreateCServeV2DeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -306,23 +306,20 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**410** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_cserve_v3_deployment_deployments_cserve_v3_post**
-> CreateCServeV3DeploymentResponse create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
+# **create_cserve_v2_deployment_deployments_cserve_v2_post**
+> create_cserve_v2_deployment_deployments_cserve_v2_post()
 
-Create Cserve V3 Deployment
+Retired Cserve Deployment
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
-from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -332,27 +329,74 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
 
     try:
-        # Create Cserve V3 Deployment
-        api_response = api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post(create_c_serve_v3_deployment_request)
-        print("The response of EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment
+        api_instance.create_cserve_v2_deployment_deployments_cserve_v2_post()
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->create_cserve_v2_deployment_deployments_cserve_v2_post: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**410** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_cserve_v3_deployment_deployments_cserve_v3_post**
+> create_cserve_v3_deployment_deployments_cserve_v3_post()
+
+Retired Cserve Deployment
+
+### Example
+
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Retired Cserve Deployment
+        api_instance.create_cserve_v3_deployment_deployments_cserve_v3_post()
     except Exception as e:
         print("Exception when calling EXTERNALApi->create_cserve_v3_deployment_deployments_cserve_v3_post: %s\n" % e)
 ```
@@ -361,30 +405,26 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**CreateCServeV3DeploymentResponse**](CreateCServeV3DeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+**410** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2057,18 +2097,16 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**
-> GetCServeV2DeploymentResponse get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
+# **get_cserve_deployment_deployments_cserve_deployment_id_get**
+> get_cserve_deployment_deployments_cserve_deployment_id_get(deployment_id)
 
-Get Cserve V2 Deployment
+Retired Cserve Deployment Detail
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2078,15 +2116,6 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
@@ -2095,10 +2124,72 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     deployment_id = 56 # int | 
 
     try:
-        # Get Cserve V2 Deployment
-        api_response = api_instance.get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
-        print("The response of EXTERNALApi->get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment Detail
+        api_instance.get_cserve_deployment_deployments_cserve_deployment_id_get(deployment_id)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_cserve_deployment_deployments_cserve_deployment_id_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**410** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get**
+> get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
+
+Retired Cserve Deployment Detail
+
+### Example
+
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Retired Cserve Deployment Detail
+        api_instance.get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(deployment_id)
     except Exception as e:
         print("Exception when calling EXTERNALApi->get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get: %s\n" % e)
 ```
@@ -2114,11 +2205,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetCServeV2DeploymentResponse**](GetCServeV2DeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -2129,23 +2220,21 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**410** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get**
-> GetCServeV3DeploymentResponse get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
+> get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
 
-Get Cserve V3 Deployment
+Retired Cserve Deployment Detail
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2155,15 +2244,6 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
@@ -2172,10 +2252,8 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     deployment_id = 56 # int | 
 
     try:
-        # Get Cserve V3 Deployment
-        api_response = api_instance.get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
-        print("The response of EXTERNALApi->get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment Detail
+        api_instance.get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get(deployment_id)
     except Exception as e:
         print("Exception when calling EXTERNALApi->get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get: %s\n" % e)
 ```
@@ -2191,11 +2269,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetCServeV3DeploymentResponse**](GetCServeV3DeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -2206,7 +2284,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**410** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -5666,17 +5744,16 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_cserve_v2_deployment_deployments_cserve_v2_put**
-> UpdateDeploymentResponse update_cserve_v2_deployment_deployments_cserve_v2_put()
+# **update_cserve_deployment_deployments_cserve_put**
+> update_cserve_deployment_deployments_cserve_put()
 
-Update Cserve V2 Deployment
+Retired Cserve Deployment
 
 ### Example
 
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -5693,12 +5770,10 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
 
     try:
-        # Update Cserve V2 Deployment
-        api_response = api_instance.update_cserve_v2_deployment_deployments_cserve_v2_put()
-        print("The response of EXTERNALApi->update_cserve_v2_deployment_deployments_cserve_v2_put:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment
+        api_instance.update_cserve_deployment_deployments_cserve_put()
     except Exception as e:
-        print("Exception when calling EXTERNALApi->update_cserve_v2_deployment_deployments_cserve_v2_put: %s\n" % e)
+        print("Exception when calling EXTERNALApi->update_cserve_deployment_deployments_cserve_put: %s\n" % e)
 ```
 
 
@@ -5709,7 +5784,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
@@ -5724,23 +5799,20 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**410** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_cserve_v3_deployment_deployments_cserve_v3_put**
-> UpdateDeploymentResponse update_cserve_v3_deployment_deployments_cserve_v3_put(deployment_id, create_c_serve_v3_deployment_request)
+# **update_cserve_v2_deployment_deployments_cserve_v2_put**
+> update_cserve_v2_deployment_deployments_cserve_v2_put()
 
-Update Cserve V3 Deployment
+Retired Cserve Deployment
 
 ### Example
 
-* Bearer Authentication (HTTPBearer):
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
-from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -5750,28 +5822,74 @@ configuration = platform_api_python_client.Configuration(
     host = "http://localhost"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: HTTPBearer
-configuration = platform_api_python_client.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
 
 # Enter a context with an instance of the API client
 with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
-    deployment_id = 56 # int | 
-    create_c_serve_v3_deployment_request = platform_api_python_client.CreateCServeV3DeploymentRequest() # CreateCServeV3DeploymentRequest | 
 
     try:
-        # Update Cserve V3 Deployment
-        api_response = api_instance.update_cserve_v3_deployment_deployments_cserve_v3_put(deployment_id, create_c_serve_v3_deployment_request)
-        print("The response of EXTERNALApi->update_cserve_v3_deployment_deployments_cserve_v3_put:\n")
-        pprint(api_response)
+        # Retired Cserve Deployment
+        api_instance.update_cserve_v2_deployment_deployments_cserve_v2_put()
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->update_cserve_v2_deployment_deployments_cserve_v2_put: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**410** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_cserve_v3_deployment_deployments_cserve_v3_put**
+> update_cserve_v3_deployment_deployments_cserve_v3_put()
+
+Retired Cserve Deployment
+
+### Example
+
+
+```python
+import platform_api_python_client
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+
+    try:
+        # Retired Cserve Deployment
+        api_instance.update_cserve_v3_deployment_deployments_cserve_v3_put()
     except Exception as e:
         print("Exception when calling EXTERNALApi->update_cserve_v3_deployment_deployments_cserve_v3_put: %s\n" % e)
 ```
@@ -5780,31 +5898,26 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deployment_id** | **int**|  | 
- **create_c_serve_v3_deployment_request** | [**CreateCServeV3DeploymentRequest**](CreateCServeV3DeploymentRequest.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**UpdateDeploymentResponse**](UpdateDeploymentResponse.md)
+void (empty response body)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
+**410** | Successful Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -23,9 +23,6 @@ from typing_extensions import Annotated
 from platform_api_python_client.models.cluster_config import ClusterConfig
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest
 from platform_api_python_client.models.cluster_registration_response import ClusterRegistrationResponse
-from platform_api_python_client.models.create_c_serve_v2_deployment_response import CreateCServeV2DeploymentResponse
-from platform_api_python_client.models.create_c_serve_v3_deployment_request import CreateCServeV3DeploymentRequest
-from platform_api_python_client.models.create_c_serve_v3_deployment_response import CreateCServeV3DeploymentResponse
 from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
 from platform_api_python_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse
 from platform_api_python_client.models.create_dynamo_deployment_request import CreateDynamoDeploymentRequest
@@ -47,8 +44,6 @@ from platform_api_python_client.models.deployment_status_response import Deploym
 from platform_api_python_client.models.deployment_status_v3_response import DeploymentStatusV3Response
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse
-from platform_api_python_client.models.get_c_serve_v2_deployment_response import GetCServeV2DeploymentResponse
-from platform_api_python_client.models.get_c_serve_v3_deployment_response import GetCServeV3DeploymentResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
 from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
@@ -676,6 +671,251 @@ class EXTERNALApi:
 
 
     @validate_call
+    def create_cserve_deployment_deployments_cserve_post(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._create_cserve_deployment_deployments_cserve_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def create_cserve_deployment_deployments_cserve_post_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._create_cserve_deployment_deployments_cserve_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def create_cserve_deployment_deployments_cserve_post_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("POST /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._create_cserve_deployment_deployments_cserve_post_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_cserve_deployment_deployments_cserve_post_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/deployments/cserve',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def create_cserve_v2_deployment_deployments_cserve_v2_post(
         self,
         _request_timeout: Union[
@@ -690,8 +930,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CreateCServeV2DeploymentResponse:
-        """(Deprecated) Create Cserve V2 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -725,7 +965,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV2DeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -753,8 +993,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CreateCServeV2DeploymentResponse]:
-        """(Deprecated) Create Cserve V2 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -788,7 +1028,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV2DeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -817,7 +1057,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """(Deprecated) Create Cserve V2 Deployment
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -851,7 +1091,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV2DeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -923,7 +1163,6 @@ class EXTERNALApi:
     @validate_call
     def create_cserve_v3_deployment_deployments_cserve_v3_post(
         self,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -936,12 +1175,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CreateCServeV3DeploymentResponse:
-        """(Deprecated) Create Cserve V3 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -966,7 +1203,6 @@ class EXTERNALApi:
         warnings.warn("POST /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._create_cserve_v3_deployment_deployments_cserve_v3_post_serialize(
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -974,8 +1210,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV3DeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -991,7 +1226,6 @@ class EXTERNALApi:
     @validate_call
     def create_cserve_v3_deployment_deployments_cserve_v3_post_with_http_info(
         self,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1004,12 +1238,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CreateCServeV3DeploymentResponse]:
-        """(Deprecated) Create Cserve V3 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1034,7 +1266,6 @@ class EXTERNALApi:
         warnings.warn("POST /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._create_cserve_v3_deployment_deployments_cserve_v3_post_serialize(
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1042,8 +1273,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV3DeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1059,7 +1289,6 @@ class EXTERNALApi:
     @validate_call
     def create_cserve_v3_deployment_deployments_cserve_v3_post_without_preload_content(
         self,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1073,11 +1302,9 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """(Deprecated) Create Cserve V3 Deployment
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1102,7 +1329,6 @@ class EXTERNALApi:
         warnings.warn("POST /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._create_cserve_v3_deployment_deployments_cserve_v3_post_serialize(
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1110,8 +1336,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateCServeV3DeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1122,7 +1347,6 @@ class EXTERNALApi:
 
     def _create_cserve_v3_deployment_deployments_cserve_v3_post_serialize(
         self,
-        create_c_serve_v3_deployment_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1148,8 +1372,6 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_c_serve_v3_deployment_request is not None:
-            _body_params = create_c_serve_v3_deployment_request
 
 
         # set the HTTP header `Accept`
@@ -1160,23 +1382,9 @@ class EXTERNALApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -7035,7 +7243,7 @@ class EXTERNALApi:
 
 
     @validate_call
-    def get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(
+    def get_cserve_deployment_deployments_cserve_deployment_id_get(
         self,
         deployment_id: StrictInt,
         _request_timeout: Union[
@@ -7050,8 +7258,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetCServeV2DeploymentResponse:
-        """Get Cserve V2 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7077,6 +7285,270 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve/{deployment_id} is deprecated.", DeprecationWarning)
+
+        _param = self._get_cserve_deployment_deployments_cserve_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_cserve_deployment_deployments_cserve_deployment_id_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment Detail
+
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /deployments/cserve/{deployment_id} is deprecated.", DeprecationWarning)
+
+        _param = self._get_cserve_deployment_deployments_cserve_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_cserve_deployment_deployments_cserve_deployment_id_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """(Deprecated) Retired Cserve Deployment Detail
+
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /deployments/cserve/{deployment_id} is deprecated.", DeprecationWarning)
+
+        _param = self._get_cserve_deployment_deployments_cserve_deployment_id_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_cserve_deployment_deployments_cserve_deployment_id_get_serialize(
+        self,
+        deployment_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/cserve/{deployment_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment Detail
+
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v2/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7087,7 +7559,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV2DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7117,8 +7589,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetCServeV2DeploymentResponse]:
-        """Get Cserve V2 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7144,6 +7616,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v2/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7154,7 +7627,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV2DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7185,7 +7658,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Cserve V2 Deployment
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7211,6 +7684,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v2/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v2_deployment_deployments_cserve_v2_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7221,7 +7695,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV2DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7274,7 +7748,6 @@ class EXTERNALApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -7311,8 +7784,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetCServeV3DeploymentResponse:
-        """Get Cserve V3 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7338,6 +7811,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v3/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7348,7 +7822,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV3DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7378,8 +7852,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetCServeV3DeploymentResponse]:
-        """Get Cserve V3 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7405,6 +7879,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v3/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7415,7 +7890,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV3DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7446,7 +7921,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get Cserve V3 Deployment
+        """(Deprecated) Retired Cserve Deployment Detail
 
 
         :param deployment_id: (required)
@@ -7472,6 +7947,7 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("GET /deployments/cserve_v3/{deployment_id} is deprecated.", DeprecationWarning)
 
         _param = self._get_cserve_v3_deployment_deployments_cserve_v3_deployment_id_get_serialize(
             deployment_id=deployment_id,
@@ -7482,7 +7958,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetCServeV3DeploymentResponse",
+            '410': "object",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -7535,7 +8011,6 @@ class EXTERNALApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -19869,6 +20344,251 @@ class EXTERNALApi:
 
 
     @validate_call
+    def update_cserve_deployment_deployments_cserve_put(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._update_cserve_deployment_deployments_cserve_put_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def update_cserve_deployment_deployments_cserve_put_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._update_cserve_deployment_deployments_cserve_put_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def update_cserve_deployment_deployments_cserve_put_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """(Deprecated) Retired Cserve Deployment
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve is deprecated.", DeprecationWarning)
+
+        _param = self._update_cserve_deployment_deployments_cserve_put_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '410': "object",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_cserve_deployment_deployments_cserve_put_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/deployments/cserve',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def update_cserve_v2_deployment_deployments_cserve_v2_put(
         self,
         _request_timeout: Union[
@@ -19883,8 +20603,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateDeploymentResponse:
-        """(Deprecated) Update Cserve V2 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -19918,7 +20638,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -19946,8 +20666,8 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateDeploymentResponse]:
-        """(Deprecated) Update Cserve V2 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -19981,7 +20701,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -20010,7 +20730,7 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """(Deprecated) Update Cserve V2 Deployment
+        """(Deprecated) Retired Cserve Deployment
 
 
         :param _request_timeout: timeout setting for this request. If one
@@ -20044,7 +20764,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -20116,8 +20836,6 @@ class EXTERNALApi:
     @validate_call
     def update_cserve_v3_deployment_deployments_cserve_v3_put(
         self,
-        deployment_id: StrictInt,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -20130,14 +20848,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateDeploymentResponse:
-        """Update Cserve V3 Deployment
+    ) -> None:
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param deployment_id: (required)
-        :type deployment_id: int
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -20159,10 +20873,9 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._update_cserve_v3_deployment_deployments_cserve_v3_put_serialize(
-            deployment_id=deployment_id,
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -20170,8 +20883,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -20187,8 +20899,6 @@ class EXTERNALApi:
     @validate_call
     def update_cserve_v3_deployment_deployments_cserve_v3_put_with_http_info(
         self,
-        deployment_id: StrictInt,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -20201,14 +20911,10 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateDeploymentResponse]:
-        """Update Cserve V3 Deployment
+    ) -> ApiResponse[None]:
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param deployment_id: (required)
-        :type deployment_id: int
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -20230,10 +20936,9 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._update_cserve_v3_deployment_deployments_cserve_v3_put_serialize(
-            deployment_id=deployment_id,
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -20241,8 +20946,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -20258,8 +20962,6 @@ class EXTERNALApi:
     @validate_call
     def update_cserve_v3_deployment_deployments_cserve_v3_put_without_preload_content(
         self,
-        deployment_id: StrictInt,
-        create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -20273,13 +20975,9 @@ class EXTERNALApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update Cserve V3 Deployment
+        """(Deprecated) Retired Cserve Deployment
 
 
-        :param deployment_id: (required)
-        :type deployment_id: int
-        :param create_c_serve_v3_deployment_request: (required)
-        :type create_c_serve_v3_deployment_request: CreateCServeV3DeploymentRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -20301,10 +20999,9 @@ class EXTERNALApi:
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        warnings.warn("PUT /deployments/cserve_v3 is deprecated.", DeprecationWarning)
 
         _param = self._update_cserve_v3_deployment_deployments_cserve_v3_put_serialize(
-            deployment_id=deployment_id,
-            create_c_serve_v3_deployment_request=create_c_serve_v3_deployment_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -20312,8 +21009,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateDeploymentResponse",
-            '422': "HTTPValidationError",
+            '410': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -20324,8 +21020,6 @@ class EXTERNALApi:
 
     def _update_cserve_v3_deployment_deployments_cserve_v3_put_serialize(
         self,
-        deployment_id,
-        create_c_serve_v3_deployment_request,
         _request_auth,
         _content_type,
         _headers,
@@ -20348,15 +21042,9 @@ class EXTERNALApi:
 
         # process the path parameters
         # process the query parameters
-        if deployment_id is not None:
-            
-            _query_params.append(('deployment_id', deployment_id))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_c_serve_v3_deployment_request is not None:
-            _body_params = create_c_serve_v3_deployment_request
 
 
         # set the HTTP header `Accept`
@@ -20367,23 +21055,9 @@ class EXTERNALApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
-            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

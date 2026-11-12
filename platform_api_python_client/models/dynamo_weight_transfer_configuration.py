@@ -17,20 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
+from platform_api_python_client.models.dynamo_weight_transfer_policy import DynamoWeightTransferPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CreateCServeV2DeploymentResponse(BaseModel):
+class DynamoWeightTransferConfiguration(BaseModel):
     """
-    CreateCServeV2DeploymentResponse
+    ModelExpress peer weight transfer between the workers of one pool, in either serving mode.
     """ # noqa: E501
-    id: StrictInt
-    created_at: datetime
-    endpoint_url: StrictStr
-    __properties: ClassVar[List[str]] = ["id", "created_at", "endpoint_url"]
+    policy: Optional[DynamoWeightTransferPolicy] = Field(default=None, description="The default and only policy, so an empty object opts in. require_gpu_direct_rdma makes a starting worker pull the model's weights GPU to GPU from a worker of the same pool that already serves the same model_revision commit, over the cluster's GPU-direct RDMA fabric (currently AWS EFA only), instead of downloading the checkpoint. A pool's first worker, or one without a reachable peer, falls back to the usual loader. The chart and runtime image prerequisites of require_gpu_direct_rdma KV transfer apply; the API does not validate them.")
+    __properties: ClassVar[List[str]] = ["policy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +48,7 @@ class CreateCServeV2DeploymentResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateCServeV2DeploymentResponse from a JSON string"""
+        """Create an instance of DynamoWeightTransferConfiguration from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +73,7 @@ class CreateCServeV2DeploymentResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateCServeV2DeploymentResponse from a dict"""
+        """Create an instance of DynamoWeightTransferConfiguration from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +81,7 @@ class CreateCServeV2DeploymentResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "created_at": obj.get("created_at"),
-            "endpoint_url": obj.get("endpoint_url")
+            "policy": obj.get("policy")
         })
         return _obj
 

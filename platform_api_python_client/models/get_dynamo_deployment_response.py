@@ -26,6 +26,7 @@ from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.dynamo_communications_output import DynamoCommunicationsOutput
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
+from platform_api_python_client.models.dynamo_weight_transfer_configuration import DynamoWeightTransferConfiguration
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
@@ -54,7 +55,9 @@ class GetDynamoDeploymentResponse(BaseModel):
     serving_mode: Optional[DynamoServingMode] = None
     worker_pools: Optional[DynamoWorkerPools] = None
     communications: Optional[DynamoCommunicationsOutput] = None
+    weight_transfer: Optional[DynamoWeightTransferConfiguration] = None
     model: StrictStr
+    model_revision: Optional[StrictStr] = None
     served_model_name: Optional[StrictStr] = None
     runtime_version: Optional[StrictStr] = None
     min_replicas: StrictInt = Field(description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
@@ -71,7 +74,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "model", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,6 +128,9 @@ class GetDynamoDeploymentResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of communications
         if self.communications:
             _dict['communications'] = self.communications.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of weight_transfer
+        if self.weight_transfer:
+            _dict['weight_transfer'] = self.weight_transfer.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -159,6 +165,16 @@ class GetDynamoDeploymentResponse(BaseModel):
         # and model_fields_set contains the field
         if self.communications is None and "communications" in self.model_fields_set:
             _dict['communications'] = None
+
+        # set to None if weight_transfer (nullable) is None
+        # and model_fields_set contains the field
+        if self.weight_transfer is None and "weight_transfer" in self.model_fields_set:
+            _dict['weight_transfer'] = None
+
+        # set to None if model_revision (nullable) is None
+        # and model_fields_set contains the field
+        if self.model_revision is None and "model_revision" in self.model_fields_set:
+            _dict['model_revision'] = None
 
         # set to None if served_model_name (nullable) is None
         # and model_fields_set contains the field
@@ -236,7 +252,9 @@ class GetDynamoDeploymentResponse(BaseModel):
             "serving_mode": obj.get("serving_mode"),
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
             "communications": DynamoCommunicationsOutput.from_dict(obj["communications"]) if obj.get("communications") is not None else None,
+            "weight_transfer": DynamoWeightTransferConfiguration.from_dict(obj["weight_transfer"]) if obj.get("weight_transfer") is not None else None,
             "model": obj.get("model"),
+            "model_revision": obj.get("model_revision"),
             "served_model_name": obj.get("served_model_name"),
             "runtime_version": obj.get("runtime_version"),
             "min_replicas": obj.get("min_replicas"),

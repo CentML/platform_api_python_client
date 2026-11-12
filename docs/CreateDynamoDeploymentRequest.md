@@ -18,7 +18,9 @@ Name | Type | Description | Notes
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
 **worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
 **communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
+**weight_transfer** | [**DynamoWeightTransferConfiguration**](DynamoWeightTransferConfiguration.md) |  | [optional] 
 **model** | **str** |  | 
+**model_revision** | **str** |  | [optional] 
 **served_model_name** | **str** |  | [optional] 
 **runtime_version** | **str** | Dynamo runtime image tag (for example 1.4.0). Defaults to the platform&#39;s current release; GET /prebuilt-images?type&#x3D;dynamo lists the versions the platform has validated, but any tag may be requested. require_gpu_direct_rdma needs an EFA-capable image. Changing it restarts every component of a running deployment. | [optional] 
 **min_replicas** | **int** |  | [optional] 

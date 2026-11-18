@@ -39,6 +39,7 @@ from platform_api_python_client.models.spire_crds import SpireCrds
 from platform_api_python_client.models.teleport_kube_agent import TeleportKubeAgent
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class ClusterComponents(BaseModel):
     """
@@ -65,7 +66,8 @@ class ClusterComponents(BaseModel):
     __properties: ClassVar[List[str]] = ["kube_prometheus_stack", "istio", "cert_manager", "ingress_nginx", "spire_crds", "spire", "external_dns", "prometheus_adapter", "keda", "fluent_bit", "argo_rollouts", "network_operator", "opentelemetry_collector", "gpu_operator", "longhorn", "metrics_server", "teleport_kube_agent", "final_stack"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -77,8 +79,7 @@ class ClusterComponents(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

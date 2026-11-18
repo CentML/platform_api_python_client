@@ -16,19 +16,19 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
-**chart_revision** | **str** |  | [optional] 
+**chart_revision** | **str** | Saved catalog Git reference for this revision; null if not recorded. Informational: omit chart_revision from edit or clone requests to use the current platform default. | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
 **hf_token_ref** | **int** |  | [optional] 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
-**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) |  | [optional] 
-**communications** | [**DynamoCommunicationsOutput**](DynamoCommunicationsOutput.md) |  | [optional] 
-**weight_transfer** | [**DynamoWeightTransferConfiguration**](DynamoWeightTransferConfiguration.md) |  | [optional] 
+**worker_pools** | [**DynamoWorkerPools**](DynamoWorkerPools.md) | Hardware and scaling per worker role. Aggregated mode uses exactly &#x60;worker&#x60;; disaggregated mode uses exactly &#x60;prefill&#x60; and &#x60;decode&#x60;. Unused roles are null. | [optional] 
+**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) | Requested communication policy; null for revisions using the legacy configuration. | [optional] 
+**weight_transfer** | [**DynamoWeightTransferConfiguration**](DynamoWeightTransferConfiguration.md) | Requested weight transfer policy; null when the workers use the native loader. | [optional] 
 **model** | **str** |  | 
-**model_revision** | **str** |  | [optional] 
+**model_revision** | **str** | Commit SHA of &#x60;model&#x60; this revision loads; null when the workers load the default branch. | [optional] 
 **served_model_name** | **str** |  | [optional] 
-**runtime_version** | **str** |  | [optional] 
+**runtime_version** | **str** | Dynamo runtime version tag this revision renders with. | [optional] 
 **min_replicas** | **int** |  | 
 **max_replicas** | **int** |  | 
 **concurrency** | **int** |  | [optional] 
@@ -43,6 +43,7 @@ Name | Type | Description | Notes
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**frontend** | [**DynamoFrontendConfig**](DynamoFrontendConfig.md) | Frontend replica bounds this revision requests; the defaults for revisions created before the field. | [optional] 
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
 **command** | **List[str]** |  | [optional] 

@@ -11,17 +11,17 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
-**priority** | **str** |  | [optional] 
+**priority** | **str** | Kubernetes PriorityClass name on the pod spec. Omit to leave unset. | [optional] 
 **pools** | [**CclDynamoPools**](CclDynamoPools.md) |  | 
 **env** | [**Env**](Env.md) |  | [optional] 
 **image** | [**DynamoImage**](DynamoImage.md) |  | [optional] 
 **ingress** | [**Ingress**](Ingress.md) |  | 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
-**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
+**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) | Platform-managed worker communications. Only disaggregated KV transfer is supported. Omit or set null to preserve the legacy connector configuration. | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**extra_args** | **str** |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
+**extra_args** | **str** | Extra worker CLI arguments as a single shell-style string, split into argv with POSIX shell quoting (shlex). Backslash is an escape character, so &#x60;\\&#x60; is consumed unless quoted: e.g. &#x60;--regex \\d+&#x60; reaches the worker as &#x60;d+&#x60;. Wrap literal backslashes in single quotes (&#x60;--regex &#39;\\d+&#39;&#x60;). Unbalanced quotes or a trailing backslash are rejected. | [optional] 
+**hf_token_ref** | **int** | Access-token vault item ID for HF_TOKEN. | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 

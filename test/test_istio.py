@@ -37,10 +37,7 @@ class TestIstio(unittest.TestCase):
             return Istio(
                 enabled = True,
                 values = platform_api_python_client.models.istio_overrides.IstioOverrides(
-                    istio_cni = platform_api_python_client.models.istio_cni_subchart_overrides.IstioCniSubchartOverrides(
-                        cni = platform_api_python_client.models.istio_cni_overrides.IstioCniOverrides(
-                            cni_bin_dir = '', 
-                            cni_conf_dir = '', ), ), )
+                    istio_cni = null, )
             )
         else:
             return Istio(

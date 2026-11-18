@@ -24,13 +24,15 @@ from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
-from platform_api_python_client.models.dynamo_communications_output import DynamoCommunicationsOutput
+from platform_api_python_client.models.dynamo_communications_input import DynamoCommunicationsInput
+from platform_api_python_client.models.dynamo_frontend_config import DynamoFrontendConfig
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
 from platform_api_python_client.models.dynamo_weight_transfer_configuration import DynamoWeightTransferConfiguration
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class GetDynamoDeploymentResponse(BaseModel):
     """
@@ -47,23 +49,23 @@ class GetDynamoDeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
-    chart_revision: Optional[StrictStr] = None
+    chart_revision: Optional[StrictStr] = Field(default=None, description="Saved catalog Git reference for this revision; null if not recorded. Informational: omit chart_revision from edit or clone requests to use the current platform default.")
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
     volume_mounts: Optional[List[VolumeMount]] = None
     hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     serving_mode: Optional[DynamoServingMode] = None
-    worker_pools: Optional[DynamoWorkerPools] = None
-    communications: Optional[DynamoCommunicationsOutput] = None
-    weight_transfer: Optional[DynamoWeightTransferConfiguration] = None
+    worker_pools: Optional[DynamoWorkerPools] = Field(default=None, description="Hardware and scaling per worker role. Aggregated mode uses exactly `worker`; disaggregated mode uses exactly `prefill` and `decode`. Unused roles are null.")
+    communications: Optional[DynamoCommunicationsInput] = Field(default=None, description="Requested communication policy; null for revisions using the legacy configuration.")
+    weight_transfer: Optional[DynamoWeightTransferConfiguration] = Field(default=None, description="Requested weight transfer policy; null when the workers use the native loader.")
     model: StrictStr
-    model_revision: Optional[StrictStr] = None
+    model_revision: Optional[StrictStr] = Field(default=None, description="Commit SHA of `model` this revision loads; null when the workers load the default branch.")
     served_model_name: Optional[StrictStr] = None
-    runtime_version: Optional[StrictStr] = None
+    runtime_version: Optional[StrictStr] = Field(default=None, description="Dynamo runtime version tag this revision renders with.")
     min_replicas: StrictInt = Field(description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
     max_replicas: StrictInt = Field(description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
-    concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[StrictInt] = None
+    concurrency: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    cooldown_period: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
     extra_args: Optional[StrictStr] = None
     env_vars: Optional[Dict[str, StrictStr]] = None
     env_vars_refs: Optional[Dict[str, Any]] = None
@@ -74,10 +76,12 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    frontend: Optional[DynamoFrontendConfig] = Field(default=None, description="Frontend replica bounds this revision requests; the defaults for revisions created before the field.")
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol", "frontend"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -89,8 +93,7 @@ class GetDynamoDeploymentResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -119,8 +122,7 @@ class GetDynamoDeploymentResponse(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_item_volume_mounts.to_dict())
+                _items.append(_item_volume_mounts.to_dict() if _item_volume_mounts is not None else None)
             _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of worker_pools
         if self.worker_pools:
@@ -131,6 +133,9 @@ class GetDynamoDeploymentResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of weight_transfer
         if self.weight_transfer:
             _dict['weight_transfer'] = self.weight_transfer.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of frontend
+        if self.frontend:
+            _dict['frontend'] = self.frontend.to_dict()
         # set to None if image_url (nullable) is None
         # and model_fields_set contains the field
         if self.image_url is None and "image_url" in self.model_fields_set:
@@ -251,7 +256,7 @@ class GetDynamoDeploymentResponse(BaseModel):
             "hf_token_ref": obj.get("hf_token_ref"),
             "serving_mode": obj.get("serving_mode"),
             "worker_pools": DynamoWorkerPools.from_dict(obj["worker_pools"]) if obj.get("worker_pools") is not None else None,
-            "communications": DynamoCommunicationsOutput.from_dict(obj["communications"]) if obj.get("communications") is not None else None,
+            "communications": DynamoCommunicationsInput.from_dict(obj["communications"]) if obj.get("communications") is not None else None,
             "weight_transfer": DynamoWeightTransferConfiguration.from_dict(obj["weight_transfer"]) if obj.get("weight_transfer") is not None else None,
             "model": obj.get("model"),
             "model_revision": obj.get("model_revision"),
@@ -270,7 +275,8 @@ class GetDynamoDeploymentResponse(BaseModel):
             "image_pull_ref": obj.get("image_pull_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
-            "backend_protocol": obj.get("backend_protocol")
+            "backend_protocol": obj.get("backend_protocol"),
+            "frontend": DynamoFrontendConfig.from_dict(obj["frontend"]) if obj.get("frontend") is not None else None
         })
         return _obj
 

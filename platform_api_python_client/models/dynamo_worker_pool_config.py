@@ -22,13 +22,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class DynamoWorkerPoolConfig(BaseModel):
     """
     Hardware and scaling for one Dynamo worker role.  ``min_replicas``/``max_replicas`` are the canonical size. ``replicas`` is the deprecated fixed-size alias (``min == max``) still accepted on disaggregated pools. ``parse_dynamo_topology`` owns the cross-field rules (bounds ordering, autoscaling target, which roles may autoscale).
     """ # noqa: E501
     hardware_instance_id: StrictInt
-    replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Deprecated fixed pool size, equivalent to min_replicas == max_replicas.")
     min_replicas: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
     max_replicas: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     concurrency: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
@@ -36,7 +37,8 @@ class DynamoWorkerPoolConfig(BaseModel):
     __properties: ClassVar[List[str]] = ["hardware_instance_id", "replicas", "min_replicas", "max_replicas", "concurrency", "cooldown_period"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class DynamoWorkerPoolConfig(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

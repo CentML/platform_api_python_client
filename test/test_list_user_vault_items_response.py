@@ -41,7 +41,7 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
                         type = 'env_vars', 
                         key = '', 
                         value = '', 
-                        visibility = 'USER', )
+                        visibility = null, )
                     ]
             )
         else:
@@ -52,7 +52,7 @@ class TestListUserVaultItemsResponse(unittest.TestCase):
                         type = 'env_vars', 
                         key = '', 
                         value = '', 
-                        visibility = 'USER', )
+                        visibility = null, )
                     ],
         )
         """

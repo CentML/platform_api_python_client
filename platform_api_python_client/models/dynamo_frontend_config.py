@@ -17,21 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from platform_api_python_client.models.dynamo_kv_transfer_configuration import DynamoKvTransferConfiguration
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
-class DynamoCommunicationsOutput(BaseModel):
+class DynamoFrontendConfig(BaseModel):
     """
-    DynamoCommunicationsOutput
+    Replica bounds for the Dynamo Frontend, shaped like a worker pool's so that Frontend autoscaling can arrive without an API change. Until it does, the Frontend runs a fixed count: ``min_replicas`` must equal ``max_replicas``.
     """ # noqa: E501
-    kv_transfer: DynamoKvTransferConfiguration
-    __properties: ClassVar[List[str]] = ["kv_transfer"]
+    min_replicas: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = 3
+    max_replicas: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = 3
+    __properties: ClassVar[List[str]] = ["min_replicas", "max_replicas"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -43,12 +46,11 @@ class DynamoCommunicationsOutput(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DynamoCommunicationsOutput from a JSON string"""
+        """Create an instance of DynamoFrontendConfig from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +71,11 @@ class DynamoCommunicationsOutput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of kv_transfer
-        if self.kv_transfer:
-            _dict['kv_transfer'] = self.kv_transfer.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DynamoCommunicationsOutput from a dict"""
+        """Create an instance of DynamoFrontendConfig from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +83,8 @@ class DynamoCommunicationsOutput(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "kv_transfer": DynamoKvTransferConfiguration.from_dict(obj["kv_transfer"]) if obj.get("kv_transfer") is not None else None
+            "min_replicas": obj.get("min_replicas") if obj.get("min_replicas") is not None else 3,
+            "max_replicas": obj.get("max_replicas") if obj.get("max_replicas") is not None else 3
         })
         return _obj
 

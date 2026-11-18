@@ -29,6 +29,7 @@ from platform_api_python_client.models.ingress import Ingress
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class UnifiedWriteDynamoDeploymentRequest(BaseModel):
     """
@@ -40,17 +41,17 @@ class UnifiedWriteDynamoDeploymentRequest(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
-    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
+    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="Kubernetes PriorityClass name on the pod spec. Omit to leave unset.")
     pools: CclDynamoPools
     env: Optional[Env] = None
     image: Optional[DynamoImage] = None
     ingress: Ingress
     serving_mode: Optional[DynamoServingMode] = None
-    communications: Optional[DynamoCommunicationsInput] = None
+    communications: Optional[DynamoCommunicationsInput] = Field(default=None, description="Platform-managed worker communications. Only disaggregated KV transfer is supported. Omit or set null to preserve the legacy connector configuration.")
     model: StrictStr
     served_model_name: Optional[StrictStr] = None
-    extra_args: Optional[StrictStr] = None
-    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    extra_args: Optional[StrictStr] = Field(default=None, description="Extra worker CLI arguments as a single shell-style string, split into argv with POSIX shell quoting (shlex). Backslash is an escape character, so `\\` is consumed unless quoted: e.g. `--regex \\d+` reaches the worker as `d+`. Wrap literal backslashes in single quotes (`--regex '\\d+'`). Unbalanced quotes or a trailing backslash are rejected.")
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Access-token vault item ID for HF_TOKEN.")
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     __properties: ClassVar[List[str]] = ["type", "name", "cluster_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "pools", "env", "image", "ingress", "serving_mode", "communications", "model", "served_model_name", "extra_args", "hf_token_ref", "enable_logging", "enable_node_model_cache"]
@@ -62,15 +63,16 @@ class UnifiedWriteDynamoDeploymentRequest(BaseModel):
             raise ValueError("must be one of enum values ('ccl_dynamo')")
         return value
 
-    @field_validator('name')
+    @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -82,8 +84,7 @@ class UnifiedWriteDynamoDeploymentRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -112,8 +113,7 @@ class UnifiedWriteDynamoDeploymentRequest(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_item_volume_mounts.to_dict())
+                _items.append(_item_volume_mounts.to_dict() if _item_volume_mounts is not None else None)
             _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of pools
         if self.pools:

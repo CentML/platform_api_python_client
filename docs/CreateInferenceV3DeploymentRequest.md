@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
-**priority** | **str** |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
+**priority** | **str** | Kubernetes PriorityClass name on the pod spec. Omit to leave unset. | [optional] 
+**hf_token_ref** | **int** | Access-token vault item ID for HF_TOKEN. Cannot be combined with hf_token. | [optional] 
 **image_url** | **str** |  | 
 **image_pull_secret_credentials** | [**ImagePullSecretCredentials**](ImagePullSecretCredentials.md) |  | [optional] 
 **image_pull_ref** | **int** |  | [optional] 

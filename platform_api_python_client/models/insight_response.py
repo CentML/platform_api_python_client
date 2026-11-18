@@ -26,6 +26,7 @@ from platform_api_python_client.models.insight_status import InsightStatus
 from platform_api_python_client.models.insight_status_change_response import InsightStatusChangeResponse
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class InsightResponse(BaseModel):
     """
@@ -48,7 +49,8 @@ class InsightResponse(BaseModel):
     __properties: ClassVar[List[str]] = ["id", "identity", "severity", "status", "title", "observed_at", "created_at", "resource", "observed_summary", "recommended_steps", "content", "reported_by", "updated_at", "history"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -60,8 +62,7 @@ class InsightResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -93,8 +94,7 @@ class InsightResponse(BaseModel):
         _items = []
         if self.history:
             for _item_history in self.history:
-                if _item_history:
-                    _items.append(_item_history.to_dict())
+                _items.append(_item_history.to_dict() if _item_history is not None else None)
             _dict['history'] = _items
         # set to None if content (nullable) is None
         # and model_fields_set contains the field

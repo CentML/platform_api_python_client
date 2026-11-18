@@ -22,12 +22,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.dynamo_communications_input import DynamoCommunicationsInput
+from platform_api_python_client.models.dynamo_frontend_config import DynamoFrontendConfig
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
 from platform_api_python_client.models.dynamo_weight_transfer_configuration import DynamoWeightTransferConfiguration
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreateDynamoDeploymentRequest(BaseModel):
     """
@@ -37,26 +39,26 @@ class CreateDynamoDeploymentRequest(BaseModel):
     max_unavailable: Optional[StrictInt] = None
     name: Annotated[str, Field(min_length=1, strict=True, max_length=20)]
     cluster_id: StrictInt
-    hardware_instance_id: Optional[StrictInt] = None
+    hardware_instance_id: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
-    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
+    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="Kubernetes PriorityClass name on the pod spec. Omit to leave unset.")
     serving_mode: Optional[DynamoServingMode] = None
-    worker_pools: Optional[DynamoWorkerPools] = None
-    communications: Optional[DynamoCommunicationsInput] = None
-    weight_transfer: Optional[DynamoWeightTransferConfiguration] = None
+    worker_pools: Optional[DynamoWorkerPools] = Field(default=None, description="Hardware and scaling per worker role. Aggregated mode uses exactly `worker`; disaggregated mode uses exactly `prefill` and `decode`. Unused roles are null.")
+    communications: Optional[DynamoCommunicationsInput] = Field(default=None, description="Platform-managed worker communications. Only disaggregated KV transfer is supported. Omit or set null to preserve the legacy connector configuration.")
+    weight_transfer: Optional[DynamoWeightTransferConfiguration] = Field(default=None, description="Platform-managed weight loading between the workers of a pool (ModelExpress peer transfer), in either serving mode. An empty object opts in and pins model_revision to a commit; omit or set null to keep the native loader.")
     model: StrictStr
-    model_revision: Optional[Annotated[str, Field(min_length=1, strict=True)]] = None
+    model_revision: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="Hugging Face branch, tag or commit of `model`. The API resolves it to a commit SHA and stores that SHA, so resume and rollback load the same weights. An update keeps the stored commit when it omits this field or sends that commit, as long as `model` is unchanged and extra_args does not set --revision; send a branch or tag to move to its newest commit. With no stored commit, weight_transfer pins the default branch's current commit, and otherwise each worker loads the default branch when it starts.")
     served_model_name: Optional[StrictStr] = None
     runtime_version: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Dynamo runtime image tag (for example 1.4.0). Defaults to the platform's current release; GET /prebuilt-images?type=dynamo lists the versions the platform has validated, but any tag may be requested. require_gpu_direct_rdma needs an EFA-capable image. Changing it restarts every component of a running deployment.")
-    min_replicas: Optional[StrictInt] = None
-    max_replicas: Optional[StrictInt] = None
-    concurrency: Optional[StrictInt] = None
-    cooldown_period: Optional[StrictInt] = None
-    extra_args: Optional[StrictStr] = None
+    min_replicas: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    max_replicas: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    concurrency: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    cooldown_period: Optional[StrictInt] = Field(default=None, description="Deprecated aggregated-only spelling; set this under worker_pools.worker instead. Accepted alongside worker_pools when the values agree.")
+    extra_args: Optional[StrictStr] = Field(default=None, description="Extra worker CLI arguments as a single shell-style string, split into argv with POSIX shell quoting (shlex). Backslash is an escape character, so `\\` is consumed unless quoted: e.g. `--regex \\d+` reaches the worker as `d+`. Wrap literal backslashes in single quotes (`--regex '\\d+'`). Unbalanced quotes or a trailing backslash are rejected.")
     hf_token: Optional[StrictStr] = None
-    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Access-token vault item ID for HF_TOKEN. Cannot be combined with hf_token.")
     env_vars: Optional[Dict[str, StrictStr]] = None
     env_vars_refs: Optional[Dict[str, Any]] = None
     endpoint_bearer_token: Optional[StrictStr] = None
@@ -66,27 +68,29 @@ class CreateDynamoDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "hf_token_ref", "env_vars", "env_vars_refs", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol"]
+    frontend: Optional[DynamoFrontendConfig] = Field(default=None, description="Replica bounds for the Frontend (HTTP server and router) pods serving the endpoint, which are placed on separate nodes where possible. Two keep the endpoint serving through a node loss. min_replicas and max_replicas must be equal until Frontend autoscaling is supported. Changing them restarts every component of a running deployment.")
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "hf_token_ref", "env_vars", "env_vars_refs", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol", "frontend"]
 
-    @field_validator('name')
+    @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
-    @field_validator('runtime_version')
+    @field_validator('runtime_version', mode="before")
     def runtime_version_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$", value):
+        if isinstance(value, str) and not re.match(r"^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$", value):
             raise ValueError(r"must validate the regular expression /^[A-Za-z0-9_][A-Za-z0-9._-]{0,127}$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -98,8 +102,7 @@ class CreateDynamoDeploymentRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -128,8 +131,7 @@ class CreateDynamoDeploymentRequest(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_item_volume_mounts.to_dict())
+                _items.append(_item_volume_mounts.to_dict() if _item_volume_mounts is not None else None)
             _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of worker_pools
         if self.worker_pools:
@@ -140,6 +142,9 @@ class CreateDynamoDeploymentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of weight_transfer
         if self.weight_transfer:
             _dict['weight_transfer'] = self.weight_transfer.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of frontend
+        if self.frontend:
+            _dict['frontend'] = self.frontend.to_dict()
         # set to None if max_surge (nullable) is None
         # and model_fields_set contains the field
         if self.max_surge is None and "max_surge" in self.model_fields_set:
@@ -289,7 +294,8 @@ class CreateDynamoDeploymentRequest(BaseModel):
             "image_pull_ref": obj.get("image_pull_ref"),
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
-            "backend_protocol": obj.get("backend_protocol")
+            "backend_protocol": obj.get("backend_protocol"),
+            "frontend": DynamoFrontendConfig.from_dict(obj["frontend"]) if obj.get("frontend") is not None else None
         })
         return _obj
 

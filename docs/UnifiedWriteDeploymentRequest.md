@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
-**priority** | **str** |  | [optional] 
+**priority** | **str** | Kubernetes PriorityClass name on the pod spec. Omit to leave unset. | [optional] 
 **pools** | [**CclDynamoPools**](CclDynamoPools.md) |  | 
 **env** | [**Env**](Env.md) |  | [optional] 
 **image** | [**DynamoImage**](DynamoImage.md) |  | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **healthcheck** | **str** |  | [optional] 
 **command** | **str** |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
+**hf_token_ref** | **int** | Access-token vault item ID for HF_TOKEN. | [optional] 
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
@@ -31,10 +31,10 @@ Name | Type | Description | Notes
 **backoff_limit** | **int** |  | [optional] [default to 3]
 **active_deadline_seconds** | **int** |  | [optional] 
 **serving_mode** | [**DynamoServingMode**](DynamoServingMode.md) |  | [optional] 
-**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) |  | [optional] 
+**communications** | [**DynamoCommunicationsInput**](DynamoCommunicationsInput.md) | Platform-managed worker communications. Only disaggregated KV transfer is supported. Omit or set null to preserve the legacy connector configuration. | [optional] 
 **model** | **str** |  | 
 **served_model_name** | **str** |  | [optional] 
-**extra_args** | **str** |  | [optional] 
+**extra_args** | **str** | Extra worker CLI arguments as a single shell-style string, split into argv with POSIX shell quoting (shlex). Backslash is an escape character, so &#x60;\\&#x60; is consumed unless quoted: e.g. &#x60;--regex \\d+&#x60; reaches the worker as &#x60;d+&#x60;. Wrap literal backslashes in single quotes (&#x60;--regex &#39;\\d+&#39;&#x60;). Unbalanced quotes or a trailing backslash are rejected. | [optional] 
 
 ## Example
 

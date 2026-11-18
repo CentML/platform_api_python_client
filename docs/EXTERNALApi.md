@@ -1347,7 +1347,9 @@ void (empty response body)
 
 Delete Unified Deployment
 
-Delete a deployment, as PUT /deployments/status/{deployment_id} with DELETED does.  Deletes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster, in any status.
+Delete a deployment, as PUT /deployments/status/{deployment_id} with DELETED does.
+
+Deletes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster, in any status.
 
 ### Example
 
@@ -1580,7 +1582,8 @@ Name | Type | Description  | Notes
 
 Delete Volume Endpoint
 
-Delete a volume: tear down its ArgoCD app (and PVC) if reachable, then soft-delete the row. Only the owner or an admin with admin:manage_volumes may delete.
+Delete a volume: tear down its ArgoCD app (and PVC) if reachable, then soft-delete the row.
+Only the owner or an admin with admin:manage_volumes may delete.
 
 ### Example
 
@@ -1735,7 +1738,10 @@ Name | Type | Description  | Notes
 
 Get All User Vault Items Endpoint
 
-List metadata for every item the user can read, without any secret values.  Values are deliberately omitted so browsing the vault never bulk-exposes secrets. Callers that need one value fetch it from the by-id endpoint below.
+List metadata for every item the user can read, without any secret values.
+
+Values are deliberately omitted so browsing the vault never bulk-exposes
+secrets. Callers that need one value fetch it from the by-id endpoint below.
 
 ### Example
 
@@ -1744,7 +1750,6 @@ List metadata for every item the user can read, without any secret values.  Valu
 ```python
 import platform_api_python_client
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse
-from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2294,7 +2299,11 @@ No authorization required
 
 Get Current Org Gpu Quota
 
-Return persisted GPU quotas for the caller's organization. Usage fields come later.  ``cluster_id`` filters to that cluster when it is visible. Unknown or invisible cluster IDs return an empty list rather than 404 so this member endpoint does not leak whether a cluster exists.
+Return persisted GPU quotas for the caller's organization. Usage fields come later.
+
+``cluster_id`` filters to that cluster when it is visible. Unknown or invisible
+cluster IDs return an empty list rather than 404 so this member endpoint does
+not leak whether a cluster exists.
 
 ### Example
 
@@ -2549,7 +2558,33 @@ Name | Type | Description  | Notes
 
 Get Deployment Logs V4
 
-Retrieve one page of a single pod's logs from Loki, oldest line first.  - `pod`: which pod's logs to read; pick a name reported by   `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store   simply yields empty pages. - `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the   newest page; `true` fetches newer logs (for follow-polling). - `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both   directions: `fetch_newer=false` returns lines strictly older than that millisecond,   `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log   window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at   the head (the oldest page) — to follow live logs, take the tail page first and pass its   newest `timestamp`. There is no server-issued page token — mint the boundary from the   events themselves (pages never split a millisecond, so a delivered boundary millisecond   is always complete): pass the oldest event's `timestamp` to keep paging older, and the   newest event `timestamp` seen on any page — history pages included — to fetch newer. An   empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`   page means nothing new yet — poll again with the same `timestamp`. - `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on   every poll (late-arriving lines land there), so callers must deduplicate by event `id`;   re-delivered lines do not count toward `max_lines`. A span holding more than the log   store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is   dropped and logged server-side). - `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's   per-query ceiling); a page may exceed it when many lines share one millisecond (such a   group is never split across pages, unless it exceeds that same 5000-entry ceiling — the   excess is then dropped and logged server-side) or through the re-delivered span.
+Retrieve one page of a single pod's logs from Loki, oldest line first.
+
+- `pod`: which pod's logs to read; pick a name reported by
+  `/deployments/pods/{deployment_id}/{revision_number}` — a pod unknown to the log store
+  simply yields empty pages.
+- `fetch_newer`: direction. `false` (default) pages toward older logs, starting from the
+  newest page; `true` fetches newer logs (for follow-polling).
+- `timestamp`: epoch-millisecond boundary (the events' `timestamp` unit), exclusive in both
+  directions: `fetch_newer=false` returns lines strictly older than that millisecond,
+  `fetch_newer=true` lines strictly newer. Without it both directions scan the whole log
+  window: `fetch_newer=false` starts at the tail (the newest page), `fetch_newer=true` at
+  the head (the oldest page) — to follow live logs, take the tail page first and pass its
+  newest `timestamp`. There is no server-issued page token — mint the boundary from the
+  events themselves (pages never split a millisecond, so a delivered boundary millisecond
+  is always complete): pass the oldest event's `timestamp` to keep paging older, and the
+  newest event `timestamp` seen on any page — history pages included — to fetch newer. An
+  empty `fetch_newer=false` page means history is exhausted; an empty `fetch_newer=true`
+  page means nothing new yet — poll again with the same `timestamp`.
+- `fetch_newer=true` with a `timestamp` also re-delivers the ~15 seconds at and before it on
+  every poll (late-arriving lines land there), so callers must deduplicate by event `id`;
+  re-delivered lines do not count toward `max_lines`. A span holding more than the log
+  store's 5000-entry query ceiling re-delivers only its newest 5000 lines (the excess is
+  dropped and logged server-side).
+- `max_lines`: cap on new lines per page — default 100, at most 5000 (the log store's
+  per-query ceiling); a page may exceed it when many lines share one millisecond (such a
+  group is never split across pages, unless it exceeds that same 5000-entry ceiling — the
+  excess is then dropped and logged server-side) or through the re-delivered span.
 
 ### Example
 
@@ -2638,7 +2673,9 @@ Name | Type | Description  | Notes
 
 Get Deployment Pods
 
-List the pod names recorded for this revision, recently terminated pods included; the history is bounded to a retention window, so the list can differ from the live pods in status_v3.
+List the pod names recorded for this revision, recently terminated pods included;
+the history is bounded to a retention window, so the list can differ from the live pods
+in status_v3.
 
 ### Example
 
@@ -3039,7 +3076,6 @@ Get Deployments
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.list_get_deployment_response import ListGetDeploymentResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -3736,7 +3772,6 @@ Get Prebuilt Images
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.list_prebuilt_image_response import ListPrebuiltImageResponse
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
@@ -3808,7 +3843,9 @@ Name | Type | Description  | Notes
 
 Get Unified Deployment
 
-Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.  env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+Get a ccl_compute, ccl_inference, ccl_job or ccl_dynamo deployment: its request and its read-only fields.
+
+env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
 
 ### Example
 
@@ -3887,7 +3924,9 @@ Name | Type | Description  | Notes
 
 Get Unified Deployment Logs
 
-Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.  Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+Read one page of a pod's logs from Loki, with the paging of GET /logs/{deployment_id}/{revision_number}.
+
+Take the pod from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
 
 ### Example
 
@@ -3976,7 +4015,8 @@ Name | Type | Description  | Notes
 
 Get Unified Deployment Pods
 
-List the pods that logged under one revision, recently terminated pods included. The log store's retention bounds the history, so the list can differ from the running pods.
+List the pods that logged under one revision, recently terminated pods included. The log store's retention
+bounds the history, so the list can differ from the running pods.
 
 ### Example
 
@@ -4217,7 +4257,10 @@ Name | Type | Description  | Notes
 
 Get Unified Deployment Usage
 
-Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.  ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo does; its dynamo_* metrics are not supported yet.
+Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} does.
+
+ccl_dynamo takes cpu, memory, gpu and gpu_memory with the component, revision_number and pod filters, as dynamo
+does; its dynamo_* metrics are not supported yet.
 
 ### Example
 
@@ -4227,7 +4270,6 @@ Read a deployment's usage metrics, as GET /deployments/usage/{deployment_id} doe
 import platform_api_python_client
 from platform_api_python_client.models.metric import Metric
 from platform_api_python_client.models.unified_get_deployment_usage_response import UnifiedGetDeploymentUsageResponse
-from platform_api_python_client.models.usage_component import UsageComponent
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -4382,7 +4424,6 @@ Get Usage
 import platform_api_python_client
 from platform_api_python_client.models.get_deployment_usage_response import GetDeploymentUsageResponse
 from platform_api_python_client.models.metric import Metric
-from platform_api_python_client.models.usage_component import UsageComponent
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -4467,7 +4508,10 @@ Name | Type | Description  | Notes
 
 Get User Vault Item By Id Endpoint
 
-Resolve a single secret's value.  This is the only endpoint that returns a vault value, so it is the single place where read access to secret material is authorized and auditable.
+Resolve a single secret's value.
+
+This is the only endpoint that returns a vault value, so it is the single
+place where read access to secret material is authorized and auditable.
 
 ### Example
 
@@ -4625,7 +4669,8 @@ Name | Type | Description  | Notes
 
 Get Volume Status Endpoint
 
-Live volume status: status is the stored intent, service_status is computed from the volume app's health and PVC phase.
+Live volume status: status is the stored intent, service_status is computed from the
+volume app's health and PVC phase.
 
 ### Example
 
@@ -4781,7 +4826,11 @@ Name | Type | Description  | Notes
 
 List Cluster Capacity
 
-Return GPU capacity breakdown for accessible clusters.  When *cluster_id* is supplied only that cluster is included (if accessible).  Clusters whose Prometheus data is unavailable are omitted from the results rather than failing the entire request.
+Return GPU capacity breakdown for accessible clusters.
+
+When *cluster_id* is supplied only that cluster is included (if
+accessible).  Clusters whose Prometheus data is unavailable are omitted
+from the results rather than failing the entire request.
 
 ### Example
 
@@ -4943,8 +4992,6 @@ List Insights
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.insight_resource_type import InsightResourceType
-from platform_api_python_client.models.insight_severity import InsightSeverity
 from platform_api_python_client.models.insight_status import InsightStatus
 from platform_api_python_client.models.list_insights_response import ListInsightsResponse
 from platform_api_python_client.rest import ApiException
@@ -5103,7 +5150,8 @@ This endpoint does not need any parameter.
 
 List Unified Deployment Revisions
 
-List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
+List a deployment's revisions, newest first, each read as GET /deployments/{deployment_id} reads the selected
+one. env.vars values are masked unless the caller owns the deployment or may manage the organization's deployments.
 
 ### Example
 
@@ -5182,7 +5230,14 @@ Name | Type | Description  | Notes
 
 Put Org Gpu Quota On Cluster
 
-Persist organization GPU quota on this cluster and apply KAI Queue CRs.  ``gpu_quota`` of -1 is unlimited; a positive value is a hard cap. Rows are never removed. Requires ``CATALOG_TARGET_REVISION`` to contain ``catalog/src/catalog/kai_gpu_queues``.  A 200 means the quota row was saved and an Argo CD sync was requested (not that Queue CRs are already healthy). A 502 means the row was saved but the Application upsert/sync request failed; re-issue this idempotent PUT to retry.
+Persist organization GPU quota on this cluster and apply KAI Queue CRs.
+
+``gpu_quota`` of -1 is unlimited; a positive value is a hard cap. Rows are never
+removed. Requires ``CATALOG_TARGET_REVISION`` to contain ``catalog/src/catalog/kai_gpu_queues``.
+
+A 200 means the quota row was saved and an Argo CD sync was requested (not that
+Queue CRs are already healthy). A 502 means the row was saved but the Application
+upsert/sync request failed; re-issue this idempotent PUT to retry.
 
 ### Example
 
@@ -5350,7 +5405,10 @@ Name | Type | Description  | Notes
 
 Rollout Unified Deployment Revision
 
-Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.  An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+Select a revision and roll the deployment out at it; ccl_job deployments cannot roll out a revision.
+
+An ACTIVE deployment applies the revision. A PAUSED deployment only selects it, and a resume applies it.
+max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
 ### Example
 
@@ -5506,7 +5564,9 @@ This endpoint does not need any parameter.
 
 Update Cluster
 
-Validate a cluster component configuration for an org-owned cluster.  Infra provisioning is not wired yet; ``config.components`` is validated only.
+Validate a cluster component configuration for an org-owned cluster.
+
+Infra provisioning is not wired yet; ``config.components`` is validated only.
 
 ### Example
 
@@ -5587,7 +5647,9 @@ Name | Type | Description  | Notes
 
 Update Cluster Metadata
 
-Update DB metadata for an org-owned cluster.  Global clusters (parent_id IS NULL) are not mutable here.
+Update DB metadata for an org-owned cluster.
+
+Global clusters (parent_id IS NULL) are not mutable here.
 
 ### Example
 
@@ -6468,7 +6530,10 @@ Name | Type | Description  | Notes
 
 Update Unified Deployment
 
-Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.  A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
+Replace a deployment's request and roll it out; ccl_job deployments cannot be updated.
+
+A PAUSED deployment stores the request without a rollout; a resume applies it. type, name, cluster_id and the
+pools keys cannot change. max_surge and max_unavailable shape this rollout only, for ccl_inference and ccl_dynamo.
 
 ### Example
 
@@ -6636,7 +6701,10 @@ Name | Type | Description  | Notes
 
 Update Unified Deployment Status
 
-Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
+Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.
+
+Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster.
+DELETE /deployments/{deployment_id} deletes them.
 
 ### Example
 
@@ -6718,7 +6786,12 @@ Name | Type | Description  | Notes
 
 Update User Vault Item Endpoint
 
-Create an immutable vault item. Existing secrets cannot be updated.  Reusing an active type, key, and visibility returns 409, even for the same value. To replace a secret, create one with a new key and update its consumers before deleting the old secret. Recreating a deleted key allocates a new secret ID. The PUT route and request name are retained for existing clients.
+Create an immutable vault item. Existing secrets cannot be updated.
+
+Reusing an active type, key, and visibility returns 409, even for the same value.
+To replace a secret, create one with a new key and update its consumers before
+deleting the old secret. Recreating a deleted key allocates a new secret ID.
+The PUT route and request name are retained for existing clients.
 
 ### Example
 

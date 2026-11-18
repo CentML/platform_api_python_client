@@ -30,6 +30,7 @@ from platform_api_python_client.models.metrics_config import MetricsConfig
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class GetInferenceV3DeploymentResponse(BaseModel):
     """
@@ -46,7 +47,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     created_at: datetime
     hardware_instance_id: StrictInt
     revision_number: StrictInt
-    chart_revision: Optional[StrictStr] = None
+    chart_revision: Optional[StrictStr] = Field(default=None, description="Saved catalog Git reference for this revision; null if not recorded. Informational: omit chart_revision from edit or clone requests to use the current platform default.")
     user_annotations: Optional[Dict[str, StrictStr]] = None
     priority: Optional[StrictStr] = None
     volume_mounts: Optional[List[VolumeMount]] = None
@@ -76,18 +77,19 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     metrics: Optional[MetricsConfig] = None
     __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "image_pull_secret_name", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
-    @field_validator('image_pull_secret_name')
+    @field_validator('image_pull_secret_name', mode="before")
     def image_pull_secret_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -99,8 +101,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -129,8 +130,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_item_volume_mounts.to_dict())
+                _items.append(_item_volume_mounts.to_dict() if _item_volume_mounts is not None else None)
             _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:

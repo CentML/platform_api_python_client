@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class Image(BaseModel):
     """
@@ -32,18 +33,19 @@ class Image(BaseModel):
     pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     __properties: ClassVar[List[str]] = ["url", "pull_ref", "pull_secret_name"]
 
-    @field_validator('pull_secret_name')
+    @field_validator('pull_secret_name', mode="before")
     def pull_secret_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -55,8 +57,7 @@ class Image(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

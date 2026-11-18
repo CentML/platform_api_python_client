@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **hardware_instance_id** | **int** |  | 
 **revision_number** | **int** |  | 
-**chart_revision** | **str** |  | [optional] 
+**chart_revision** | **str** | Saved catalog Git reference for this revision; null if not recorded. Informational: omit chart_revision from edit or clone requests to use the current platform default. | [optional] 
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **priority** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 

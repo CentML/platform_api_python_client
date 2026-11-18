@@ -7,7 +7,7 @@ Hardware and scaling for one Dynamo worker role.  ``min_replicas``/``max_replica
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hardware_instance_id** | **int** |  | 
-**replicas** | **int** |  | [optional] 
+**replicas** | **int** | Deprecated fixed pool size, equivalent to min_replicas &#x3D;&#x3D; max_replicas. | [optional] 
 **min_replicas** | **int** |  | [optional] 
 **max_replicas** | **int** |  | [optional] 
 **concurrency** | **int** |  | [optional] 

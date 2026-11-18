@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     Platform External API
 
@@ -10,6 +8,7 @@
 
     Do not edit the class manually.
 """  # noqa: E501
+
 
 import warnings
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
@@ -42,7 +41,6 @@ from platform_api_python_client.models.delete_user_vault_item_request import Del
 from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
 from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
 from platform_api_python_client.models.deployment_status_v3_response import DeploymentStatusV3Response
-from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
@@ -57,9 +55,7 @@ from platform_api_python_client.models.get_inference_v3_deployment_response impo
 from platform_api_python_client.models.get_job_deployment_response import GetJobDeploymentResponse
 from platform_api_python_client.models.get_volume_response import GetVolumeResponse
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse
-from platform_api_python_client.models.insight_resource_type import InsightResourceType
 from platform_api_python_client.models.insight_response import InsightResponse
-from platform_api_python_client.models.insight_severity import InsightSeverity
 from platform_api_python_client.models.insight_status import InsightStatus
 from platform_api_python_client.models.invite_user_request import InviteUserRequest
 from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse
@@ -96,9 +92,7 @@ from platform_api_python_client.models.update_deployment_status_v3_request impor
 from platform_api_python_client.models.update_insight_status_request import UpdateInsightStatusRequest
 from platform_api_python_client.models.update_service_account_request import UpdateServiceAccountRequest
 from platform_api_python_client.models.upsert_user_vault_item_request import UpsertUserVaultItemRequest
-from platform_api_python_client.models.usage_component import UsageComponent
 from platform_api_python_client.models.user_vault_item import UserVaultItem
-from platform_api_python_client.models.user_vault_type import UserVaultType
 from platform_api_python_client.models.volume_status_response import VolumeStatusResponse
 
 from platform_api_python_client.api_client import ApiClient, RequestSerialized
@@ -5967,7 +5961,7 @@ class EXTERNALApi:
     @validate_call
     def get_all_user_vault_items_endpoint_user_vault_get(
         self,
-        type: Optional[UserVaultType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -6039,7 +6033,7 @@ class EXTERNALApi:
     @validate_call
     def get_all_user_vault_items_endpoint_user_vault_get_with_http_info(
         self,
-        type: Optional[UserVaultType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -6111,7 +6105,7 @@ class EXTERNALApi:
     @validate_call
     def get_all_user_vault_items_endpoint_user_vault_get_without_preload_content(
         self,
-        type: Optional[UserVaultType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -10706,7 +10700,7 @@ class EXTERNALApi:
         self,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -10785,7 +10779,7 @@ class EXTERNALApi:
         self,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -10864,7 +10858,7 @@ class EXTERNALApi:
         self,
         offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
         limit: Optional[Annotated[int, Field(strict=True, ge=0)]] = None,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         search_query: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -13105,7 +13099,7 @@ class EXTERNALApi:
     @validate_call
     def get_prebuilt_images_prebuilt_images_get(
         self,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13172,7 +13166,7 @@ class EXTERNALApi:
     @validate_call
     def get_prebuilt_images_prebuilt_images_get_with_http_info(
         self,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -13239,7 +13233,7 @@ class EXTERNALApi:
     @validate_call
     def get_prebuilt_images_prebuilt_images_get_without_preload_content(
         self,
-        type: Optional[DeploymentType] = None,
+        type: Optional[Any] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14807,7 +14801,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -14903,7 +14897,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -14999,7 +14993,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -15435,7 +15429,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -15530,7 +15524,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -15625,7 +15619,7 @@ class EXTERNALApi:
         end_time_in_seconds: StrictInt,
         step: Optional[StrictInt] = None,
         revision_number: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        component: Optional[UsageComponent] = None,
+        component: Optional[Any] = None,
         pod: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None,
         _request_timeout: Union[
             None,
@@ -17403,10 +17397,10 @@ class EXTERNALApi:
     def list_insights_insights_get(
         self,
         status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
-        severity: Optional[InsightSeverity] = None,
+        severity: Optional[Any] = None,
         cluster_id: Optional[StrictInt] = None,
         deployment_id: Optional[StrictInt] = None,
-        resource_type: Optional[InsightResourceType] = None,
+        resource_type: Optional[Any] = None,
         observed_after: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
         before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -17498,10 +17492,10 @@ class EXTERNALApi:
     def list_insights_insights_get_with_http_info(
         self,
         status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
-        severity: Optional[InsightSeverity] = None,
+        severity: Optional[Any] = None,
         cluster_id: Optional[StrictInt] = None,
         deployment_id: Optional[StrictInt] = None,
-        resource_type: Optional[InsightResourceType] = None,
+        resource_type: Optional[Any] = None,
         observed_after: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
         before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -17593,10 +17587,10 @@ class EXTERNALApi:
     def list_insights_insights_get_without_preload_content(
         self,
         status: Annotated[Optional[List[InsightStatus]], Field(description="Repeat to list several statuses")] = None,
-        severity: Optional[InsightSeverity] = None,
+        severity: Optional[Any] = None,
         cluster_id: Optional[StrictInt] = None,
         deployment_id: Optional[StrictInt] = None,
-        resource_type: Optional[InsightResourceType] = None,
+        resource_type: Optional[Any] = None,
         observed_after: Optional[datetime] = None,
         limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
         before_id: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,

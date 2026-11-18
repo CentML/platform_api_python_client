@@ -27,6 +27,7 @@ from platform_api_python_client.models.metrics_config import MetricsConfig
 from platform_api_python_client.models.volume_mount import VolumeMount
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreateInferenceV3DeploymentRequest(BaseModel):
     """
@@ -40,8 +41,8 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     user_annotations: Optional[Dict[str, StrictStr]] = None
     chart_revision: Optional[StrictStr] = None
     volume_mounts: Optional[Annotated[List[VolumeMount], Field(max_length=10)]] = None
-    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = None
-    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
+    priority: Optional[Annotated[str, Field(strict=True, max_length=253)]] = Field(default=None, description="Kubernetes PriorityClass name on the pod spec. Omit to leave unset.")
+    hf_token_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Access-token vault item ID for HF_TOKEN. Cannot be combined with hf_token.")
     image_url: StrictStr
     image_pull_secret_credentials: Optional[ImagePullSecretCredentials] = None
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
@@ -67,25 +68,26 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     metrics: Optional[MetricsConfig] = None
     __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
-    @field_validator('name')
+    @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
-    @field_validator('image_pull_secret_name')
+    @field_validator('image_pull_secret_name', mode="before")
     def image_pull_secret_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -97,8 +99,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -127,8 +128,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
         _items = []
         if self.volume_mounts:
             for _item_volume_mounts in self.volume_mounts:
-                if _item_volume_mounts:
-                    _items.append(_item_volume_mounts.to_dict())
+                _items.append(_item_volume_mounts.to_dict() if _item_volume_mounts is not None else None)
             _dict['volume_mounts'] = _items
         # override the default output from pydantic by calling `to_dict()` of image_pull_secret_credentials
         if self.image_pull_secret_credentials:

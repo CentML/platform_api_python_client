@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**InsightStatus**](InsightStatus.md) |  | 
-**comment** | **str** |  | [optional] 
+**comment** | **str** | Why the status changed; kept in the history and shown to reporters | [optional] 
 
 ## Example
 

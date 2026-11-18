@@ -23,27 +23,29 @@ from typing_extensions import Annotated
 from platform_api_python_client.models.insight_status import InsightStatus
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class UpdateInsightStatusRequest(BaseModel):
     """
     UpdateInsightStatusRequest
     """ # noqa: E501
     status: InsightStatus
-    comment: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=2000)]] = None
+    comment: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=2000)]] = Field(default=None, description="Why the status changed; kept in the history and shown to reporters")
     __properties: ClassVar[List[str]] = ["status", "comment"]
 
-    @field_validator('comment')
+    @field_validator('comment', mode="before")
     def comment_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[^\x00]*$", value):
+        if isinstance(value, str) and not re.match(r"^[^\x00]*$", value):
             raise ValueError(r"must validate the regular expression /^[^\x00]*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -55,8 +57,7 @@ class UpdateInsightStatusRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

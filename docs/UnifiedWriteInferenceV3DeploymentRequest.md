@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **user_annotations** | **Dict[str, str]** |  | [optional] 
 **chart_revision** | **str** |  | [optional] 
 **volume_mounts** | [**List[VolumeMount]**](VolumeMount.md) |  | [optional] 
-**priority** | **str** |  | [optional] 
+**priority** | **str** | Kubernetes PriorityClass name on the pod spec. Omit to leave unset. | [optional] 
 **pools** | [**CclMainPools**](CclMainPools.md) |  | 
 **env** | [**Env**](Env.md) |  | [optional] 
 **image** | [**Image**](Image.md) |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **healthcheck** | **str** |  | [optional] 
 **command** | **str** |  | [optional] 
 **config_file** | [**ConfigFileMount**](ConfigFileMount.md) |  | [optional] 
-**hf_token_ref** | **int** |  | [optional] 
+**hf_token_ref** | **int** | Access-token vault item ID for HF_TOKEN. | [optional] 
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]
 **metrics** | [**MetricsConfig**](MetricsConfig.md) |  | [optional] 
 **enable_logging** | **bool** |  | [optional] [default to False]

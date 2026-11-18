@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreateFilesystemVolumeRequest(BaseModel):
     """
@@ -34,10 +35,10 @@ class CreateFilesystemVolumeRequest(BaseModel):
     storage_class: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = None
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "size_gb", "storage_class"]
 
-    @field_validator('name')
+    @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
@@ -48,18 +49,19 @@ class CreateFilesystemVolumeRequest(BaseModel):
             raise ValueError("must be one of enum values ('filesystem')")
         return value
 
-    @field_validator('storage_class')
+    @field_validator('storage_class', mode="before")
     def storage_class_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
             return value
 
-        if not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -71,8 +73,7 @@ class CreateFilesystemVolumeRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

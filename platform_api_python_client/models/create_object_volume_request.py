@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from platform_api_python_client.models.object_storage_provider import ObjectStorageProvider
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 class CreateObjectVolumeRequest(BaseModel):
     """
@@ -38,10 +39,10 @@ class CreateObjectVolumeRequest(BaseModel):
     read_only: Optional[StrictBool] = False
     __properties: ClassVar[List[str]] = ["name", "cluster_id", "backend", "provider", "bucket", "region", "prefix", "read_only"]
 
-    @field_validator('name')
+    @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z][a-z0-9-]*$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z][a-z0-9-]*$", value):
             raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9-]*$/")
         return value
 
@@ -52,22 +53,23 @@ class CreateObjectVolumeRequest(BaseModel):
             raise ValueError("must be one of enum values ('object')")
         return value
 
-    @field_validator('bucket')
+    @field_validator('bucket', mode="before")
     def bucket_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^(?:[0-9A-Za-z._-]+|arn:[a-z0-9-]+:s3(?:-outposts|-object-lambda)?:[0-9A-Za-z._:\/+=,@-]+)$", value):
+        if isinstance(value, str) and not re.match(r"^(?:[0-9A-Za-z._-]+|arn:[a-z0-9-]+:s3(?:-outposts|-object-lambda)?:[0-9A-Za-z._:\/+=,@-]+)$", value):
             raise ValueError(r"must validate the regular expression /^(?:[0-9A-Za-z._-]+|arn:[a-z0-9-]+:s3(?:-outposts|-object-lambda)?:[0-9A-Za-z._:\/+=,@-]+)$/")
         return value
 
-    @field_validator('region')
+    @field_validator('region', mode="before")
     def region_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", value):
+        if isinstance(value, str) and not re.match(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", value):
             raise ValueError(r"must validate the regular expression /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -79,8 +81,7 @@ class CreateObjectVolumeRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -36,9 +36,7 @@ class TestIstioOverrides(unittest.TestCase):
         if include_optional:
             return IstioOverrides(
                 istio_cni = platform_api_python_client.models.istio_cni_subchart_overrides.IstioCniSubchartOverrides(
-                    cni = platform_api_python_client.models.istio_cni_overrides.IstioCniOverrides(
-                        cni_bin_dir = '', 
-                        cni_conf_dir = '', ), )
+                    cni = null, )
             )
         else:
             return IstioOverrides(

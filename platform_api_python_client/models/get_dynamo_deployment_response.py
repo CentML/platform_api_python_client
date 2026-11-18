@@ -25,7 +25,7 @@ from platform_api_python_client.models.backend_protocol import BackendProtocol
 from platform_api_python_client.models.deployment_status import DeploymentStatus
 from platform_api_python_client.models.deployment_type import DeploymentType
 from platform_api_python_client.models.dynamo_communications_input import DynamoCommunicationsInput
-from platform_api_python_client.models.dynamo_frontend_config import DynamoFrontendConfig
+from platform_api_python_client.models.dynamo_frontend_config_response import DynamoFrontendConfigResponse
 from platform_api_python_client.models.dynamo_serving_mode import DynamoServingMode
 from platform_api_python_client.models.dynamo_weight_transfer_configuration import DynamoWeightTransferConfiguration
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools
@@ -76,7 +76,7 @@ class GetDynamoDeploymentResponse(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    frontend: Optional[DynamoFrontendConfig] = Field(default=None, description="Frontend replica bounds this revision requests; the defaults for revisions created before the field.")
+    frontend: Optional[DynamoFrontendConfigResponse] = Field(default=None, description="Frontend replica bounds and size this revision requests; the defaults for revisions created before these fields.")
     __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "env_vars", "env_vars_refs", "endpoint_certificate_authority", "endpoint_bearer_token", "bearer_token_ref", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol", "frontend"]
 
     model_config = ConfigDict(
@@ -276,7 +276,7 @@ class GetDynamoDeploymentResponse(BaseModel):
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "backend_protocol": obj.get("backend_protocol"),
-            "frontend": DynamoFrontendConfig.from_dict(obj["frontend"]) if obj.get("frontend") is not None else None
+            "frontend": DynamoFrontendConfigResponse.from_dict(obj["frontend"]) if obj.get("frontend") is not None else None
         })
         return _obj
 

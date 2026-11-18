@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.38.0"
+__version__ = "4.39.0"
 
 # Define package exports
 __all__ = [
@@ -72,6 +72,7 @@ __all__ = [
     "DeploymentUsageValue",
     "DynamoCommunicationsInput",
     "DynamoFrontendConfig",
+    "DynamoFrontendConfigResponse",
     "DynamoImage",
     "DynamoKvTransferConfiguration",
     "DynamoKvTransferPolicy",
@@ -255,6 +256,7 @@ from platform_api_python_client.models.deployment_usage import DeploymentUsage a
 from platform_api_python_client.models.deployment_usage_value import DeploymentUsageValue as DeploymentUsageValue
 from platform_api_python_client.models.dynamo_communications_input import DynamoCommunicationsInput as DynamoCommunicationsInput
 from platform_api_python_client.models.dynamo_frontend_config import DynamoFrontendConfig as DynamoFrontendConfig
+from platform_api_python_client.models.dynamo_frontend_config_response import DynamoFrontendConfigResponse as DynamoFrontendConfigResponse
 from platform_api_python_client.models.dynamo_image import DynamoImage as DynamoImage
 from platform_api_python_client.models.dynamo_kv_transfer_configuration import DynamoKvTransferConfiguration as DynamoKvTransferConfiguration
 from platform_api_python_client.models.dynamo_kv_transfer_policy import DynamoKvTransferPolicy as DynamoKvTransferPolicy

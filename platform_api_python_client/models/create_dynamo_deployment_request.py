@@ -68,7 +68,7 @@ class CreateDynamoDeploymentRequest(BaseModel):
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     backend_protocol: Optional[BackendProtocol] = None
-    frontend: Optional[DynamoFrontendConfig] = Field(default=None, description="Replica bounds for the Frontend (HTTP server and router) pods serving the endpoint, which are placed on separate nodes where possible. Two keep the endpoint serving through a node loss. min_replicas and max_replicas must be equal until Frontend autoscaling is supported. Changing them restarts every component of a running deployment.")
+    frontend: Optional[DynamoFrontendConfig] = Field(default=None, description="Replica bounds and size of the Frontend (HTTP server and router) pods serving the endpoint, which are placed on separate nodes where possible. Two keep the endpoint serving through a node loss. min_replicas and max_replicas must be equal until Frontend autoscaling is supported. Changing any of these restarts every component of a running deployment.")
     __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "serving_mode", "worker_pools", "communications", "weight_transfer", "model", "model_revision", "served_model_name", "runtime_version", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "extra_args", "hf_token", "hf_token_ref", "env_vars", "env_vars_refs", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "image_pull_ref", "enable_logging", "enable_node_model_cache", "backend_protocol", "frontend"]
 
     @field_validator('name', mode="before")

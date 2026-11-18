@@ -36,7 +36,9 @@ class TestDynamoFrontendConfig(unittest.TestCase):
         if include_optional:
             return DynamoFrontendConfig(
                 min_replicas = 1.0,
-                max_replicas = 1.0
+                max_replicas = 1.0,
+                cpu = 1000.0,
+                memory = 1024.0
             )
         else:
             return DynamoFrontendConfig(

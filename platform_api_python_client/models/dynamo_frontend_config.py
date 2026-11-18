@@ -26,11 +26,13 @@ from pydantic_core import to_jsonable_python
 
 class DynamoFrontendConfig(BaseModel):
     """
-    Replica bounds for the Dynamo Frontend, shaped like a worker pool's so that Frontend autoscaling can arrive without an API change. Until it does, the Frontend runs a fixed count: ``min_replicas`` must equal ``max_replicas``.
+    Replica bounds and pod size for the Dynamo Frontend. A size is requested and limited alike; left unset, the chart's small default applies. The bounds are shaped like a worker pool's so that Frontend autoscaling can arrive without an API change. Until it does, the Frontend runs a fixed count: ``min_replicas`` must equal ``max_replicas``.
     """ # noqa: E501
     min_replicas: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = 3
     max_replicas: Optional[Annotated[int, Field(le=10, strict=True, ge=1)]] = 3
-    __properties: ClassVar[List[str]] = ["min_replicas", "max_replicas"]
+    cpu: Optional[Annotated[int, Field(le=8000, strict=True, ge=1000)]] = Field(default=None, description="CPU for each Frontend pod, in millicores.")
+    memory: Optional[Annotated[int, Field(le=16384, strict=True, ge=1024)]] = Field(default=None, description="Memory for each Frontend pod, in MiB.")
+    __properties: ClassVar[List[str]] = ["min_replicas", "max_replicas", "cpu", "memory"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -71,6 +73,16 @@ class DynamoFrontendConfig(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if cpu (nullable) is None
+        # and model_fields_set contains the field
+        if self.cpu is None and "cpu" in self.model_fields_set:
+            _dict['cpu'] = None
+
+        # set to None if memory (nullable) is None
+        # and model_fields_set contains the field
+        if self.memory is None and "memory" in self.model_fields_set:
+            _dict['memory'] = None
+
         return _dict
 
     @classmethod
@@ -84,7 +96,9 @@ class DynamoFrontendConfig(BaseModel):
 
         _obj = cls.model_validate({
             "min_replicas": obj.get("min_replicas") if obj.get("min_replicas") is not None else 3,
-            "max_replicas": obj.get("max_replicas") if obj.get("max_replicas") is not None else 3
+            "max_replicas": obj.get("max_replicas") if obj.get("max_replicas") is not None else 3,
+            "cpu": obj.get("cpu"),
+            "memory": obj.get("memory")
         })
         return _obj
 

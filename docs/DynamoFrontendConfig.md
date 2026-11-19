@@ -1,6 +1,6 @@
 # DynamoFrontendConfig
 
-Replica bounds for the Dynamo Frontend, shaped like a worker pool's so that Frontend autoscaling can arrive without an API change. Until it does, the Frontend runs a fixed count: ``min_replicas`` must equal ``max_replicas``.
+Replica bounds and pod size for the Dynamo Frontend. A size is requested and limited alike; left unset, the chart's small default applies. The bounds are shaped like a worker pool's so that Frontend autoscaling can arrive without an API change. Until it does, the Frontend runs a fixed count: ``min_replicas`` must equal ``max_replicas``.
 
 ## Properties
 
@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **min_replicas** | **int** |  | [optional] [default to 3]
 **max_replicas** | **int** |  | [optional] [default to 3]
+**cpu** | **int** | CPU for each Frontend pod, in millicores. | [optional] 
+**memory** | **int** | Memory for each Frontend pod, in MiB. | [optional] 
 
 ## Example
 

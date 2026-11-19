@@ -85,7 +85,9 @@ class TestCreateDynamoDeploymentRequest(unittest.TestCase):
                 backend_protocol = 'HTTP',
                 frontend = platform_api_python_client.models.dynamo_frontend_config.DynamoFrontendConfig(
                     min_replicas = 1.0, 
-                    max_replicas = 1.0, )
+                    max_replicas = 1.0, 
+                    cpu = 1000.0, 
+                    memory = 1024.0, )
             )
         else:
             return CreateDynamoDeploymentRequest(

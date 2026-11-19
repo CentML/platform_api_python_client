@@ -88,9 +88,11 @@ class TestGetDynamoDeploymentResponse(unittest.TestCase):
                 enable_logging = True,
                 enable_node_model_cache = True,
                 backend_protocol = 'HTTP',
-                frontend = platform_api_python_client.models.dynamo_frontend_config.DynamoFrontendConfig(
+                frontend = platform_api_python_client.models.dynamo_frontend_config_response.DynamoFrontendConfigResponse(
                     min_replicas = 1.0, 
-                    max_replicas = 1.0, )
+                    max_replicas = 1.0, 
+                    cpu = 56, 
+                    memory = 56, )
             )
         else:
             return GetDynamoDeploymentResponse(

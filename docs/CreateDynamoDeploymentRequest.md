@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
-**frontend** | [**DynamoFrontendConfig**](DynamoFrontendConfig.md) | Replica bounds for the Frontend (HTTP server and router) pods serving the endpoint, which are placed on separate nodes where possible. Two keep the endpoint serving through a node loss. min_replicas and max_replicas must be equal until Frontend autoscaling is supported. Changing them restarts every component of a running deployment. | [optional] 
+**frontend** | [**DynamoFrontendConfig**](DynamoFrontendConfig.md) | Replica bounds and size of the Frontend (HTTP server and router) pods serving the endpoint, which are placed on separate nodes where possible. Two keep the endpoint serving through a node loss. min_replicas and max_replicas must be equal until Frontend autoscaling is supported. Changing any of these restarts every component of a running deployment. | [optional] 
 
 ## Example
 

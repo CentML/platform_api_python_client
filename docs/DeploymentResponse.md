@@ -43,7 +43,7 @@ Name | Type | Description | Notes
 **enable_logging** | **bool** |  | [optional] [default to True]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
-**frontend** | [**DynamoFrontendConfig**](DynamoFrontendConfig.md) | Frontend replica bounds this revision requests; the defaults for revisions created before the field. | [optional] 
+**frontend** | [**DynamoFrontendConfigResponse**](DynamoFrontendConfigResponse.md) | Frontend replica bounds and size this revision requests; the defaults for revisions created before these fields. | [optional] 
 **container_port** | **int** |  | 
 **healthcheck** | **str** |  | [optional] 
 **command** | **List[str]** |  | [optional] 

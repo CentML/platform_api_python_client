@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.39.0"
+__version__ = "4.40.0"
 
 # Define package exports
 __all__ = [
@@ -28,15 +28,35 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
-    "ArgoRollouts",
+    "Admission",
+    "Autoscaling",
     "BackendProtocol",
+    "CDI",
+    "CNI",
     "CclDynamoPools",
     "CclMainPools",
-    "CertManager",
+    "CclusterCatalogsClusterBaseArgoRolloutsChartValues",
+    "CclusterCatalogsClusterBaseArgoRolloutsController",
+    "CclusterCatalogsClusterBaseArgoRolloutsValues",
+    "CclusterCatalogsClusterBaseCertManagerChartValues",
+    "CclusterCatalogsClusterBaseCertManagerValues",
+    "CclusterCatalogsClusterBaseGpuOperatorChartValues",
+    "CclusterCatalogsClusterBaseGpuOperatorValues",
+    "CclusterCatalogsClusterBaseIngressNginxChartValues",
+    "CclusterCatalogsClusterBaseIngressNginxController",
+    "CclusterCatalogsClusterBaseIngressNginxValues",
+    "CclusterCatalogsClusterBaseIstioValues",
+    "CclusterCatalogsClusterBaseKaiSchedulerChartValues",
+    "CclusterCatalogsClusterBaseKaiSchedulerValues",
+    "CclusterCatalogsClusterBaseKedaChartValues",
+    "CclusterCatalogsClusterBaseKedaValues",
+    "CclusterCatalogsClusterBaseKubePrometheusStackChartValues",
+    "CclusterCatalogsClusterBaseKubePrometheusStackValues",
+    "CclusterCatalogsClusterBaseMetricsServerChartValues",
+    "CclusterCatalogsClusterBaseMetricsServerValues",
     "CloudProvider",
+    "ClusterBaseComponents",
     "ClusterCapacityResponse",
-    "ClusterComponents",
-    "ClusterConfig",
     "ClusterCredential",
     "ClusterRegistrationRequest",
     "ClusterRegistrationResponse",
@@ -59,6 +79,9 @@ __all__ = [
     "CreateVolumeRequest",
     "CreditsResponse",
     "DailyBillResponse",
+    "Dashboard",
+    "DefaultPriorities",
+    "DefaultQueue",
     "DeleteUserVaultItemRequest",
     "DeploymentComponentType",
     "DeploymentLogEventV4",
@@ -82,9 +105,6 @@ __all__ = [
     "DynamoWorkerPoolConfig",
     "DynamoWorkerPools",
     "Env",
-    "ExternalDns",
-    "FinalStack",
-    "FluentBit",
     "GenerateServiceAccountSecretResponse",
     "GetClusterResponse",
     "GetComputeDeploymentResponse",
@@ -101,7 +121,6 @@ __all__ = [
     "GetJobDeploymentResponse",
     "GetObjectVolumeResponse",
     "GetVolumeResponse",
-    "GpuOperator",
     "GpuTypeCapacity",
     "HTTPValidationError",
     "HardwareInstanceResponse",
@@ -109,7 +128,6 @@ __all__ = [
     "Image",
     "ImagePullSecretCredentials",
     "Ingress",
-    "IngressNginx",
     "InsightListItemResponse",
     "InsightResource",
     "InsightResourceType",
@@ -118,12 +136,10 @@ __all__ = [
     "InsightStatus",
     "InsightStatusChangeResponse",
     "InviteUserRequest",
-    "Istio",
-    "IstioCniOverrides",
-    "IstioCniSubchartOverrides",
-    "IstioOverrides",
-    "Keda",
-    "KubePrometheusStack",
+    "IstioBase",
+    "IstioCNI",
+    "IstioGateway",
+    "Istiod",
     "ListClusterCapacityResponse",
     "ListDailyBillResponse",
     "ListDeploymentRevisionsResponse",
@@ -138,28 +154,35 @@ __all__ = [
     "ListUserVaultItemsResponse",
     "ListVolumesResponse",
     "LocationInner",
-    "Longhorn",
+    "MIG",
     "Metric",
+    "Metrics",
     "MetricsConfig",
-    "MetricsServer",
-    "NetworkOperator",
     "ObjectStorageProvider",
-    "OpentelemetryCollector",
+    "Operator",
     "OrganizationGpuQuotaRequest",
     "OrganizationGpuQuotaResponse",
+    "Pilot",
     "PodDetails",
     "PodStatus",
     "Pool",
     "PrebuiltImageResponse",
-    "PrometheusAdapter",
+    "Prometheus",
+    "PrometheusRules",
+    "PrometheusSpec",
+    "PrometheusValues",
+    "Quota",
+    "Replicas",
+    "ResourceList",
+    "ResourceRequirements",
     "RevisionPodDetails",
     "RolloutStatus",
     "RolloutStrategyParams",
+    "Scheduler",
     "ServiceAccountResponse",
     "ServiceStatus",
-    "Spire",
-    "SpireCrds",
-    "TeleportKubeAgent",
+    "Toggle",
+    "Toleration",
     "UnifiedGetComputeDeploymentResponse",
     "UnifiedGetDeploymentLogsResponse",
     "UnifiedGetDeploymentPodsResponse",
@@ -179,6 +202,7 @@ __all__ = [
     "UnifiedWriteInferenceV3DeploymentRequest",
     "UnifiedWriteJobDeploymentRequest",
     "UpdateClusterMetadataRequest",
+    "UpdateClusterRequest",
     "UpdateDeploymentResponse",
     "UpdateDeploymentStatusV3Request",
     "UpdateInsightStatusRequest",
@@ -195,6 +219,7 @@ __all__ = [
     "VolumeMount",
     "VolumeStatus",
     "VolumeStatusResponse",
+    "Workload",
 ]
 
 # import apis into sdk package
@@ -212,15 +237,35 @@ from platform_api_python_client.exceptions import ApiAttributeError as ApiAttrib
 from platform_api_python_client.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from platform_api_python_client.models.argo_rollouts import ArgoRollouts as ArgoRollouts
+from platform_api_python_client.models.admission import Admission as Admission
+from platform_api_python_client.models.autoscaling import Autoscaling as Autoscaling
 from platform_api_python_client.models.backend_protocol import BackendProtocol as BackendProtocol
+from platform_api_python_client.models.cdi import CDI as CDI
+from platform_api_python_client.models.cni import CNI as CNI
 from platform_api_python_client.models.ccl_dynamo_pools import CclDynamoPools as CclDynamoPools
 from platform_api_python_client.models.ccl_main_pools import CclMainPools as CclMainPools
-from platform_api_python_client.models.cert_manager import CertManager as CertManager
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollouts_chart_values import CclusterCatalogsClusterBaseArgoRolloutsChartValues as CclusterCatalogsClusterBaseArgoRolloutsChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollouts_controller import CclusterCatalogsClusterBaseArgoRolloutsController as CclusterCatalogsClusterBaseArgoRolloutsController
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollouts_values import CclusterCatalogsClusterBaseArgoRolloutsValues as CclusterCatalogsClusterBaseArgoRolloutsValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_cert_manager_chart_values import CclusterCatalogsClusterBaseCertManagerChartValues as CclusterCatalogsClusterBaseCertManagerChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_cert_manager_values import CclusterCatalogsClusterBaseCertManagerValues as CclusterCatalogsClusterBaseCertManagerValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_gpu_operator_chart_values import CclusterCatalogsClusterBaseGpuOperatorChartValues as CclusterCatalogsClusterBaseGpuOperatorChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_gpu_operator_values import CclusterCatalogsClusterBaseGpuOperatorValues as CclusterCatalogsClusterBaseGpuOperatorValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_ingress_nginx_chart_values import CclusterCatalogsClusterBaseIngressNginxChartValues as CclusterCatalogsClusterBaseIngressNginxChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_ingress_nginx_controller import CclusterCatalogsClusterBaseIngressNginxController as CclusterCatalogsClusterBaseIngressNginxController
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_ingress_nginx_values import CclusterCatalogsClusterBaseIngressNginxValues as CclusterCatalogsClusterBaseIngressNginxValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_istio_values import CclusterCatalogsClusterBaseIstioValues as CclusterCatalogsClusterBaseIstioValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_kai_scheduler_chart_values import CclusterCatalogsClusterBaseKaiSchedulerChartValues as CclusterCatalogsClusterBaseKaiSchedulerChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_kai_scheduler_values import CclusterCatalogsClusterBaseKaiSchedulerValues as CclusterCatalogsClusterBaseKaiSchedulerValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_keda_chart_values import CclusterCatalogsClusterBaseKedaChartValues as CclusterCatalogsClusterBaseKedaChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_keda_values import CclusterCatalogsClusterBaseKedaValues as CclusterCatalogsClusterBaseKedaValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_kube_prometheus_stack_chart_values import CclusterCatalogsClusterBaseKubePrometheusStackChartValues as CclusterCatalogsClusterBaseKubePrometheusStackChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_kube_prometheus_stack_values import CclusterCatalogsClusterBaseKubePrometheusStackValues as CclusterCatalogsClusterBaseKubePrometheusStackValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_metrics_server_chart_values import CclusterCatalogsClusterBaseMetricsServerChartValues as CclusterCatalogsClusterBaseMetricsServerChartValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_metrics_server_values import CclusterCatalogsClusterBaseMetricsServerValues as CclusterCatalogsClusterBaseMetricsServerValues
 from platform_api_python_client.models.cloud_provider import CloudProvider as CloudProvider
+from platform_api_python_client.models.cluster_base_components import ClusterBaseComponents as ClusterBaseComponents
 from platform_api_python_client.models.cluster_capacity_response import ClusterCapacityResponse as ClusterCapacityResponse
-from platform_api_python_client.models.cluster_components import ClusterComponents as ClusterComponents
-from platform_api_python_client.models.cluster_config import ClusterConfig as ClusterConfig
 from platform_api_python_client.models.cluster_credential import ClusterCredential as ClusterCredential
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest as ClusterRegistrationRequest
 from platform_api_python_client.models.cluster_registration_response import ClusterRegistrationResponse as ClusterRegistrationResponse
@@ -243,6 +288,9 @@ from platform_api_python_client.models.create_service_account_response import Cr
 from platform_api_python_client.models.create_volume_request import CreateVolumeRequest as CreateVolumeRequest
 from platform_api_python_client.models.credits_response import CreditsResponse as CreditsResponse
 from platform_api_python_client.models.daily_bill_response import DailyBillResponse as DailyBillResponse
+from platform_api_python_client.models.dashboard import Dashboard as Dashboard
+from platform_api_python_client.models.default_priorities import DefaultPriorities as DefaultPriorities
+from platform_api_python_client.models.default_queue import DefaultQueue as DefaultQueue
 from platform_api_python_client.models.delete_user_vault_item_request import DeleteUserVaultItemRequest as DeleteUserVaultItemRequest
 from platform_api_python_client.models.deployment_component_type import DeploymentComponentType as DeploymentComponentType
 from platform_api_python_client.models.deployment_log_event_v4 import DeploymentLogEventV4 as DeploymentLogEventV4
@@ -266,9 +314,6 @@ from platform_api_python_client.models.dynamo_weight_transfer_policy import Dyna
 from platform_api_python_client.models.dynamo_worker_pool_config import DynamoWorkerPoolConfig as DynamoWorkerPoolConfig
 from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPools as DynamoWorkerPools
 from platform_api_python_client.models.env import Env as Env
-from platform_api_python_client.models.external_dns import ExternalDns as ExternalDns
-from platform_api_python_client.models.final_stack import FinalStack as FinalStack
-from platform_api_python_client.models.fluent_bit import FluentBit as FluentBit
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse as GenerateServiceAccountSecretResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse as GetClusterResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse as GetComputeDeploymentResponse
@@ -285,7 +330,6 @@ from platform_api_python_client.models.get_inference_v3_deployment_response impo
 from platform_api_python_client.models.get_job_deployment_response import GetJobDeploymentResponse as GetJobDeploymentResponse
 from platform_api_python_client.models.get_object_volume_response import GetObjectVolumeResponse as GetObjectVolumeResponse
 from platform_api_python_client.models.get_volume_response import GetVolumeResponse as GetVolumeResponse
-from platform_api_python_client.models.gpu_operator import GpuOperator as GpuOperator
 from platform_api_python_client.models.gpu_type_capacity import GpuTypeCapacity as GpuTypeCapacity
 from platform_api_python_client.models.http_validation_error import HTTPValidationError as HTTPValidationError
 from platform_api_python_client.models.hardware_instance_response import HardwareInstanceResponse as HardwareInstanceResponse
@@ -293,7 +337,6 @@ from platform_api_python_client.models.hardware_preset_response import HardwareP
 from platform_api_python_client.models.image import Image as Image
 from platform_api_python_client.models.image_pull_secret_credentials import ImagePullSecretCredentials as ImagePullSecretCredentials
 from platform_api_python_client.models.ingress import Ingress as Ingress
-from platform_api_python_client.models.ingress_nginx import IngressNginx as IngressNginx
 from platform_api_python_client.models.insight_list_item_response import InsightListItemResponse as InsightListItemResponse
 from platform_api_python_client.models.insight_resource import InsightResource as InsightResource
 from platform_api_python_client.models.insight_resource_type import InsightResourceType as InsightResourceType
@@ -302,12 +345,10 @@ from platform_api_python_client.models.insight_severity import InsightSeverity a
 from platform_api_python_client.models.insight_status import InsightStatus as InsightStatus
 from platform_api_python_client.models.insight_status_change_response import InsightStatusChangeResponse as InsightStatusChangeResponse
 from platform_api_python_client.models.invite_user_request import InviteUserRequest as InviteUserRequest
-from platform_api_python_client.models.istio import Istio as Istio
-from platform_api_python_client.models.istio_cni_overrides import IstioCniOverrides as IstioCniOverrides
-from platform_api_python_client.models.istio_cni_subchart_overrides import IstioCniSubchartOverrides as IstioCniSubchartOverrides
-from platform_api_python_client.models.istio_overrides import IstioOverrides as IstioOverrides
-from platform_api_python_client.models.keda import Keda as Keda
-from platform_api_python_client.models.kube_prometheus_stack import KubePrometheusStack as KubePrometheusStack
+from platform_api_python_client.models.istio_base import IstioBase as IstioBase
+from platform_api_python_client.models.istio_cni import IstioCNI as IstioCNI
+from platform_api_python_client.models.istio_gateway import IstioGateway as IstioGateway
+from platform_api_python_client.models.istiod import Istiod as Istiod
 from platform_api_python_client.models.list_cluster_capacity_response import ListClusterCapacityResponse as ListClusterCapacityResponse
 from platform_api_python_client.models.list_daily_bill_response import ListDailyBillResponse as ListDailyBillResponse
 from platform_api_python_client.models.list_deployment_revisions_response import ListDeploymentRevisionsResponse as ListDeploymentRevisionsResponse
@@ -322,28 +363,35 @@ from platform_api_python_client.models.list_service_accounts_response import Lis
 from platform_api_python_client.models.list_user_vault_items_response import ListUserVaultItemsResponse as ListUserVaultItemsResponse
 from platform_api_python_client.models.list_volumes_response import ListVolumesResponse as ListVolumesResponse
 from platform_api_python_client.models.location_inner import LocationInner as LocationInner
-from platform_api_python_client.models.longhorn import Longhorn as Longhorn
+from platform_api_python_client.models.mig import MIG as MIG
 from platform_api_python_client.models.metric import Metric as Metric
+from platform_api_python_client.models.metrics import Metrics as Metrics
 from platform_api_python_client.models.metrics_config import MetricsConfig as MetricsConfig
-from platform_api_python_client.models.metrics_server import MetricsServer as MetricsServer
-from platform_api_python_client.models.network_operator import NetworkOperator as NetworkOperator
 from platform_api_python_client.models.object_storage_provider import ObjectStorageProvider as ObjectStorageProvider
-from platform_api_python_client.models.opentelemetry_collector import OpentelemetryCollector as OpentelemetryCollector
+from platform_api_python_client.models.operator import Operator as Operator
 from platform_api_python_client.models.organization_gpu_quota_request import OrganizationGpuQuotaRequest as OrganizationGpuQuotaRequest
 from platform_api_python_client.models.organization_gpu_quota_response import OrganizationGpuQuotaResponse as OrganizationGpuQuotaResponse
+from platform_api_python_client.models.pilot import Pilot as Pilot
 from platform_api_python_client.models.pod_details import PodDetails as PodDetails
 from platform_api_python_client.models.pod_status import PodStatus as PodStatus
 from platform_api_python_client.models.pool import Pool as Pool
 from platform_api_python_client.models.prebuilt_image_response import PrebuiltImageResponse as PrebuiltImageResponse
-from platform_api_python_client.models.prometheus_adapter import PrometheusAdapter as PrometheusAdapter
+from platform_api_python_client.models.prometheus import Prometheus as Prometheus
+from platform_api_python_client.models.prometheus_rules import PrometheusRules as PrometheusRules
+from platform_api_python_client.models.prometheus_spec import PrometheusSpec as PrometheusSpec
+from platform_api_python_client.models.prometheus_values import PrometheusValues as PrometheusValues
+from platform_api_python_client.models.quota import Quota as Quota
+from platform_api_python_client.models.replicas import Replicas as Replicas
+from platform_api_python_client.models.resource_list import ResourceList as ResourceList
+from platform_api_python_client.models.resource_requirements import ResourceRequirements as ResourceRequirements
 from platform_api_python_client.models.revision_pod_details import RevisionPodDetails as RevisionPodDetails
 from platform_api_python_client.models.rollout_status import RolloutStatus as RolloutStatus
 from platform_api_python_client.models.rollout_strategy_params import RolloutStrategyParams as RolloutStrategyParams
+from platform_api_python_client.models.scheduler import Scheduler as Scheduler
 from platform_api_python_client.models.service_account_response import ServiceAccountResponse as ServiceAccountResponse
 from platform_api_python_client.models.service_status import ServiceStatus as ServiceStatus
-from platform_api_python_client.models.spire import Spire as Spire
-from platform_api_python_client.models.spire_crds import SpireCrds as SpireCrds
-from platform_api_python_client.models.teleport_kube_agent import TeleportKubeAgent as TeleportKubeAgent
+from platform_api_python_client.models.toggle import Toggle as Toggle
+from platform_api_python_client.models.toleration import Toleration as Toleration
 from platform_api_python_client.models.unified_get_compute_deployment_response import UnifiedGetComputeDeploymentResponse as UnifiedGetComputeDeploymentResponse
 from platform_api_python_client.models.unified_get_deployment_logs_response import UnifiedGetDeploymentLogsResponse as UnifiedGetDeploymentLogsResponse
 from platform_api_python_client.models.unified_get_deployment_pods_response import UnifiedGetDeploymentPodsResponse as UnifiedGetDeploymentPodsResponse
@@ -363,6 +411,7 @@ from platform_api_python_client.models.unified_write_dynamo_deployment_request i
 from platform_api_python_client.models.unified_write_inference_v3_deployment_request import UnifiedWriteInferenceV3DeploymentRequest as UnifiedWriteInferenceV3DeploymentRequest
 from platform_api_python_client.models.unified_write_job_deployment_request import UnifiedWriteJobDeploymentRequest as UnifiedWriteJobDeploymentRequest
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest as UpdateClusterMetadataRequest
+from platform_api_python_client.models.update_cluster_request import UpdateClusterRequest as UpdateClusterRequest
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse as UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request as UpdateDeploymentStatusV3Request
 from platform_api_python_client.models.update_insight_status_request import UpdateInsightStatusRequest as UpdateInsightStatusRequest
@@ -379,4 +428,5 @@ from platform_api_python_client.models.volume_backend import VolumeBackend as Vo
 from platform_api_python_client.models.volume_mount import VolumeMount as VolumeMount
 from platform_api_python_client.models.volume_status import VolumeStatus as VolumeStatus
 from platform_api_python_client.models.volume_status_response import VolumeStatusResponse as VolumeStatusResponse
+from platform_api_python_client.models.workload import Workload as Workload
 

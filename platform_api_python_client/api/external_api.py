@@ -19,7 +19,6 @@ from datetime import datetime
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, List, Optional
 from typing_extensions import Annotated
-from platform_api_python_client.models.cluster_config import ClusterConfig
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest
 from platform_api_python_client.models.cluster_registration_response import ClusterRegistrationResponse
 from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest
@@ -87,6 +86,7 @@ from platform_api_python_client.models.unified_update_deployment_rollout_request
 from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest
 from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
+from platform_api_python_client.models.update_cluster_request import UpdateClusterRequest
 from platform_api_python_client.models.update_deployment_response import UpdateDeploymentResponse
 from platform_api_python_client.models.update_deployment_status_v3_request import UpdateDeploymentStatusV3Request
 from platform_api_python_client.models.update_insight_status_request import UpdateInsightStatusRequest
@@ -19466,7 +19466,7 @@ class EXTERNALApi:
     def update_cluster_clusters_cluster_id_put(
         self,
         cluster_id: StrictInt,
-        cluster_config: ClusterConfig,
+        update_cluster_request: UpdateClusterRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19482,12 +19482,12 @@ class EXTERNALApi:
     ) -> object:
         """Update Cluster
 
-        Validate a cluster component configuration for an org-owned cluster.  Infra provisioning is not wired yet; ``config.components`` is validated only.
+        Install the requested cluster_base components on an org-owned ccluster cluster.  Applies the cluster's cluster-base component set and returns without waiting for the rollout, so repeating the call is safe. Components left out of the request are uninstalled.
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_config: (required)
-        :type cluster_config: ClusterConfig
+        :param update_cluster_request: (required)
+        :type update_cluster_request: UpdateClusterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19512,7 +19512,7 @@ class EXTERNALApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_config=cluster_config,
+            update_cluster_request=update_cluster_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19538,7 +19538,7 @@ class EXTERNALApi:
     def update_cluster_clusters_cluster_id_put_with_http_info(
         self,
         cluster_id: StrictInt,
-        cluster_config: ClusterConfig,
+        update_cluster_request: UpdateClusterRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19554,12 +19554,12 @@ class EXTERNALApi:
     ) -> ApiResponse[object]:
         """Update Cluster
 
-        Validate a cluster component configuration for an org-owned cluster.  Infra provisioning is not wired yet; ``config.components`` is validated only.
+        Install the requested cluster_base components on an org-owned ccluster cluster.  Applies the cluster's cluster-base component set and returns without waiting for the rollout, so repeating the call is safe. Components left out of the request are uninstalled.
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_config: (required)
-        :type cluster_config: ClusterConfig
+        :param update_cluster_request: (required)
+        :type update_cluster_request: UpdateClusterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19584,7 +19584,7 @@ class EXTERNALApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_config=cluster_config,
+            update_cluster_request=update_cluster_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19610,7 +19610,7 @@ class EXTERNALApi:
     def update_cluster_clusters_cluster_id_put_without_preload_content(
         self,
         cluster_id: StrictInt,
-        cluster_config: ClusterConfig,
+        update_cluster_request: UpdateClusterRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -19626,12 +19626,12 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update Cluster
 
-        Validate a cluster component configuration for an org-owned cluster.  Infra provisioning is not wired yet; ``config.components`` is validated only.
+        Install the requested cluster_base components on an org-owned ccluster cluster.  Applies the cluster's cluster-base component set and returns without waiting for the rollout, so repeating the call is safe. Components left out of the request are uninstalled.
 
         :param cluster_id: (required)
         :type cluster_id: int
-        :param cluster_config: (required)
-        :type cluster_config: ClusterConfig
+        :param update_cluster_request: (required)
+        :type update_cluster_request: UpdateClusterRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -19656,7 +19656,7 @@ class EXTERNALApi:
 
         _param = self._update_cluster_clusters_cluster_id_put_serialize(
             cluster_id=cluster_id,
-            cluster_config=cluster_config,
+            update_cluster_request=update_cluster_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -19677,7 +19677,7 @@ class EXTERNALApi:
     def _update_cluster_clusters_cluster_id_put_serialize(
         self,
         cluster_id,
-        cluster_config,
+        update_cluster_request,
         _request_auth,
         _content_type,
         _headers,
@@ -19705,8 +19705,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if cluster_config is not None:
-            _body_params = cluster_config
+        if update_cluster_request is not None:
+            _body_params = update_cluster_request
 
 
         # set the HTTP header `Accept`

@@ -5560,13 +5560,14 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_cluster_clusters_cluster_id_put**
-> object update_cluster_clusters_cluster_id_put(cluster_id, cluster_config)
+> object update_cluster_clusters_cluster_id_put(cluster_id, update_cluster_request)
 
 Update Cluster
 
-Validate a cluster component configuration for an org-owned cluster.
+Install the requested cluster_base components on an org-owned ccluster cluster.
 
-Infra provisioning is not wired yet; ``config.components`` is validated only.
+Applies the cluster's cluster-base component set and returns without waiting for the rollout, so
+repeating the call is safe. Components left out of the request are uninstalled.
 
 ### Example
 
@@ -5574,7 +5575,7 @@ Infra provisioning is not wired yet; ``config.components`` is validated only.
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.cluster_config import ClusterConfig
+from platform_api_python_client.models.update_cluster_request import UpdateClusterRequest
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -5599,11 +5600,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     cluster_id = 56 # int | 
-    cluster_config = platform_api_python_client.ClusterConfig() # ClusterConfig | 
+    update_cluster_request = platform_api_python_client.UpdateClusterRequest() # UpdateClusterRequest | 
 
     try:
         # Update Cluster
-        api_response = api_instance.update_cluster_clusters_cluster_id_put(cluster_id, cluster_config)
+        api_response = api_instance.update_cluster_clusters_cluster_id_put(cluster_id, update_cluster_request)
         print("The response of EXTERNALApi->update_cluster_clusters_cluster_id_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -5618,7 +5619,7 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cluster_id** | **int**|  | 
- **cluster_config** | [**ClusterConfig**](ClusterConfig.md)|  | 
+ **update_cluster_request** | [**UpdateClusterRequest**](UpdateClusterRequest.md)|  | 
 
 ### Return type
 

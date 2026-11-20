@@ -70,12 +70,13 @@ class GetInferenceV3DeploymentResponse(BaseModel):
     image_pull_ref: Optional[Annotated[int, Field(strict=True, ge=1)]] = None
     image_pull_secret_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=253)]] = Field(default=None, description="Name of a pre-existing image pull Secret in the deployment namespace. Created, refreshed and deleted externally. Mutually exclusive with inline registry credentials and image_pull_ref. Include on updates to retain it; null clears it.")
     backend_protocol: Optional[BackendProtocol] = None
+    request_body_limit_mib: Optional[Annotated[int, Field(le=1024, strict=True, ge=1)]] = Field(default=15, description="Maximum request-body size in MiB, including encoding and multipart overhead. Defaults to 15 MiB; must be between 1 and 1024 MiB.")
     enable_logging: Optional[StrictBool] = True
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "image_pull_secret_name", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["creator_email", "cluster_id", "id", "name", "endpoint_url", "image_url", "type", "status", "created_at", "hardware_instance_id", "revision_number", "chart_revision", "user_annotations", "priority", "volume_mounts", "hf_token_ref", "container_port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "endpoint_certificate_authority", "endpoint_bearer_token", "env_vars", "command", "command_args", "original_command", "image_pull_secret_credentials", "env_vars_refs", "bearer_token_ref", "image_pull_ref", "image_pull_secret_name", "backend_protocol", "request_body_limit_mib", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('image_pull_secret_name', mode="before")
     def image_pull_secret_name_validate_regular_expression(cls, value):
@@ -282,6 +283,7 @@ class GetInferenceV3DeploymentResponse(BaseModel):
             "image_pull_ref": obj.get("image_pull_ref"),
             "image_pull_secret_name": obj.get("image_pull_secret_name"),
             "backend_protocol": obj.get("backend_protocol"),
+            "request_body_limit_mib": obj.get("request_body_limit_mib") if obj.get("request_body_limit_mib") is not None else 15,
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else True,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,

@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **hf_token** | **str** |  | [optional] 
 **env_vars_refs** | **object** |  | [optional] 
 **backend_protocol** | [**BackendProtocol**](BackendProtocol.md) |  | [optional] 
+**request_body_limit_mib** | **int** | Maximum request-body size in MiB, including encoding and multipart overhead. Defaults to 15 MiB; must be between 1 and 1024 MiB. | [optional] [default to 15]
 **enable_logging** | **bool** |  | [optional] [default to False]
 **enable_node_model_cache** | **bool** |  | [optional] [default to False]
 **session_affinity** | **bool** | Enable best-effort sticky routing via the &#x60;X-Session-Id&#x60; request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state. | [optional] [default to False]

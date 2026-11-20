@@ -61,12 +61,13 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
     hf_token: Optional[StrictStr] = None
     env_vars_refs: Optional[Dict[str, Any]] = None
     backend_protocol: Optional[BackendProtocol] = None
+    request_body_limit_mib: Optional[Annotated[int, Field(le=1024, strict=True, ge=1)]] = Field(default=15, description="Maximum request-body size in MiB, including encoding and multipart overhead. Defaults to 15 MiB; must be between 1 and 1024 MiB.")
     enable_logging: Optional[StrictBool] = False
     enable_node_model_cache: Optional[StrictBool] = False
     session_affinity: Optional[StrictBool] = Field(default=False, description="Enable best-effort sticky routing via the `X-Session-Id` request header. Requests carrying the same header value land on the same pod, improving KV cache reuse for agentic workloads. Requests without the header are routed at random. Affinity is NOT durable: scaling, rollouts, restarts, or readiness-probe transitions will remap sessions to different pods. Do not use for irreplaceable in-pod state.")
     config_file: Optional[ConfigFileMount] = None
     metrics: Optional[MetricsConfig] = None
-    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
+    __properties: ClassVar[List[str]] = ["max_surge", "max_unavailable", "name", "cluster_id", "hardware_instance_id", "user_annotations", "chart_revision", "volume_mounts", "priority", "hf_token_ref", "image_url", "image_pull_secret_credentials", "image_pull_ref", "image_pull_secret_name", "port", "min_replicas", "max_replicas", "concurrency", "cooldown_period", "healthcheck", "env_vars", "command", "endpoint_bearer_token", "bearer_token_ref", "endpoint_certificate_authority", "hf_token", "env_vars_refs", "backend_protocol", "request_body_limit_mib", "enable_logging", "enable_node_model_cache", "session_affinity", "config_file", "metrics"]
 
     @field_validator('name', mode="before")
     def name_validate_regular_expression(cls, value):
@@ -274,6 +275,7 @@ class CreateInferenceV3DeploymentRequest(BaseModel):
             "hf_token": obj.get("hf_token"),
             "env_vars_refs": obj.get("env_vars_refs"),
             "backend_protocol": obj.get("backend_protocol"),
+            "request_body_limit_mib": obj.get("request_body_limit_mib") if obj.get("request_body_limit_mib") is not None else 15,
             "enable_logging": obj.get("enable_logging") if obj.get("enable_logging") is not None else False,
             "enable_node_model_cache": obj.get("enable_node_model_cache") if obj.get("enable_node_model_cache") is not None else False,
             "session_affinity": obj.get("session_affinity") if obj.get("session_affinity") is not None else False,

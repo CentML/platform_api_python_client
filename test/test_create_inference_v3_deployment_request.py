@@ -74,6 +74,7 @@ class TestCreateInferenceV3DeploymentRequest(unittest.TestCase):
                 hf_token = '',
                 env_vars_refs = platform_api_python_client.models.env_vars_refs.Env Vars Refs(),
                 backend_protocol = 'HTTP',
+                request_body_limit_mib = 1.0,
                 enable_logging = True,
                 enable_node_model_cache = True,
                 session_affinity = True,

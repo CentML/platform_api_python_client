@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollouts_values import CclusterCatalogsClusterBaseArgoRolloutsValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_cert_manager_values import CclusterCatalogsClusterBaseCertManagerValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_dynamo_platform_values import CclusterCatalogsClusterBaseDynamoPlatformValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_gpu_operator_values import CclusterCatalogsClusterBaseGpuOperatorValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_ingress_nginx_values import CclusterCatalogsClusterBaseIngressNginxValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_istio_values import CclusterCatalogsClusterBaseIstioValues
@@ -34,7 +35,7 @@ from pydantic_core import to_jsonable_python
 
 class ClusterBaseComponents(BaseModel):
     """
-    The cluster_base components to install on a ccluster cluster, each as its chart's values.  A component is installed only when its field is set (``{}`` for the catalog defaults), with exactly the values given. One left out is not installed, and is uninstalled if an earlier update installed it. final_stack is required.  The values use the chart's own keys and may include keys the typed model doesn't list; they reach the chart unchanged. Inference deployments on GKE need ingress_nginx's `ingress-nginx.controller.podLabels` (`sidecar.istio.io/inject: \"true\"`), istio's CNI paths and gpu_operator's GKE driver paths. An unknown component name is rejected rather than read as one left out, which would uninstall it.  With the generated Python client, build the request with `UpdateClusterRequest.from_dict(...)`: its model constructors drop the keys a typed model doesn't list (CentML/platform#4946).
+    The cluster_base components to install on a ccluster cluster, each as its chart's values.  A component is installed only when its field is set (``{}`` for the catalog defaults), with exactly the values given. One left out is not installed, and is uninstalled if an earlier update installed it. final_stack is required.  The values use the chart's own keys and may include keys the typed model doesn't list; they reach the chart unchanged. Inference deployments on GKE need ingress_nginx's `ingress-nginx.controller.podLabels` (`sidecar.istio.io/inject: \"true\"`), istio's CNI paths and gpu_operator's GKE driver paths. Dynamo deployments need dynamo_platform, whose NATS volume claims the cluster's default StorageClass. An unknown component name is rejected rather than read as one left out, which would uninstall it.  With the generated Python client, build the request with `UpdateClusterRequest.from_dict(...)`: its model constructors drop the keys a typed model doesn't list (CentML/platform#4946).
     """ # noqa: E501
     kube_prometheus_stack: Optional[CclusterCatalogsClusterBaseKubePrometheusStackValues] = None
     istio: Optional[CclusterCatalogsClusterBaseIstioValues] = None
@@ -45,8 +46,9 @@ class ClusterBaseComponents(BaseModel):
     gpu_operator: Optional[CclusterCatalogsClusterBaseGpuOperatorValues] = None
     kai_scheduler: Optional[CclusterCatalogsClusterBaseKaiSchedulerValues] = None
     metrics_server: Optional[CclusterCatalogsClusterBaseMetricsServerValues] = None
+    dynamo_platform: Optional[CclusterCatalogsClusterBaseDynamoPlatformValues] = None
     final_stack: Dict[str, Any] = Field(description="Values of the catalogs/cluster_base/final_stack chart, generated from its Go package.")
-    __properties: ClassVar[List[str]] = ["kube_prometheus_stack", "istio", "cert_manager", "ingress_nginx", "keda", "argo_rollouts", "gpu_operator", "kai_scheduler", "metrics_server", "final_stack"]
+    __properties: ClassVar[List[str]] = ["kube_prometheus_stack", "istio", "cert_manager", "ingress_nginx", "keda", "argo_rollouts", "gpu_operator", "kai_scheduler", "metrics_server", "dynamo_platform", "final_stack"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -114,6 +116,9 @@ class ClusterBaseComponents(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of metrics_server
         if self.metrics_server:
             _dict['metrics_server'] = self.metrics_server.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of dynamo_platform
+        if self.dynamo_platform:
+            _dict['dynamo_platform'] = self.dynamo_platform.to_dict()
         # set to None if kube_prometheus_stack (nullable) is None
         # and model_fields_set contains the field
         if self.kube_prometheus_stack is None and "kube_prometheus_stack" in self.model_fields_set:
@@ -159,6 +164,11 @@ class ClusterBaseComponents(BaseModel):
         if self.metrics_server is None and "metrics_server" in self.model_fields_set:
             _dict['metrics_server'] = None
 
+        # set to None if dynamo_platform (nullable) is None
+        # and model_fields_set contains the field
+        if self.dynamo_platform is None and "dynamo_platform" in self.model_fields_set:
+            _dict['dynamo_platform'] = None
+
         return _dict
 
     @classmethod
@@ -180,6 +190,7 @@ class ClusterBaseComponents(BaseModel):
             "gpu_operator": CclusterCatalogsClusterBaseGpuOperatorValues.from_dict(obj["gpu_operator"]) if obj.get("gpu_operator") is not None else None,
             "kai_scheduler": CclusterCatalogsClusterBaseKaiSchedulerValues.from_dict(obj["kai_scheduler"]) if obj.get("kai_scheduler") is not None else None,
             "metrics_server": CclusterCatalogsClusterBaseMetricsServerValues.from_dict(obj["metrics_server"]) if obj.get("metrics_server") is not None else None,
+            "dynamo_platform": CclusterCatalogsClusterBaseDynamoPlatformValues.from_dict(obj["dynamo_platform"]) if obj.get("dynamo_platform") is not None else None,
             "final_stack": obj.get("final_stack")
         })
         return _obj

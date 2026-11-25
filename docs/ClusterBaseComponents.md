@@ -1,6 +1,6 @@
 # ClusterBaseComponents
 
-The cluster_base components to install on a ccluster cluster, each as its chart's values.  A component is installed only when its field is set (``{}`` for the catalog defaults), with exactly the values given. One left out is not installed, and is uninstalled if an earlier update installed it. final_stack is required.  The values use the chart's own keys and may include keys the typed model doesn't list; they reach the chart unchanged. Inference deployments on GKE need ingress_nginx's `ingress-nginx.controller.podLabels` (`sidecar.istio.io/inject: \"true\"`), istio's CNI paths and gpu_operator's GKE driver paths. An unknown component name is rejected rather than read as one left out, which would uninstall it.  With the generated Python client, build the request with `UpdateClusterRequest.from_dict(...)`: its model constructors drop the keys a typed model doesn't list (CentML/platform#4946).
+The cluster_base components to install on a ccluster cluster, each as its chart's values.  A component is installed only when its field is set (``{}`` for the catalog defaults), with exactly the values given. One left out is not installed, and is uninstalled if an earlier update installed it. final_stack is required.  The values use the chart's own keys and may include keys the typed model doesn't list; they reach the chart unchanged. Inference deployments on GKE need ingress_nginx's `ingress-nginx.controller.podLabels` (`sidecar.istio.io/inject: \"true\"`), istio's CNI paths and gpu_operator's GKE driver paths. Dynamo deployments need dynamo_platform, whose NATS volume claims the cluster's default StorageClass. An unknown component name is rejected rather than read as one left out, which would uninstall it.  With the generated Python client, build the request with `UpdateClusterRequest.from_dict(...)`: its model constructors drop the keys a typed model doesn't list (CentML/platform#4946).
 
 ## Properties
 
@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **gpu_operator** | [**CclusterCatalogsClusterBaseGpuOperatorValues**](CclusterCatalogsClusterBaseGpuOperatorValues.md) |  | [optional] 
 **kai_scheduler** | [**CclusterCatalogsClusterBaseKaiSchedulerValues**](CclusterCatalogsClusterBaseKaiSchedulerValues.md) |  | [optional] 
 **metrics_server** | [**CclusterCatalogsClusterBaseMetricsServerValues**](CclusterCatalogsClusterBaseMetricsServerValues.md) |  | [optional] 
+**dynamo_platform** | [**CclusterCatalogsClusterBaseDynamoPlatformValues**](CclusterCatalogsClusterBaseDynamoPlatformValues.md) |  | [optional] 
 **final_stack** | **Dict[str, object]** | Values of the catalogs/cluster_base/final_stack chart, generated from its Go package. | 
 
 ## Example

@@ -45,6 +45,7 @@ class TestUpdateClusterRequest(unittest.TestCase):
                     gpu_operator = null, 
                     kai_scheduler = null, 
                     metrics_server = null, 
+                    dynamo_platform = null, 
                     final_stack = { }, )
             )
         else:
@@ -59,6 +60,7 @@ class TestUpdateClusterRequest(unittest.TestCase):
                     gpu_operator = null, 
                     kai_scheduler = null, 
                     metrics_server = null, 
+                    dynamo_platform = null, 
                     final_stack = { }, ),
         )
         """

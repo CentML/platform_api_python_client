@@ -28,6 +28,7 @@ Method | HTTP request | Description
 [**generate_service_account_secret_service_accounts_workos_id_secrets_post**](EXTERNALApi.md#generate_service_account_secret_service_accounts_workos_id_secrets_post) | **POST** /service-accounts/{workos_id}/secrets | Generate Service Account Secret
 [**get_all_user_vault_items_endpoint_user_vault_get**](EXTERNALApi.md#get_all_user_vault_items_endpoint_user_vault_get) | **GET** /user_vault | Get All User Vault Items Endpoint
 [**get_all_volumes_endpoint_volumes_get**](EXTERNALApi.md#get_all_volumes_endpoint_volumes_get) | **GET** /volumes | Get All Volumes Endpoint
+[**get_cluster_status_clusters_cluster_id_status_get**](EXTERNALApi.md#get_cluster_status_clusters_cluster_id_status_get) | **GET** /clusters/{cluster_id}/status | Get Cluster Status
 [**get_clusters_clusters_get**](EXTERNALApi.md#get_clusters_clusters_get) | **GET** /clusters | Get Clusters
 [**get_compute_deployment_deployments_compute_deployment_id_get**](EXTERNALApi.md#get_compute_deployment_deployments_compute_deployment_id_get) | **GET** /deployments/compute/{deployment_id} | Get Compute Deployment
 [**get_credits_credits_get**](EXTERNALApi.md#get_credits_credits_get) | **GET** /credits | Get Credits
@@ -58,6 +59,7 @@ Method | HTTP request | Description
 [**get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get**](EXTERNALApi.md#get_unified_deployment_pods_deployments_deployment_id_revisions_revision_number_pods_get) | **GET** /deployments/{deployment_id}/revisions/{revision_number}/pods | Get Unified Deployment Pods
 [**get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get**](EXTERNALApi.md#get_unified_deployment_revision_deployments_deployment_id_revisions_revision_number_get) | **GET** /deployments/{deployment_id}/revisions/{revision_number} | Get Unified Deployment Revision
 [**get_unified_deployment_rollout_deployments_deployment_id_rollout_get**](EXTERNALApi.md#get_unified_deployment_rollout_deployments_deployment_id_rollout_get) | **GET** /deployments/{deployment_id}/rollout | Get Unified Deployment Rollout
+[**get_unified_deployment_status_deployments_deployment_id_status_get**](EXTERNALApi.md#get_unified_deployment_status_deployments_deployment_id_status_get) | **GET** /deployments/{deployment_id}/status | Get Unified Deployment Status
 [**get_unified_deployment_usage_deployments_deployment_id_usage_get**](EXTERNALApi.md#get_unified_deployment_usage_deployments_deployment_id_usage_get) | **GET** /deployments/{deployment_id}/usage | Get Unified Deployment Usage
 [**get_usage_daily_bills_get**](EXTERNALApi.md#get_usage_daily_bills_get) | **GET** /daily_bills | Get Usage
 [**get_usage_deployments_usage_deployment_id_get**](EXTERNALApi.md#get_usage_deployments_usage_deployment_id_get) | **GET** /deployments/usage/{deployment_id} | Get Usage
@@ -1888,6 +1890,85 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_cluster_status_clusters_cluster_id_status_get**
+> GetClusterStatusResponse get_cluster_status_clusters_cluster_id_status_get(cluster_id)
+
+Get Cluster Status
+
+Return whether an org-owned ccluster cluster is ready, and if not, why; any member may read it.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.get_cluster_status_response import GetClusterStatusResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    cluster_id = 56 # int | 
+
+    try:
+        # Get Cluster Status
+        api_response = api_instance.get_cluster_status_clusters_cluster_id_status_get(cluster_id)
+        print("The response of EXTERNALApi->get_cluster_status_clusters_cluster_id_status_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_cluster_status_clusters_cluster_id_status_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cluster_id** | **int**|  | 
+
+### Return type
+
+[**GetClusterStatusResponse**](GetClusterStatusResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4178,7 +4259,8 @@ Name | Type | Description  | Notes
 
 Get Unified Deployment Rollout
 
-Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+Get whether a ccl_inference deployment's rollout is paused, and its status. A deployment that is not ACTIVE has
+no rollout: it reads as not paused and Missing.
 
 ### Example
 
@@ -4233,6 +4315,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UnifiedGetDeploymentRolloutResponse**](UnifiedGetDeploymentRolloutResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_unified_deployment_status_deployments_deployment_id_status_get**
+> UnifiedGetDeploymentStatusResponse get_unified_deployment_status_deployments_deployment_id_status_get(deployment_id)
+
+Get Unified Deployment Status
+
+Get a deployment's desired status and, when it is ACTIVE, whether its latest apply is live and the health of
+each component. Take the pods from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+### Example
+
+* Bearer Authentication (HTTPBearer):
+
+```python
+import platform_api_python_client
+from platform_api_python_client.models.unified_get_deployment_status_response import UnifiedGetDeploymentStatusResponse
+from platform_api_python_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = platform_api_python_client.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: HTTPBearer
+configuration = platform_api_python_client.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with platform_api_python_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = platform_api_python_client.EXTERNALApi(api_client)
+    deployment_id = 56 # int | 
+
+    try:
+        # Get Unified Deployment Status
+        api_response = api_instance.get_unified_deployment_status_deployments_deployment_id_status_get(deployment_id)
+        print("The response of EXTERNALApi->get_unified_deployment_status_deployments_deployment_id_status_get:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EXTERNALApi->get_unified_deployment_status_deployments_deployment_id_status_get: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deployment_id** | **int**|  | 
+
+### Return type
+
+[**UnifiedGetDeploymentStatusResponse**](UnifiedGetDeploymentStatusResponse.md)
 
 ### Authorization
 
@@ -6620,7 +6782,11 @@ Name | Type | Description  | Notes
 
 Update Unified Deployment Rollout
 
-Pause or resume the in-flight rollout; not stored. Not implemented yet.
+Pause or resume a ccl_inference deployment's rollout, as PUT /deployments/status_v3/{deployment_id} does with
+rollout_status. Not stored: the next update, revision rollout or resume clears a pause.
+
+A pause takes effect only while the rollout is Progressing or Degraded, and a resume only while it is paused;
+anything else, and a deployment that is not ACTIVE, changes nothing.
 
 ### Example
 
@@ -6698,11 +6864,12 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_unified_deployment_status_deployments_deployment_id_status_put**
-> DeploymentStatusResponse update_unified_deployment_status_deployments_deployment_id_status_put(deployment_id, deployment_status_request)
+> UnifiedGetDeploymentStatusResponse update_unified_deployment_status_deployments_deployment_id_status_put(deployment_id, unified_update_deployment_status_request)
 
 Update Unified Deployment Status
 
-Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.
+Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does, and return its status as
+GET /deployments/{deployment_id}/status does.
 
 Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster.
 DELETE /deployments/{deployment_id} deletes them.
@@ -6713,8 +6880,8 @@ DELETE /deployments/{deployment_id} deletes them.
 
 ```python
 import platform_api_python_client
-from platform_api_python_client.models.deployment_status_request import DeploymentStatusRequest
-from platform_api_python_client.models.deployment_status_response import DeploymentStatusResponse
+from platform_api_python_client.models.unified_get_deployment_status_response import UnifiedGetDeploymentStatusResponse
+from platform_api_python_client.models.unified_update_deployment_status_request import UnifiedUpdateDeploymentStatusRequest
 from platform_api_python_client.rest import ApiException
 from pprint import pprint
 
@@ -6739,11 +6906,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = platform_api_python_client.EXTERNALApi(api_client)
     deployment_id = 56 # int | 
-    deployment_status_request = platform_api_python_client.DeploymentStatusRequest() # DeploymentStatusRequest | 
+    unified_update_deployment_status_request = platform_api_python_client.UnifiedUpdateDeploymentStatusRequest() # UnifiedUpdateDeploymentStatusRequest | 
 
     try:
         # Update Unified Deployment Status
-        api_response = api_instance.update_unified_deployment_status_deployments_deployment_id_status_put(deployment_id, deployment_status_request)
+        api_response = api_instance.update_unified_deployment_status_deployments_deployment_id_status_put(deployment_id, unified_update_deployment_status_request)
         print("The response of EXTERNALApi->update_unified_deployment_status_deployments_deployment_id_status_put:\n")
         pprint(api_response)
     except Exception as e:
@@ -6758,11 +6925,11 @@ with platform_api_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deployment_id** | **int**|  | 
- **deployment_status_request** | [**DeploymentStatusRequest**](DeploymentStatusRequest.md)|  | 
+ **unified_update_deployment_status_request** | [**UnifiedUpdateDeploymentStatusRequest**](UnifiedUpdateDeploymentStatusRequest.md)|  | 
 
 ### Return type
 
-[**DeploymentStatusResponse**](DeploymentStatusResponse.md)
+[**UnifiedGetDeploymentStatusResponse**](UnifiedGetDeploymentStatusResponse.md)
 
 ### Authorization
 

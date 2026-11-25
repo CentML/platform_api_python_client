@@ -194,6 +194,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """
         pass
 
+    def test_get_cluster_status_clusters_cluster_id_status_get(self) -> None:
+        """Test case for get_cluster_status_clusters_cluster_id_status_get
+
+        Get Cluster Status
+        """
+        pass
+
     def test_get_clusters_clusters_get(self) -> None:
         """Test case for get_clusters_clusters_get
 
@@ -401,6 +408,13 @@ class TestEXTERNALApi(unittest.TestCase):
         """Test case for get_unified_deployment_rollout_deployments_deployment_id_rollout_get
 
         Get Unified Deployment Rollout
+        """
+        pass
+
+    def test_get_unified_deployment_status_deployments_deployment_id_status_get(self) -> None:
+        """Test case for get_unified_deployment_status_deployments_deployment_id_status_get
+
+        Get Unified Deployment Status
         """
         pass
 

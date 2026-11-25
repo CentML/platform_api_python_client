@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.41.0"
+__version__ = "4.42.0"
 
 # Define package exports
 __all__ = [
@@ -40,6 +40,7 @@ __all__ = [
     "CclusterCatalogsClusterBaseArgoRolloutsValues",
     "CclusterCatalogsClusterBaseCertManagerChartValues",
     "CclusterCatalogsClusterBaseCertManagerValues",
+    "CclusterCatalogsClusterBaseDynamoPlatformValues",
     "CclusterCatalogsClusterBaseGpuOperatorChartValues",
     "CclusterCatalogsClusterBaseGpuOperatorValues",
     "CclusterCatalogsClusterBaseIngressNginxChartValues",
@@ -60,6 +61,8 @@ __all__ = [
     "ClusterCredential",
     "ClusterRegistrationRequest",
     "ClusterRegistrationResponse",
+    "ClusterStatus",
+    "ComponentHealth",
     "ConfigFileMount",
     "CreateComputeDeploymentRequest",
     "CreateComputeDeploymentResponse",
@@ -107,6 +110,7 @@ __all__ = [
     "Env",
     "GenerateServiceAccountSecretResponse",
     "GetClusterResponse",
+    "GetClusterStatusResponse",
     "GetComputeDeploymentResponse",
     "GetDeploymentLogResponse",
     "GetDeploymentLogV4Response",
@@ -183,18 +187,21 @@ __all__ = [
     "ServiceStatus",
     "Toggle",
     "Toleration",
+    "UnifiedComponentStatus",
     "UnifiedGetComputeDeploymentResponse",
     "UnifiedGetDeploymentLogsResponse",
     "UnifiedGetDeploymentPodsResponse",
     "UnifiedGetDeploymentResponse",
     "UnifiedGetDeploymentRevisionResponse",
     "UnifiedGetDeploymentRolloutResponse",
+    "UnifiedGetDeploymentStatusResponse",
     "UnifiedGetDeploymentUsageResponse",
     "UnifiedGetDynamoDeploymentResponse",
     "UnifiedGetInferenceV3DeploymentResponse",
     "UnifiedGetJobDeploymentResponse",
     "UnifiedListDeploymentRevisionsResponse",
     "UnifiedUpdateDeploymentRolloutRequest",
+    "UnifiedUpdateDeploymentStatusRequest",
     "UnifiedWriteComputeDeploymentRequest",
     "UnifiedWriteDeploymentRequest",
     "UnifiedWriteDeploymentResponse",
@@ -249,6 +256,7 @@ from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollo
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_argo_rollouts_values import CclusterCatalogsClusterBaseArgoRolloutsValues as CclusterCatalogsClusterBaseArgoRolloutsValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_cert_manager_chart_values import CclusterCatalogsClusterBaseCertManagerChartValues as CclusterCatalogsClusterBaseCertManagerChartValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_cert_manager_values import CclusterCatalogsClusterBaseCertManagerValues as CclusterCatalogsClusterBaseCertManagerValues
+from platform_api_python_client.models.ccluster_catalogs_cluster_base_dynamo_platform_values import CclusterCatalogsClusterBaseDynamoPlatformValues as CclusterCatalogsClusterBaseDynamoPlatformValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_gpu_operator_chart_values import CclusterCatalogsClusterBaseGpuOperatorChartValues as CclusterCatalogsClusterBaseGpuOperatorChartValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_gpu_operator_values import CclusterCatalogsClusterBaseGpuOperatorValues as CclusterCatalogsClusterBaseGpuOperatorValues
 from platform_api_python_client.models.ccluster_catalogs_cluster_base_ingress_nginx_chart_values import CclusterCatalogsClusterBaseIngressNginxChartValues as CclusterCatalogsClusterBaseIngressNginxChartValues
@@ -269,6 +277,8 @@ from platform_api_python_client.models.cluster_capacity_response import ClusterC
 from platform_api_python_client.models.cluster_credential import ClusterCredential as ClusterCredential
 from platform_api_python_client.models.cluster_registration_request import ClusterRegistrationRequest as ClusterRegistrationRequest
 from platform_api_python_client.models.cluster_registration_response import ClusterRegistrationResponse as ClusterRegistrationResponse
+from platform_api_python_client.models.cluster_status import ClusterStatus as ClusterStatus
+from platform_api_python_client.models.component_health import ComponentHealth as ComponentHealth
 from platform_api_python_client.models.config_file_mount import ConfigFileMount as ConfigFileMount
 from platform_api_python_client.models.create_compute_deployment_request import CreateComputeDeploymentRequest as CreateComputeDeploymentRequest
 from platform_api_python_client.models.create_compute_deployment_response import CreateComputeDeploymentResponse as CreateComputeDeploymentResponse
@@ -316,6 +326,7 @@ from platform_api_python_client.models.dynamo_worker_pools import DynamoWorkerPo
 from platform_api_python_client.models.env import Env as Env
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse as GenerateServiceAccountSecretResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse as GetClusterResponse
+from platform_api_python_client.models.get_cluster_status_response import GetClusterStatusResponse as GetClusterStatusResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse as GetComputeDeploymentResponse
 from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse as GetDeploymentLogResponse
 from platform_api_python_client.models.get_deployment_log_v4_response import GetDeploymentLogV4Response as GetDeploymentLogV4Response
@@ -392,18 +403,21 @@ from platform_api_python_client.models.service_account_response import ServiceAc
 from platform_api_python_client.models.service_status import ServiceStatus as ServiceStatus
 from platform_api_python_client.models.toggle import Toggle as Toggle
 from platform_api_python_client.models.toleration import Toleration as Toleration
+from platform_api_python_client.models.unified_component_status import UnifiedComponentStatus as UnifiedComponentStatus
 from platform_api_python_client.models.unified_get_compute_deployment_response import UnifiedGetComputeDeploymentResponse as UnifiedGetComputeDeploymentResponse
 from platform_api_python_client.models.unified_get_deployment_logs_response import UnifiedGetDeploymentLogsResponse as UnifiedGetDeploymentLogsResponse
 from platform_api_python_client.models.unified_get_deployment_pods_response import UnifiedGetDeploymentPodsResponse as UnifiedGetDeploymentPodsResponse
 from platform_api_python_client.models.unified_get_deployment_response import UnifiedGetDeploymentResponse as UnifiedGetDeploymentResponse
 from platform_api_python_client.models.unified_get_deployment_revision_response import UnifiedGetDeploymentRevisionResponse as UnifiedGetDeploymentRevisionResponse
 from platform_api_python_client.models.unified_get_deployment_rollout_response import UnifiedGetDeploymentRolloutResponse as UnifiedGetDeploymentRolloutResponse
+from platform_api_python_client.models.unified_get_deployment_status_response import UnifiedGetDeploymentStatusResponse as UnifiedGetDeploymentStatusResponse
 from platform_api_python_client.models.unified_get_deployment_usage_response import UnifiedGetDeploymentUsageResponse as UnifiedGetDeploymentUsageResponse
 from platform_api_python_client.models.unified_get_dynamo_deployment_response import UnifiedGetDynamoDeploymentResponse as UnifiedGetDynamoDeploymentResponse
 from platform_api_python_client.models.unified_get_inference_v3_deployment_response import UnifiedGetInferenceV3DeploymentResponse as UnifiedGetInferenceV3DeploymentResponse
 from platform_api_python_client.models.unified_get_job_deployment_response import UnifiedGetJobDeploymentResponse as UnifiedGetJobDeploymentResponse
 from platform_api_python_client.models.unified_list_deployment_revisions_response import UnifiedListDeploymentRevisionsResponse as UnifiedListDeploymentRevisionsResponse
 from platform_api_python_client.models.unified_update_deployment_rollout_request import UnifiedUpdateDeploymentRolloutRequest as UnifiedUpdateDeploymentRolloutRequest
+from platform_api_python_client.models.unified_update_deployment_status_request import UnifiedUpdateDeploymentStatusRequest as UnifiedUpdateDeploymentStatusRequest
 from platform_api_python_client.models.unified_write_compute_deployment_request import UnifiedWriteComputeDeploymentRequest as UnifiedWriteComputeDeploymentRequest
 from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest as UnifiedWriteDeploymentRequest
 from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse as UnifiedWriteDeploymentResponse

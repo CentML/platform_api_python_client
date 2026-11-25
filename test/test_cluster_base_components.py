@@ -44,6 +44,7 @@ class TestClusterBaseComponents(unittest.TestCase):
                 gpu_operator = { },
                 kai_scheduler = { },
                 metrics_server = { },
+                dynamo_platform = { },
                 final_stack = { }
             )
         else:

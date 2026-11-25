@@ -42,6 +42,7 @@ from platform_api_python_client.models.deployment_status_response import Deploym
 from platform_api_python_client.models.deployment_status_v3_response import DeploymentStatusV3Response
 from platform_api_python_client.models.generate_service_account_secret_response import GenerateServiceAccountSecretResponse
 from platform_api_python_client.models.get_cluster_response import GetClusterResponse
+from platform_api_python_client.models.get_cluster_status_response import GetClusterStatusResponse
 from platform_api_python_client.models.get_compute_deployment_response import GetComputeDeploymentResponse
 from platform_api_python_client.models.get_deployment_log_response import GetDeploymentLogResponse
 from platform_api_python_client.models.get_deployment_log_v4_response import GetDeploymentLogV4Response
@@ -80,9 +81,11 @@ from platform_api_python_client.models.unified_get_deployment_pods_response impo
 from platform_api_python_client.models.unified_get_deployment_response import UnifiedGetDeploymentResponse
 from platform_api_python_client.models.unified_get_deployment_revision_response import UnifiedGetDeploymentRevisionResponse
 from platform_api_python_client.models.unified_get_deployment_rollout_response import UnifiedGetDeploymentRolloutResponse
+from platform_api_python_client.models.unified_get_deployment_status_response import UnifiedGetDeploymentStatusResponse
 from platform_api_python_client.models.unified_get_deployment_usage_response import UnifiedGetDeploymentUsageResponse
 from platform_api_python_client.models.unified_list_deployment_revisions_response import UnifiedListDeploymentRevisionsResponse
 from platform_api_python_client.models.unified_update_deployment_rollout_request import UnifiedUpdateDeploymentRolloutRequest
+from platform_api_python_client.models.unified_update_deployment_status_request import UnifiedUpdateDeploymentStatusRequest
 from platform_api_python_client.models.unified_write_deployment_request import UnifiedWriteDeploymentRequest
 from platform_api_python_client.models.unified_write_deployment_response import UnifiedWriteDeploymentResponse
 from platform_api_python_client.models.update_cluster_metadata_request import UpdateClusterMetadataRequest
@@ -6472,6 +6475,270 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/volumes',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_cluster_status_clusters_cluster_id_status_get(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetClusterStatusResponse:
+        """Get Cluster Status
+
+        Return whether an org-owned ccluster cluster is ready, and if not, why; any member may read it.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_cluster_status_clusters_cluster_id_status_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_cluster_status_clusters_cluster_id_status_get_with_http_info(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetClusterStatusResponse]:
+        """Get Cluster Status
+
+        Return whether an org-owned ccluster cluster is ready, and if not, why; any member may read it.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_cluster_status_clusters_cluster_id_status_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_cluster_status_clusters_cluster_id_status_get_without_preload_content(
+        self,
+        cluster_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Cluster Status
+
+        Return whether an org-owned ccluster cluster is ready, and if not, why; any member may read it.
+
+        :param cluster_id: (required)
+        :type cluster_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_cluster_status_clusters_cluster_id_status_get_serialize(
+            cluster_id=cluster_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClusterStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_cluster_status_clusters_cluster_id_status_get_serialize(
+        self,
+        cluster_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if cluster_id is not None:
+            _path_params['cluster_id'] = cluster_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/clusters/{cluster_id}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14547,7 +14814,7 @@ class EXTERNALApi:
     ) -> UnifiedGetDeploymentRolloutResponse:
         """Get Unified Deployment Rollout
 
-        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+        Get whether a ccl_inference deployment's rollout is paused, and its status. A deployment that is not ACTIVE has no rollout: it reads as not paused and Missing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -14615,7 +14882,7 @@ class EXTERNALApi:
     ) -> ApiResponse[UnifiedGetDeploymentRolloutResponse]:
         """Get Unified Deployment Rollout
 
-        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+        Get whether a ccl_inference deployment's rollout is paused, and its status. A deployment that is not ACTIVE has no rollout: it reads as not paused and Missing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -14683,7 +14950,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Get Unified Deployment Rollout
 
-        Get whether the in-flight rollout is paused, and its status. Not implemented yet.
+        Get whether a ccl_inference deployment's rollout is paused, and its status. A deployment that is not ACTIVE has no rollout: it reads as not paused and Missing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -14777,6 +15044,270 @@ class EXTERNALApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/deployments/{deployment_id}/rollout',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_unified_deployment_status_deployments_deployment_id_status_get(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UnifiedGetDeploymentStatusResponse:
+        """Get Unified Deployment Status
+
+        Get a deployment's desired status and, when it is ACTIVE, whether its latest apply is live and the health of each component. Take the pods from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_status_deployments_deployment_id_status_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_unified_deployment_status_deployments_deployment_id_status_get_with_http_info(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UnifiedGetDeploymentStatusResponse]:
+        """Get Unified Deployment Status
+
+        Get a deployment's desired status and, when it is ACTIVE, whether its latest apply is live and the health of each component. Take the pods from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_status_deployments_deployment_id_status_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_unified_deployment_status_deployments_deployment_id_status_get_without_preload_content(
+        self,
+        deployment_id: StrictInt,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Unified Deployment Status
+
+        Get a deployment's desired status and, when it is ACTIVE, whether its latest apply is live and the health of each component. Take the pods from GET /deployments/{deployment_id}/revisions/{revision_number}/pods.
+
+        :param deployment_id: (required)
+        :type deployment_id: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_unified_deployment_status_deployments_deployment_id_status_get_serialize(
+            deployment_id=deployment_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UnifiedGetDeploymentStatusResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_unified_deployment_status_deployments_deployment_id_status_get_serialize(
+        self,
+        deployment_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if deployment_id is not None:
+            _path_params['deployment_id'] = deployment_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'HTTPBearer'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/deployments/{deployment_id}/status',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -23401,7 +23932,7 @@ class EXTERNALApi:
     ) -> UnifiedGetDeploymentRolloutResponse:
         """Update Unified Deployment Rollout
 
-        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+        Pause or resume a ccl_inference deployment's rollout, as PUT /deployments/status_v3/{deployment_id} does with rollout_status. Not stored: the next update, revision rollout or resume clears a pause.  A pause takes effect only while the rollout is Progressing or Degraded, and a resume only while it is paused; anything else, and a deployment that is not ACTIVE, changes nothing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -23473,7 +24004,7 @@ class EXTERNALApi:
     ) -> ApiResponse[UnifiedGetDeploymentRolloutResponse]:
         """Update Unified Deployment Rollout
 
-        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+        Pause or resume a ccl_inference deployment's rollout, as PUT /deployments/status_v3/{deployment_id} does with rollout_status. Not stored: the next update, revision rollout or resume clears a pause.  A pause takes effect only while the rollout is Progressing or Degraded, and a resume only while it is paused; anything else, and a deployment that is not ACTIVE, changes nothing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -23545,7 +24076,7 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update Unified Deployment Rollout
 
-        Pause or resume the in-flight rollout; not stored. Not implemented yet.
+        Pause or resume a ccl_inference deployment's rollout, as PUT /deployments/status_v3/{deployment_id} does with rollout_status. Not stored: the next update, revision rollout or resume clears a pause.  A pause takes effect only while the rollout is Progressing or Degraded, and a resume only while it is paused; anything else, and a deployment that is not ACTIVE, changes nothing.
 
         :param deployment_id: (required)
         :type deployment_id: int
@@ -23677,7 +24208,7 @@ class EXTERNALApi:
     def update_unified_deployment_status_deployments_deployment_id_status_put(
         self,
         deployment_id: StrictInt,
-        deployment_status_request: DeploymentStatusRequest,
+        unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -23690,15 +24221,15 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DeploymentStatusResponse:
+    ) -> UnifiedGetDeploymentStatusResponse:
         """Update Unified Deployment Status
 
-        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
+        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does, and return its status as GET /deployments/{deployment_id}/status does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
 
         :param deployment_id: (required)
         :type deployment_id: int
-        :param deployment_status_request: (required)
-        :type deployment_status_request: DeploymentStatusRequest
+        :param unified_update_deployment_status_request: (required)
+        :type unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -23723,7 +24254,7 @@ class EXTERNALApi:
 
         _param = self._update_unified_deployment_status_deployments_deployment_id_status_put_serialize(
             deployment_id=deployment_id,
-            deployment_status_request=deployment_status_request,
+            unified_update_deployment_status_request=unified_update_deployment_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -23731,7 +24262,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeploymentStatusResponse",
+            '200': "UnifiedGetDeploymentStatusResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -23749,7 +24280,7 @@ class EXTERNALApi:
     def update_unified_deployment_status_deployments_deployment_id_status_put_with_http_info(
         self,
         deployment_id: StrictInt,
-        deployment_status_request: DeploymentStatusRequest,
+        unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -23762,15 +24293,15 @@ class EXTERNALApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DeploymentStatusResponse]:
+    ) -> ApiResponse[UnifiedGetDeploymentStatusResponse]:
         """Update Unified Deployment Status
 
-        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
+        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does, and return its status as GET /deployments/{deployment_id}/status does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
 
         :param deployment_id: (required)
         :type deployment_id: int
-        :param deployment_status_request: (required)
-        :type deployment_status_request: DeploymentStatusRequest
+        :param unified_update_deployment_status_request: (required)
+        :type unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -23795,7 +24326,7 @@ class EXTERNALApi:
 
         _param = self._update_unified_deployment_status_deployments_deployment_id_status_put_serialize(
             deployment_id=deployment_id,
-            deployment_status_request=deployment_status_request,
+            unified_update_deployment_status_request=unified_update_deployment_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -23803,7 +24334,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeploymentStatusResponse",
+            '200': "UnifiedGetDeploymentStatusResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -23821,7 +24352,7 @@ class EXTERNALApi:
     def update_unified_deployment_status_deployments_deployment_id_status_put_without_preload_content(
         self,
         deployment_id: StrictInt,
-        deployment_status_request: DeploymentStatusRequest,
+        unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -23837,12 +24368,12 @@ class EXTERNALApi:
     ) -> RESTResponseType:
         """Update Unified Deployment Status
 
-        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
+        Pause or resume a deployment, as PUT /deployments/status/{deployment_id} does, and return its status as GET /deployments/{deployment_id}/status does.  Pauses and resumes ccl_compute, ccl_inference, ccl_job and ccl_dynamo deployments through ccluster. DELETE /deployments/{deployment_id} deletes them.
 
         :param deployment_id: (required)
         :type deployment_id: int
-        :param deployment_status_request: (required)
-        :type deployment_status_request: DeploymentStatusRequest
+        :param unified_update_deployment_status_request: (required)
+        :type unified_update_deployment_status_request: UnifiedUpdateDeploymentStatusRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -23867,7 +24398,7 @@ class EXTERNALApi:
 
         _param = self._update_unified_deployment_status_deployments_deployment_id_status_put_serialize(
             deployment_id=deployment_id,
-            deployment_status_request=deployment_status_request,
+            unified_update_deployment_status_request=unified_update_deployment_status_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -23875,7 +24406,7 @@ class EXTERNALApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DeploymentStatusResponse",
+            '200': "UnifiedGetDeploymentStatusResponse",
             '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
@@ -23888,7 +24419,7 @@ class EXTERNALApi:
     def _update_unified_deployment_status_deployments_deployment_id_status_put_serialize(
         self,
         deployment_id,
-        deployment_status_request,
+        unified_update_deployment_status_request,
         _request_auth,
         _content_type,
         _headers,
@@ -23916,8 +24447,8 @@ class EXTERNALApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if deployment_status_request is not None:
-            _body_params = deployment_status_request
+        if unified_update_deployment_status_request is not None:
+            _body_params = unified_update_deployment_status_request
 
 
         # set the HTTP header `Accept`

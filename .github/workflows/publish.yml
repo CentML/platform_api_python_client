@@ -8,6 +8,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       id-token: write
     steps:
       - uses: actions/checkout@v3
@@ -33,3 +34,17 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://upload.pypi.org/legacy/
+      - name: Request SDK upgrade
+        env:
+          # Needs Contents: write on CentML/centml-python-client to dispatch.
+          # The SDK repository also needs this secret with Pull requests: write.
+          GH_TOKEN: ${{ secrets.SDK_UPDATE_TOKEN }}
+          CLIENT_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::Configure SDK_UPDATE_TOKEN with access to CentML/centml-python-client. See https://github.com/CentML/centml-python-client#automated-platform-api-client-updates"
+            exit 1
+          fi
+          jq -n --arg version "${CLIENT_VERSION#v}" \
+            '{event_type: "platform-api-client-published", client_payload: {version: $version}}' \
+            | gh api --method POST repos/CentML/centml-python-client/dispatches --input -
